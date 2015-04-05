@@ -1,0 +1,7 @@
+2013-09-11 09:09:08,383 [6] ERROR - management.servicehtml “System.Dynamic.ExpandoObject”未包含“cansub”的定义
+2013-09-11 14:45:34,546 [37] ERROR - management.weeklyservice 未将对象引用设置到对象的实例。
+2013-09-11 14:46:50,955 [7] ERROR - management.weeklyservice 未将对象引用设置到对象的实例。
+2013-09-11 14:46:51,518 [8] ERROR - management.weeklyservice 未将对象引用设置到对象的实例。
+2013-09-11 14:46:54,559 [9] ERROR - management.weeklyservice 未将对象引用设置到对象的实例。
+2013-09-11 15:39:30,508 [27] ERROR - management.weeklyservice 该字符串未被识别为有效的 DateTime。
+2013-09-11 15:41:47,231 [6] ERROR - management.weeklyservice 该字符串未被识别为有效的 DateTime。

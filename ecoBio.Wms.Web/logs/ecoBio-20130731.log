@@ -1,0 +1,22 @@
+2013-07-31 09:10:55,749 [24] ERROR - material.upchartandgrid 未将对象引用设置到对象的实例。
+2013-07-31 09:51:57,486 [31] ERROR - home.platform “System.Dynamic.ExpandoObject”未包含“chart1_1”的定义
+2013-07-31 10:39:30,176 [18] ERROR - costanalysis.fullscreen 未找到视图“chartfullscreen”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/costanalysis/chartfullscreen.aspx
+~/Views/costanalysis/chartfullscreen.ascx
+~/Views/Shared/chartfullscreen.aspx
+~/Views/Shared/chartfullscreen.ascx
+~/Views/costanalysis/chartfullscreen.cshtml
+~/Views/costanalysis/chartfullscreen.vbhtml
+~/Views/Shared/chartfullscreen.cshtml
+~/Views/Shared/chartfullscreen.vbhtml
+2013-07-31 12:38:52,855 [41] ERROR - home.platform “System.Dynamic.ExpandoObject”未包含“chart4name”的定义
+2013-07-31 13:39:31,509 [47] ERROR - useradmin.userinfo 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-07-31 13:40:56,482 [8] ERROR - useradmin.userinfo 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-07-31 13:48:30,371 [5] ERROR - useradmin.userinfo 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-07-31 13:49:28,643 [8] ERROR - useradmin.userinfo 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-07-31 13:51:02,573 [9] ERROR - useradmin.userinfo 索引超出范围。必须为非负值并小于集合大小。
+参数名: index

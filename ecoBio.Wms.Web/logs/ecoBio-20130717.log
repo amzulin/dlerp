@@ -1,0 +1,35 @@
+2013-07-17 08:26:22,572 [8] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.
+2013-07-17 08:59:59,167 [8] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.
+2013-07-17 09:03:36,169 [6] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.
+2013-07-17 09:04:13,914 [6] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.
+2013-07-17 09:04:40,921 [8] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.
+2013-07-17 09:06:36,476 [9] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.
+2013-07-17 09:07:12,460 [11] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.
+2013-07-17 09:14:51,463 [5] ERROR - Admin_Customer.StartBulkCollection 无法进行大容量加载。文件“c:\share\t.data”不存在。
+2013-07-17 09:15:29,673 [11] ERROR - Admin_Customer.StartBulkCollection 违反了 PRIMARY KEY 约束“PK_CUSTOMERCOLLECTION”。不能在对象“dbo.CustomerCollection”中插入重复键。重复键值为 (HUAWEI_10_0_0)。
+语句已终止。
+2013-07-17 09:33:56,761 [34] ERROR - Admin_Customer.StartBulkCollection 找不到方法:“System.Collections.Generic.List`1<ecoBio.Wms.Data.Entities.Models.CustomerCollection> ecoBio.Wms.Service.Management.CustomerService.StartBulkCollection(System.String, System.String)”。
+2013-07-17 09:35:12,671 [29] ERROR - Admin_Customer.StartBulkCollection 此请求已被阻止，因为当用在 GET 请求中时，会将敏感信息透漏给第三方网站。若要允许 GET 请求，请将 JsonRequestBehavior 设置为 AllowGet。
+2013-07-17 09:38:59,677 [31] ERROR - Admin_Customer.CustomerCollectionList 未将对象引用设置到对象的实例。
+2013-07-17 09:39:28,848 [30] ERROR - Admin_Customer.CustomerCollectionList 未将对象引用设置到对象的实例。
+2013-07-17 09:41:56,059 [6] ERROR - Admin_Customer.CustomerCollectionList 未将对象引用设置到对象的实例。
+2013-07-17 10:45:01,166 [85] ERROR - Admin_Customer.StartBulkCollection 找不到方法:“ecoBio.Wms.ViewModel.ReturnValue ecoBio.Wms.Service.Management.CustomerService.StartBulkCollection(System.String, System.String)”。
+2013-07-17 11:35:37,157 [62] ERROR - Admin_Customer.CustomerDailyAvgDataView “@”字符后不应有“if”关键字。在代码内部，不需要在像“if”这样的构造前加上前缀“@”。
+
+2013-07-17 11:37:09,557 [66] ERROR - Admin_Customer.CustomerDailyAvgDataView “@”字符后不应有“if”关键字。在代码内部，不需要在像“if”这样的构造前加上前缀“@”。
+
+2013-07-17 11:37:09,579 [66] ERROR - admin_customer.BulkDailyAvgData 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-17 11:37:42,655 [68] ERROR - Admin_Customer.CustomerDailyAvgDataView “System.Dynamic.ExpandoObject”未包含“unit”的定义
+2013-07-17 11:37:42,655 [68] ERROR - admin_customer.BulkDailyAvgData 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-17 11:39:15,112 [68] ERROR - Admin_Customer.CustomerDailyAvgDataView 未将对象引用设置到对象的实例。
+2013-07-17 11:39:40,323 [62] ERROR - Admin_Customer.CustomerDailyAvgDataView 未将对象引用设置到对象的实例。
+2013-07-17 11:44:14,554 [10] ERROR - Admin_Customer.CustomerDailyAvgDataView 未将对象引用设置到对象的实例。
+2013-07-17 13:01:01,695 [127] ERROR - admin_customer.uploadtoshare “C:/Share/”是物理路径，但应为虚拟路径。
+2013-07-17 14:01:58,854 [5] ERROR - Admin_Rights.SaveEmployeeRole 对于“ecoBio.Wms.Web.Controllers.Admin_RightsController”中方法“System.Web.Mvc.ActionResult SaveEmployeeRole(System.Guid, System.Guid)”的不可以为 null 的类型“System.Guid”的参数“role”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2013-07-17 14:12:42,783 [22] ERROR - Admin_Rights.SaveEmployeeRole 对于“ecoBio.Wms.Web.Controllers.Admin_RightsController”中方法“System.Web.Mvc.ActionResult SaveEmployeeRole(System.Guid, System.Guid)”的不可以为 null 的类型“System.Guid”的参数“role”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2013-07-17 14:43:14,556 [10] ERROR - Admin_Customer.uploadflowchart 对路径“~/Scripts/flex/”的访问被拒绝。
+2013-07-17 14:58:37,575 [20] ERROR - Admin_Customer.uploadflowchart 对路径“~/Scripts/flex/”的访问被拒绝。
+2013-07-17 15:25:36,832 [32] ERROR - Account.Login 可为空的对象必须具有一个值。
+2013-07-17 15:26:15,504 [31] ERROR - Account.Login 可为空的对象必须具有一个值。

@@ -1,0 +1,9 @@
+2013-08-08 13:28:27,291 [42] ERROR - management.serviceweeklydown 未找到视图“serviceweeklydown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/serviceweeklydown.aspx
+~/Views/management/serviceweeklydown.ascx
+~/Views/Shared/serviceweeklydown.aspx
+~/Views/Shared/serviceweeklydown.ascx
+~/Views/management/serviceweeklydown.cshtml
+~/Views/management/serviceweeklydown.vbhtml
+~/Views/Shared/serviceweeklydown.cshtml
+~/Views/Shared/serviceweeklydown.vbhtml

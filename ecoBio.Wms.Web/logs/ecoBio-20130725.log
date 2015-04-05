@@ -1,0 +1,72 @@
+2013-07-25 13:06:08,302 [111] ERROR - management.servicesdown 未找到视图“servicesdown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/servicesdown.aspx
+~/Views/management/servicesdown.ascx
+~/Views/Shared/servicesdown.aspx
+~/Views/Shared/servicesdown.ascx
+~/Views/management/servicesdown.cshtml
+~/Views/management/servicesdown.vbhtml
+~/Views/Shared/servicesdown.cshtml
+~/Views/Shared/servicesdown.vbhtml
+2013-07-25 13:07:01,203 [106] ERROR - management.servicesdown 未找到视图“servicesdown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/servicesdown.aspx
+~/Views/management/servicesdown.ascx
+~/Views/Shared/servicesdown.aspx
+~/Views/Shared/servicesdown.ascx
+~/Views/management/servicesdown.cshtml
+~/Views/management/servicesdown.vbhtml
+~/Views/Shared/servicesdown.cshtml
+~/Views/Shared/servicesdown.vbhtml
+2013-07-25 13:07:08,352 [106] ERROR - management.servicesdown 未找到视图“servicesdown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/servicesdown.aspx
+~/Views/management/servicesdown.ascx
+~/Views/Shared/servicesdown.aspx
+~/Views/Shared/servicesdown.ascx
+~/Views/management/servicesdown.cshtml
+~/Views/management/servicesdown.vbhtml
+~/Views/Shared/servicesdown.cshtml
+~/Views/Shared/servicesdown.vbhtml
+2013-07-25 13:30:19,132 [5] ERROR - management.servicesdown 未找到视图“servicesdown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/servicesdown.aspx
+~/Views/management/servicesdown.ascx
+~/Views/Shared/servicesdown.aspx
+~/Views/Shared/servicesdown.ascx
+~/Views/management/servicesdown.cshtml
+~/Views/management/servicesdown.vbhtml
+~/Views/Shared/servicesdown.cshtml
+~/Views/Shared/servicesdown.vbhtml
+2013-07-25 13:46:44,972 [20] ERROR - management.serviceweeklydown 未找到视图“serviceweeklydown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/serviceweeklydown.aspx
+~/Views/management/serviceweeklydown.ascx
+~/Views/Shared/serviceweeklydown.aspx
+~/Views/Shared/serviceweeklydown.ascx
+~/Views/management/serviceweeklydown.cshtml
+~/Views/management/serviceweeklydown.vbhtml
+~/Views/Shared/serviceweeklydown.cshtml
+~/Views/Shared/serviceweeklydown.vbhtml
+2013-07-25 13:49:00,682 [20] ERROR - management.serviceweeklydown 未找到视图“serviceweeklydown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/serviceweeklydown.aspx
+~/Views/management/serviceweeklydown.ascx
+~/Views/Shared/serviceweeklydown.aspx
+~/Views/Shared/serviceweeklydown.ascx
+~/Views/management/serviceweeklydown.cshtml
+~/Views/management/serviceweeklydown.vbhtml
+~/Views/Shared/serviceweeklydown.cshtml
+~/Views/Shared/serviceweeklydown.vbhtml
+2013-07-25 13:58:03,727 [10] ERROR - management.serviceweeklydown 未找到视图“serviceweeklydown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/serviceweeklydown.aspx
+~/Views/management/serviceweeklydown.ascx
+~/Views/Shared/serviceweeklydown.aspx
+~/Views/Shared/serviceweeklydown.ascx
+~/Views/management/serviceweeklydown.cshtml
+~/Views/management/serviceweeklydown.vbhtml
+~/Views/Shared/serviceweeklydown.cshtml
+~/Views/Shared/serviceweeklydown.vbhtml
+2013-07-25 14:06:04,086 [28] ERROR - management.serviceweeklydown 未找到视图“serviceweeklydown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/serviceweeklydown.aspx
+~/Views/management/serviceweeklydown.ascx
+~/Views/Shared/serviceweeklydown.aspx
+~/Views/Shared/serviceweeklydown.ascx
+~/Views/management/serviceweeklydown.cshtml
+~/Views/management/serviceweeklydown.vbhtml
+~/Views/Shared/serviceweeklydown.cshtml
+~/Views/Shared/serviceweeklydown.vbhtml

@@ -1,0 +1,30 @@
+2013-08-09 15:58:42,630 [16] ERROR - management.repairdown 未找到视图“repairdown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/repairdown.aspx
+~/Views/management/repairdown.ascx
+~/Views/Shared/repairdown.aspx
+~/Views/Shared/repairdown.ascx
+~/Views/management/repairdown.cshtml
+~/Views/management/repairdown.vbhtml
+~/Views/Shared/repairdown.cshtml
+~/Views/Shared/repairdown.vbhtml
+2013-08-09 15:59:09,328 [17] ERROR - management.maintenancedown 未找到视图“maintenancedown”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/management/maintenancedown.aspx
+~/Views/management/maintenancedown.ascx
+~/Views/Shared/maintenancedown.aspx
+~/Views/Shared/maintenancedown.ascx
+~/Views/management/maintenancedown.cshtml
+~/Views/management/maintenancedown.vbhtml
+~/Views/Shared/maintenancedown.cshtml
+~/Views/Shared/maintenancedown.vbhtml
+2013-08-09 16:00:54,506 [17] ERROR - material.downloadtab 未找到视图“downloadtab”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/material/downloadtab.aspx
+~/Views/material/downloadtab.ascx
+~/Views/Shared/downloadtab.aspx
+~/Views/Shared/downloadtab.ascx
+~/Views/material/downloadtab.cshtml
+~/Views/material/downloadtab.vbhtml
+~/Views/Shared/downloadtab.cshtml
+~/Views/Shared/downloadtab.vbhtml
+2013-08-09 17:10:26,581 [94] ERROR - home.platform LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.
+2013-08-09 17:10:38,670 [90] ERROR - home.platform LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.
+2013-08-09 17:10:42,830 [90] ERROR - home.platform LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.

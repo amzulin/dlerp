@@ -1,0 +1,7 @@
+2013-07-24 09:03:55,902 [19] ERROR - usercenter.userinfo2 未将对象引用设置到对象的实例。
+2013-07-24 09:09:10,976 [11] ERROR - usercenter.userinfo2 未将对象引用设置到对象的实例。
+2013-07-24 09:36:34,731 [9] ERROR - usercenter.saveuserchartconfig 未将对象引用设置到对象的实例。
+2013-07-24 09:41:54,329 [6] ERROR - usercenter.saveuserchartconfig 未将对象引用设置到对象的实例。
+2013-07-24 16:17:57,306 [50] ERROR - home.platform “System.Dynamic.ExpandoObject”未包含“unitname1”的定义
+2013-07-24 17:22:53,736 [19] ERROR - home.platform “System.Dynamic.ExpandoObject”未包含“material”的定义
+2013-07-24 17:23:04,788 [18] ERROR - home.platform “System.Dynamic.ExpandoObject”未包含“material”的定义

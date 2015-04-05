@@ -1,0 +1,35 @@
+2013-07-28 13:36:53,473 [8] ERROR - home.index 在路由集合中未能找到名为“material/stock”的路由。
+参数名: name
+2013-07-28 13:37:30,781 [5] ERROR - home.index 在路由集合中未能找到名为“material/stock”的路由。
+参数名: name
+2013-07-28 14:34:26,602 [18] ERROR - useradmin.rolelist 未找到分部视图“rolelist”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/useradmin/rolelist.aspx
+~/Views/useradmin/rolelist.ascx
+~/Views/Shared/rolelist.aspx
+~/Views/Shared/rolelist.ascx
+~/Views/useradmin/rolelist.cshtml
+~/Views/useradmin/rolelist.vbhtml
+~/Views/Shared/rolelist.cshtml
+~/Views/Shared/rolelist.vbhtml
+2013-07-28 14:34:59,499 [33] ERROR - useradmin.rolelist 未找到分部视图“rolelist”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/useradmin/rolelist.aspx
+~/Views/useradmin/rolelist.ascx
+~/Views/Shared/rolelist.aspx
+~/Views/Shared/rolelist.ascx
+~/Views/useradmin/rolelist.cshtml
+~/Views/useradmin/rolelist.vbhtml
+~/Views/Shared/rolelist.cshtml
+~/Views/Shared/rolelist.vbhtml
+2013-07-28 15:08:20,561 [34] ERROR - useradmin.oneuser 对于“ecoBio.Wms.Web.Controllers.useradminController”中方法“System.Web.Mvc.ActionResult oneuser(System.Guid, System.String)”的不可以为 null 的类型“System.Guid”的参数“guid”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2013-07-28 15:09:26,015 [5] ERROR - useradmin.oneuser 对于“ecoBio.Wms.Web.Controllers.useradminController”中方法“System.Web.Mvc.ActionResult oneuser(System.Guid, System.String)”的不可以为 null 的类型“System.Guid”的参数“guid”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2013-07-28 16:00:17,189 [15] ERROR - useradmin.rolelist 未找到分部视图“rolelist”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/useradmin/rolelist.aspx
+~/Views/useradmin/rolelist.ascx
+~/Views/Shared/rolelist.aspx
+~/Views/Shared/rolelist.ascx
+~/Views/useradmin/rolelist.cshtml
+~/Views/useradmin/rolelist.vbhtml
+~/Views/Shared/rolelist.cshtml
+~/Views/Shared/rolelist.vbhtml

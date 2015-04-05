@@ -1,0 +1,8 @@
+2013-07-27 17:25:10,698 [6] ERROR - Admin_Rights.SetCustomerFunction 值不能为 null。
+参数名: input
+2013-07-27 17:26:33,035 [10] ERROR - Admin_Rights.SetCustomerFunction 值不能为 null。
+参数名: input
+2013-07-27 17:29:35,696 [10] ERROR - Admin_Rights.SetCustomerFunction 未将对象引用设置到对象的实例。
+2013-07-27 17:29:40,844 [9] ERROR - Admin_Rights.SetCustomerFunction 未将对象引用设置到对象的实例。
+2013-07-27 17:29:43,948 [9] ERROR - Admin_Rights.SetCustomerFunction 未将对象引用设置到对象的实例。
+2013-07-27 17:30:02,793 [9] ERROR - Admin_Rights.SetCustomerFunction 未将对象引用设置到对象的实例。

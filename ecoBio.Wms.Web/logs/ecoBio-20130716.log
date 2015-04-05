@@ -1,0 +1,82 @@
+2013-07-16 10:38:56,734 [10] ERROR - errorl
+2013-07-16 10:44:22,620 [15] ERROR - Admin_Customer.CustomerCollectionConfigList 未将对象引用设置到对象的实例。
+2013-07-16 10:44:22,645 [15] ERROR - admin_customer.CustomerCollectionConfig 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 13:07:26,280 [76] ERROR - admin_customer.CustomerPrice d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\Admin_Customer\CustomerPrice.cshtml(40): error CS1002: 应输入 ;
+2013-07-16 13:07:43,118 [78] ERROR - Admin_Customer.CustomerPriceList 未将对象引用设置到对象的实例。
+2013-07-16 13:07:43,147 [78] ERROR - admin_customer.CustomerPrice 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 13:09:00,741 [73] ERROR - Admin_Customer.CustomerPriceList 未将对象引用设置到对象的实例。
+2013-07-16 13:09:00,760 [73] ERROR - admin_customer.CustomerPrice 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 13:12:00,703 [9] ERROR - Admin_Customer.CustomerPriceList 未将对象引用设置到对象的实例。
+2013-07-16 13:12:00,721 [9] ERROR - admin_customer.CustomerPrice 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 13:12:46,403 [9] ERROR - Admin_Customer.CustomerPriceList 未找到分部视图“CustomerPriceList”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin_Customer/CustomerPriceList.aspx
+~/Views/Admin_Customer/CustomerPriceList.ascx
+~/Views/Shared/CustomerPriceList.aspx
+~/Views/Shared/CustomerPriceList.ascx
+~/Views/Admin_Customer/CustomerPriceList.cshtml
+~/Views/Admin_Customer/CustomerPriceList.vbhtml
+~/Views/Shared/CustomerPriceList.cshtml
+~/Views/Shared/CustomerPriceList.vbhtml
+2013-07-16 13:12:46,421 [9] ERROR - admin_customer.CustomerPrice 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 13:50:58,439 [42] ERROR - Admin_Customer.GetCustomerPrice 此请求已被阻止，因为当用在 GET 请求中时，会将敏感信息透漏给第三方网站。若要允许 GET 请求，请将 JsonRequestBehavior 设置为 AllowGet。
+2013-07-16 13:59:57,391 [45] ERROR - Admin_Customer.GetCustomerPrice 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-07-16 14:02:00,450 [15] ERROR - Admin_Customer.GetCustomerPrice 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-07-16 14:02:01,844 [44] ERROR - Admin_Customer.GetCustomerPrice 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-07-16 14:02:25,284 [39] ERROR - Admin_Customer.GetCustomerPrice 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-07-16 14:05:36,903 [39] ERROR - Admin_Customer.SaveCustomerPrice 未找到分部视图“SaveCustomerPrice”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin_Customer/SaveCustomerPrice.aspx
+~/Views/Admin_Customer/SaveCustomerPrice.ascx
+~/Views/Shared/SaveCustomerPrice.aspx
+~/Views/Shared/SaveCustomerPrice.ascx
+~/Views/Admin_Customer/SaveCustomerPrice.cshtml
+~/Views/Admin_Customer/SaveCustomerPrice.vbhtml
+~/Views/Shared/SaveCustomerPrice.cshtml
+~/Views/Shared/SaveCustomerPrice.vbhtml
+2013-07-16 14:07:02,536 [7] ERROR - Admin_Customer.SaveCustomerPrice 未找到分部视图“SaveCustomerPrice”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin_Customer/SaveCustomerPrice.aspx
+~/Views/Admin_Customer/SaveCustomerPrice.ascx
+~/Views/Shared/SaveCustomerPrice.aspx
+~/Views/Shared/SaveCustomerPrice.ascx
+~/Views/Admin_Customer/SaveCustomerPrice.cshtml
+~/Views/Admin_Customer/SaveCustomerPrice.vbhtml
+~/Views/Shared/SaveCustomerPrice.cshtml
+~/Views/Shared/SaveCustomerPrice.vbhtml
+2013-07-16 14:09:12,587 [8] ERROR - Admin_Customer.SaveCustomerPrice 未找到分部视图“SaveCustomerPrice”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin_Customer/SaveCustomerPrice.aspx
+~/Views/Admin_Customer/SaveCustomerPrice.ascx
+~/Views/Shared/SaveCustomerPrice.aspx
+~/Views/Shared/SaveCustomerPrice.ascx
+~/Views/Admin_Customer/SaveCustomerPrice.cshtml
+~/Views/Admin_Customer/SaveCustomerPrice.vbhtml
+~/Views/Shared/SaveCustomerPrice.cshtml
+~/Views/Shared/SaveCustomerPrice.vbhtml
+2013-07-16 14:17:17,068 [15] ERROR - Admin_Customer.SaveCustomerPrice 未找到分部视图“SaveCustomerPrice”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin_Customer/SaveCustomerPrice.aspx
+~/Views/Admin_Customer/SaveCustomerPrice.ascx
+~/Views/Shared/SaveCustomerPrice.aspx
+~/Views/Shared/SaveCustomerPrice.ascx
+~/Views/Admin_Customer/SaveCustomerPrice.cshtml
+~/Views/Admin_Customer/SaveCustomerPrice.vbhtml
+~/Views/Shared/SaveCustomerPrice.cshtml
+~/Views/Shared/SaveCustomerPrice.vbhtml
+2013-07-16 16:17:26,757 [7] ERROR - Admin_Rights.AddRole foreach 块缺少结束字符“}”。请确保此块内的所有“{”都有匹配的“}”字符，并且任何“}”都不会解释为标记。
+
+2013-07-16 16:17:26,771 [7] ERROR - Admin_Rights.Role 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 16:18:38,452 [7] ERROR - Admin_Rights.AddRole foreach 块缺少结束字符“}”。请确保此块内的所有“{”都有匹配的“}”字符，并且任何“}”都不会解释为标记。
+
+2013-07-16 16:18:38,453 [7] ERROR - Admin_Rights.Role 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 16:18:40,185 [24] ERROR - Admin_Rights.AddRole foreach 块缺少结束字符“}”。请确保此块内的所有“{”都有匹配的“}”字符，并且任何“}”都不会解释为标记。
+
+2013-07-16 16:18:40,186 [24] ERROR - Admin_Rights.Role 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 16:18:40,896 [7] ERROR - Admin_Rights.AddRole foreach 块缺少结束字符“}”。请确保此块内的所有“{”都有匹配的“}”字符，并且任何“}”都不会解释为标记。
+
+2013-07-16 16:18:40,897 [7] ERROR - Admin_Rights.Role 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 16:21:36,005 [24] ERROR - Admin_Rights.AddRole d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\Admin_Rights\AddRole.cshtml(86): error CS0103: 当前上下文中不存在名称“rolestr1”
+2013-07-16 16:21:36,006 [24] ERROR - Admin_Rights.Role 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-16 17:31:35,191 [46] ERROR - errorl
+2013-07-16 19:14:21,969 [131] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.
+2013-07-16 19:16:09,861 [8] ERROR - Admin_Customer.StartBulkCollection The operation cannot be completed because the DbContext has been disposed.

@@ -1,0 +1,2 @@
+bommain. 增加一个字段 rootCost 成本 float null 当计算了成本的时候，把结果保存
+增加表 bomcost

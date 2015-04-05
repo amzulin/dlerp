@@ -1,0 +1,142 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>l2</title>
+</head>
+	<body class="login">            
+    	<div id="login_wrapper">
+        	
+            <div class="clear"></div>
+            <div id="login_top">
+                <!-- logo -->
+                <div style="width: 100px; height: 58px"></div>
+                <a href="/">
+	                <div class="logo">
+	                </div>
+                </a>
+                <!-- /logo -->
+                
+                <!-- main nav -->
+                <div id="admin_nav2">
+                    <div class="spacer20" style="height: 25px"></div>
+                    <div class="clear"></div>
+                    <ul>
+                        <li>
+                            <a href="/enroll/settings" title="Sign In" class="active" >Sign Up</a>
+                        </li>
+                         <li>
+                            <a href="/login" title="Log In">Log In</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end main nav -->
+            </div>
+            
+            <div class="clear"></div>
+            
+			<div class="login_holder">
+	<div class="bg_header">
+    	<div class="login_content">
+            <div class="icon_lock left"></div>
+            <div class="left">
+            	<h4 class="subhead left span-10">Log in to AIM</h4>
+            </div>
+		</div>
+    </div>
+    <div class="clear"></div>
+	<div class="login_content">
+        <!-- begin form -->
+        <div class="spacer"></div>
+        
+        <form id="login_frm" name="login_frm" method="post">
+        
+
+        <div id="error_row" style="display:none">
+            <div class="error none" id="error_message">
+                <div class="icon_error"></div>
+                <div class="alert_text left">
+                		
+                    	<strong>Invalid username or password</strong>
+                    	
+                    
+                </div>
+            </div>
+        </div>
+				        <div class="clear spacer"></div>
+        <table class="gray_table" cellpadding="10" cellspacing="0" border="0" id="textfield2" width="770">
+        	
+            <tr>
+                <td align="right" width="125" valign="middle"><label>Username:</label></td>
+                <td width="40">
+                	<div class="td_spacer"></div>
+                </td>
+                <td align="left" valign="middle"><input id="txtUsername" name="username" type="text"  value=""/></td>
+                <td valign="middle">
+                	<div class="td_spacer"></div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" valign="middle"><label>Password:</label></td>
+                <td width="40" valign="middle">
+                	<div class="td_spacer"></div>
+                </td>
+                 <td width="250" align="left" valign="middle"><input id="txtPassword" name="password" type="password"  /></td>
+                 <td valign="middle">
+                 	<div class="td_spacer"></div>
+                 </td>
+            </tr>
+                        <tr>
+            	<td><div class="td_spacer"></div></td>
+                <td width="40">
+                	<div class="td_spacer"></div>
+                </td>
+                <td colspan="2" valign="middle" align="left">
+                	<input id="chkRememberMe" name="remember_me" type="checkbox" />&nbsp;<label>Remember me</label>
+                </td>
+             </tr>
+             <tr>
+             	<td><div class="td_spacer"></div></td>
+                <td width="40">
+                	<div class="td_spacer"></div>
+                </td>
+                <td colspan="2" align="left" valign="middle">
+                	<div class="left">
+                        <div class="left">
+                            <a id="submit_lnk" title="Log In" href="javascript:void(0)" class="login" style="margin: 0; padding: 0;"></a>
+                            <input id="submit_btn" type="image" value="" style="width:0;height:0"/>
+                        </div> 
+                        <div class="left prepend-1">
+                            <a href="/login/forgot">Need Help Logging In?</a>
+                        </div>
+                    </div>
+                </td>
+             </tr>
+            
+         </table>
+        </form>
+        <!-- end form -->
+    </div>
+    <div class="ie6_login_spacer"></div>
+</div>
+            <div class="clear"></div>
+            <div class="footer_shadow"></div>
+            <div class="clear"></div>
+            
+            <div style="color: #84a4be;" class="left">
+    <div style="width: 150px" class="left">
+        &copy; 2013 nextjump.
+    </div>
+
+</div>            
+            
+            <div class="clear"></div>
+            <div class="spacer20"></div>
+			        </div>
+    </body>
+</html>

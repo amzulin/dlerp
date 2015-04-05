@@ -1,0 +1,6 @@
+2013-08-27 10:28:57,957 [21] ERROR - diagnostic.optimizationday Unexpected character encountered while parsing value: 每. Path '', line 0, position 0.
+2013-08-27 10:29:10,455 [32] ERROR - diagnostic.optimizationday Unexpected character encountered while parsing value: 每. Path '', line 0, position 0.
+2013-08-27 10:54:49,467 [35] ERROR - diagnostic.optimizationpage 未将对象引用设置到对象的实例。
+2013-08-27 11:35:40,801 [17] ERROR - home.default1 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-08-27 12:59:50,877 [57] ERROR - home.default1 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-08-27 14:10:23,932 [11] ERROR - home.default1 无法直接请求文件“~/Views/home/default1.cshtml”，因为它调用了“RenderSection”方法。

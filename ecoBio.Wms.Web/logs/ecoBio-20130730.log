@@ -1,0 +1,31 @@
+2013-07-30 09:56:44,311 [32] ERROR - useradmin.userinfo “System.Dynamic.ExpandoObject”未包含“unitname_1”的定义
+2013-07-30 09:58:28,030 [5] ERROR - useradmin.userinfo “System.Dynamic.ExpandoObject”未包含“unitname_1”的定义
+2013-07-30 09:58:56,028 [5] ERROR - useradmin.userinfo d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\useradmin\userinfo.cshtml(94): error CS0103: 当前上下文中不存在名称“unitname_1”
+2013-07-30 10:00:12,324 [5] ERROR - useradmin.userinfo d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\useradmin\userinfo.cshtml(94): error CS0103: 当前上下文中不存在名称“unitname_1”
+2013-07-30 10:05:12,931 [11] ERROR - useradmin.configplatchart “System.Dynamic.ExpandoObject”未包含“list”的定义
+2013-07-30 10:05:12,973 [11] ERROR - useradmin.userinfo 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-30 10:38:42,402 [15] ERROR - useradmin.configplatchart d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\useradmin\configplatchart.cshtml(49): error CS1061: “ecoBio.Wms.ViewModel.KeyValue”不包含“isgroup”的定义，并且找不到可接受类型为“ecoBio.Wms.ViewModel.KeyValue”的第一个参数的扩展方法“isgroup”(是否缺少 using 指令或程序集引用?)
+2013-07-30 10:38:42,422 [15] ERROR - useradmin.userinfo 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-30 11:10:41,874 [12] ERROR - useradmin.userinfo d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\useradmin\userinfo.cshtml(166): error CS0103: 当前上下文中不存在名称“items”
+2013-07-30 11:11:47,793 [32] ERROR - useradmin.userinfo “System.Dynamic.ExpandoObject”未包含“unitlist2”的定义
+2013-07-30 11:25:04,464 [12] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-07-30 11:25:12,515 [12] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-07-30 11:25:13,232 [35] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-07-30 11:25:13,646 [28] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-07-30 11:25:29,710 [32] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-07-30 11:26:50,038 [30] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-07-30 11:28:56,537 [5] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-07-30 11:44:49,533 [12] ERROR - useradmin.userinfo d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\useradmin\userinfo.cshtml(169): error CS0103: 当前上下文中不存在名称“selunit1”
+2013-07-30 11:44:55,088 [10] ERROR - useradmin.userinfo d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\useradmin\userinfo.cshtml(169): error CS0103: 当前上下文中不存在名称“selunit1”
+2013-07-30 13:21:44,238 [13] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-07-30 13:31:48,995 [23] ERROR - useradmin.roleuser “System.Dynamic.ExpandoObject”未包含“one”的定义
+2013-07-30 15:01:31,452 [47] ERROR - useradmin.roleuserlist “System.Dynamic.ExpandoObject”未包含“list”的定义
+2013-07-30 15:01:31,471 [47] ERROR - useradmin.roleuser 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-30 15:10:37,212 [29] ERROR - useradmin.roleuserlist “System.Dynamic.ExpandoObject”未包含“code”的定义
+2013-07-30 15:10:37,229 [29] ERROR - useradmin.roleuser 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-30 15:20:40,760 [6] ERROR - useradmin.roleuserlist LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.
+2013-07-30 15:20:40,779 [6] ERROR - useradmin.roleuser 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-30 15:22:58,225 [41] ERROR - useradmin.roleuserlist 对于“ecoBio.Wms.Web.Controllers.useradminController”中方法“System.Web.Mvc.ActionResult roleuserlist(System.Guid, System.String, System.String)”的不可以为 null 的类型“System.Guid”的参数“role”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2013-07-30 16:21:03,266 [23] ERROR - useradmin.roleuserlist 未将对象引用设置到对象的实例。
+2013-07-30 16:25:29,903 [11] ERROR - useradmin.roleuserlist 未将对象引用设置到对象的实例。

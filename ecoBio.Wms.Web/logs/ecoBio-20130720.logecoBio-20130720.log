@@ -1,0 +1,1 @@
+2013-07-20 18:49:13,701 [30] ERROR - Admin_CustomerInfo.Index d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\Admin_CustomerInfo\Index.cshtml(91): error CS0019: 运算符“||”无法应用于“<null>”和“bool”类型的操作数

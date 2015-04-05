@@ -1,0 +1,28 @@
+2013-08-16 10:10:36,150 [8] ERROR - diagnostic.recoommendprocess 未将对象引用设置到对象的实例。
+2013-08-16 10:14:34,999 [10] ERROR - diagnostic.downloadpdf 未找到视图“downloadpdf”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/diagnostic/downloadpdf.aspx
+~/Views/diagnostic/downloadpdf.ascx
+~/Views/Shared/downloadpdf.aspx
+~/Views/Shared/downloadpdf.ascx
+~/Views/diagnostic/downloadpdf.cshtml
+~/Views/diagnostic/downloadpdf.vbhtml
+~/Views/Shared/downloadpdf.cshtml
+~/Views/Shared/downloadpdf.vbhtml
+2013-08-16 10:17:45,658 [31] ERROR - diagnostic.downloadpdf 未找到视图“downloadpdf”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/diagnostic/downloadpdf.aspx
+~/Views/diagnostic/downloadpdf.ascx
+~/Views/Shared/downloadpdf.aspx
+~/Views/Shared/downloadpdf.ascx
+~/Views/diagnostic/downloadpdf.cshtml
+~/Views/diagnostic/downloadpdf.vbhtml
+~/Views/Shared/downloadpdf.cshtml
+~/Views/Shared/downloadpdf.vbhtml
+2013-08-16 10:46:27,081 [23] ERROR - diagnostic.downloadpdf 未找到视图“downloadpdf”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/diagnostic/downloadpdf.aspx
+~/Views/diagnostic/downloadpdf.ascx
+~/Views/Shared/downloadpdf.aspx
+~/Views/Shared/downloadpdf.ascx
+~/Views/diagnostic/downloadpdf.cshtml
+~/Views/diagnostic/downloadpdf.vbhtml
+~/Views/Shared/downloadpdf.cshtml
+~/Views/Shared/downloadpdf.vbhtml

@@ -1,0 +1,6 @@
+2013-09-12 09:10:22,173 [9] ERROR - management.weeklyservice 该字符串未被识别为有效的 DateTime。
+2013-09-12 09:10:50,324 [26] ERROR - management.weeklyservice 该字符串未被识别为有效的 DateTime。
+2013-09-12 09:12:56,377 [7] ERROR - management.weeklyservice 该字符串未被识别为有效的 DateTime。
+2013-09-12 10:52:39,446 [16] ERROR - management.forpdf 未将对象引用设置到对象的实例。
+2013-09-12 10:52:54,176 [17] ERROR - management.forpdf 未将对象引用设置到对象的实例。
+2013-09-12 10:54:44,207 [21] ERROR - management.forpdf 未将对象引用设置到对象的实例。

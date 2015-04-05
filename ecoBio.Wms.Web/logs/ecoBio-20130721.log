@@ -1,0 +1,23 @@
+2013-07-21 10:43:35,021 [22] ERROR - Admin_CustomerInfo.IndexCustomerSOP 未将对象引用设置到对象的实例。
+2013-07-21 10:43:35,032 [22] ERROR - Admin_CustomerInfo.CustomerSOP 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-21 11:03:45,859 [13] ERROR - Admin_CustomerInfo.CustomerCollectionList “System.Dynamic.ExpandoObject”未包含“customer”的定义
+2013-07-21 11:03:45,867 [13] ERROR - Admin_CustomerInfo.CustomerCollection 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-21 11:52:42,799 [12] ERROR - Admin_CustomerInfo.CustomerCollectionConfigList 未找到分部视图“CustomerCollectionConfigList”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin_CustomerInfo/CustomerCollectionConfigList.aspx
+~/Views/Admin_CustomerInfo/CustomerCollectionConfigList.ascx
+~/Views/Shared/CustomerCollectionConfigList.aspx
+~/Views/Shared/CustomerCollectionConfigList.ascx
+~/Views/Admin_CustomerInfo/CustomerCollectionConfigList.cshtml
+~/Views/Admin_CustomerInfo/CustomerCollectionConfigList.vbhtml
+~/Views/Shared/CustomerCollectionConfigList.cshtml
+~/Views/Shared/CustomerCollectionConfigList.vbhtml
+2013-07-21 11:54:57,803 [5] ERROR - Admin_CustomerInfo.CustomerCollectionList “System.Dynamic.ExpandoObject”未包含“point”的定义
+2013-07-21 11:54:57,815 [5] ERROR - Admin_CustomerInfo.CustomerCollection 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-21 11:55:46,333 [7] ERROR - Admin_CustomerInfo.CustomerCollectionList “System.Dynamic.ExpandoObject”未包含“point”的定义
+2013-07-21 11:55:46,333 [7] ERROR - Admin_CustomerInfo.CustomerCollection 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-21 11:55:50,468 [6] ERROR - Admin_CustomerInfo.CustomerCollectionList “System.Dynamic.ExpandoObject”未包含“point”的定义
+2013-07-21 11:55:50,468 [6] ERROR - Admin_CustomerInfo.CustomerCollection 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-21 11:56:39,382 [10] ERROR - Admin_CustomerInfo.CustomerEquipmentSpec “System.Dynamic.ExpandoObject”未包含“unit”的定义
+2013-07-21 13:09:07,939 [54] ERROR - Admin_CustomerInfo.AddCustomerConstruction “System.Dynamic.ExpandoObject”未包含“code”的定义
+2013-07-21 13:09:07,974 [54] ERROR - Admin_CustomerInfo.CustomerConstruction 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-21 14:36:26,289 [9] ERROR - Admin_Customer.GetCustomerByGuid1 未将对象引用设置到对象的实例。

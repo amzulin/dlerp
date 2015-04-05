@@ -1,0 +1,26 @@
+2013-08-05 08:54:51,307 [12] ERROR - account.verification 可为空的对象必须具有一个值。
+2013-08-05 09:58:23,866 [7] ERROR - Admin_Customer.AddCustomerEquipmentSpec 未将对象引用设置到对象的实例。
+2013-08-05 09:59:05,636 [7] ERROR - Admin_Customer.CustomerEquipmentSpec 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-08-05 14:19:25,870 [96] ERROR - material.downloadreport 未找到视图“downloadreport”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/material/downloadreport.aspx
+~/Views/material/downloadreport.ascx
+~/Views/Shared/downloadreport.aspx
+~/Views/Shared/downloadreport.ascx
+~/Views/material/downloadreport.cshtml
+~/Views/material/downloadreport.vbhtml
+~/Views/Shared/downloadreport.cshtml
+~/Views/Shared/downloadreport.vbhtml
+2013-08-05 14:20:15,136 [96] ERROR - material.downloadreport 未找到视图“downloadreport”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/material/downloadreport.aspx
+~/Views/material/downloadreport.ascx
+~/Views/Shared/downloadreport.aspx
+~/Views/Shared/downloadreport.ascx
+~/Views/material/downloadreport.cshtml
+~/Views/material/downloadreport.vbhtml
+~/Views/Shared/downloadreport.cshtml
+~/Views/Shared/downloadreport.vbhtml
+2013-08-05 15:29:57,848 [99] ERROR - management.siteservicepage d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\management\siteservicepage.cshtml(101): error CS1061: “ecoBio.Wms.ViewModel.SiteServiceManagementModel”不包含“ServiceContent”的定义，并且找不到可接受类型为“ecoBio.Wms.ViewModel.SiteServiceManagementModel”的第一个参数的扩展方法“ServiceContent”(是否缺少 using 指令或程序集引用?)
+2013-08-05 15:31:42,949 [6] ERROR - management.siteservicepage d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\management\siteservicepage.cshtml(101): error CS1061: “ecoBio.Wms.ViewModel.SiteServiceManagementModel”不包含“ServiceContent”的定义，并且找不到可接受类型为“ecoBio.Wms.ViewModel.SiteServiceManagementModel”的第一个参数的扩展方法“ServiceContent”(是否缺少 using 指令或程序集引用?)
+2013-08-05 15:35:13,139 [12] ERROR - management.siteservicepage d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\management\siteservicepage.cshtml(101): error CS1061: “ecoBio.Wms.ViewModel.SiteServiceManagementModel”不包含“ServiceContent”的定义，并且找不到可接受类型为“ecoBio.Wms.ViewModel.SiteServiceManagementModel”的第一个参数的扩展方法“ServiceContent”(是否缺少 using 指令或程序集引用?)
+2013-08-05 15:43:11,681 [8] ERROR - management.savesiteservice 无法识别的 GUID 格式。
+2013-08-05 16:10:21,686 [6] ERROR - management.savesiteservice 该字符串未被识别为有效的 DateTime。有一个未知单词(从索引 11 处开始)。

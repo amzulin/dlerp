@@ -1,0 +1,52 @@
+2013-07-23 10:52:05,466 [10] ERROR - Admin_Teach.AddEquipmentKeyParameter 值不能为 null。
+参数名: source
+2013-07-23 10:52:05,491 [10] ERROR - Admin_Teach.EquipmentKeyParameter 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-23 12:07:42,850 [61] ERROR - Admin_Customer.CustomerStandardUnit “System.Dynamic.ExpandoObject”未包含“customers”的定义
+2013-07-23 12:11:11,437 [58] ERROR - Admin_Customer.CustomerStandardUnit “System.Dynamic.ExpandoObject”未包含“customers”的定义
+2013-07-23 12:14:05,921 [11] ERROR - Admin_Customer.OneCustomerStandardUnit “System.Dynamic.ExpandoObject”未包含“units”的定义
+2013-07-23 12:14:05,941 [11] ERROR - Admin_Customer.CustomerStandardUnit 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-23 12:14:06,498 [12] ERROR - Admin_Customer.OneCustomerStandardUnit “System.Dynamic.ExpandoObject”未包含“units”的定义
+2013-07-23 12:14:06,499 [12] ERROR - Admin_Customer.CustomerStandardUnit 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-23 12:48:13,831 [57] ERROR - Admin_Customer.CustomerStandardUnitList 未找到分部视图“CustomerStandardUnitList”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin_Customer/CustomerStandardUnitList.aspx
+~/Views/Admin_Customer/CustomerStandardUnitList.ascx
+~/Views/Shared/CustomerStandardUnitList.aspx
+~/Views/Shared/CustomerStandardUnitList.ascx
+~/Views/Admin_Customer/CustomerStandardUnitList.cshtml
+~/Views/Admin_Customer/CustomerStandardUnitList.vbhtml
+~/Views/Shared/CustomerStandardUnitList.cshtml
+~/Views/Shared/CustomerStandardUnitList.vbhtml
+2013-07-23 12:48:13,843 [57] ERROR - Admin_Customer.CustomerStandardUnit 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-23 12:55:08,488 [50] ERROR - Admin_Customer.OneCustomerStandardUnit d:\svn_code\local\20130710_CODE\ecoBio.Wms.Web\Views\Admin_Customer\OneCustomerStandardUnit.cshtml(23): error CS0103: 当前上下文中不存在名称“ddl”
+2013-07-23 12:55:08,505 [50] ERROR - Admin_Customer.CustomerStandardUnit 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-07-23 16:02:41,462 [37] ERROR - material.filetable “C:/Share/DGKLSZ/files/inventory_n/”是物理路径，但应为虚拟路径。
+2013-07-23 16:06:30,531 [37] ERROR - material.filetable “C:/Res/DGKLSZ/files/inventory_n/”是物理路径，但应为虚拟路径。
+2013-07-23 16:21:53,451 [15] ERROR - material.downloadtab “C:/Res/DGKLSZ/files/inventory_n/201306.pdf”是物理路径，但应为虚拟路径。
+2013-07-23 16:33:20,651 [6] ERROR - material.downloadtab “C:/Res/DGKLSZ/files/inventory_n/201306.pdf”是物理路径，但应为虚拟路径。
+2013-07-23 16:35:20,941 [7] ERROR - material.downloadtab “C:/Res/DGKLSZ/files/inventory_n/201306.pdf”是物理路径，但应为虚拟路径。
+2013-07-23 16:37:48,759 [11] ERROR - material.downloadtab 未找到视图“downloadtab”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/material/downloadtab.aspx
+~/Views/material/downloadtab.ascx
+~/Views/Shared/downloadtab.aspx
+~/Views/Shared/downloadtab.ascx
+~/Views/material/downloadtab.cshtml
+~/Views/material/downloadtab.vbhtml
+~/Views/Shared/downloadtab.cshtml
+~/Views/Shared/downloadtab.vbhtml
+2013-07-23 16:38:07,172 [10] ERROR - material.downloadreport 未找到视图“downloadreport”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/material/downloadreport.aspx
+~/Views/material/downloadreport.ascx
+~/Views/Shared/downloadreport.aspx
+~/Views/Shared/downloadreport.ascx
+~/Views/material/downloadreport.cshtml
+~/Views/material/downloadreport.vbhtml
+~/Views/Shared/downloadreport.cshtml
+~/Views/Shared/downloadreport.vbhtml
+2013-07-23 16:40:40,585 [11] ERROR - management.sop 未将对象引用设置到对象的实例。
+2013-07-23 16:44:30,838 [15] ERROR - management.sop 未将对象引用设置到对象的实例。
+2013-07-23 17:04:16,323 [23] ERROR - management.sop 未将对象引用设置到对象的实例。
+2013-07-23 17:05:59,428 [8] ERROR - management.sop 未将对象引用设置到对象的实例。
+2013-07-23 17:39:15,520 [10] ERROR - management.bioefficiencysop 未将对象引用设置到对象的实例。
+2013-07-23 17:39:16,041 [7] ERROR - management.bioefficiencysop 未将对象引用设置到对象的实例。
+2013-07-23 17:47:01,927 [15] ERROR - Admin_CustomerInfo.SaveCustomerSOP 对于“ecoBio.Wms.Web.Controllers.Admin_CustomerInfoController”中方法“System.Web.Mvc.ActionResult SaveCustomerSOP(ecoBio.Wms.Data.Entities.Models.CustomerSOP, System.String, Boolean)”的不可以为 null 的类型“System.Boolean”的参数“CustomerSopIsBioaugmentation”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
