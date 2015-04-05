@@ -19,5 +19,6 @@ D:\软件开发\git\code\Enterprise.Invoicing\Enterprise.Invoicing.Common\obj\De
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\bin\Debug\ecoBio.Wms.Common.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\bin\Debug\ecoBio.Wms.Common.pdb
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\bin\Debug\Newtonsoft.Json.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\obj\Debug\Enterprise.Invoicing.Common.csprojResolveAssemblyReference.cache
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\obj\Debug\ecoBio.Wms.Common.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\obj\Debug\ecoBio.Wms.Common.pdb

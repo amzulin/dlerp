@@ -17,5 +17,6 @@ D:\软件开发\git\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj
 D:\软件开发\git\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Debug\Enterprise.Invoicing.ViewModel.pdb
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.ViewModel\bin\Debug\Enterprise.Invoicing.ViewModel.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.ViewModel\bin\Debug\Enterprise.Invoicing.ViewModel.pdb
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.ViewModel\obj\Debug\Enterprise.Invoicing.ViewModel.csprojResolveAssemblyReference.cache
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.ViewModel\obj\Debug\Enterprise.Invoicing.ViewModel.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.ViewModel\obj\Debug\Enterprise.Invoicing.ViewModel.pdb

@@ -521,6 +521,8 @@ D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Enterprise.Invoicing.Reposi
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Enterprise.Invoicing.Repositories.System.dll
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Enterprise.Invoicing.Service.dll
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Enterprise.Invoicing.ViewModel.dll
+D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\EntityFramework.dll
+D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\EntityFramework.SqlServer.dll
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\log4net.dll
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Microsoft.Web.Infrastructure.dll
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Microsoft.Web.WebPages.OAuth.dll
@@ -554,6 +556,8 @@ D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Enterprise.Invoicing.Reposi
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Enterprise.Invoicing.Repositories.pdb
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Enterprise.Invoicing.Service.pdb
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\Enterprise.Invoicing.ViewModel.pdb
+D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\EntityFramework.xml
+D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\EntityFramework.SqlServer.xml
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\System.Net.Http.Formatting.xml
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\System.Web.Helpers.xml
 D:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\bin\System.Web.Http.xml

@@ -43,8 +43,11 @@ D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\En
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\Enterprise.Invoicing.Entities.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\Enterprise.Invoicing.ViewModel.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\EntityFramework.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\EntityFramework.SqlServer.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\Enterprise.Invoicing.Entities.pdb
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\Enterprise.Invoicing.ViewModel.pdb
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\EntityFramework.xml
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\bin\Debug\EntityFramework.SqlServer.xml
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\obj\Debug\Enterprise.Invoicing.Repositories.csprojResolveAssemblyReference.cache
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\obj\Debug\Enterprise.Invoicing.Repositories.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories\obj\Debug\Enterprise.Invoicing.Repositories.pdb
