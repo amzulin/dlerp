@@ -1,0 +1,30 @@
+2013-11-18 13:22:57,624 [12] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 13:25:50,317 [20] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 13:57:10,274 [33] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 13:57:10,345 [26] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 13:59:32,003 [27] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 14:15:03,949 [30] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 14:15:04,051 [25] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 14:32:22,290 [30] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 15:12:04,738 [27] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 16:46:54,790 [50] ERROR - main.btn 值不能为 null 或为空。
+参数名: linkText
+2013-11-18 16:53:28,926 [50] ERROR - main.printwin Unable to cast the type 'System.Decimal' to type 'System.Object'. LINQ to Entities only supports casting EDM primitive or enumeration types.
+2013-11-18 16:56:38,597 [38] ERROR - main.printwin Unable to cast the type 'System.Decimal' to type 'System.Object'. LINQ to Entities only supports casting EDM primitive or enumeration types.
+2013-11-18 17:09:31,718 [14] ERROR - account.verification The provider did not return a 'DbSpatialServices' instance. In order to use the 'DbGeography' or 'DbGeometry' spatial types the EF provider being used must support spatial types and all prerequisites for the provider must be installed. See http://go.microsoft.com/fwlink/?LinkId=287183 for details.
+2013-11-18 20:32:43,396 [29] ERROR - main.printwin 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-11-18 20:32:52,477 [35] ERROR - main.printwin 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-11-18 20:38:09,385 [23] ERROR - main.printwin Unable to cast the type 'System.Decimal' to type 'System.Object'. LINQ to Entities only supports casting EDM primitive or enumeration types.
+2013-11-18 21:07:37,508 [9] ERROR - main.printwin 索引超出范围。必须为非负值并小于集合大小。
+参数名: index

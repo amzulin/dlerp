@@ -1,0 +1,144 @@
+﻿@{
+    Layout = null;
+    var person = Model.person as List<Enterprise.Invoicing.Entities.Models.Employee>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>消息发送</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> <script src="~/Scripts/jquery.form.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var attrname='';
+        var attrguid='';
+        function save() { 
+            var forids=[],fornames=[];
+            var list = $("input[mytype='person']");
+            $.each(list, function (i, m) { 
+                var chb=$(m).attr("checked");
+                if (chb=="checked") {
+                    forids.push($(m).attr("forid"));
+                    fornames.push($(m).attr("forname"));
+                }
+            });
+            var title = $("#txtttle").val();
+            var remark = $("#txtremark").val();
+            var cate = $("#ddlcate").val();
+            if (title == ''|| forids.length<1) {
+                $.dialog.alert((title == ''?"标题不能为空;":"")+( forids.length<1?"请选择收件人;":"")+(remark == ''?"消息内容不能为空;":""));
+                return false;
+            }
+            $.dialog.tips('提交中...', 3, 'loading.gif');
+            $.post("../message/savemsg",
+                {
+                    title: title, cate: cate, forids: forids.toString(), fornames: fornames.toString(), remark: remark,attrname:attrname,attrguid:attrguid
+                }, function (data) {
+                    if (data.status == false) {
+                        $.dialog.alert(data.message);
+                        return false;
+                    }
+                    else {   
+                        $.dialog.tips('发送成功');
+                        W.query();
+                    }
+                });
+        }
+        function selectall() {
+            var chb = $("#chball").attr("checked");
+            var list = $("input[mytype='person']");
+            $.each(list, function (i, m) {
+                if (chb=="checked")   $(m).attr("checked", "checked");
+                else $(m).removeAttr("checked")
+            });
+        }
+        function chbone(id) {
+            var chbme = $("#chb_"+id).attr("checked");
+
+            if (chbme!="checked") $("#chball").removeAttr("checked")
+        }  
+        function uploadfile() {
+            var formid = 'fileimage';
+            $("#fileimage").ajaxSubmit({
+                dataType: 'json', //数据格式为json 
+                beforeSend: function () { //开始上传                   
+                    $("#" + formid + " span[id=sp_msg]").attr("class", "loading"); //上传按钮显示上传中 
+                },
+                success: function (data) {
+                    if (data.status == false) {
+                        alert(data.message);
+                        $("#" + formid + " span[id=sp_msg]").attr("class", "error");
+                    }
+                    else {
+                        $("#" + formid + " div[id=div_upload]").show();
+                        $("#" + formid + " input[id=filename]").val(data.value);
+                        $("#" + formid + " span[id=sp_filename]").text(data.value2);
+                        $("#" + formid + " span[id=sp_msg]").removeClass("loading");
+                        attrname=data.value2;
+                        attrguid=data.value;
+
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="15%" align="right">消息类别：</td>
+    <td width="85%" align="left"><select id="ddlcate">
+        <option value="消息">消息</option>
+        <option value="公告">公告</option></select></td></tr>
+  <tr> 
+    <td align="right">标题：</td>
+    <td><input type="text" id="txtttle"  style="width:600px;"  /></td>
+  </tr><tr> 
+    <td align="right">接收人：</td>
+    <td><div>
+        <input type="checkbox" id="chball" onclick="selectall()" style="width:20px;" />全选
+        @foreach (var item in person)
+        {
+        <input type="checkbox" id="chb_@item.staffId" onclick="chbone(@item.staffId)" forid="@item.staffId" forname="@item.staffName" mytype="person"  style="width:20px;" /> @item.staffName
+       }
+
+        </div></td>
+  </tr>
+  <tr> 
+    <td align="right">内容：</td>
+    <td> <textarea rows="10" style="width:600px;height:235px;"  id="txtremark"></textarea> </td>
+    </tr><tr>
+        <td align="right">附件</td>
+    <td>
+        <form action="../main/fileuploadactin" id="fileimage" method="post">
+         <input type="hidden" id="filetype" name="filetype" value="message" />
+         <input id="myfile" type="file" name="myfile" style="width:250px;" /> 
+         <span id="sub" class="btn3" onclick="uploadfile();">上传</span>  
+         <input type="hidden" id="filename" name="filename" value="" />
+   
+    <span id="sp_msg"></span>
+    <div id="div_upload"  style="display:none;" class="adjunct"><span class="adjunct_icon"></span>
+        <span id="sp_filename"></span><span id="spbtn_delete" style="margin-left:8px;" class="round_delete" onclick="deletefile();"></span></div>
+     </form>
+    </td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" >
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.PurchaseModel;
+    var ddl = Model.ddl as List<Enterprise.Invoicing.Entities.Models.Supplier>;
+    if (type == "edit")
+    {
+        ViewBag.Title = "编辑采购单";
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增采购单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：采购管理 > 新增采购单 </div>
+<div class="content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer" style="height:80px;">
+<label>采购单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@no" />
+<label>采购部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  style="width:90px;" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>采购人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" style="width:50px;"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>备注：</label><input name="" id="txtremark" type="text" style="width:150px;" value=""/>  
+        <br />
+<label>供应商：</label><input name="" type="text" id="txtsupplier"  value="@one.suppliername" style="width:300px;" />     
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer" style="height:80px;">
+<label>采购单号：</label><input name="" type="text" readonly="readonly"  class="input_gray"  style="width:100px;" value="@one.purchaseNo" />       
+<label>采购部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:90px;" value="@one.depName"/>
+<label>采购人：</label><input name="" type="text" readonly="readonly" class="input_gray" style="width:50px;" value="@one.staffName" />   
+<label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark"  style="width:150px;" />  
+        <br />
+        <label>供应商：</label><input name="" type="text" id="txtsupplier"  value="@one.suppliername" style="width:300px;" />     
+</div>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>采购明细</h2>
+<div class="add">
+    <ul>
+        <li><label>物料：</label><input name="" type="text" id="txtmaterialprice"  style="width:250px;"/>
+</li>
+         <li>
+<label>采购数量：</label><input name="" type="text" id="txtcount" class="input_width_60px"/></li>
+         <li>
+<label>采购单价：</label><input name="" type="text" id="txtprice" readonly="readonly" class="input_width_60px input_gray"/></li> 
+        <li><label>交货日期：</label><input name="" type="text" id="txtdate" class="input_width_60px"/></li>
+         <li><label>备注：</label><input name="" type="text" id="txtrem" class="input_width_80px"/></li>
+         <li>
+<a  href="javascript:void(0);" id="btngl" class="gray_btn">保存</a>
+    <input type="hidden" id="hidcount" value="0" />
+    <input type="hidden" id="hiddetail" value="" />
+    <input type="hidden" id="hidarr" value="" />
+</li>   </ul>
+</div>
+<div  id="detail_table">
+@{
+    Html.RenderAction("orderdetail", "purchase", new { outno = no });   
+}
+</div> 
+
+
+
+</div>
+
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+    var hdetail = 0;
+    var hcount = 0;
+    var hprice = 0;
+    var hmaterial = "";
+    var hname = "";
+    var hmodel = "";
+    var htype = "";
+    $(function () {
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        if (type == 'edit') {
+            supplierid = '@one.supplierId';
+            suppliername = '@one.suppliername';
+        } else {
+            supplierid = 0;
+            suppliername = '';
+        }
+
+        $("#btngl").click(savedetail);//自动关联
+
+
+
+        $("#txtdate").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });
+    });
+
+    function savedetail() {
+        var txtcount = $("#txtcount").val();
+        var txtprice = $("#txtprice").val();
+        var txtrem = $("#txtrem").val();
+        var txtdate = $("#txtdate").val();
+        if (hmaterial == "" || txtcount == "" || isNaN(txtcount) || txtprice == "" || isNaN(txtprice)) {
+            $.dialog.alert("请输入物料,正确的数量和单价！");
+            return false;
+        }     
+        var ctxt = parseFloat(txtcount);
+        var ctxp = parseFloat(txtprice);
+        if (ctxt < 1 || ctxp<0) {
+            $.dialog.alert("输入数量和价格必须大于等于0");
+            return false;
+        }
+        $.post("../purchase/saveorderdetailtemp", { type: htype, no: no, detail: hdetail, m: hmaterial, name: hname, model: hmodel, count: ctxt, remark: txtrem, date: txtdate, price: ctxp }, function (data) {
+            if (data.status == "error") {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $("#detail_table").load("../purchase/orderdetail", { no: no }, function (data) { });
+                //hdetail = 0;
+                //hcount = 0;
+                //hmaterial = "";
+                //hname = "";
+                //hmodel = "";
+                htype = "add";
+            }
+        });
+    }
+    function editone(detailid, m, name, model, c, p, d, r) {
+        hdetail = detailid;
+        hmaterial = m, hname = name, hmodel = model, hcount = c, hprice = p;;
+        $("#txtmaterial").val(name);
+        $("#txtcount").val(c);
+        $("#txtprice").val(p);
+        $("#txtrem").val(r);
+        $("#txtdate").val(d);
+        htype = "edit";
+    }
+    function deleteone(rno, id, m) {
+        if (confirm("确定删除？")) {
+            $.post('../purchase/deleteorderdetail', { no: no, detail: id, m: m }, function (data) {
+                if (data == "ok") {
+                    $("#detail_table").load("../purchase/orderdetail", { no: no }, function (data) { });
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+    
+ 
+</script>

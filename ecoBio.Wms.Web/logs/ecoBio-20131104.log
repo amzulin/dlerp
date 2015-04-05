@@ -1,0 +1,22 @@
+2013-11-04 11:23:18,858 [30] ERROR - account.verification The provider did not return a 'DbSpatialServices' instance. In order to use the 'DbGeography' or 'DbGeometry' spatial types the EF provider being used must support spatial types and all prerequisites for the provider must be installed. See http://go.microsoft.com/fwlink/?LinkId=287183 for details.
+2013-11-04 11:44:48,912 [16] ERROR - purchase.orderdetailview “System.Dynamic.ExpandoObject”未包含“one”的定义
+2013-11-04 11:44:48,967 [16] ERROR - purchase.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-11-04 12:16:14,965 [23] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-04 13:05:32,034 [23] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-04 14:51:17,551 [23] ERROR - stockout.returnone “System.Dynamic.ExpandoObject”未包含“outno”的定义
+2013-11-04 16:05:38,793 [26] ERROR - stockout.returnone “System.Dynamic.ExpandoObject”未包含“no”的定义
+2013-11-04 17:17:34,850 [15] ERROR - account.verification The provider did not return a 'DbSpatialServices' instance. In order to use the 'DbGeography' or 'DbGeometry' spatial types the EF provider being used must support spatial types and all prerequisites for the provider must be installed. See http://go.microsoft.com/fwlink/?LinkId=287183 for details.
+2013-11-04 22:30:27,080 [200] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-04 22:32:53,314 [196] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-04 23:35:21,796 [217] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-04 23:38:03,757 [200] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-04 23:48:38,754 [210] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-04 23:48:44,357 [210] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText

@@ -1,0 +1,7 @@
+2014-02-22 19:41:29,433 [9] ERROR - main.index 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+2014-02-22 19:43:39,381 [6] ERROR - main.index 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+2014-02-22 19:49:02,099 [14] ERROR - main.index 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+2014-02-22 19:50:33,109 [18] ERROR - account.verification An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.
+2014-02-22 19:52:21,030 [27] ERROR - account.verification An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.
+2014-02-22 19:54:53,708 [28] ERROR - account.verification An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.
+2014-02-22 19:57:14,030 [30] ERROR - account.verification An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.

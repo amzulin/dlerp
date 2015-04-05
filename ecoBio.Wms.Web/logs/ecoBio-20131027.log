@@ -1,0 +1,10 @@
+2013-10-27 00:15:12,827 [64] ERROR - depot.rawmaterial d:\软件开发\code\ecoBio.Wms.Web\Views\depot\rawmaterial.cshtml(11): error CS1061: “Enterprise.Invoicing.ViewModel.DepotDetailModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.DepotDetailModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2013-10-27 00:41:01,484 [40] ERROR - depot.rawmaterial “System.Dynamic.ExpandoObject”未包含“mc”的定义
+2013-10-27 00:41:38,099 [40] ERROR - depot.rawmaterial 值不能为 null。
+参数名: source
+2013-10-27 00:43:16,847 [7] ERROR - depot.rawmaterial 值不能为 null。
+参数名: source
+2013-10-27 00:44:13,660 [5] ERROR - depot.rawmaterial 值不能为 null。
+参数名: source
+2013-10-27 00:54:09,819 [9] ERROR - depot.rawmaterial “System.Dynamic.ExpandoObject”未包含“depotid”的定义
+2013-10-27 22:14:48,779 [173] ERROR - stockout.outold2new 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

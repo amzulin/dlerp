@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "员工管理";
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.EmployeeModel>; 
+    var key = Model.key as string;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > 员工管理 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>关键字：<input name="" type="text" id="txtkey" value="@key" />
+<a class="btn_search" href="javascript:void(0);" id="btn"></a>
+    <input type="hidden" id="hidpage" value="@page" />
+</div>
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>员工列表</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="13%">所在部门</th>
+    <th width="8%">姓名</th>
+    <th width="10%">电话</th>
+    <th width="8%">职务</th>
+    <th width="7%">登录用户</th>
+    <th width="10%">用户名</th>
+     <th width="12%">角色</th>
+    <th width="6%">状态</th>
+    <th width="11%">备注</th>
+    <th width="10%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>    
+    <td>@item.depName</td>
+             <td>@item.staffName</td>
+    <td>@item.mobile</td>
+             <td>@item.duty</td>
+              <td>@{
+         if (item.isUser)
+         {
+             <span>是</span> 
+         }
+         else
+         {
+        <span></span>
+         }
+        }
+    </td>
+    <td>@item.userId</td>
+    <td>@item.roleName</td>
+    <td>@{
+         if (item.status)
+         {
+             <span>启用</span> 
+         }
+         else
+         {
+        <span>停用</span>
+         }
+        }
+    </td>
+    <td>@item.remark</td>
+    <td>    
+           @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("system_user"))
+            {   <span onclick="editone('edit',@item.staffId)" class="edit"></span>}
+	</td>
+</tr>
+         pi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="9">无员工列表</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+	 @Html.Partial("~/Views/Shared/page.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../system/user"}
+       })
+    </div>
+
+
+    </div>
+<script>  
+    var page = '@page';
+    var onewin;
+    $(function () {   
+        $("#btn").click(query);
+    });
+
+    function query() {
+        var dd = $("#txtkey").val();
+        window.location.href = "../system/user?page=" + page + (dd != "" ? "&key=" + dd : "");
+    }
+    function loadgrid() {
+        query();
+        onewin.close();
+    }
+    function editone(t,id)
+    {
+         onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+            title: "设置员工登录信息",
+            content: 'url:../system/userone?type=' + t + '&id=' + id
+        });
+
+    }   
+    
+</script>

@@ -1,0 +1,56 @@
+﻿
+@{
+    var no = Model.no;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.ProductSemi>;
+    var pi = 1;
+    }
+    
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th width="5%">明细</th>
+                <th width="14%">物料名称</th>
+                <th width="14%">物料规格</th>
+                <th width="6%">数量</th>
+                <th width="8%" >单价</th>
+                <th width="12%">金额</th>          
+              <th width="6%">人员</th>                
+              <th width="10%">日期</th>
+          <th width="15%">备注</th>
+        </tr>
+      </thead>
+          <tbody>
+     @if (list.Count>0)
+     {
+        foreach (var item in list)
+     {  
+  <tr>
+      <td>@pi</td>
+    <td>@item.proName</td>
+    <td>@item.proModel</td>
+    <td>@item.amount</td>
+      <td>
+           @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("semishowmoney_page"))
+        {
+            <span>@Math.Round(item.price,4)</span>
+        }</td>
+    <td> @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("semishowmoney_page"))
+        {
+            <span>@(Math.Round((decimal)item.amount*item.price,4).ToString())</span>
+        }</td>    
+      <td>@item.staffName</td>
+      <td>@item.createDate.ToString("yyyy-MM-dd")</td>
+    <td>@item.remark</td>
+  </tr>
+         pi++;
+      }    
+     }
+     else
+     {
+        <tr>
+  <td colspan="9"  bgcolor="#FFFFFF" style="text-align:left;">无入库明细</td></tr> 
+     }
+</tbody>
+    </table> 
+
+    

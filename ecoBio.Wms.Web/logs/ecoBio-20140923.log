@@ -1,0 +1,4 @@
+2014-09-23 14:03:51,291 [53] ERROR - main.printwin 未将对象引用设置到对象的实例。
+2014-09-23 14:04:28,642 [54] ERROR - main.printwin 未将对象引用设置到对象的实例。
+2014-09-23 14:05:04,757 [52] ERROR - main.printwin 未将对象引用设置到对象的实例。
+2014-09-23 17:44:23,650 [9] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。

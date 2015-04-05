@@ -1,0 +1,3 @@
+2014-08-14 22:15:44,808 [24] ERROR - depot.reportcostpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\depot\reportcostpart.cshtml(36): error CS1061: “Enterprise.Invoicing.ViewModel.MaterialCostModel”不包含“materialName”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.MaterialCostModel”的第一个参数的扩展方法“materialName”(是否缺少 using 指令或程序集引用?)
+2014-08-14 22:15:44,858 [24] ERROR - depot.reportcost 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-08-14 22:39:29,471 [24] ERROR - main.autopost 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)

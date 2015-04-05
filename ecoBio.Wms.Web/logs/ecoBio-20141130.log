@@ -1,0 +1,20 @@
+2014-11-30 13:37:05,392 [68] ERROR - message.showmsg 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.MsgReceModel”不兼容。类型“msgId”的成员在同名的数据读取器中没有对应的列。
+2014-11-30 14:21:12,940 [7] ERROR - message.sendpart 列名 'sendstaffname' 无效。
+2014-11-30 14:21:12,973 [7] ERROR - message.send 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-11-30 15:02:00,508 [27] ERROR - message.sendone 无法将类型“System.Web.Mvc.ViewResult”隐式转换为“System.Action”
+2014-11-30 16:22:19,837 [17] ERROR - message.showmsg 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.MsgReceModel”不兼容。类型“msgId”的成员在同名的数据读取器中没有对应的列。
+2014-11-30 16:22:22,265 [13] ERROR - message.showmsg 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.MsgReceModel”不兼容。类型“msgId”的成员在同名的数据读取器中没有对应的列。
+2014-11-30 16:22:24,386 [17] ERROR - message.showmsg 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.MsgReceModel”不兼容。类型“msgId”的成员在同名的数据读取器中没有对应的列。
+2014-11-30 16:23:56,537 [13] ERROR - message.showmsg 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.MsgReceModel”不兼容。类型“msgId”的成员在同名的数据读取器中没有对应的列。
+2014-11-30 17:28:53,412 [22] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-11-30 19:36:21,622 [88] ERROR - manage.material “Material”的“price”属性不能设置为“null”值。必须将该属性设置为类型为“System.Decimal”的非 null 值。
+2014-11-30 21:54:10,202 [80] ERROR - bom.producedelete DELETE 语句与 REFERENCE 约束"FK_ProduceDetail_Production"冲突。该冲突发生于数据库"hds0570423_db"，表"dbo.ProduceDetail", column 'produceNo'。
+语句已终止。
+2014-11-30 21:54:15,644 [88] ERROR - bom.producedelete DELETE 语句与 REFERENCE 约束"FK_ProduceDetail_Production"冲突。该冲突发生于数据库"hds0570423_db"，表"dbo.ProduceDetail", column 'produceNo'。
+语句已终止。
+2014-11-30 21:54:24,224 [88] ERROR - bom.producedelete DELETE 语句与 REFERENCE 约束"FK_ProduceDetail_Production"冲突。该冲突发生于数据库"hds0570423_db"，表"dbo.ProduceDetail", column 'produceNo'。
+语句已终止。
+2014-11-30 21:54:32,947 [83] ERROR - bom.producedelete DELETE 语句与 REFERENCE 约束"FK_ProduceDetail_Production"冲突。该冲突发生于数据库"hds0570423_db"，表"dbo.ProduceDetail", column 'produceNo'。
+语句已终止。
+2014-11-30 21:55:03,440 [80] ERROR - bom.producedelete DELETE 语句与 REFERENCE 约束"FK_ProduceDetail_Production"冲突。该冲突发生于数据库"hds0570423_db"，表"dbo.ProduceDetail", column 'produceNo'。
+语句已终止。

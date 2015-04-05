@@ -1,0 +1,1 @@
+2013-11-21 21:59:49,451 [6] ERROR - account.verification An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.

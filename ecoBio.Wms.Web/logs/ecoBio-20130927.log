@@ -1,0 +1,3 @@
+2013-09-27 11:22:36,353 [287] ERROR - management.forpdf “System.Dynamic.ExpandoObject”未包含“cansub”的定义
+2013-09-27 11:25:20,892 [291] ERROR - management.forpdf 未将对象引用设置到对象的实例。
+2013-09-27 11:26:18,944 [279] ERROR - management.forpdf 未将对象引用设置到对象的实例。

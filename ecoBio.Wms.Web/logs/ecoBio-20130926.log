@@ -1,0 +1,12 @@
+2013-09-26 09:37:57,462 [89] ERROR - costanalysis.priceecs 不存在具有键“ddlu”的“IEnumerable<SelectListItem>”类型的 ViewData 项。
+2013-09-26 09:37:57,475 [89] ERROR - costanalysis.price 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-09-26 13:27:26,189 [32] ERROR - costanalysis.priceecs LINQ to Entities does not recognize the method 'System.String ToString(System.String)' method, and this method cannot be translated into a store expression.
+2013-09-26 13:27:26,551 [32] ERROR - costanalysis.price 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-09-26 13:30:37,277 [26] ERROR - costanalysis.priceecs 可为空的对象必须具有一个值。
+2013-09-26 13:30:37,294 [26] ERROR - costanalysis.price 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-09-26 13:32:45,800 [11] ERROR - costanalysis.priceecs 可为空的对象必须具有一个值。
+2013-09-26 13:32:47,363 [11] ERROR - costanalysis.price 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-09-26 13:33:27,482 [11] ERROR - costanalysis.priceecs 可为空的对象必须具有一个值。
+2013-09-26 13:33:27,500 [11] ERROR - costanalysis.price 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-09-26 13:33:27,898 [5] ERROR - costanalysis.priceecs 可为空的对象必须具有一个值。
+2013-09-26 13:33:27,900 [5] ERROR - costanalysis.price 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

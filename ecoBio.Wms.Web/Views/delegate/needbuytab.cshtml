@@ -1,0 +1,136 @@
+﻿@{
+    var gate = Model.gate as Enterprise.Invoicing.Entities.Models.V_DelegateOrderModel;
+    var gatehad = Model.gatehad as Enterprise.Invoicing.Entities.Models.DelegateSendDetail;
+    var price = Model.price as List<SelectListItem>;
+    
+    var had = Model.had as List<Enterprise.Invoicing.Entities.Models.V_DelegateSendDetailModel>;
+    var orderdetail = Model.orderdetail as List<Enterprise.Invoicing.Entities.Models.V_DelegateOrderDetail>;
+    var order = Model.order;
+
+    var boms = Model.boms as List<Enterprise.Invoicing.Entities.Models.BomMain>;
+    }
+@if (gate!=null)
+{
+    
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+  <thead>
+  <tr>
+    <th>委外物料</th>
+    <th>名称</th>
+    <th>规格</th>
+    <th>工单总数</th>
+    <th>工单剩余</th>
+    <th>本次数量</th>
+    <th>单价</th>      
+ </tr>
+  </thead>
+    <tbody><tr>
+           <td>@gate.productNo</td>
+    <td>@gate.productName</td>
+    <td>@gate.productModel</td>
+    <td>@gate.productAmount</td>
+    <td>@(gate.productAmount-gate.productGiveAmount)</td>
+    <td><input type="text" id="txtsendamount" m="@gate.productNo" maxvalue="@(gate.productAmount-gate.productGiveAmount)" value="@(gatehad!=null?(gatehad.productAmount.ToString()):"")" style="width:50px;" onblur="jsamount()" /></td>    
+    <td>@Html.DropDownList("ddlprice",price)</td>
+    </tr></tbody>
+</table>
+}
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+  <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="10%">物料编码</th>
+    <th width="18%">物料名称</th>
+    <th width="24%">物料规格</th>
+    <th width="13%">计算需发数量</th>
+    <th width="10%">实发数量</th>
+    <th width="20%">备注</th>
+  </tr>
+  </thead>
+  <tbody>
+      @if (orderdetail != null)
+      {     
+          var txtindex=0;
+          foreach (var item in orderdetail)
+      {
+          var mhad = had.FirstOrDefault(p => p.delegateNo == item.delegateNo && p.materialNo == item.materialNo);
+          var bm = boms.FirstOrDefault(p => p.materialNo == item.materialNo);
+          <tr>
+              <td>@(txtindex+1)</td>
+            <td>@item.materialNo</td>
+            <td class="endwise_title">
+               @item.materialName
+            </td>
+            <td>@item.materialModel</td>
+            <td id="td_@txtindex">@(mhad!=null?Math.Round( mhad.theoryAmount,4).ToString():"")</td>
+            <td class="endwise_title">
+                @{
+                  var canupdate = 1;
+                  var ro = "";
+                  }
+              <input type="text" name="textfield" ftype="txtin" cu="@canupdate" @ro tabindex="@txtindex" id="txtin_@txtindex" zc="" 
+                  detail="@(mhad!=null?mhad.detailSn:0)"  orderdetail="@item.detailSn" m="@item.materialNo" bomid="@(bm!=null?bm.bomId:0)" 
+                  maxvalue="@(item.detailAmount.Value-item.sendAmount.Value)" 
+                  bombs="@(bm!=null?bm.amount:0)"  
+                  value="@(mhad!=null?mhad.realAmount.ToString():"")" 
+                  jsamount="" onblur="realamount('txtin_@txtindex')"
+                  style="width:70px;" />
+            </td>
+              <td><input type="text" name="textfield" ftype="txtr" cu="@canupdate" @ro id="txtr_@txtindex"   value="@(mhad!=null?mhad.remark:"")"  style="width:130px;"  /></td>
+          </tr>
+          txtindex++;
+      }
+          if (orderdetail != null && orderdetail.Count > 0)
+      { 
+        <tr><td colspan="10" style="text-align:center; margin-top:10px;"><a href="javascript:void(0);" onclick="saveindeail()"  class="btn_84px">新增</a></td></tr>
+      } 
+      }
+    </tbody>
+  </table>
+
+<script>
+    $(function () {
+        //var dlist = $("input[ftype='txtd']");
+        //$.each(dlist, function (i, m)
+        //{
+        //    $(m).datepicker({
+        //        dateFormat: "yy-mm-dd",
+        //        showOn: "button",
+        //        buttonImageOnly: true,
+        //        buttonImage: '../images/front/public/calendar.gif',
+        //        changeMonth: true,
+        //        numberOfMonths: 1
+        //    });
+        //});
+        
+    });
+
+    function jsamount() {
+        var sl = $("#txtsendamount").val();
+        var pmv = $("#txtsendamount").attr('maxvalue');
+        var txts = $("input[ftype='txtin']");
+        
+        if (isNaN(sl)) { $.dialog.tips('委外数量格式有误！'); $("#txtsendamount").val(''); sl = ''; }
+        if (parseFloat(sl) < 0) { $.dialog.tips('委外数量要大于0！'); $("#txtsendamount").val(''); sl = ''; }
+        if (parseFloat(pmv) < parseFloat(sl)) { $.dialog.tips('委外数量最大不能超出' + parseFloat(pmv)); $("#txtsendamount").val(pmv); sl = pmv; }
+        $.each(txts, function (i, m) {
+            if (sl == '') {
+                $(m).val(''); $(m).attr("jsamount", 0);
+                $("#td_" + $(m).attr('tabindex')).text('');
+            }
+            else {
+                var bs = $(m).attr('bombs');
+                var jssl = (parseFloat(sl) * parseFloat(bs)).toFixed(4);
+                $(m).val(jssl);
+                $(m).attr("jsamount", jssl);
+                $("#td_" + $(m).attr('tabindex')).text(jssl);
+            }
+        });
+    }
+    function realamount(id) {
+        var sl = $("#" + id).val();
+        if (isNaN(sl)) { $.dialog.tips('发货数量格式有误！'); $("#" + id).val(''); }
+        if (parseFloat(sl) < 0) { $.dialog.tips('发货数量必须大于0！'); $("#" + id).val(''); }
+    }
+</script>

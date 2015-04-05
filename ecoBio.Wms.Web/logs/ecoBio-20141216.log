@@ -1,0 +1,8 @@
+2014-12-16 21:46:54,429 [18] ERROR - main.printwin c:\Users\Mengzulin\AppData\Local\Temp\Temporary ASP.NET Files\vs\f355a4d3\9e9ec789\App_Web_delegatesendprint.cshtml.63a96023.n4cfpj7y.0.cs(1174): error CS1038: 应输入 #endregion 指令
+2014-12-16 21:47:20,807 [21] ERROR - main.printwin d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\main\delegatesendprint.cshtml(153): error CS1501: “ToString”方法没有任何重载采用 1 个参数
+2014-12-16 21:47:58,931 [16] ERROR - main.printwin d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\main\delegatesendprint.cshtml(153): error CS1501: “ToString”方法没有任何重载采用 1 个参数
+2014-12-16 21:48:22,066 [20] ERROR - main.printwin d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\main\delegatesendprint.cshtml(165): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateSendModel”不包含“makeStaff”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateSendModel”的第一个参数的扩展方法“makeStaff”(是否缺少 using 指令或程序集引用?)
+2014-12-16 21:54:09,160 [21] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2014-12-16 22:00:03,849 [12] ERROR - main.printwin d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\main\delegatesendprint.cshtml(154): error CS1502: 与“System.Math.Round(double, int)”最匹配的重载方法具有一些无效参数
+2014-12-16 22:00:45,575 [10] ERROR - main.printwin d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\main\delegatesendprint.cshtml(154): error CS1502: 与“System.Math.Round(double, int)”最匹配的重载方法具有一些无效参数

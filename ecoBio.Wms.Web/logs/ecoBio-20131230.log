@@ -1,0 +1,5 @@
+2013-12-30 21:10:39,726 [5] ERROR - account.verification 从数据库中获取提供程序信息时出错。这可能是 Entity Framework 使用的连接字符串不正确导致的。有关详细信息，请查看内部异常并确保连接字符串正确。
+2013-12-30 21:19:05,541 [9] ERROR - account.verification 正在创建模型，此时不可使用上下文。如果在 OnModelCreating 方法内使用上下文或如果多个线程同时访问同一上下文实例，可能引发此异常。请注意不保证 DbContext 的实例成员和相关类是线程安全的。
+2013-12-30 21:26:01,750 [5] ERROR - account.verification 正在创建模型，此时不可使用上下文。如果在 OnModelCreating 方法内使用上下文或如果多个线程同时访问同一上下文实例，可能引发此异常。请注意不保证 DbContext 的实例成员和相关类是线程安全的。
+2013-12-30 21:41:21,700 [8] ERROR - main.index 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+2013-12-30 21:47:37,139 [16] ERROR - main.autopost 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)

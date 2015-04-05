@@ -1,0 +1,31 @@
+﻿@{
+    
+}
+@{
+    ViewBag.Title = "盘点单列表";
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：半成品盘点 > 盘点单列表 </div>
+
+
+<!--表格内容-->
+
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("semilistpart", "stockin");   
+}
+</div>
+
+
+<script>  
+    parturl = "../stockin/semilistpart";
+    csparas = 'semiNo';
+    htmlids = 'txtkey';
+
+    
+</script>

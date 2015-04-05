@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "采购单价报表";
+    
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：报表查询 > 采购单价报表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+    <table>
+        <tr><td style="width:80px;text-align:right;">关键字：</td><td><input style="width:120px;" id="txtno"  name="" type="text"/></td><td style="width:30px;text-align:right;"></td>
+           <td> <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+        </td><td>    <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+            </td></tr>
+    </table>
+</div>
+
+    
+<!--表格内容-->
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("reportcostpart", "depot");   
+}</div>
+
+
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+  
+    function pageload(p) {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../depot/reportcostpart", { page: page, where: $("#txtno").val(), orderby: orderby }, function () { });
+    }
+    function orderlistp(by) {
+    }
+    function excel() {
+        para = "";
+        geturl();
+        window.location.href = "../depot/excelcost?where=" + $("#txtno").val() + "&orderby=" + orderby;
+    }
+
+    function geturl() {
+        para = "";
+        var no = $("#txtno").val();
+        parra = no;
+        return para;
+    }
+</script>
+

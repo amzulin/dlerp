@@ -1,0 +1,2 @@
+2014-12-02 20:19:57,181 [27] ERROR - manage.materialone d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\manage\materialone.cshtml(192): error CS0103: 当前上下文中不存在名称“formid”
+2014-12-02 22:04:03,092 [13] ERROR - message.savemsg “,”附近有语法错误。

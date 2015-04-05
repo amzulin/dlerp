@@ -1,0 +1,84 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel>;
+    
+    var order = Model.order;
+    }
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+  <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="9%">物料编码</th>
+    <th width="18%">物料名称</th>
+    <th width="18%">物料规格</th>
+    <th width="7%">申请数</th>
+    <th width="7%">已采购</th>
+    <th width="8%">本次采购</th>
+    <th width="8%">采购价格</th>      
+    <th width="12%">交货日期</th>
+    <th width="8%">备注</th>
+  </tr>
+  </thead>
+  <tbody>
+      @if (list!=null)
+      {     
+          var txtindex=0;   
+      foreach (var item in list)
+      {
+          <tr>
+              <td>@(txtindex+1)</td>
+            <td>@item.materialNo</td>
+            <td class="endwise_title">
+               @item.materialName
+            </td>
+            <td>@item.materialModel</td>
+            <td>@item.orderAmount</td>
+            <td ><span>@item.buyAmount</span></td>
+            <td class="endwise_title">
+                @{
+          var cls = "input_width_40px";
+                  var canupdate = 1;
+                  var ro = "";
+                  }
+              <input type="text" name="textfield" ftype="txtin" cu="@canupdate" @ro tabindex="@txtindex" id="txtin_@txtindex" zc="@item.orderAmount"  hb="@item.buyAmount"  ic="@item.mebuyAmount" detail="@item.detailSn" m="@item.materialNo"  value="@item.mebuyAmount" class="@cls" />
+            </td>
+            <td class="endwise_title">
+                   @*<input type="text" name="textfield" ftype="txtinp" cu="@canupdate" @ro id="txtp_@txtindex"   value="@item.mebuyPrice" class="@cls" />*@
+         <select name="textfield" ftype="txtinp" cu="@canupdate" @ro id="txtp_@txtindex"   value="@item.mebuyPrice" class="input_width_80px"  >
+             @if (item.priceList!=null&&item.priceList.Count>0)
+             {
+                 foreach (var ip in item.priceList)
+                 {
+                     <option value="@ip.value">@ip.value2</option>
+                 }
+             }
+         </select>
+	            </td>
+              <td><input type="text" name="textfield" ftype="txtd" cu="@canupdate" @ro id="txtd_@txtindex"   value="@(item.mysenddate<DateTime.Now.AddYears(5)?item.mysenddate.ToString("yyyy-MM-dd"):"")" class="input_width_60px" /></td>
+              <td><input type="text" name="textfield" ftype="txtr" cu="@canupdate" @ro id="txtr_@txtindex"   value="@item.remark" class="@cls" /></td>
+          </tr>
+          txtindex++;
+      } 
+      if (list != null && list.Count > 0)
+      { 
+        <tr><td colspan="10" style="text-align:center; margin-top:10px;"><a href="javascript:void(0);" onclick="saveindeail()"  class="btn_84px">新增</a></td></tr>
+      } 
+      }
+    </tbody>
+  </table>
+
+<script>
+    $(function () {
+        var dlist = $("input[ftype='txtd']");
+        $.each(dlist, function (i, m)
+        {
+            $(m).datepicker({
+                dateFormat: "yy-mm-dd",
+                showOn: "button",
+                buttonImageOnly: true,
+                buttonImage: '../images/front/public/calendar.gif',
+                changeMonth: true,
+                numberOfMonths: 1
+            });
+        });
+    });
+</script>

@@ -1,0 +1,71 @@
+2014-05-29 21:46:44,129 [8] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-05-29 21:48:25,888 [5] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-05-29 22:50:10,316 [29] ERROR - bom.orderlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\orderlistpart.cshtml(9): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BomOrderModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BomOrderModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2014-05-29 22:50:10,341 [29] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 22:51:19,944 [39] ERROR - bom.orderlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\orderlistpart.cshtml(62): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BomOrderModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BomOrderModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2014-05-29 22:51:19,945 [39] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 22:51:58,086 [39] ERROR - bom.orderlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\orderlistpart.cshtml(66): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BomOrderModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BomOrderModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2014-05-29 22:51:58,086 [39] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 22:52:35,310 [15] ERROR - bom.orderlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\orderlistpart.cshtml(70): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BomOrderModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BomOrderModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2014-05-29 22:52:35,310 [15] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 22:53:10,307 [15] ERROR - bom.orderone d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\orderone.cshtml(11): error CS0266: 无法将类型“int?”隐式转换为“int”。存在一个显式转换(是否缺少强制转换?)
+2014-05-29 22:55:28,989 [38] ERROR - bom.orderonedetail An error occurred while executing the command definition. See the inner exception for details.
+2014-05-29 22:55:28,999 [38] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 22:59:15,768 [10] ERROR - bom.orderonedetail An error occurred while executing the command definition. See the inner exception for details.
+2014-05-29 22:59:18,778 [10] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:00:08,567 [9] ERROR - bom.orderonedetail An error occurred while executing the command definition. See the inner exception for details.
+2014-05-29 23:00:08,568 [9] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:02:17,622 [10] ERROR - bom.orderonedetail An error occurred while executing the command definition. See the inner exception for details.
+2014-05-29 23:02:17,633 [10] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:03:59,974 [14] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:09:56,111 [15] ERROR - bom.orderlistview 未找到分部视图“orderlistview”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/bom/orderlistview.aspx
+~/Views/bom/orderlistview.ascx
+~/Views/Shared/orderlistview.aspx
+~/Views/Shared/orderlistview.ascx
+~/Views/bom/orderlistview.cshtml
+~/Views/bom/orderlistview.vbhtml
+~/Views/Shared/orderlistview.cshtml
+~/Views/Shared/orderlistview.vbhtml
+2014-05-29 23:10:29,454 [15] ERROR - bom.orderlistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:10:31,724 [15] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:18:58,053 [18] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-05-29 23:21:59,235 [11] ERROR - bom.orderlistview d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\orderlistview.cshtml(8): error CS0103: 当前上下文中不存在名称“one”
+2014-05-29 23:21:59,245 [11] ERROR - bom.orderlistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:21:59,245 [11] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:29:49,784 [15] ERROR - bom.orderlistview An error occurred while executing the command definition. See the inner exception for details.
+2014-05-29 23:29:56,964 [15] ERROR - bom.orderlistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:29:56,965 [15] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:35:01,273 [12] ERROR - bom.orderlistview An error occurred while executing the command definition. See the inner exception for details.
+2014-05-29 23:35:01,296 [12] ERROR - bom.orderlistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:35:01,296 [12] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:38:37,817 [17] ERROR - bom.orderlistview An error occurred while executing the command definition. See the inner exception for details.
+2014-05-29 23:46:45,208 [20] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-05-29 23:49:50,335 [25] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:49:58,665 [24] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:49:58,665 [24] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:52:55,192 [9] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:53:47,801 [6] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:53:47,801 [6] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:53:48,960 [10] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:53:48,961 [10] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:53:54,219 [10] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:53:54,219 [10] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:02,261 [6] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:02,262 [6] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:22,957 [8] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:22,958 [8] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:25,367 [10] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:25,368 [10] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:25,910 [6] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:25,911 [6] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:26,077 [8] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:26,078 [8] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:26,199 [10] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:26,200 [10] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:26,367 [8] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:26,367 [8] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:26,579 [6] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:26,580 [6] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-05-29 23:54:34,747 [10] ERROR - bom.orderonedetail 未将对象引用设置到对象的实例。
+2014-05-29 23:54:34,748 [10] ERROR - bom.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

@@ -1,0 +1,5 @@
+2014-12-15 20:34:40,396 [14] ERROR - delegate.delegatedelete 列名 'sendno' 无效。
+2014-12-15 20:34:48,205 [13] ERROR - delegate.delegatedelete 列名 'sendno' 无效。
+2014-12-15 20:40:21,022 [13] ERROR - delegate.saverequirebuytemp 对于“Enterprise.Invoicing.Web.Controllers.delegateController”中方法“System.Web.Mvc.ActionResult saverequirebuytemp(System.String, System.String, System.Decimal, System.Decimal, System.String, System.String, System.String, System.String, System.String, System.String, System.String, System.String)”的不可以为 null 的类型“System.Decimal”的参数“price”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2014-12-15 20:44:56,276 [12] ERROR - main.printwin 未将对象引用设置到对象的实例。

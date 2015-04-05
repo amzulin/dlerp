@@ -1,0 +1,3 @@
+2013-11-09 00:49:11,775 [15] ERROR - depot.reportorder LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.
+2013-11-09 00:50:48,475 [11] ERROR - depot.reportorder LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.
+2013-11-09 00:55:17,473 [12] ERROR - depot.reportstockin d:\软件开发\code\ecoBio.Wms.Web\Views\depot\reportstockin.cshtml(163): error CS1502: 与“Enterprise.Invoicing.Common.Utils.GetStatus(int)”最匹配的重载方法具有一些无效参数

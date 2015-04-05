@@ -1,0 +1,122 @@
+﻿@{
+    Layout = null;
+
+    var one = Model.model as Enterprise.Invoicing.ViewModel.V_BomMaterial;
+    var type = Model.type;
+    var id = Model.id;
+    var ddlcate = Model.ddlcate as List<SelectListItem>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id = '@id', type = '@type';
+        var hmaterial = '';
+        $(function () {
+            if (type=='edit') {
+                hmaterial='@one.materialNo'
+            }
+            $("#txtmaterial").autocomplete({
+                source: function (request, response) {
+                    var key = $("#txtmaterial").val();
+                    $.get("../main/querymaterial", { key: key, mc: '' }, function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.code + " 物料:" + item.name + " 型号:" + item.model,
+                                name: item.name,
+                                model: item.model,
+                                value: item.code,
+                                mc: item.mc
+                            }
+                        }));
+                    });
+                },
+                minLength: 1,
+                select: function (event, ui) {
+                    var item = ui.item.name;
+                    $("#txtmaterial").val(ui.item.value + " " + ui.item.name + " " + ui.item.model);
+                    hmaterial = ui.item.value;
+                    hname = ui.item.name;
+                    hmodel = ui.item.model;
+                    return false;
+                }
+            });
+        });
+        function save() {
+            if (hmaterial == '') {
+                $.dialog.alert("请选择BOM根节点产品！");
+                return false;
+            }
+            var remark = $("#txtremark").val();
+            var amount = $("#txtamount").val();
+            if (amount == '') {
+                alert("请选择BOM根节与上级的倍数！");
+                return false;
+            }
+            if (isNaN(amount)|| Number(amount)<0) {
+                alert("数量格式有误！");
+                return false;
+            }
+            var loss = $("#txtloss").val();
+            if (loss == "" || isNaN(loss) || Number(loss) < 0 || Number(loss) > 99) {
+                $.dialog.alert("损耗率为0至99之间的整数！");
+                return false;
+            }
+            var cate = $("#ddlcate").val();
+            $.post("../bom/savebom",
+               {
+                   id: id, type: type, amount: amount, cate: cate, material: hmaterial, remark: remark, loss: loss
+               }, function (data) {
+                   if (data.status == false) {
+                      alert(data.message);
+                       return false;
+                   }
+                   else {
+                       W.loadgrid();
+                   }
+               });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td width="21%" align="right">物料：</td>
+    <td colspan="3"><input name="" style="width:400px;" type="text" id="txtmaterial"  value="@(type=="edit"?one.materialName.ToString()+" "+one.materialModel:"")"  /></td>
+  </tr>
+  <tr>
+    <td width="21%" align="right">基本用量：</td>
+    <td width="23%"><input name="" type="text" id="txtamount" class="input_width_120px" value="@(type=="edit"?Math.Round(one.amount,one.xslength).ToString():"")" /></td>
+    <td width="21%" align="right">属性：</td>
+    <td width="35%">@Html.DropDownList("ddlcate", ddlcate)</td>
+  </tr>
+  <tr>
+    <td  align="right">损耗率：</td>
+    <td><input name="" type="text" id="txtloss" style="width:80px;" value="@(type=="edit"?one.loss.ToString():"0")" />%</td>
+    <td  align="right">备注：</td>
+    <td><input name="" type="text" id="txtremark" value="@(type=="edit"?one.remark.ToString():"")" /></td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3">
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

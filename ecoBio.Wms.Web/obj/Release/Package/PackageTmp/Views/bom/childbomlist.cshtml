@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "子BOM管理";
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.V_BomMaterial>;
+    var key = Model.key as string;
+    string valid = Model.valid;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > 子BOM管理 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>关键字：<input name="" type="text" id="txtkey" value="@key" />
+      状态：<select id="ddlstatus">
+        <option @(valid=="1"?"selected=selected":"") value="1">已启用</option>
+        <option @(valid==""?"selected=selected":"") value="">全部</option>
+        <option @(valid=="0"?"selected=selected":"") value="0">已禁用</option>
+
+       </select>
+<a class="btn_search" href="javascript:void(0);" id="btn"></a>
+    <input type="hidden" id="hidpage" value="@page" />
+      @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("childbom_add"))
+             {    <span  onclick="editone('add',0)"  class="btn_refer2">新增BOM</span>}
+    @Html.Partial("~/Views/Shared/page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../bom/childbomlist"}
+       })
+
+</div>
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>BOM列表</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="20%">子BOM名称</th>
+    <th width="18%">规格</th>
+    <th width="8%">版本</th>
+
+    <th width="5%">状态</th>
+    <th width="10%">日期</th>
+    <th width="14%">备注</th>
+
+    <th width="20%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>    
+    <td>@item.bomName</td>
+    <td>@item.otherProject</td>
+    <td>@item.version</td>
+    <td>@(item.status==1?"启用":"禁用")</td>             
+    <td>@(item.status==0?(item.endDate.HasValue?item.endDate.Value.ToString("yyyy-MM-dd"):"已停用"):(item.startDate.HasValue?item.startDate.Value.ToString("yyyy-MM-dd"):"已启用"))</td>
+    <td>@item.remark</td>
+    <td>    
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("childbom_view"))
+            {  <span title="查看" onclick="editone('view',@item.bomId)" class="view"></span>}
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("childbom_export"))
+              {  <span title="导出EXCEL" onclick="editone('export',@item.bomId)" >导出</span>}
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("childbom_update"))
+              {  <span title="修改" onclick="editone('edit',@item.bomId)" class="edit"></span>
+              <span title="@(item.status==1?"禁用":"启用")" onclick="editone('status',@item.bomId,@(item.status==1?"0":"1"))" >@(item.status==1?"禁用":"启用")</span>
+          }
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("childbom_copy")&&item.status==1)
+              {  <span title="导出EXCEL" onclick="bomcopy(@item.bomId,'@item.bomName','@item.materialCate')" >复制</span>}
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("childbom_delete"))
+         {     <span onclick="deleteone(@pi,'@item.bomId');"  title="删除">删除</span>  }
+	</td>
+</tr>
+         pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="7">无BOM信息</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+           
+	 @Html.Partial("~/Views/Shared/page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../bom/childbomlist"}
+       })
+    </div>
+
+
+    </div>
+<script>  
+    var page = '@page';
+    var onewin;
+    $(function () {   
+        $("#btn").click(query);
+    });
+
+    function query() {
+        var dd = $("#txtkey").val();
+        var ds = $("#ddlstatus").val();
+        window.location.href = "../bom/childbomlist?page=" + page + (dd != "" ? "&key=" + dd : "") + (ds != "" ? "&valid=" + ds : "");
+    }
+    function loadgrid() {
+        query();
+        onewin.close();
+    }
+    function editone(t, id, s) {
+        if (t == 'view')
+            window.location.href = '../bom/childbomtree?type=' + t + '&id=' + id;
+        else if (t == 'status') {
+            if (confirm("确定" + (s == 0 ? "禁用" : "启用") + "该BOM？")) {
+                var dd = $("#txtkey").val();
+                var ds = $("#ddlstatus").val();
+                $.post("../bom/bomvalid", { id: id, valid: s }, function (data) {
+                    if (data.status == true) {
+                        $.dialog.tips("操作成功 ");
+                        window.location.href = "../bom/childbomlist?page=" + page + (dd != "" ? "&key=" + dd : "") + (ds != "" ? "&valid=" + ds : "");
+                    }
+                    else {
+                        $.dialog.alert((s == 0 ? "禁用" : "启用") + "失败！");
+                    }
+                });
+            }
+            else
+                return false;
+        }
+        else if (t == 'add') {
+            onewin = $.dialog({
+                id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+                title: t == "add" ? '新增子BOM' : "子BOM信息",
+                content: '<table style="margin-top:10px;" width="500px" border="0" cellspacing="0" cellpadding="0">'
+                + '<tr style="height:30px;">'
+                + '<td width="15%" align="right">子BOM名称：</td>'
+                + '<td width="35%"><input name="" type="text" id="txtname" /></td>'
+                + '<td width="15%" align="right">版本：</td>'
+                + '<td width="35%"><input name="" type="text" id="txtversion" value="" /></td>'
+                + '</tr><tr style="height:30px;">'
+                + '<td align="right">规格：</td><td><input name="" type="text" id="txtmodel"/></td>'
+                + '<td align="right"></td><td></td>'
+                + '</tr><tr style="height:30px;">'
+                + '<td align="right">快速码：</td><td><input name="" type="text" id="txtcode"/></td>'
+                + '<td align="right">备注：</td><td><input name="" type="text" id="txtremark"/></td>'
+                + '</tr>'
+                + '</table>'
+                               , button: [
+       {
+           name: '提交',
+           callback: function () {
+               var name = $("#txtname").val();
+               var code = $("#txtcode").val();
+               var model = $("#txtmodel").val();
+               var version = $("#txtversion").val();
+               var remark = $("#txtremark").val();
+               $.post("../bom/savechildbom", { name: name, model: model, remark: remark, code: code, version: version }, function (data) {
+                   if (data.status == true) {
+                       query();
+                   }
+                   else {
+                       $.dialog.alert(data.message);
+                       return false;
+                   }
+               });
+           },
+           focus: true
+       },
+       {
+           name: '取消'
+       }
+                               ]
+            });
+        }
+        else
+            window.location.href = '../bom/childbomtree?type=' + t + '&id=' + id;
+
+    }
+    function deleteone(i, id) {
+        if (confirm("确定删除该BOM？")) {
+            var dd = $("#txtkey").val();
+            var ds = $("#ddlstatus").val();
+            $.post("../bom/deletebom", { id: id }, function (data) {
+                if (data.status == true) {
+                    window.location.href = "../bom/childbomlist?page=" + page + (dd != "" ? "&key=" + dd : "") + (ds != "" ? "&valid=" + ds : "");
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                }
+            });
+        }
+        else
+            return false;
+
+    }
+    function bomcopy(bomid, bomname,code) {
+        onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+            title: bomname + " 子BOM复制",
+            content: '<table style="margin-top:10px;" width="500px" border="0" cellspacing="0" cellpadding="0">'
+            + '<tr style="height:30px;">'
+            + '<td width="15%" align="right">子BOM名称：</td>'
+            + '<td width="35%"><input name="" type="text" id="txtname" value="' + bomname + '" /></td>'
+            + '<td width="15%" align="right">版本：</td>'
+            + '<td width="35%"><input name="" type="text" id="txtversion"  value="" /></td>'
+            + '</tr><tr style="height:30px;">'
+            + '<td align="right">快速码：</td><td><input name="" type="text" id="txtcode" value="' + code + '" /></td>'
+            + '<td align="right">备注：</td><td><input name="" type="text" id="txtremark"/></td>'
+            + '</tr>'
+            + '</table>'
+                              , button: [
+      {
+          name: '提交',
+          callback: function () {
+              var name = $("#txtname").val();
+              var code = $("#txtcode").val();
+              var version = $("#txtversion").val();
+              var remark = $("#txtremark").val();
+              $.post("../bom/savechildbomcopy", { from: bomid, name: name, remark: remark, code: code, version: version }, function (data) {
+                  if (data.status == true) {
+                      query();
+                  }
+                  else {
+                      $.dialog.alert(data.message);
+                      return false;
+                  }
+              });
+          },
+          focus: true
+      },
+      {
+          name: '取消'
+      }
+                              ]
+        });
+    }
+</script>

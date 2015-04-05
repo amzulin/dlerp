@@ -1,0 +1,80 @@
+﻿
+@{
+    var no = Model.no;
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.StockDetailModel>;
+    var outtype = 0;
+    if (list.Count>0)
+    {
+        outtype = list[0].datatype;
+    }
+    var mc = Model.mc as List<Enterprise.Invoicing.ViewModel.KeyValue>;
+    var pi = 1;
+    }
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th width="5%">明细</th>
+          <th width="10%">物料编码</th>
+          <th width="15%">物料名称</th>
+          <th width="18%">物料规格</th>
+          <th width="11%">物料图号</th>
+          <th width="5%" >单位</th>
+            @if (outtype==1)
+            {
+                
+          <th width="9%">仓库</th>
+          <th width="10%">出库数量</th>
+          <th width="7%">单价</th>
+            }
+            else{
+          <th width="11%">仓库</th>
+          <th width="15%">出库数量</th>
+            }
+          <th width="10%">备注</th>
+        </tr>
+      </thead>
+          <tbody>
+     @if (list.Count>0)
+     {
+        foreach (var item in list)
+     {  
+  <tr>
+      <td>@pi</td>
+      <td title="编码 @item.materialNo">@item.materialNo</td>
+    <td title="编码 @item.materialNo">@item.materialName</td>
+    <td title="编码 @item.materialNo">@item.materialModel</td>
+    <td title="编码 @item.materialNo">@item.materialTu</td>
+    <td>@item.materialUnit</td>
+      <td>@item.depotName</td>
+    <td>
+        @if (item.returnamount > 0)//有出库
+        {
+            <span>@(item.amount+"( 退回:"+item.returnamount+")")</span> 
+        }
+        else
+        {
+             <span>@item.amount</span> 
+        }
+    </td>
+       @if (outtype == 1)
+            {
+        <td>
+            @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("sellmoney_page"))
+            {
+                  <span>@item.price</span>
+            }
+            </td>
+      }
+    <td>@item.remark</td>
+  </tr>
+         pi++;
+      }    
+     }
+     else
+     {
+        <tr>
+  <td colspan="9"  bgcolor="#FFFFFF" style="text-align:left;">无出库明细</td></tr> 
+     }
+</tbody>
+    </table> 
+

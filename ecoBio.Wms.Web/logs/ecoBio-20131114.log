@@ -1,0 +1,2 @@
+2013-11-14 22:20:58,823 [8] ERROR - main.print 报表数据源对象的类型必须为 System.Data.DataTable、System.Collections.IEnumerable 或 System.Web.UI.IDataSource。
+2013-11-14 22:22:51,935 [12] ERROR - main.print 输入的 XML 不符合架构。API 文档中介绍了 XML 的语法。有关报表中 XML 的信息，请参阅“报表定义语言”语法。

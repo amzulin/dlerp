@@ -1,0 +1,142 @@
+﻿
+@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_ProductionModel>;
+    int count = 0;
+    var first = "";
+    if (list!=null&&list.Count>0)
+    {
+        first = list[0].produceNo;
+        count = list.Count;
+    }
+    var page = Model.pageIndex;
+    var pi = 1;
+    var dpi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>领料单</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlist('produceNo')" >领料单号</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlist('bomOrderNo')">订单号</th>
+      
+    <th width="8%" style="cursor:pointer;" onclick="orderlist('staffName')">编码</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlist('staffName')">名称</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlist('staffName')">规格</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlist('status')">总数</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlist('status')">已产</th>
+    <th width="7%" style="cursor:pointer;" onclick="orderlist('staffName')">生成用户</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlist('status')">状态</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlist('remark')">备注</th>
+    <th width="10%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr><td colspan="13">
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tbody>
+        <tr  id="tr_@dpi" onclick="loaddetail(@dpi,'../bom/producedetailview?no=@item.produceNo')">
+      <td width="5%">@pi</td>
+    <td width="10%">@item.produceNo</td>
+    <td width="10%">@item.bomOrderNo</td>
+
+    <td width="8%">@item.productNo</td>
+    <td width="12%">@item.productName</td>
+    <td width="12%">@item.productModel</td>
+    <td width="6%">@item.productAmount</td>
+    <td width="6%">@item.productBackAmount</td>
+
+    <td width="7%">@item.staffName</td>
+    <td width="6%">
+        @if (item.isover == 1)
+        {
+            <span>完工</span> 
+        }
+        else
+        {
+            <span>@Enterprise.Invoicing.Common.Utils.GetStatus(item.status)</span>
+        }
+
+    </td>
+    <td width="8%">       <span> @item.productRemark</span></td>
+    <td width="10%">   
+        @if (item.isover!=1)
+        {
+            
+            if (Enterprise.Invoicing.Web.Masterpage.CheckRight("produce_check")&&item.canfs)
+            {
+                <a href="javascript:void(0);" onclick="changestatus('produce','@item.produceNo',@item.status,'../bom/producelist?page=@page')">@Html.Raw(Enterprise.Invoicing.Common.Utils.GetBtnStr(item.status))</a>
+            }  
+          if (item.status==0)
+          {              
+           if (Enterprise.Invoicing.Web.Masterpage.CheckRight("produce_update")||item.staffId==Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+            {
+               <a href="produceone?type=edit&page=@page&no=@item.produceNo" title="修改">修改</a>
+        }
+              if (Enterprise.Invoicing.Web.Masterpage.CheckRight("produce_invalid"))
+            {
+           <a href="javascript:void(0);" onclick="changestatus('produce','@item.produceNo',-1,'../bom/producelist?page=@page')"  title="作废">作废</a>
+        }
+              if (Enterprise.Invoicing.Web.Masterpage.CheckRight("produce_delete") || item.staffId == Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+            {
+            <span onclick="deleteone('../bom/producedelete','@item.produceNo','领料单');"  title="删除">删除</span>  
+        }  
+          }
+        }
+          @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("produce_print"))
+          {
+              <span onclick="print('领料单','produce','@item.produceNo');"  title="打印">打印</span>
+          }  
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("produce_pull")&&item.status==1&&item.isclose==false&&item.isover==0&&item.valid==true)
+          {
+        <a href="../delegate/pullone?productno=@item.produceNo">领料</a>
+         }
+          </td>
+   </tr>
+                	  </tbody>
+    </table>      
+          <div  id="detai_div_@dpi" style="display:none;">
+              @{
+    Html.RenderAction("producedetailview", "bom", new { no = "" });
+      }
+        </div>
+
+             </td></tr>
+         pi++;
+         dpi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="13">无领料单</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+	 @Html.Partial("~/Views/Shared/page_load.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",""},{"url","../bom/producelist"}
+       })
+    </div>
+<script>  
+    var c = '@count';
+    var detail = [];
+    var close = [];
+    page = '@page'
+    $(function () {
+        for (var i = 0; i < c; i++) {
+            detail.push(0);
+            close.push(0);
+        }
+    });  
+</script>

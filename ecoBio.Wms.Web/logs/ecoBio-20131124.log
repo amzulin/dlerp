@@ -1,0 +1,3 @@
+2013-11-24 11:40:01,843 [22] ERROR - purchase.orderlist “@”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+2013-11-24 11:53:21,080 [9] ERROR - main.printa4 “System.Dynamic.ExpandoObject”未包含“title”的定义

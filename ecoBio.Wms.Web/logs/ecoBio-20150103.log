@@ -1,0 +1,15 @@
+2015-01-03 08:33:07,164 [8] ERROR - bom.producelistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\producelistpart.cshtml(106): error CS1502: 与“System.Web.WebPages.WebPageExecutingBase.Write(System.Web.WebPages.HelperResult)”最匹配的重载方法具有一些无效参数
+2015-01-03 08:33:07,173 [8] ERROR - bom.producelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2015-01-03 08:33:59,028 [5] ERROR - delegate.pullone d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\pullone.cshtml(44): error CS1061: “Enterprise.Invoicing.Entities.Models.V_ProductPullModel”不包含“pullNoNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_ProductPullModel”的第一个参数的扩展方法“pullNoNo”(是否缺少 using 指令或程序集引用?)
+2015-01-03 08:42:53,868 [18] ERROR - delegate.pullonedetail 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2015-01-03 08:42:53,868 [18] ERROR - delegate.pullone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2015-01-03 08:43:04,727 [13] ERROR - delegate.pullonedetail d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\pullonedetail.cshtml(32): error CS1502: 与“System.Math.Round(double, int)”最匹配的重载方法具有一些无效参数
+2015-01-03 08:43:04,727 [13] ERROR - delegate.pullone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2015-01-03 09:03:20,396 [36] ERROR - delegate.savepullone 列名 'WY030001' 无效。
+2015-01-03 09:03:30,489 [36] ERROR - delegate.savepullone 列名 'WY030001' 无效。
+2015-01-03 09:06:36,691 [6] ERROR - delegate.savepullone 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.DelegateSend”不兼容。类型“sendNo”的成员在同名的数据读取器中没有对应的列。
+2015-01-03 19:32:08,282 [23] ERROR - delegate.pullonedetail “System.Dynamic.ExpandoObject”未包含“boms”的定义
+2015-01-03 19:32:08,338 [23] ERROR - delegate.pullone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2015-01-03 20:12:41,029 [13] ERROR - delegate.savepullone 列名 'backNo' 无效。
+2015-01-03 20:19:22,329 [22] ERROR - main.printwin 索引超出了数组界限。

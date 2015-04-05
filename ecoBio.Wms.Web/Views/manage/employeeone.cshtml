@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+    var one = Model.model as Enterprise.Invoicing.ViewModel.EmployeeModel;
+    var deplist = Model.deplist as List<SelectListItem>;
+    var type = Model.type;
+    var id = Model.id;
+    if (type=="edit"&&id>0)
+    {
+        var mydepid=one.depId.ToString();
+        var dep = deplist.FirstOrDefault(p => p.Value == mydepid);
+        if (dep != null)
+        {
+            dep.Selected = true;
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id='@id',  type='@type';
+        function save() {
+            var rad = $('input:radio[name="radcheck"]:checked').val();
+            var name = $("#txtname").val();
+            var mobile = $("#txtmobile").val();
+            var duty = $("#txtduty").val();
+            var email = $("#txtemail").val();
+            var dep = $("#ddldep").val();
+            var remark = $("#txtremark").val();
+            if (name == '') {
+                $.dialog.alert("部门名称不能为空！");
+                return false;
+            }
+            $.dialog.tips('提交中...', 4, 'loading.gif');
+            //id,depId, string name, string mobile, string email, string duty, string remark
+            $.post("../manage/saveemployee",
+                {
+                    id: id, rad: rad, depId: dep, name: name, mobile: mobile, duty: duty, email: email, remark: remark
+                }, function (data) {
+                    if (data.status == false) {
+                        $.dialog.alert(data.message);
+                        return false;
+                    }
+                    else {
+                        W.loadgrid();
+                    }
+                });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="21%" align="right">员工姓名：</td>
+    <td width="23%"><input id="txtname" name="" type="text" value="@one.staffName" /></td>
+    <td width="21%" align="right">所在部门：</td>
+    <td width="35%">@Html.DropDownList("ddldep",deplist)</td>
+  </tr>
+<tr>
+    <td align="right">手机号：</td>
+    <td><input name="" id="txtmobile" value="@one.mobile" type="text" /></td>
+    <td align="right">邮箱：</td>
+    <td><input name="" id="txtemail" value="@one.email" type="text" /></td>
+  </tr>
+  <tr>
+    <td align="right">职务：</td>
+    <td><input name="" id="txtduty" value="@one.duty" type="text" /></td>
+    <td align="right">员工状态：</td>
+    <td>
+        &nbsp;<input id="rad1" name="radcheck" type="radio" value="1" checked="checked"  style="width:20px;"/>正常  
+        &nbsp;<input style="width:20px;" id="rad0" name="radcheck" type="radio" value="0" />停用
+    </td>
+  </tr>
+  <tr>
+    <td align="right">备注：</td>
+    <td height="50" colspan="3">
+        <input id="txtremark" name="" value="@one.remark" type="text" />
+    </td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3">
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

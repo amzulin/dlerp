@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+    var url = Model.url;
+    var v1 = Model.v1;
+    var v2 = Model.v2;
+    var message = Model.message;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>系统登录</title>
+    <link href="~/Content/themes/wms_login.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/lhgdialog/lhgdialog.js"></script>
+    <script>
+        $(function () {
+            //$("#f").submit();
+            var m = '@message';
+            var v1 = '@v1';
+            var v2 = '@v2';
+            if (m != "") {
+                $.dialog.alert(m);
+                return false;
+            }
+            if (v1 != '') $("#msg1").text(v1);
+            if (v2 != '') $("#msg2").text(v2);
+
+            document.onkeydown = function (e) {
+                if (!e) e = window.event;//火狐中是 window.event
+                if ((e.keyCode || e.which) == 13) {
+                    login();
+                }
+            }
+        });
+        function login() {
+            var v1 = $("#userid").val();
+            var v2 = $("#pwd").val();
+            var a = /^\d{6}$/;
+            var go = 1;
+            if (v1 == "") {
+                $("#msg1").text("请输入用户名"); go = 0;
+            }
+            //else if (!a.test(v1)) {
+            //    $("#msg1").text("用户名输入错误"); go = 0;
+            //}
+            else $("#msg1").text("");
+
+            if (v2 == "") {
+                $("#msg2").text("请输入密码"); go = 0;
+            }
+            //else if (v2.length != 6) {
+            //    $("#msg2").text("密码输入错误"); go = 0;
+            //}
+            else $("#msg2").text("");
+
+            if (go == 1) {
+                $("#dd_login").addClass("loading");
+                $("#f").submit();
+                //$.post("../account/verification", { userid: v1, pwd: v2 }, function (data) {
+                //    if (data.status == true) {
+                //       window.location.href ="../main/index";
+                //        // alert(data.message);
+                //    }
+                //    else {
+                //        $("#dd_login").removeClass("loading");
+                //        $("#msg1").text(data.value);
+                //        $("#msg2").text(data.value2);
+                //    }
+                //});
+            }
+        }
+        function chageimg() {
+            $("#valiCode").attr("src", "/Account/GetValidateCode?time=" + (new Date()).getTime());
+        }
+    </script>
+</head>
+
+
+    <body>
+<div class="login_mian">
+<div style="height:220px;"></div>
+<div class="login_input">
+    <div id="dd_login"></div>
+    <form id="f" action="../account/verification" method="post"><input type="hidden" name="action" id="action" value="login" />
+<ul>
+<li><label>用户名</label><input name="userid" id="userid" type="text" value="mzl" />
+    <span id="msg1"></span>
+</li>
+
+<li><label>密 码</label><input name="pwd" id="pwd" type="password" value="11" />
+    <span id="msg2"></span>
+</li>
+<li><input name="" type="button" onclick="login()" class="login_btn"/></li> 
+</ul>
+    </form>
+</div>
+</div>
+<div class="login_foot">©copyright:2013-2020 ecoBio宜态科环保</div>
+</body>
+</html>

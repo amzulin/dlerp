@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "客户管理";
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.Supplier>; 
+    var key = Model.key as string;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > 客户管理 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>关键字：<input name="" type="text" id="txtkey" value="@key" />
+<a class="btn_search" href="javascript:void(0);" id="btn"></a>
+    <input type="hidden" id="hidpage" value="@page" />
+</div>
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>客户列表</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="25%">名称</th>
+    <th width="8%">联系人</th>
+    <th width="10%">电话</th>
+    <th width="20%">地址</th>
+    <th width="4%">状态</th>
+    <th width="10%">备注</th>
+    <th width="18%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>
+    <td>@item.supplierName</td>
+    <td>@item.person</td>
+    <td>@item.phone</td>
+    <td>@item.address</td>
+    <td>@{
+         if (item.valid)
+         {
+             <span>启用</span> 
+         }
+         else
+         {
+        <span>停用</span>
+         }
+        }
+    </td>
+    <td>@item.remark</td>
+    <td>    
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_update"))
+            {  <span onclick="editone('edit',@item.supplierId)" class="edit"></span>}
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_delete"))
+            {     <span onclick="deleteone(@pi,'@item.supplierId');"  title="删除">删除</span>  }
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_price"))
+         {     <span onclick="manage('@item.supplierId',@pageindex);"  title="价格管理">价格管理</span>  }
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_priceprint"))
+         {     <span onclick="print('@item.supplierId',@pageindex);"  title="导出价格">导出</span>  }
+	</td>
+</tr>
+         pi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="7">无客户信息</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+             @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_add"))
+            {    <div style="float:left"><span  onclick="editone('add',0)"  class="add_btn">新增客户</span></div>}
+	 @Html.Partial("~/Views/Shared/page.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../manage/customer"}
+       })
+    </div>
+
+
+    </div>
+<script>  
+    var page = '@page';
+    var onewin;
+    $(function () {   
+        $("#btn").click(query);
+    });
+
+    function query() {
+        var dd = $("#txtkey").val();
+        window.location.href = "../manage/customer?page=" + page + (dd != "" ? "&key=" + dd : "");
+    }
+    function loadgrid() {
+        query();
+        onewin.close();
+    }
+    function editone(t,id)
+    {
+         onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+            title: t == "add" ? '新增客户' : "客户信息",
+            content: 'url:../manage/customerone?type=' + t + '&id=' + id
+        });
+
+    }
+    function deleteone(i, id) {
+        if (confirm("确定删除该客户？")) {
+            var dd = $("#txtkey").val();
+            $.post("../manage/deletesupplier", { id: id }, function (data) {
+                if (data.status == true) {
+                    window.location.href = "../manage/customer?page=" + page + (dd != "" ? "&key=" + dd : "");
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                }
+            });
+        }
+        else
+            return false;
+
+    }
+    
+
+
+    function print(id, p) {
+        var dd = $("#txtkey").val();
+        window.location.href = "../manage/customer?page=" + page + (dd != "" ? "&key=" + dd : "");
+    }
+    function manage(id, p) {
+        window.location.href = "../manage/customerprice?id=" + id + "&page=" + p;
+    }
+
+</script>

@@ -1,0 +1,53 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.ReturnDetailModel>;
+    var depots = Model.depots as List<SelectListItem>;
+    var order = Model.order;
+    }
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+  <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="15%">物料名称</th>
+    <th width="15%">物料规格</th>
+    <th width="10%">采购数量</th>
+       <th width="17%">入库单号</th>
+    <th width="8%">入库数量</th>
+    <th width="8%">退单数量</th>
+    <th width="12%">所在仓库</th>
+    <th width="10%">备注</th>
+  </tr>
+  </thead>
+  <tbody>
+      @if (list!=null)
+      {     
+          var txtindex=0;   
+      foreach (var item in list)
+      {
+          <tr>
+              <td>@(txtindex+1)</td>
+            <td class="endwise_title">@item.materialName</td>
+            <td>@item.materialModel</td>
+              <td>@item.orderAmoutn</td>
+              <td>@item.stockinNo</td>
+              <td>@item.inAmount</td>
+            <td class="endwise_title"><label>
+                @{
+                  var cls = "input_width_60px";
+                  var canupdate = 1;
+                  var ro = "";
+                  }
+              <input type="text" name="textfield" ftype="txtin" cu="@canupdate" @ro tabindex="@txtindex" id="txtin_@txtindex" zc="@item.inAmount"  hb="@item.returnAmount"  ic="@item.returnAmount" detail="@item.stockinDetailSn" m="@item.materialNo"  value="@item.returnAmount" class="@cls" />
+            </label></td>
+            <td class="endwise_title">  @item.depotName</td>  
+              <td><input type="text" name="textfield" ftype="txtrem" cu="@canupdate" @ro tabindex="@txtindex" id="txtrem_@txtindex"  value="@item.remark" class="@cls" /></td>
+            
+          </tr>
+          txtindex++;
+          } 
+      }
+    </tbody>
+  </table>
+@if (list!=null&&list.Count>0)
+      { 
+    <div style="text-align:center; margin-top:10px;"><a href="javascript:void(0);" onclick="saveindeail()"  class="btn_84px">新增</a></div>
+}

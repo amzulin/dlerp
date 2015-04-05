@@ -1,0 +1,7 @@
+2014-06-18 20:07:08,995 [13] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-06-18 20:12:14,266 [8] ERROR - stockin.inlist d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\stockin\inlist.cshtml(24): error CS1519: 类、结构或接口成员声明中的标记“)”无效
+2014-06-18 20:22:53,025 [5] ERROR - purchase.saverequirebuytemp 索引超出了数组界限。
+2014-06-18 20:22:59,816 [16] ERROR - purchase.saverequirebuytemp 索引超出了数组界限。
+2014-06-18 20:30:15,020 [18] ERROR - bom.bomout 可为空的对象必须具有一个值。
+2014-06-18 21:11:54,317 [9] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-06-18 21:13:21,417 [18] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。

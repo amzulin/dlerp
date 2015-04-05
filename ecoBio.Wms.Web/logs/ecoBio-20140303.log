@@ -1,0 +1,5 @@
+2014-03-03 20:31:16,665 [6] ERROR - main.index 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+2014-03-03 21:26:05,602 [9] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2014-03-03 21:30:30,598 [9] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText

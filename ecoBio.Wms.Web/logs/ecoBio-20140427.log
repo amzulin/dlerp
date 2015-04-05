@@ -1,0 +1,9 @@
+2014-04-27 17:21:36,604 [9] ERROR - main.index 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+2014-04-27 22:55:05,865 [129] ERROR - stockout.returnlistpart 列名 'supplierId' 无效。
+2014-04-27 22:55:05,910 [129] ERROR - stockout.returnlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-04-27 22:56:21,156 [61] ERROR - stockout.savecanreturntemp 未将对象引用设置到对象的实例。
+2014-04-27 22:56:26,370 [63] ERROR - stockout.savecanreturntemp 未将对象引用设置到对象的实例。
+2014-04-27 23:06:58,404 [14] ERROR - stockout.returnrsell 运算符“==”无法应用于“int”和“string”类型的操作数
+2014-04-27 23:42:22,213 [7] ERROR - stockout.savecanreturntemp 未将对象引用设置到对象的实例。
+2014-04-27 23:43:08,576 [23] ERROR - stockout.savecanreturntemp 未将对象引用设置到对象的实例。
+2014-04-27 23:58:49,047 [9] ERROR - main.printwin 未将对象引用设置到对象的实例。

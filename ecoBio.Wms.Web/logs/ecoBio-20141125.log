@@ -1,0 +1,4 @@
+2014-11-25 15:24:05,738 [31] ERROR - purchase.needbuytab 无法在 LINQ to Entities 查询中初始化实现 IEnumerable“System.Collections.Generic.List`1[[Enterprise.Invoicing.ViewModel.ReturnValue, Enterprise.Invoicing.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]”的类型。
+2014-11-25 15:24:05,834 [31] ERROR - purchase.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-11-25 15:25:00,559 [28] ERROR - purchase.needbuytab 无法在 LINQ to Entities 查询中初始化实现 IEnumerable“System.Collections.Generic.List`1[[Enterprise.Invoicing.ViewModel.ReturnValue, Enterprise.Invoicing.ViewModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]”的类型。
+2014-11-25 15:25:00,559 [28] ERROR - purchase.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

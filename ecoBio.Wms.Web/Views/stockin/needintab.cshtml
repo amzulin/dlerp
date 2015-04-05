@@ -1,0 +1,66 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.StockDetailModel>;
+    var depots = Model.depots as List<SelectListItem>;
+    var order = Model.order;
+    }
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+  <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="20%">物料名称</th>
+    <th width="20%">物料规格</th>
+    <th width="10%">采购</th>
+    <th width="10%">未入库</th>
+    <th width="10%">本次入库</th>
+    <th width="15%">所入仓库</th>
+    <th width="10%">备注</th>
+  </tr>
+  </thead>
+  <tbody>
+      @if (list!=null)
+      {     
+          var txtindex=0;   
+      foreach (var item in list)
+      {
+          <tr>
+              <td>@(txtindex+1)</td>
+            <td class="endwise_title">@item.materialName</td>
+            <td>@item.materialModel</td>
+              <td>@item.orderAmout</td>
+              <td>@item.remainAmout</td>
+            <td class="endwise_title"><label>
+                @{
+                  var cls = "input_width_60px";
+                  var canupdate = 1;
+                  var ro = "";
+                  }
+              <input type="text" name="textfield" ftype="txtin" cu="@canupdate" @ro tabindex="@txtindex" id="txtin_@txtindex" zc="@item.orderAmout"  hb="@item.remainAmout"  ic="@item.amount" detail="@item.purchaseDetailSn" m="@item.materialNo"  value="@item.amount" class="@cls" />
+            </label></td>
+            <td class="endwise_title">  
+                  <select ftype="txtinp" id="@("ddldepot"+txtindex)" style="width:100px;">
+            <option value="0">请选择仓库</option>
+                @foreach (var d in depots)
+                {
+                    if (d.Value==item.depotId.ToString())
+                    {
+                        <option selected="selected" value="@d.Value">@d.Text</option>
+                    }
+                    else
+                    {
+                        <option  value="@d.Value">@d.Text</option>
+                    }
+                }
+        </select>                 
+                     
+	            </td>
+              <td><input type="text" name="textfield" ftype="txtrem"  tabindex="@txtindex" id="txtrem_@txtindex"  value="@item.remark" /></td>
+          </tr>
+          txtindex++;
+          } 
+      }
+    </tbody>
+  </table>
+@if (list!=null&&list.Count>0)
+      { 
+    <div style="text-align:center; margin-top:10px;"><a href="javascript:void(0);" onclick="saveindeail()"  class="btn_84px">新增</a></div>
+}

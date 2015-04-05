@@ -1,0 +1,158 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.PurchaseRequireMode;
+
+    
+    if (type == "edit")
+    {
+        ViewBag.Title = "编辑入库单";
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增入库单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：采购申请管理 > 新增采购申请单 </div>
+<div class="data_content" style="min-height:500px;">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer">
+<label>申请单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@no" />
+<label>申请部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>申请人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>备注：</label><input name="" id="txtremark" type="text" value=""/>  
+@*<a href="javascript:void(0);" id="btncreate" class="btn_refer">提交</a>*@
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer">
+<label>申请单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@one.requireNo" />
+<label>申请部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" value="@one.depName"/>
+<label>申请人：</label><input name="" type="text" readonly="readonly" class="input_gray" value="@one.staffName" />   
+<label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark"/>  
+</div>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>申请明细</h2>
+<div class="add">
+    <ul>
+        <li><label>物料：</label><input name="" type="text" id="txtmaterial"  style="width:200px;"/></li>
+         <li><label>申请数量：</label><input name="" type="text" id="txtcount" class="input_width_80px"/></li>
+         <li><label>需求日期：</label><input name="" type="text" id="txtdate" readonly="readonly" class="input_width_80px"/></li>
+         <li><label>备注：</label><input name="" type="text" id="txtrem"  style="width:200px;" /></li>
+         <li><a  href="javascript:void(0);" id="btngl" class="gray_btn">新增</a>
+             <input type="hidden" id="hidcount" value="0" />
+    <input type="hidden" id="hiddetail" value="" />
+    <input type="hidden" id="hidarr" value="" />
+</li>   </ul>
+</div>
+<div  id="detail_table">
+@{
+    Html.RenderAction("requiredetail", "purchase", new { outno = no });   
+}
+</div> 
+
+
+
+</div>
+
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+
+
+    var hdetail = 0;
+    var hcount = 0;
+
+    var htype = "";
+
+    $(function () {
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        $("#btncreate").click(function () {
+            var remark = $("#txtremark").val();
+            window.location.href = "../purchase/requireone?type=createno&remark=" + remark;
+        });
+
+        $("#btngl").click(savedetail);//自动关联
+
+
+
+        $("#txtdate").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });
+    });
+
+    function savedetail() {
+        var txtcount = $("#txtcount").val();
+        var txtrem = $("#txtrem").val();
+        var txtdate = $("#txtdate").val();
+        if (hmaterial == "" || txtcount == "" || isNaN(txtcount)) {
+            $.dialog.alert("请输入物料和正确的数量！");
+            return false;
+        }     
+        var ctxt = parseInt(txtcount);
+        if (ctxt < 1) {
+            $.dialog.alert("输入数量必须大于0");
+            return false;
+        }
+        $.post("../purchase/saverequiredetailtemp", { type: htype, no: no, remark: txtrem, date: txtdate, detail: hdetail, m: hmaterial, name: hname, model: hmodel, hth: hth, count: ctxt }, function (data) {
+            if (data.status == "error") {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $("#detail_table").load("../purchase/requiredetail", { no: no }, function (data) { });
+                //hdetail = 0;
+                //hcount = 0;
+                //hmaterial = "";
+                //hname = "";
+                //hmodel = "";
+                htype = "add";
+            }
+        });
+    }
+    function editone(detailid, m,name,model, c,d,r,th) {
+        hdetail = detailid;
+        hmaterial = m, hname = name, hmodel = model, hth = th, hcount = c;
+        $("#txtmaterial").val(name);
+        $("#txtcount").val(c);
+        $("#txtrem").val(r);
+        $("#txtdate").val(d);
+        htype = "edit";
+    }
+    function deleteone(rno, id, m) {
+        if (confirm("确定删除？")) {
+            $.post('../purchase/deleterequiredetail', { no: no, detail: id, m: m }, function (data) {
+                if (data == "ok") {
+                    $("#detail_table").load("../purchase/requiredetail", { no: no }, function (data) { });
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+    
+ 
+</script>

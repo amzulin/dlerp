@@ -1,0 +1,73 @@
+﻿@{
+    var moduel = Model.list as List<Enterprise.Invoicing.Entities.Models.Menu>;
+    }
+
+<div id="main_nav">
+             @{
+             if (moduel != null)
+             {
+                <ul id="nav">
+                @{
+                     var M = moduel.Where(p => p.parentNo==null||p.menuNo==p.parentNo);
+                     foreach (var m in M)
+                     {
+                         if (m.menuName == "主页")
+                         {
+                            <li class="top"><a href="../main/index" class="top_link"><span>系统主页</span></a></li>
+                         }
+                         else
+                         {
+                             var route = "";
+                             if (m.menuType == 1 && m.menuUrl != "")
+                             {
+                                 route = "../" + m.menuUrl;
+                             }
+                             else
+                             {
+                                 route = "javascript:void(0)";
+                             }
+                             <li class="top"><a href="@route" id="@m.menuNo" class="top_link"><span class="down">@m.menuName</span></a>                                 
+                             @{
+                             var mc = moduel.Where(p => p.parentNo == m.menuNo && p.menuNo != p.parentNo);
+                                if (mc!=null)
+                                {
+                                    <ul class="sub">
+                                        @{
+                                            foreach (var omc in mc)
+                                            {
+                                                if (omc.menuType == 1)
+                                                {
+                                                    <li><a href="../@omc.menuUrl">@omc.menuName</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a href="javascript:void(0)" class="fly">@omc.menuName</a>
+                                                        @{
+                                                            var gc = moduel.Where(p => p.parentNo == omc.menuNo && p.menuType == 1);
+                                                            if (gc!=null)
+                                                            {
+                                                                <ul>
+                                                                    @{
+                                                                        foreach (var ogc in gc)
+                                                                        {
+                                                                            <li><a href="../@ogc.menuUrl">@ogc.menuName</a></li>
+                                                                        }
+                                                                     }
+                                                                </ul>
+                                                            }
+                                                         }
+                                                    </li>
+                                                }
+                                            }
+                                        }
+                                        </ul>
+                                } 
+                             }
+                             </li>
+                         }
+                     }
+                 }
+                </ul>
+             }
+            }
+        </div>  

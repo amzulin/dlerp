@@ -1,0 +1,281 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var order = "";// Model.order;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.PurchaseModel;
+    var ddl = Model.ddl as List<Enterprise.Invoicing.Entities.Models.Supplier>;
+    var supplierid = 0;
+    if (type == "edit")
+    {
+        supplierid = one.supplierId.Value;
+        ViewBag.Title = "编辑采购单";
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增采购单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：采购管理 > 新增采购单 </div>
+<div class="content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer">
+<label>采购单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@no" />
+<label>供应商：</label><input name="" type="text" id="txtsupplierp"  style="width:200px;" />  
+<label>采购部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  style="width:90px;" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>采购人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" style="width:50px;"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>备注：</label><input name="" id="txtremark" type="text" value=""/>  
+@*<a href="javascript:void(0);" id="btncreate" class="btn_refer">提交</a>*@
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer">
+<label>采购单号：</label><input name="" type="text" readonly="readonly"  class="input_gray"  style="width:100px;" value="@one.purchaseNo" />
+        <label>供应商：</label><input name="" type="text" id="txtsupplierreadonly" value="@one.suppliername" readonly="readonly" class="input_gray" style="width:200px;" /> 
+<label>采购部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:90px;" value="@one.depName"/>
+<label>采购人：</label><input name="" type="text" readonly="readonly" class="input_gray" style="width:50px;" value="@one.staffName" />   
+<label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark"/>  
+</div>
+}
+<div class="content_main">
+<!--左侧导航-->
+<div id="sidebar_left">
+<h2>申请单号</h2>
+<div>
+<input type="text" value="关键字" id="txtquery" /><a href="javascript:void(0);" onclick="pageload(1)" class="btn">查询</a>
+</div>
+    
+<div id="div_ul">
+    @{
+        Html.RenderAction("needbuylist", "purchase", new { no = no, query = "" });   
+    }
+</div>
+</div>
+
+<!--左侧导航结束-->
+
+<!--右侧表格-->
+<div id="right_area">
+<h3 id="t_order">@order</h3>
+<div class="clear"></div>
+<div id="div_tab" class="right_area_list">
+  @{
+      Html.RenderAction("needbuytab", "purchase", new { no = no,supplier=0, order = "" });   
+    }
+</div>
+
+    <div id="tab_haddetail">
+@{
+    Html.RenderAction("needbuytemp", "purchase", new { no = no });   
+    }  
+</div>
+</div>
+
+</div>
+
+</div>
+<script>    
+    var selectindex = 0;
+    var order = '@order';
+    var no = '@no';
+    supplierid =Number( '@supplierid');
+    $(function () {
+        var type = $("#hidtype").val();        
+        if (type == "add") {
+            $("#txtinsn").removeAttr("readonly");
+            supplierid = 0;
+            suppliername = '';
+        } else { 
+            supplierid = '@one.supplierId';
+            suppliername = '@one.suppliername';
+        }
+
+        $("#txtquery").autocomplete({
+            source: function (request, response) {
+                var key = $("#txtquery").val();
+                $.get("../purchase/queryorder", { key: key }, function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.value,
+                            value: item.value
+                        }
+                    }));
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                var item = ui.item;
+            }
+        });
+        $("#txtquery").focus(function () {
+            var v = $("#txtquery").val();
+            if (v == "关键字") {
+                $("#txtquery").val("");
+            }
+        });
+        $("#txtquery").blur(function () {
+            var v = $("#txtquery").val();
+            if (v == "") {
+                $("#txtquery").val("关键字");
+            }
+        });
+        $("#txtsupplierp").autocomplete({
+            source: function (request, response) {
+                var key = $("#txtsupplierp").val();
+                $.get("../main/querycustomer", { key: key, type: 0 }, function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.no + item.name,
+                            name: item.name,
+                            no: item.no,
+                            value: item.id,
+                        }
+                    }));
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                var item = ui.item.name;
+                $("#txtsupplierp").val(ui.item.no + ui.item.name);
+                supplierid = ui.item.value;
+                suppliername = ui.item.name;
+                sel_order(order, no);
+                return false;
+            }
+        });
+    });
+    function pageload(p) {
+        var key = $("#txtquery").val();
+        if (key == "关键字") key = "";
+        $("#div_ul").load("../purchase/needbuylist", {page:p, query: key, no: no }, function (data) { });
+    }
+    function sel_order(o, inno) {
+        //if (o == order) return;
+        //if (supplierid==0) {
+        //    $.dialog.tips("请先选择供应商");
+        //    return false;
+        //}
+        order = o;
+        $("#t_order").text(order);
+        $("#div_tab").load("../purchase/needbuytab", { order: order,supplier:supplierid, no: inno }, function (data) { });
+    }
+
+    function saveindeail() {
+        var txts = $("input[ftype='txtin']");
+        var txtp = $("select[ftype='txtinp']");
+        var txtd = $("input[ftype='txtd']");
+        var txtr = $("input[ftype='txtr']");
+        if (txts.length < 1 || txts.length!=txtp.length) {
+            $.dialog.alert("无申请单明细！");
+            return false;
+        }
+        var details = [];
+        var counts = [];
+        var prices = [];
+        var models = [];
+        var dates = [];
+        var remarks = [];
+        var msg = "";
+        for (var i = 0; i < txts.length; i++) {
+            var o = $(txts[i]);
+            var cu = o.attr("cu");
+            //if (cu == 1) {
+            var zc = o.attr("zc");
+            var ic = o.attr("ic");
+            var hb = o.attr("hb");
+            var detail = o.attr("detail");
+            var tabindex = o.attr("tabindex");
+            var m = o.attr("m");
+            var vp = $("#txtp_" + tabindex).val();
+            var v = o.val();
+            if (v == "") v = 0;
+
+            if (v==0||vp=="") {
+                continue;
+            }
+
+            if (isNaN(zc) || isNaN(ic) || isNaN(v) || isNaN(vp)) {
+                msg += ("第" + (tabindex + 1) + "行数量或价格格式有误！");
+            }
+            zc = Number(zc);
+            ic = Number(ic);
+            hb = Number(hb);
+            v = Number(v);
+            vp = Number(vp);
+            if (v < 0 || v > zc || vp < 0) {
+                msg += ("第" + (tabindex + 1) + "行数量或价格有误！");
+            }
+            if (v > 0 && vp < 0) {
+                msg += ("第" + (tabindex + 1) + "行价格有误！");
+            }
+            //if (hb - ic + v > zc) {
+            //    msg += ("第" + (tabindex + 1) + "行最多需采购的数量为：" + (zc - (hb - ic)).toString() + "！");
+            //}
+            var od = $(txtd[i]);
+            var or = $(txtr[i]);
+            dates.push(od.val());
+            remarks.push(or.val());
+
+            details.push(detail);
+            counts.push(v);
+            prices.push(vp);
+            models.push(m);
+            //}
+        }
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        if (details.length < 1 || details.length != counts.length) {
+            $.dialog.alert((details.length < 1 ? "未选择采购物料数量和单价" : "") + (details.length != counts.length ? "提交数据格式有误！" : ""));
+            return false;
+        }
+        $.post("../purchase/saverequirebuytemp", { order: order, no: no, details: details.toString(), counts: counts.toString(), prices: prices.toString(), models: models.toString(), dates: dates.toString(), remarks: remarks.toString() }, function (data) {
+            //if (data.status == false) {
+            //    $.dialog.alert(data.message);
+            //    return false;
+            //}
+            //else {
+            $("#tab_haddetail").load("../purchase/needbuytemp", { no: no }, function (data) { });
+            //}
+        });
+
+    }
+    function deldetailtemp(sn,m) {
+        $.post("../purchase/deleteneedbuytemp", {no:no, sn: sn, m: m }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $("#tab_haddetail").load("../purchase/needbuytemp", { no: no }, function (data) { });
+
+            }
+        });
+    }
+    function savestockin() {
+        var r = $("#txtremark").val();
+        if (supplierid == '0') {
+            $.dialog.alert("请选择供应商");
+            return false;
+        }
+        $.post("../purchase/savesneedbuy", { no: no, type: '@type', supplier: supplierid, remark: r }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功...', 1, 'loading.gif');
+                window.location.href = "../purchase/orderlist";
+            }
+        });
+    }
+
+</script>

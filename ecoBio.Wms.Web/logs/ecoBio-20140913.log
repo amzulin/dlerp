@@ -1,0 +1,14 @@
+2014-09-13 00:00:57,959 [27] ERROR - account.verification An error occurred accessing the database. This usually means that the connection to the database failed. Check that the connection string is correct and that the appropriate DbContext constructor is being used to specify it or find it in the application's config file. See http://go.microsoft.com/fwlink/?LinkId=386386 for information on DbContext and connections. See the inner exception for details of the failure.
+2014-09-13 00:02:46,284 [27] ERROR - account.verification An error occurred accessing the database. This usually means that the connection to the database failed. Check that the connection string is correct and that the appropriate DbContext constructor is being used to specify it or find it in the application's config file. See http://go.microsoft.com/fwlink/?LinkId=386386 for information on DbContext and connections. See the inner exception for details of the failure.
+2014-09-13 19:54:01,829 [8] ERROR - purchase.saverequiredetailtemp 该字符串未被识别为有效的 DateTime。
+2014-09-13 22:33:15,111 [43] ERROR - cost.paylist The specified cast from a materialized 'System.Int32' type to the 'System.Double' type is not valid.
+2014-09-13 22:37:33,910 [49] ERROR - cost.paylistpart 列名 'createname' 无效。
+2014-09-13 22:37:33,956 [49] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-13 22:40:23,456 [49] ERROR - cost.paylistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\paylistpart.cshtml(49): error CS0103: 当前上下文中不存在名称“start”
+2014-09-13 22:40:23,466 [49] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-13 23:02:12,570 [48] ERROR - cost.paydetailview d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\paydetailview.cshtml(28): error CS1061: “Enterprise.Invoicing.ViewModel.V_StockInPurchase”不包含“cost”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.V_StockInPurchase”的第一个参数的扩展方法“cost”(是否缺少 using 指令或程序集引用?)
+2014-09-13 23:02:12,580 [48] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-13 23:02:12,580 [48] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-13 23:07:53,463 [46] ERROR - cost.paydetailview 关键字 'from' 附近有语法错误。
+2014-09-13 23:07:53,472 [46] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-13 23:07:53,473 [46] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

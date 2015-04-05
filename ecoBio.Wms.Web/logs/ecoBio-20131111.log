@@ -1,0 +1,5 @@
+2013-11-11 21:03:48,516 [19] ERROR - depot.reportstockout d:\软件开发\code\ecoBio.Wms.Web\Views\depot\reportstockout.cshtml(70): error CS0103: 当前上下文中不存在名称“sel_sup”
+2013-11-11 22:07:26,452 [29] ERROR - depot.reportold2new d:\软件开发\code\ecoBio.Wms.Web\Views\depot\reportold2new.cshtml(190): error CS0103: 当前上下文中不存在名称“ret”
+2013-11-11 22:08:35,643 [24] ERROR - depot.excelold2new 索引超出了数组界限。
+2013-11-11 22:12:47,694 [7] ERROR - depot.excelold2new 索引超出了数组界限。
+2013-11-11 23:42:39,841 [49] ERROR - depot.reportreturnout d:\软件开发\code\ecoBio.Wms.Web\Views\depot\reportreturnout.cshtml(192): error CS0103: 当前上下文中不存在名称“intype”

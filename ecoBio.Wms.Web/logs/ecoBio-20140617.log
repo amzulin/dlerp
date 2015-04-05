@@ -1,0 +1,4 @@
+2014-06-17 20:31:55,193 [29] ERROR - bom.bomout “System.Dynamic.ExpandoObject”未包含“depots”的定义
+2014-06-17 20:39:13,681 [10] ERROR - bom.bomoutdetail 对于“Enterprise.Invoicing.Web.Controllers.bomController”中方法“System.Web.Mvc.ActionResult bomoutdetail(System.String, Int32, Int32)”的不可以为 null 的类型“System.Int32”的参数“sn”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2014-06-17 22:00:32,243 [17] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。

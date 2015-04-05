@@ -1,0 +1,51 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.PurchaseDetailModel>;
+    }
+@if (list!=null&&list.Count>0)
+{ 
+<div class="right_area_active_list">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <thead>
+  <tr>
+    <th width="5%" align="center">&nbsp;</th>
+    <th width="5%" height="21" align="center">明细号</th>
+    <th width="13%">物料名称</th>
+    <th width="13%">物料规格</th>
+    <th width="10%">申请数</th>
+    <th width="10%" >采购数</th>
+    <th width="10%">采购单价</th>
+    <th width="10%">总价</th>      
+    <th width="12%" >交货日期</th>
+    <th width="12%">备注</th>
+  </tr>
+  </thead>
+    <tbody>
+    @foreach (var item in list)
+    {
+        if (item.type == "delete")
+        {
+            continue; 
+        }
+          <tr>
+              <td>
+                  <span class="round_delete_icon" onclick="deldetailtemp('@item.requireDetailSn','@item.materialModel')" style="margin-right:10px;"></span>                
+              </td>
+    <td align="center">@item.requireDetailSn</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td>@item.requireAmount</td>
+    <td class="yellow_color">@item.poAmount</td>
+    <td>@item.poPrice</td>
+              <td>@(item.poAmount*item.poPrice)</td>
+             <td>@(item.sendDate<DateTime.Now.AddYears(5)?item.sendDate.ToString("yyyy-MM-dd"):"")</td>
+             <td>@item.remark</td>
+  </tr>
+    }
+        </tbody>
+</table>
+</div>
+
+    <div style=" text-align:center; height:46px; padding-top:10px; width:765px; background:#f7fbff; border-top:1px solid #c6d9e7;">
+<a class="btn_refer2" href="javascript:void(0);" onclick="savestockin()">提交</a>
+</div>
+}

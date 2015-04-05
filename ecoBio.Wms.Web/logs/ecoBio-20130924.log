@@ -1,0 +1,7 @@
+2013-09-24 15:22:11,171 [350] ERROR - datacenter.datainput 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+2013-09-24 15:29:46,098 [347] ERROR - datacenter.loadunitform 未将对象引用设置到对象的实例。
+2013-09-24 15:29:59,526 [347] ERROR - datacenter.loadunitform 未将对象引用设置到对象的实例。
+2013-09-24 15:32:34,827 [343] ERROR - datacenter.loadunitform 未将对象引用设置到对象的实例。
+2013-09-24 15:42:51,664 [20] ERROR - datacenter.loadunitform 未将对象引用设置到对象的实例。
+2013-09-24 15:44:38,900 [10] ERROR - datacenter.loadunitform 未将对象引用设置到对象的实例。

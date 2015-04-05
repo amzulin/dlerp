@@ -1,0 +1,28 @@
+2013-10-24 00:00:03,992 [7] ERROR - stockin.inlistview 未将对象引用设置到对象的实例。
+2013-10-24 00:00:04,007 [7] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-24 00:03:05,385 [7] ERROR - stockin.inlistview “System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string,object>>”未包含“no”的定义
+2013-10-24 00:03:05,402 [7] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-24 00:04:53,156 [7] ERROR - stockin.inlistview “System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string,object>>”未包含“no”的定义
+2013-10-24 00:04:53,175 [7] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-24 00:05:47,092 [11] ERROR - stockin.inlistview “System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string,object>>”未包含“no”的定义
+2013-10-24 00:05:47,114 [11] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-24 00:07:53,121 [7] ERROR - stockin.inlistview “System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string,object>>”未包含“no”的定义
+2013-10-24 00:08:04,440 [7] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-24 00:11:19,951 [5] ERROR - stockin.inlistview “System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string,object>>”未包含“no”的定义
+2013-10-24 00:11:19,966 [5] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-24 00:18:27,864 [5] ERROR - account.verification The provider did not return a 'DbSpatialServices' instance. In order to use the 'DbGeography' or 'DbGeometry' spatial types the EF provider being used must support spatial types and all prerequisites for the provider must be installed. See http://go.microsoft.com/fwlink/?LinkId=287183 for details.
+2013-10-24 00:23:34,078 [13] ERROR - account.verification The provider did not return a 'DbSpatialServices' instance. In order to use the 'DbGeography' or 'DbGeometry' spatial types the EF provider being used must support spatial types and all prerequisites for the provider must be installed. See http://go.microsoft.com/fwlink/?LinkId=287183 for details.
+2013-10-24 00:35:09,172 [15] ERROR - stockin.inlistview 值不能为 null。
+参数名: source
+2013-10-24 00:36:37,823 [15] ERROR - stockin.inlistview 值不能为 null。
+参数名: source
+2013-10-24 00:37:56,534 [15] ERROR - stockin.inlistview 值不能为 null。
+参数名: source
+2013-10-24 00:39:54,879 [7] ERROR - stockin.inlistview 值不能为 null。
+参数名: source
+2013-10-24 00:40:25,540 [8] ERROR - stockin.inlistview 值不能为 null。
+参数名: source
+2013-10-24 00:43:09,692 [5] ERROR - stockin.inlistview 值不能为 null。
+参数名: source
+2013-10-24 00:44:44,054 [5] ERROR - stockin.inproductdetail 值不能为 null。
+参数名: source

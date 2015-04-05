@@ -1,0 +1,72 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.StockReturnDetailModel>;
+    var depots = Model.depots as List<SelectListItem>; 
+    var outno = Model.outno;
+    }
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+  <thead>
+  <tr>
+    <th width="5%">序号</th>
+     <th width="8%">领料仓库</th>
+    <th width="20%">物料名称</th>
+    <th width="20%">物料规格</th>
+    <th width="7%">单位</th>
+    <th width="8%">领料数量</th>
+    <th width="12%">退回仓库</th>
+    <th width="12%">退回数量</th>
+    <th width="8%">备注</th>
+  </tr>
+  </thead>
+  <tbody>
+      @if (list!=null)
+      {     
+          var txtindex=0;   
+      foreach (var item in list)
+      {
+          <tr>
+              <td>@(txtindex+1)</td>
+             <td>@item.fromdepotName</td>
+            <td class="endwise_title">@item.materialName</td>
+            <td>@item.materialModel</td>
+            <td>@item.materialUnit</td>
+            <td ><span>@item.outAmoutn</span></td>
+              <td>
+                                    <select ftype="txtinp" id="@("ddldepot"+txtindex)" style="width:100px;">
+            <option value="0">请选择仓库</option>
+                @foreach (var d in depots)
+                {
+                    if (d.Value==item.todepotId.ToString())
+                    {
+                        <option selected="selected" value="@d.Value">@d.Text</option>
+                    }
+                    else
+                    {
+                        <option  value="@d.Value">@d.Text</option>
+                    }
+                }
+        </select> 
+              </td>
+            <td class="endwise_title"><label>
+                @{
+                  var cls = "input_width_60px";
+                  var canupdate = 1;
+                  var ro = "";
+                  //if (item.buyAmount==item.orderAmount)
+                  //{
+                  //    cls += " input_gray";
+                  //    canupdate = 0;
+                  //    ro = "readonly=readonly";
+                  //}
+                  }
+              <input type="text" name="textfield" ftype="txtin" cu="@canupdate" @ro tabindex="@txtindex" id="txtin_@txtindex" zc="@item.outAmoutn" hc="@item.hadreturnAmount"  ic="@item.returnAmount" detail="@item.stockoutDetailSn" m="@item.materialNo"  value="@item.returnAmount" class="@cls" />
+            </label></td>    <td><input type="text" name="textfield" ftype="txtrem" cu="@canupdate" @ro tabindex="@txtindex" id="txtrem_@txtindex" value="@item.remark" class="@cls"  /></td>        
+          </tr>
+          txtindex++;
+      }  
+      }
+    </tbody>
+  </table>
+@if (list!=null&&list.Count>0)
+      { 
+    <div style="text-align:center; margin-top:10px;"><a href="javascript:void(0);" onclick="saveindeail()"  class="btn_84px">新增</a></div>
+}

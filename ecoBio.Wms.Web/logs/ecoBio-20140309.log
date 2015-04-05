@@ -1,0 +1,22 @@
+2014-03-09 00:00:41,425 [6] ERROR - account.login “System.Dynamic.ExpandoObject”未包含“dog”的定义
+2014-03-09 00:03:20,849 [14] ERROR - purchase.orderlistpart d:\program\code\ecoBio.Wms.Web\Views\purchase\orderlistpart.cshtml(55): error CS1061: “Enterprise.Invoicing.Entities.Models.V_PurchaseModel”不包含“suppliername”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_PurchaseModel”的第一个参数的扩展方法“suppliername”(是否缺少 using 指令或程序集引用?)
+2014-03-09 00:03:20,865 [14] ERROR - purchase.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 00:04:08,403 [5] ERROR - purchase.orderlistpart d:\program\code\ecoBio.Wms.Web\Views\purchase\orderlistpart.cshtml(73): error CS1502: 与“Enterprise.Invoicing.Common.Utils.GetStatus(int)”最匹配的重载方法具有一些无效参数
+2014-03-09 00:04:08,403 [5] ERROR - purchase.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 00:05:35,336 [20] ERROR - purchase.orderlistpart “System.Dynamic.ExpandoObject”未包含“no”的定义
+2014-03-09 00:05:35,348 [20] ERROR - purchase.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 00:06:34,920 [5] ERROR - purchase.orderlistpart “by”附近有语法错误。
+2014-03-09 00:13:48,687 [27] ERROR - purchase.orderdetailview 未将对象引用设置到对象的实例。
+2014-03-09 00:14:16,236 [12] ERROR - purchase.orderdetailview 未将对象引用设置到对象的实例。
+2014-03-09 00:35:51,059 [10] ERROR - stockin.inlistpart d:\program\code\ecoBio.Wms.Web\Views\stockin\inlistpart.cshtml(9): error CS1061: “Enterprise.Invoicing.Entities.Models.V_StockInModel”不包含“stockNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_StockInModel”的第一个参数的扩展方法“stockNo”(是否缺少 using 指令或程序集引用?)
+2014-03-09 00:35:51,071 [10] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 00:36:44,503 [34] ERROR - stockin.inlistpart d:\program\code\ecoBio.Wms.Web\Views\stockin\inlistpart.cshtml(54): error CS1061: “Enterprise.Invoicing.Entities.Models.V_StockInModel”不包含“datatype”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_StockInModel”的第一个参数的扩展方法“datatype”(是否缺少 using 指令或程序集引用?)
+2014-03-09 00:36:44,503 [34] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 00:48:47,289 [29] ERROR - stockin.inlistpart 列名 'datatype' 无效。
+2014-03-09 00:51:30,285 [11] ERROR - stockin.returnlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 00:54:44,845 [29] ERROR - stockin.returnlistpart 列名 'stockInNo' 无效。
+2014-03-09 00:54:44,859 [29] ERROR - stockin.returnlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 22:30:22,600 [35] ERROR - stockout.changelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 22:32:56,982 [40] ERROR - stockout.changelistpart 列名 'stockOutNo' 无效。
+2014-03-09 22:32:56,998 [40] ERROR - stockout.changelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-09 22:36:43,776 [40] ERROR - stockout.returnlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

@@ -1,0 +1,117 @@
+﻿@{
+    Layout = null;
+    var one = Model.model as Enterprise.Invoicing.ViewModel.EmployeeModel;
+    var roles = Model.roles as List<SelectListItem>;
+    var type = Model.type;
+    var id = Model.id;
+    if (type=="edit"&&id>0)
+    {
+        var myrole=one.roleSn.ToString();
+        var dep = roles.FirstOrDefault(p => p.Value == myrole);
+        if (dep != null)
+        {
+            dep.Selected = true;
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id='@id',  type='@type';
+        function save() {
+            var rad = $('input:radio[name="radcheck"]:checked').val();
+            var isuser = $('input:radio[name="raduser"]:checked').val();
+            var userid = $("#txtuserid").val();
+            var pwd = $("#txtpwd").val();
+            var role = $("#ddlrole").val();
+            var remark = $("#txtremark").val();
+            var utype = $("#ddlrtype").val();
+            if (userid == '') {
+                $.dialog.alert("用户名不能为空！");
+                return false;
+            }
+            if (isuser=='1'&&pwd==''&&type=='add') {
+                $.dialog.alert("账户启用后，密码不能为空！");
+                return false;
+            }
+            $.dialog.tips('提交中...', 4, 'loading.gif');
+            //id,depId, string name, string mobile, string email, string duty, string remark
+            $.post("../system/saveuser",
+                {
+                    id: id, rad: rad, isuser: isuser, userid: userid, pwd: pwd, role: role, remark: remark, utype: utype
+                }, function (data) {
+                    if (data.status == false) {
+                        $.dialog.alert(data.message);
+                        return false;
+                    }
+                    else {
+                        W.loadgrid();
+                    }
+                });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="21%" align="right">员工姓名：</td>
+    <td width="23%"><input  name="" type="text" value="@one.staffName" class="input_gray" readonly="readonly" /></td>
+    <td width="21%" align="right">所在部门：</td>
+    <td width="35%"><input  name="" type="text" value="@one.depName" class="input_gray" readonly="readonly" /></td>
+  </tr>
+<tr>
+    <td align="right">用户名：</td>
+    <td><input name="" id="txtuserid" value="@one.userId" type="text" /></td>
+    <td align="right">密码：</td>
+    <td><input name="" id="txtpwd" value="" type="password" /></td>
+  </tr>
+  <tr>
+    <td align="right">账户状态：</td>
+    <td>
+        &nbsp;<input id="rad3" name="raduser" type="radio" value="1" checked="checked"  style="width:20px;"/>启用  
+        &nbsp;<input style="width:20px;" id="rad4" name="raduser" type="radio" value="0" />停用
+    </td>
+    <td align="right">员工状态：</td>
+    <td>
+        &nbsp;<input id="rad1" name="radcheck" type="radio" value="1" checked="checked"  style="width:20px;"/>正常  
+        &nbsp;<input style="width:20px;" id="rad0" name="radcheck" type="radio" value="0" />停用
+    </td>
+  </tr>
+  <tr> 
+      <td align="right">所属角色：</td>
+    <td>@Html.DropDownList("ddlrole",roles)</td>
+    <td align="right">权限范围：</td>
+    <td><select id="ddlrtype">
+        <option value="0" @(one.rigthType==0?"selected=selected":"") >普通</option>
+        <option value="1" @(one.rigthType==1?"selected=selected":"") >本部门</option>
+        <option value="2" @(one.rigthType==2?"selected=selected":"") >所有</option></select></td>
+    </tr>
+  <tr> 
+    <td align="right">备注：</td>
+    <td colspan="3"><input id="txtremark" name="" value="@one.remark" type="text" style="width:300px;" /></td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3">
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

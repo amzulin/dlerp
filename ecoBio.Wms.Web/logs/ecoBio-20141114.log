@@ -1,0 +1,4 @@
+2014-11-14 19:46:32,886 [36] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2014-11-14 19:47:55,261 [30] ERROR - bom.childbomtree d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\childbomtree.cshtml(32): error CS1061: “Enterprise.Invoicing.ViewModel.V_BomMaterial”不包含“rootCost”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.V_BomMaterial”的第一个参数的扩展方法“rootCost”(是否缺少 using 指令或程序集引用?)
+2014-11-14 20:28:07,467 [38] ERROR - bom.childbomtree d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\childbomtree.cshtml(67): error CS0103: 当前上下文中不存在名称“id”

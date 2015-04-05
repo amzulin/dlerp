@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.Title = "采购单报表";
+
+
+    var deplist = Model.deplist as List<SelectListItem>;
+    deplist.Insert(0, new SelectListItem { Value = "-1", Text = "全部" });
+ 
+    var staffs = Model.staffs as List<SelectListItem>;
+    staffs.Insert(0, new SelectListItem { Value = "-1", Text = "全部" });
+   
+    var suppliers = Model.suppliers as List<SelectListItem>;
+    suppliers.Insert(0, new SelectListItem { Value = "-1", Text = "全部" });
+  
+
+    
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：报表查询 > 采购单报表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+    <table>
+        <tr><td style="width:80px;text-align:right;">部门：</td><td>@Html.DropDownList("ddldep",deplist)</td>
+            <td style="width:80px;text-align:right;">员工：</td><td>@Html.DropDownList("ddlstaff",staffs)</td>
+            <td style="width:80px;text-align:right;">状态：</td><td>
+            <select id="ddls">
+                <option value="-1">全部</option>
+                <option value="0">未审核</option>
+                <option value="1">已审核</option>
+                <option value="4">作废</option>
+            </select></td>
+            <td style="width:80px;text-align:right;">单号：</td><td style="width:80px;" ><input style="width:80px;" id="txtno"  name="" type="text"/></td>
+            <td style="width:80px;text-align:right;">物料：</td><td><input style="width:60px;" id="txtm"  name="" type="text"/></td>
+            <td style="width:60px;text-align:right;">规格：</td><td><input style="width:60px;" id="txtg"  name="" type="text"/></td>
+        </tr>
+        <tr><td style="text-align:right;">是否完工：</td><td>
+            <select id="ddlo">
+                <option value="-1">全部</option>
+                <option value="0">未完工</option>
+                <option value="1">完工</option>
+            </select></td>
+            <td style="text-align:right;">数量区间：</td><td><input style="width:40px;"  name="" type="text" id="txtless"/></td>
+            <td style="text-align:right;">至：</td><td><input style="width:40px;"  name="" type="text" id="txtbig" /></td>
+            <td style="text-align:right;">提交日期：</td><td><input style="width:60px;"  name="" type="text" id="from"/></td>
+            <td style="text-align:right;">至：</td><td><input style="width:60px;"  name="" type="text" id="to"  /></td><td></td><td></td>
+        </tr>
+        <tr><td style="text-align:right;">采购类别：</td><td>
+            <select id="ddlt">
+                <option value="-1">全部</option>
+                <option value="0">普通采购</option>
+                <option value="1">申请单采购</option>
+            </select></td> 
+            <td style="text-align:right;">是否退单：</td><td>
+            <select id="ddlr">
+                <option value="-1">全部</option>
+                <option value="0">无退单</option>
+                <option value="1">有退单</option>
+            </select></td> 
+            <td style="text-align:right;">价格大于：</td><td><input style="width:40px;"  name="" type="text" id="txtpless" /></td>
+            <td style="text-align:right;">价格小于：</td><td><input style="width:40px;"  name="" type="text" id="txtpbig" /></td>
+             <td>供应商：</td><td>@Html.DropDownList("ddlsup",suppliers)</td><td></td><td></td>
+        </tr>
+        <tr><td colspan="12" style="text-align:center;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+            <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+            </td></tr>
+    </table>
+</div>
+
+<!--表格内容-->
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("reportorderpart", "depot");   
+}</div>
+
+
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+    $(function () {
+        $("#from").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#to").datepicker({
+            dateFormat: "yy-mm-dd",
+            maxDate: new Date(),
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+    });
+    function pageload(p) {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../depot/reportorderpart", { page: page, where: para, orderby: orderby }, function () { });
+    }
+    function orderlistp(by) {
+        if (orderby.indexOf('desc') != -1) orderby = by + " asc";
+        else orderby = by + " desc";
+        pageload(page);
+    }
+    function excel() {
+        para = "";
+        geturl();
+        window.location.href = "../depot/excelorder?where=" + para + "&orderby=" + orderby;
+    }
+
+    function geturl()
+    {
+        para = "";
+        var dep = $("#ddldep").val();
+            var staff = $("#ddlstaff").val();
+            var sup = $("#ddlsup").val();
+            var ddls = $("#ddls").val();
+            var ddlo = $("#ddlo").val();
+            var ddlt = $("#ddlt").val();
+            var ddlr = $("#ddlr").val();
+            var m = $("#txtm").val();
+            var g = $("#txtg").val();
+            var no = $("#txtno").val();
+            var less = $("#txtless").val();
+            var big = $("#txtbig").val();
+            var pless = $("#txtpless").val();
+            var pbig = $("#txtpbig").val();
+            var start = $("#from").val();
+            var end = $("#to").val();
+
+            if (ddls != '-1') para += ' and status=' + ddls;
+            if (ddlo != '-1') para += ' and isover=' + ddlo;
+            if (dep != '-1') para += 'and depid=' + dep;
+            if (sup != '-1') para += ' and supplierId=' + sup;
+            if (staff != '-1') para += ' and staffId=' + staff;
+            if (ddlr == '0') para += ' and (linkfor2 is null or linkfor2=0 )';
+            if (ddlr == '1') para += ' and linkfor2>0';
+            if (ddlt != '-1') para += ' and type=' + ddlt;
+            if (m != '') para += " and (materialName like '%" + m + "%' or materialNo like '%" + m + "%' )";
+            if (g != '') para += " and  materialModel like '%" + g + "%'";
+            if (no != '') para += " and showno like '%" + no + "%'";
+            if (start != '') para += " and createdate>='" + start + "'";
+            if (end != '') para += " and createdate<'" + end + "'";
+
+         
+            if (less != '') {
+                if (isNaN(less)) {
+                    $.dialog.alert("请输入正确数字！");
+                    return false;
+                }
+                para += ' and amount1>=' + less;
+            }
+            if (big != '') {
+                if (isNaN(big)) {
+                    $.dialog.alert("请输入正确数字！");
+                    return false;
+                }
+                para += ' and amount1<' + big;
+            }
+            if (pless != '') {
+                if (isNaN(pless)) {
+                    $.dialog.alert("请输入正确价格！");
+                    return false;
+                }
+                para += ' and amount3>=' + less;
+            }
+            if (pbig != '') {
+                if (isNaN(pbig)) {
+                    $.dialog.alert("请输入正确价格！");
+                    return false;
+                }
+                para += ' and amount3<' + big;
+            }
+            return para;
+    }
+    
+</script>

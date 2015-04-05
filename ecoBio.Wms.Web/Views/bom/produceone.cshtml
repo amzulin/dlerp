@@ -1,0 +1,166 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    List<Enterprise.Invoicing.ViewModel.ReturnValue> ddl = Model.ddl as List<Enterprise.Invoicing.ViewModel.ReturnValue>;
+    var one = Model.one as Enterprise.Invoicing.Entities.Models.V_ProductionModel;
+
+    
+    if (type == "edit")
+    {
+        ViewBag.Title = "编辑领料单";
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增领料单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：领料单 > @(type == "add"?"新增":"修改")领料单 </div>
+<div class="data_content" style="min-height:500px;">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer" style="height:80px;">
+<label>领料单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@no" />
+<label>客户订单：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@one.bomOrderNo" />
+<label>操作人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>备注：</label><input name="" id="txtremark" type="text" value=""/>  
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer" style="height:80px;">
+<label>领料单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@one.produceNo" />
+<label>客户订单：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@one.bomOrderNo" /> 
+<label>数量：</label><input name="" id="totalamount" type="text" value="@one.productAmount"/>   
+<label>操作人：</label><input name="" type="text" readonly="readonly" class="input_gray" value="@one.staffName" />   
+<br /><label>领料物料：</label><input name="" type="text" readonly="readonly"  class="input_gray"  style="width:300px;" value="@(one.productNo+"  "+one.productName+"  "+one.productModel)" /> 
+<label>备注：</label><input name="" id="txtremark" type="text" value="@one.productRemark.Trim()"/>       
+<label>仓库：</label><input name="" id="txtdepot" type="text" value="@one.deportStaff.Trim()"/>    
+</div>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>领料明细</h2>
+<div class="add">
+    <ul>
+        <li><label>物料：</label>
+            <select id="ddlmaterial"  style="width:200px;">
+                @foreach (var item in ddl)
+                {
+                    <option value="@item.value" mn="@item.value2" mm="@item.value3" nu="@item.message">@(item.value+item.value2+item.message)</option>
+                }
+            </select></li>
+         <li><label>领料数量：</label><input name="" type="text" id="txtcount" class="input_width_80px"/></li>
+         <li><label>备注：</label><input name="" type="text" id="txtrem"  style="width:200px;" /></li>
+         <li><a  href="javascript:void(0);" id="btngl" class="gray_btn">确定</a>
+             <input type="hidden" id="hidcount" value="0" />
+    <input type="hidden" id="hiddetail" value="" />
+    <input type="hidden" id="hidarr" value="" />
+    <input type="hidden" id="hidorderno" value="@one.bomOrderNo" />
+    <input type="hidden" id="hiddetailsn" value="@one.orderDetailSn" />
+    <input type="hidden" id="hiddetailmaterial" value="@one.productNo" />
+</li>   </ul>
+</div>
+<div  id="detail_table">
+@{
+    Html.RenderAction("producedetail", "bom", new { no = no });   
+}
+</div> 
+
+
+
+</div>
+
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+
+
+    var hdetail = 0;
+    var hcount = 0;
+
+    var htype = "";
+
+    $(function () {
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        $("#btncreate").click(function () {
+            var remark = $("#txtremark").val();
+            window.location.href = "../bom/produceone?type=createno&remark=" + remark;
+        });
+
+        $("#btngl").click(savedetail);//自动关联
+
+
+
+        $("#txtdate").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });
+    });
+
+    function savedetail() {
+        var materilal = $("#ddlmaterial").val();
+        var mn = $("#ddlmaterial").find("option:selected").attr("mn");
+        var mm = $("#ddlmaterial").find("option:selected").attr("mm");
+        var un = $("#ddlmaterial").find("option:selected").attr("un");
+        var txtcount = $("#txtcount").val();
+        var txtrem = $("#txtrem").val();
+        var ctxt = parseInt(txtcount);
+        if (ctxt < 1) {
+            $.dialog.alert("输入数量必须大于0");
+            return false;
+        }
+        $.post("../bom/saveproducedetailtemp", { type: htype, no: no, remark: txtrem, detail: hdetail, m: materilal, name: mn, model: mm, mu: un, count: ctxt }, function (data) {
+            if (data.status == "error") {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $("#detail_table").load("../bom/producedetail", { no: no }, function (data) { });
+                hdetail = 0;
+                //hcount = 0;
+                //hmaterial = "";
+                //hname = "";
+                //hmodel = "";
+                htype = "add";
+            }
+        });
+    }
+    function editone(detailid, m,c,r) {
+        hdetail = detailid;
+        $("#ddlmaterial").val(m);
+        $("#txtcount").val(c);
+        $("#txtrem").val(r);
+        htype = "edit";
+    }
+    function deleteone(rno, id, m) {
+        if (confirm("确定删除？")) {
+            $.post('../bom/deleteproducedetail', { no: no, detail: id, m: m }, function (data) {
+                if (data == "ok") {
+                    $("#detail_table").load("../bom/producedetail", { no: no }, function (data) { });
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+    
+ 
+</script>

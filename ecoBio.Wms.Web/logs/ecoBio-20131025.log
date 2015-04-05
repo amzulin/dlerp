@@ -1,0 +1,16 @@
+2013-10-25 21:58:48,102 [8] ERROR - stockin.queryorder 对于“Enterprise.Invoicing.Web.Controllers.stockinController”中方法“System.Web.Mvc.ActionResult queryorder(System.String, Int32)”的不可以为 null 的类型“System.Int32”的参数“supplier”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2013-10-25 22:09:57,031 [10] ERROR - stockin.needinorder 对于“Enterprise.Invoicing.Web.Controllers.stockinController”中方法“System.Web.Mvc.ActionResult needinorder(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, Int32, System.String)”的不可以为 null 的类型“System.Int32”的参数“supplier”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2013-10-25 22:11:34,608 [6] ERROR - stockin.needinorder 对于“Enterprise.Invoicing.Web.Controllers.stockinController”中方法“System.Web.Mvc.ActionResult needinorder(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, Int32, System.String)”的不可以为 null 的类型“System.Int32”的参数“supplier”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2013-10-25 23:32:34,171 [35] ERROR - stockin.needintemp “System.Dynamic.ExpandoObject”未包含“depots”的定义
+2013-10-25 23:32:34,198 [35] ERROR - stockin.inorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-25 23:33:23,142 [35] ERROR - stockin.saveinordertemp 值不能为 null。
+参数名: source
+2013-10-25 23:36:12,520 [7] ERROR - stockin.saveinordertemp 输入字符串的格式不正确。
+2013-10-25 23:38:05,813 [7] ERROR - stockin.saveinordertemp 输入字符串的格式不正确。
+2013-10-25 23:41:30,855 [36] ERROR - stockin.saveinordertemp 值不能为 null。
+参数名: source
+2013-10-25 23:43:23,313 [5] ERROR - stockin.saveinordertemp 值不能为 null。
+参数名: source

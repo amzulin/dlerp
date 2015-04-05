@@ -1,0 +1,6 @@
+2015-01-21 20:47:16,493 [41] ERROR - stockout.outtselldetail d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\stockout\outtselldetail.cshtml(30): error CS0103: 当前上下文中不存在名称“depots”
+2015-01-21 20:47:16,524 [41] ERROR - stockout.outtsell 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2015-01-21 22:17:59,154 [35] ERROR - stockout.outtselldetail “System.Dynamic.ExpandoObject”未包含“order”的定义
+2015-01-21 22:17:59,185 [35] ERROR - stockout.outtsell 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2015-01-21 22:18:18,556 [35] ERROR - stockout.outtselldetail d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\stockout\outtselldetail.cshtml(37): error CS0103: 当前上下文中不存在名称“order”
+2015-01-21 22:18:18,557 [35] ERROR - stockout.outtsell 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

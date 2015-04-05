@@ -1,0 +1,85 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BomOrderDetailModel>;
+    var pi = 1;
+    var no = Model.no;
+ }
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="4%">序号</th> 
+    <th width="8%">物料编码</th>
+    <th width="12%">物料名称</th>
+    <th width="13%">物料规格</th>
+    <th width="5%">数量</th>
+    <th width="6%">单价</th>
+    <th width="6%">总价</th>
+    <th width="8%">交期</th>
+    <th width="8%">备注</th>
+    <th width="4%">类别</th>
+    <th width="6%">操作</th>
+  </tr>
+  </thead>
+ <tbody id="tabbody">
+   
+     @foreach (var item in list)
+     {
+         if (item.type == "delete")
+         {
+             continue; 
+         }     
+  <tr>
+      <td class="endwise_title">@pi</td>  
+    <td class="endwise_title">@item.materialNo</td>  
+      <td class="endwise_title">@Html.Raw(item.materialName)</td>
+    <td class="endwise_title">@item.materialModel</td>  
+    <td>@item.Amount</td><td>@item.Price</td><td>@(item.Price*item.Amount)</td>
+      <td>@(item.sendDate.HasValue?item.sendDate.Value.ToString("yyyy-MM-dd"):"")</td>
+      <td>@item.OrderDetailRemark</td>
+    <td  class="endwise_title">@if(item.type=="add"){
+         <span>新增</span>
+        }
+        else
+                               {  <span>原有</span>
+                               }
+    </td>
+    <td class="endwise_title">
+      
+           <span onclick="editone('@item.detailSn.ToString()','@item.materialNo.ToString()','@item.materialName.ToString()','@item.materialModel.ToString()',@item.Amount,'@item.OrderDetailRemark',@item.Price,@item.bomId,'@(item.sendDate.HasValue?item.sendDate.Value.ToString("yyyy-MM-dd"):"")');" class="edit"></span>
+            <span onclick="deleteone('@item.bomOrderNo','@item.detailSn.ToString()',@item.bomId);" title="删除">删除</span>
+     
+	</td>
+  </tr>
+      pi++;
+     }
+@if (list.Count > 0)
+{
+    <tr><td colspan="11" style="text-align:center;"><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save('@no');" >提交</a></td></tr>
+    
+}
+
+  </tbody>
+</table>
+<script>
+
+    function save(no) {
+        if (supplierid == 0) {
+            $.dialog.alert("请选择客户");
+            return false;
+        }
+        var r = $("#txtremark").val();
+        var d = $("#txtdeport").val();
+        var t = $("#ddlordertype").val();
+        $.post("../bom/saveorderone", { bomOrderNo: no, type: type, orderType: t, supplierId: supplierid, remark: r, deportStaff: d }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../bom/orderlist";
+            }
+        });
+    }
+
+</script>

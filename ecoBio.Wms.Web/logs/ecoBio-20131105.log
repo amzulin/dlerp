@@ -1,0 +1,46 @@
+2013-11-05 20:20:54,494 [13] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:26:19,278 [14] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:26:19,305 [16] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:28:09,538 [5] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:28:18,515 [14] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:28:28,690 [14] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:28:29,701 [5] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:28:30,969 [16] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:28:31,763 [16] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:28:32,099 [5] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:28:32,333 [14] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:48:49,555 [10] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:49:51,917 [12] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:52:18,915 [14] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:52:18,964 [10] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:54:44,671 [6] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 20:54:58,578 [5] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 21:30:26,272 [63] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 21:30:26,274 [65] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 21:31:27,183 [60] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-11-05 21:55:21,724 [54] ERROR - depot.reportdepot d:\软件开发\code\ecoBio.Wms.Web\Views\depot\reportdepot.cshtml(67): error CS1061: “System.Web.Mvc.SelectListItem”不包含“value”的定义，并且找不到可接受类型为“System.Web.Mvc.SelectListItem”的第一个参数的扩展方法“value”(是否缺少 using 指令或程序集引用?)
+2013-11-05 21:56:14,388 [53] ERROR - depot.reportdepot d:\软件开发\code\ecoBio.Wms.Web\Views\depot\reportdepot.cshtml(70): error CS1061: “System.Web.Mvc.SelectListItem”不包含“text”的定义，并且找不到可接受类型为“System.Web.Mvc.SelectListItem”的第一个参数的扩展方法“text”(是否缺少 using 指令或程序集引用?)
+2013-11-05 21:56:28,176 [53] ERROR - depot.reportdepot d:\软件开发\code\ecoBio.Wms.Web\Views\depot\reportdepot.cshtml(118): error CS0103: 当前上下文中不存在名称“depotid”
+2013-11-05 21:56:50,969 [51] ERROR - depot.reportdepot “System.Dynamic.ExpandoObject”未包含“depots”的定义
+2013-11-05 21:59:50,023 [5] ERROR - depot.reportdepot 未将对象引用设置到对象的实例。
+2013-11-05 22:53:11,243 [56] ERROR - depot.reportdepot 运算符“!=”无法应用于“int”和“string”类型的操作数

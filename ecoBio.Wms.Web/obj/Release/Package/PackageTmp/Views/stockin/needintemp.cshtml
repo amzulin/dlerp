@@ -1,0 +1,49 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.StockDetailModel>;
+  
+    }
+@if (list!=null&&list.Count>0)
+{ 
+<div class="right_area_active_list">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <thead>
+  <tr>
+    <th width="5%" align="center">&nbsp;</th>
+    <th width="15%" height="20" align="center">采购单号</th>
+    <th width="15%">物料编码</th>
+    <th width="15%">物料名称</th>
+    <th width="10%">采购数量</th>
+    <th width="10%">未入库数量</th>
+    <th width="10%" >入库数量</th>
+    <th width="10%">仓库</th>
+    <th width="10%">备注</th>
+  </tr>
+  </thead>
+    <tbody>
+    @foreach (var item in list)
+    {
+        if (item.type == "delete")
+        {
+            continue; 
+        }
+          <tr>
+              <td>
+                  <span class="round_delete_icon" onclick="deldetailtemp('@item.purchaseDetailSn','@item.materialModel')" style="margin-right:10px;"></span>                
+              </td>
+    <td align="center">@item.purchaseNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td>@item.orderAmout</td>
+    <td>@item.remainAmout</td>
+    <td class="yellow_color">@item.amount</td>
+    <td>@item.depotName</td><td>@item.remark</td>
+  </tr>
+    }
+        </tbody>
+</table>
+</div>
+
+    <div style=" text-align:center; height:46px; padding-top:10px; width:765px; background:#f7fbff; border-top:1px solid #c6d9e7;">
+<a class="btn_refer2" href="javascript:void(0);" onclick="savestockin()">提交</a>
+</div>
+}

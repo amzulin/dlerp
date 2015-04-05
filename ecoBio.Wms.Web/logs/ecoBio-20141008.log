@@ -1,0 +1,12 @@
+2014-10-08 20:56:30,035 [26] ERROR - account.verification An error occurred accessing the database. This usually means that the connection to the database failed. Check that the connection string is correct and that the appropriate DbContext constructor is being used to specify it or find it in the application's config file. See http://go.microsoft.com/fwlink/?LinkId=386386 for information on DbContext and connections. See the inner exception for details of the failure.
+2014-10-08 20:57:32,910 [23] ERROR - account.verification An error occurred accessing the database. This usually means that the connection to the database failed. Check that the connection string is correct and that the appropriate DbContext constructor is being used to specify it or find it in the application's config file. See http://go.microsoft.com/fwlink/?LinkId=386386 for information on DbContext and connections. See the inner exception for details of the failure.
+2014-10-08 21:47:51,853 [27] ERROR - main.printsale 未将对象引用设置到对象的实例。
+2014-10-08 21:48:20,302 [27] ERROR - main.printsale 未将对象引用设置到对象的实例。
+2014-10-08 21:53:16,862 [10] ERROR - main.printsale 未将对象引用设置到对象的实例。
+2014-10-08 22:04:40,824 [5] ERROR - main.printa4 未将对象引用设置到对象的实例。
+2014-10-08 22:19:35,460 [15] ERROR - main.printa4 输入字符串的格式不正确。
+2014-10-08 22:13:09,751 [10] ERROR - depot.notbackpart 列名 'price' 无效。
+2014-10-08 22:13:10,042 [8] ERROR - depot.notbackpart 列名 'price' 无效。
+2014-10-08 22:13:10,627 [7] ERROR - depot.notbackpart 列名 'price' 无效。
+2014-10-08 22:13:11,049 [10] ERROR - depot.notbackpart 列名 'price' 无效。
+2014-10-08 22:37:33,849 [8] ERROR - main.printwin d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\main\printwin.cshtml(39): error CS1002: 应输入 ;

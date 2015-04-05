@@ -1,0 +1,49 @@
+﻿@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "BOM查看";
+
+
+    var bomjson = Model.bomjson;
+
+}    
+<link href="~/Scripts/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
+    <script src="~/Scripts/lib/ligerUI/js/core/base.js"></script>
+    <script src="~/Scripts/lib/ligerUI/js/plugins/ligerTree.js"></script>
+    
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > <a href="../bom/bomlist"> BOM管理</a> >BOM查看 </div>
+
+
+
+
+<div class="data_content">
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>BOM查看</h2>
+<table style="margin-top:10px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+      
+        <tr><td colspan="4">
+          <ul id="tree1">   </ul> 
+            </td></tr>
+</table>
+
+        </div>
+    
+
+
+    </div>
+
+
+
+<script>
+        var json = '';
+        if ('@Html.Raw(bomjson)'!='') json = eval('[(' + '@Html.Raw(bomjson)' + ')]');
+                var manager = null;
+        $(function () {
+            if (json != '') {
+                manager = $("#tree1").ligerTree({
+                    checkbox: false, data: json, isExpand: true, nodeWidth: 800
+                });
+            }
+        });
+    </script>

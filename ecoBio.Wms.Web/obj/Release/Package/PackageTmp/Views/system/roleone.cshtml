@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+    var one = Model.model as Enterprise.Invoicing.Entities.Models.Role;
+    var type = Model.type;
+    var id = Model.id;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id='@id',  type='@type';
+        function save() {
+            var name = $("#txtname").val();
+            var remark = $("#txtremark").val();
+            var price = $("#ddlprice").val();
+            if (name == '') {
+                $.dialog.alert("角色名称不能为空！");
+                return false;
+            }
+            $.dialog.tips('提交中...', 4, 'loading.gif');
+            $.post("../system/saverole",
+                {
+                    id: id, name: name, remark: remark, price: price
+                }, function (data) {
+                if (data.status == false) {
+                    $.dialog.alert(data.message);
+                    return false;
+                }
+                else {
+                    W.loadgrid();
+                }
+            });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="21%" align="right">角色名称：</td>
+    <td width="23%"><input id="txtname" name="" type="text" value="@one.roleName" /></td>
+    <td width="21%" align="right">金额可见：</td>
+    <td width="35%"><select id="ddlprice"><option @(one.showPrice?"":"selected=selected") value="0">不可见</option><option @(one.showPrice?"selected=selected":"") value="1">可见</option></select></td>
+  </tr>  <tr>
+  
+    <td width="21%" align="right">备注：</td>
+    <td  colspan="3" ><input id="txtremark" name="" value="@one.remark" type="text" /></td>
+  </tr> 
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3">
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

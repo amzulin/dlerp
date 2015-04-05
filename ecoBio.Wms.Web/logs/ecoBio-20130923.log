@@ -1,0 +1,9 @@
+2013-09-23 12:58:41,499 [60] ERROR - material.downloadreport 未找到视图“downloadreport”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/material/downloadreport.aspx
+~/Views/material/downloadreport.ascx
+~/Views/Shared/downloadreport.aspx
+~/Views/Shared/downloadreport.ascx
+~/Views/material/downloadreport.cshtml
+~/Views/material/downloadreport.vbhtml
+~/Views/Shared/downloadreport.cshtml
+~/Views/Shared/downloadreport.vbhtml

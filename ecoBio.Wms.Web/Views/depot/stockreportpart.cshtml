@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_StockReportStatistics>;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>报表明细</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th>序号</th>
+    <th style="cursor:pointer;" onclick="orderlistp('stockMonth')">报表期数</th>
+    <th style="cursor:pointer;" onclick="orderlistp('depotName')">仓库</th>
+    <th style="cursor:pointer;" onclick="orderlistp('materials')">物料种类</th>
+    <th>期初金额</th>
+    <th>本月入库</th>
+    <th>本月出库</th>
+    <th>期末金额</th>
+    <th>明细</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>
+             <td>@item.stockMonth</td>
+    <td>@item.depotName</td>
+    <td>@item.materials</td>
+    <td>@item.startCost</td>
+    <td>@item.inCost</td>
+    <td>@item.outCost</td>
+    <td>@item.endCost</td>
+    <td><span style="cursor:pointer;" onclick="dc(@item.depotId,'@item.stockMonth')">导出明细</span></td>
+</tr>
+         pi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="8">无库存明细</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+       
+	 @Html.Partial("~/Views/Shared/page_page.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+    </div>
+
+
+<script>  
+    page = '@page';
+</script>

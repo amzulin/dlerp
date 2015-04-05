@@ -1,0 +1,42 @@
+2013-10-28 11:16:04,276 [97] ERROR - account.verification The provider did not return a 'DbSpatialServices' instance. In order to use the 'DbGeography' or 'DbGeometry' spatial types the EF provider being used must support spatial types and all prerequisites for the provider must be installed. See http://go.microsoft.com/fwlink/?LinkId=287183 for details.
+2013-10-28 16:03:06,678 [30] ERROR - manage.employee d:\软件开发\code\ecoBio.Wms.Web\Views\manage\employee.cshtml(68): error CS1061: “Enterprise.Invoicing.ViewModel.EmployeeModel”不包含“valid”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.EmployeeModel”的第一个参数的扩展方法“valid”(是否缺少 using 指令或程序集引用?)
+2013-10-28 19:40:12,077 [55] ERROR - manage.material 值不能为 null。
+参数名: source
+2013-10-28 19:41:33,398 [6] ERROR - manage.material 值不能为 null。
+参数名: source
+2013-10-28 19:41:58,283 [7] ERROR - manage.material 值不能为 null。
+参数名: source
+2013-10-28 19:43:32,843 [5] ERROR - manage.materialone 值不能为 null。
+参数名: source
+2013-10-28 20:19:27,109 [9] ERROR - manage.supplierone 未将对象引用设置到对象的实例。
+2013-10-28 20:20:37,903 [9] ERROR - manage.supplierone 未将对象引用设置到对象的实例。
+2013-10-28 20:23:31,798 [7] ERROR - manage.supplierone 未将对象引用设置到对象的实例。
+2013-10-28 21:39:21,384 [47] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:39:47,087 [56] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:40:57,852 [15] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:41:52,574 [47] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:43:34,589 [48] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:43:46,581 [55] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:47:25,415 [8] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:48:48,647 [8] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:49:17,505 [9] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:49:23,770 [8] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 21:49:28,212 [8] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 22:00:15,931 [14] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 22:02:31,823 [11] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2013-10-28 22:31:43,121 [7] ERROR - system.userone d:\软件开发\code\ecoBio.Wms.Web\Views\system\userone.cshtml(10): error CS0103: 当前上下文中不存在名称“deplist”
+2013-10-28 23:52:09,939 [6] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText

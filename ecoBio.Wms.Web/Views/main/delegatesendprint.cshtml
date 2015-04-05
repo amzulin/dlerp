@@ -1,0 +1,176 @@
+﻿@{
+    Layout = null;
+    var pm = Model.pm as Enterprise.Invoicing.Entities.Models.V_DelegateSendModel;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_DelegateSendDetailModel>;
+    string title = Model.title;
+    bool showPrice = Model.showPrice;
+    List<string> delegatenos = Model.delegatenos as List<string>;
+
+
+    var pages = delegatenos.Count;// datas.Count / 4;
+    //if(datas.Count%4>0)
+    //{
+    //    pages += 1;
+    //}
+    var index = 1;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+   @*<link href="~/Content/themes/wms_front.css" rel="stylesheet" />*@
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Lodop6.161/LodopFuncs.js"></script>
+    <title>tab</title>
+    <object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+    </object>
+    <script>
+        var LODOP;
+
+        $(function () {
+            LODOP = getLodop(document.getElementById('LODOP_OB'), document.getElementById('LODOP_EM'));
+        });
+        function print(i)
+        {
+
+            var style = "<style>" +$("#mystyle").html() + "</style>";
+            var html = style + "<body>" + $("#print_div_" + i).html() + "</body>";
+            LODOP.PRINT_INIT("");
+            LODOP.ADD_PRINT_HTM(1, 1, "100%", "100%", html);//加入打印文本
+            LODOP.SET_PRINT_PAGESIZE(1, 2200, 1370, "requirepage");//纸张大小
+            LODOP.SET_PREVIEW_WINDOW(1, 0, 0, 1000, 630, "");//预览窗口大小
+            LODOP.PREVIEW();
+        }
+    </script>
+    <style id="mystyle">
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+        html, body {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-style: normal;
+    word-spacing: 2px;
+    word-wrap: break-word;
+}
+        .rep_title {
+    font-size: 20px;
+    font-weight: bold;
+    height: 25px;
+    padding-top:10px;
+    text-align: center;
+    width:760px;
+}
+.add_btn { 
+    background: url("../../images/front/public/btn_bg.png") no-repeat scroll left -461px rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    height: 31px;
+    line-height: 31px;
+    text-align: center;
+    vertical-align: middle;
+    width: 93px;
+}
+.tab_head {
+    border-right: 1px solid #666666;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0; width:760px;
+}
+.tab_head thead th {
+    border: 1px solid #666666;
+    background: none repeat scroll 0 0;font-size: 16px;
+    height:30px;
+}
+.tab_head tbody td {
+    border: 1px solid #666666;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 5px;
+    text-align: left;
+}
+        .tab_top {
+            font-size:15px;
+        }
+    </style>
+</head>
+<body>
+    
+    @for (int i = 1; i <= delegatenos.Count; i++)
+    {
+        var ps = list.Where(p => p.delegateNo == delegatenos[i - 1]).ToList();
+    <div id="print_div_@i"  style="margin-left:20px;width:760px; border: 1px solid #666666;">
+        <div class="rep_title">@("苏州逗乐儿童用品有限公司  委外发货单")</div>
+        <table border="0" cellspacing="0" cellpadding="0" class="tab_top">
+  <tr>
+    <td width="20%" height="32" style="text-align:left;">部门：@pm.depName</td>
+    <td width="38%"style="text-align:center;">发货：@pm.sendDate.ToString("yyyy-MM-dd") &nbsp;&nbsp; 交期：@pm.needDate.ToString("yyyy-MM-dd")</td>
+    <td width="30%"style="text-align:center;">编号：@pm.sendNo</td>
+    <td width="12%"style="text-align:right;font-size:12px;"><i>@("第"+i+"页 共"+pages+"页")</i></td>
+  </tr>
+      
+            <tr style="font-size:12px;" height="32" >
+                <td colspan="4">
+                     <table border="0" cellspacing="0" cellpadding="0" class="tab_top" style="width:100%;height:100%;">
+                         <td>@ps[0].productNo</td>
+                         <td>@ps[0].productName</td>
+                         <td>@ps[0].productModel</td>
+                         <td>数量:@ps[0].productAmount</td>
+                         <td> @(showPrice&&ps[0].materialprice.HasValue?("单价:"+ps[0].materialprice.Value.ToString("f")):"")</td>
+                         <td>@(showPrice&&ps[0].materialprice.HasValue?"金额:"+Math.Round(ps[0].materialprice.Value*ps[0].productAmount,4).ToString():"")</td>
+                     </table>
+                </td>
+            </tr>
+</table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tab_head">      
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>编码</th>
+                            <th>名称</th>
+                            <th>规格</th>
+                            <th>数量</th>
+                            <th>单价</th>
+                            <th>金额</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+            <tbody>
+                @for (int j = 0; j < ps.Count; j++)
+                {
+                    <tr>
+                        <td>@(j+1)</td>
+                        <td>@ps[j].materialNo</td>
+                        <td>@ps[j].materialName</td>
+                        <td>@ps[j].materialModel</td>
+                        <td>@ps[j].realAmount</td>
+                        <td>@(showPrice&&ps[j].materialprice.HasValue?ps[j].materialprice.Value.ToString("f"):"")</td>
+                        <td>@(showPrice&&ps[j].materialprice.HasValue?Math.Round((ps[j].realAmount*ps[j].materialprice.Value),4).ToString():"")</td>
+                        <td>@ps[j].remark</td>
+                    </tr>
+                }      
+                                
+                                
+                        </tbody>
+     
+    </table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tab_top" style="margin-top:@((5-ps.Count)*26)px;">
+  <tr>
+    <td width="20%" height="30" style="text-align:left;">制单人：@pm.staffName</td>
+    <td width="20%" style="text-align:left;">审核：@pm.checkStaff</td>  
+      <td width="20%" style="text-align:left;">仓库：@pm.deportStaff</td>   
+      <td width="40%" style="text-align:left;">供应商：</td>      
+  </tr>
+</table>
+    </div> <div  style="margin-left:20px;width:760px;text-align:center;">
+    <a  style="text-align:center;text-decoration: none;font-size:11px;" href="javascript:void(0);" id="btngl" class="add_btn" onclick="print(@i);" >@("打印第"+i+"页 共"+pages+"页")</a></div>
+    <hr />
+    }
+</body>
+</html>

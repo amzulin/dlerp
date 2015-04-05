@@ -1,0 +1,79 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_ProductionDetailModel>;
+    var pi = 1;
+    var no = Model.no;
+ }
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="10%">编码</th>
+    <th width="20%">物料名称</th>
+    <th width="20%">物料规格</th>
+    <th width="10%">单位</th>
+    <th width="10%">数量</th>
+     <th width="15%">备注</th>
+    <th width="10%">操作</th>
+  </tr>
+  </thead>
+ <tbody id="tabbody">
+   
+     @foreach (var item in list)
+     {
+         if (item.edittype== "delete")
+         {
+             continue; 
+         }     
+  <tr>
+      <td class="endwise_title">@pi</td>
+    <td  class="endwise_title">@item.materialNo</td>
+      <td class="endwise_title">@Html.Raw(item.materialName)</td>
+    <td class="endwise_title">@item.materialModel</td>
+    <td class="endwise_title">@item.unit</td>
+    <td>@item.amount</td>
+      <td>@item.remark</td>
+    <td class="endwise_title">
+        
+       
+           <span onclick="editone('@item.detailSn.ToString()','@item.materialNo.ToString()',@item.amount,'@item.remark');" class="edit"></span>
+ 
+            <span onclick="deleteone('@item.produceNo','@item.detailSn.ToString()','@item.materialNo');" title="删除">删除</span>
+     
+	</td>
+  </tr>
+      pi++;
+     }
+@if (list.Count > 0)
+{
+    <tr><td colspan="8" style="text-align:center;"><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save('@no');" >提交</a></td></tr>
+    
+}
+
+  </tbody>
+</table>
+<script>
+
+    function save(no)
+    {
+        // //no,type,remark,material,bomorder,depot,bomordersn,amount,bomid,,,,,
+        var material = $("#hiddetailmaterial").val();
+        var bomordersn = $("#hiddetailsn").val();
+        var amount = $("#totalamount").val();
+        var depot = $("#txtdepot").val();
+        var bomorder = $("#hidorderno").val();
+
+        var r = $("#txtremark").val();
+        $.post("../bom/saveproducedetail", { no: no, type: type, remark: r, material: material, bomorder: bomorder, depot: depot, bomordersn: bomordersn, amount: amount }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../bom/producelist";
+            }
+        });
+    }
+
+</script>

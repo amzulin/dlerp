@@ -1,0 +1,9 @@
+2014-03-06 20:35:43,590 [1642] ERROR - purchase.requirelist 未将对象引用设置到对象的实例。
+2014-03-06 21:43:36,428 [70] ERROR - purchase.requirelist 无法对 null 引用执行运行时绑定
+2014-03-06 21:44:01,932 [70] ERROR - purchase.requirelist 无法对 null 引用执行运行时绑定
+2014-03-06 21:48:53,037 [10] ERROR - purchase.requirelist 无法对 null 引用执行运行时绑定
+2014-03-06 22:34:24,195 [9] ERROR - purchase.requirelistpart “System.Dynamic.ExpandoObject”未包含“no”的定义
+2014-03-06 22:34:24,219 [9] ERROR - purchase.requirelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-06 22:34:53,175 [40] ERROR - purchase.requirelistpart “System.Dynamic.ExpandoObject”未包含“otherParam”的定义
+2014-03-06 22:34:53,176 [40] ERROR - purchase.requirelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-06 22:35:58,749 [9] ERROR - purchase.requirelistpart “%0%”附近有语法错误。

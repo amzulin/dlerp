@@ -1,0 +1,200 @@
+﻿@{
+    Layout = null;
+    var url = Model.url;
+    var v1 = Model.v1;
+    var v2 = Model.v2;
+    var message = Model.message;
+    bool dog = Model.dog;
+    var remember = Model.remember;
+    var uid = Model.uid;
+    var chb = "";
+    if (remember)
+    {
+        chb = "checked=checked";
+    }
+    if (!dog)
+    {
+        message = "未检测到软件加密锁，请重试！";
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/themes/login_l2.css" rel="stylesheet" /> 
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/lhgdialog/lhgdialog.js"></script>
+        <script>
+            $(function () {
+                //$("#f").submit();
+                var m = '@message';
+            var v1 = '@v1';
+            var v2 = '@v2';
+            if (m != "") {
+                $.dialog.alert(m);
+                //$("#submit_lnk").css("display","none");
+                return false;
+            }
+            if (v1 != '') $("#msg1").text(v1);
+            if (v2 != '') $("#msg2").text(v2);
+
+            document.onkeydown = function (e) {
+                if (!e) e = window.event;//火狐中是 window.event
+                if ((e.keyCode || e.which) == 13) {
+                    login();
+                }
+            }
+            login();
+        });
+        function login() {
+            var v1 = $("#userid").val();
+            var v2 = $("#pwd").val();
+            var a = /^\d{6}$/;
+            var go = 1;
+            if (v1 == "") {
+                $("#msg1").text("请输入用户名"); go = 0;
+            }
+            else $("#msg1").text("");
+
+            if (v2 == "") {
+                $("#msg2").text("请输入密码"); go = 0;
+            }
+            else $("#msg2").text("");
+
+            if (go == 1) {
+                $("#dd_login").addClass("loading");
+                $("#f").submit();
+                //$.post("../account/verification", { userid: v1, pwd: v2 }, function (data) {
+                //    if (data.status == true) {
+                //       window.location.href ="../main/index";
+                //        // alert(data.message);
+                //    }
+                //    else {
+                //        $("#dd_login").removeClass("loading");
+                //        $("#msg1").text(data.value);
+                //        $("#msg2").text(data.value2);
+                //    }
+                //});
+            }
+        }
+        function chageimg() {
+            $("#valiCode").attr("src", "/Account/GetValidateCode?time=" + (new Date()).getTime());
+        }
+    </script>
+    <title>苏州吉嘉鸿精密机械 系统登录</title>
+</head>
+	<body class="login">            
+    	<div id="login_wrapper">
+        	
+            <div class="clear"></div>
+            <div id="login_top">
+                <!-- logo -->
+                <div style="width: 100px; height: 58px"></div>
+                <a href="/">
+	                <div class="logo">
+	                </div>
+                </a>
+                <!-- /logo -->
+                
+
+            </div>
+            
+            <div class="clear"></div>
+            
+			<div class="login_holder">
+	<div class="bg_header">
+    	<div class="login_content">
+            <div class="icon_lock left"></div>
+            <div class="left">
+            	<h2 class="subhead left span-10" style="font-weight:700; font-family:'Microsoft YaHei';">苏州吉嘉鸿精密机械 系统登录</h2>
+            </div>
+		</div>
+    </div>
+    <div class="clear"></div>
+	<div class="login_content">
+        <!-- begin form -->
+        <div class="spacer"></div>
+        
+        <form id="f" action="../account/verification" method="post">
+        <input type="hidden" name="action" id="action" value="login" />     
+
+        <div id="error_row" style="display:none">
+            <div class="error none" id="error_message">
+                <div class="icon_error"></div>
+                <div class="alert_text left">
+                		
+                    	<strong>Invalid username or password</strong>
+                    	
+                    
+                </div>
+            </div>
+        </div>
+				        <div class="clear spacer"></div>
+        <table class="gray_table" cellpadding="10" cellspacing="0" border="0" id="textfield2" width="770">        	
+            <tr>
+                <td align="right" width="125" valign="middle"><label>用户名:</label></td>
+                <td width="40">
+                	<div class="td_spacer"></div>
+                </td>
+                <td align="left" valign="middle"><input name="userid" id="userid" type="text" value="@uid" /></td>
+                <td valign="middle">
+                	<span id="msg1"></span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" valign="middle"><label>密码:</label></td>
+                <td width="40" valign="middle">
+                	<div class="td_spacer"></div>
+                </td>
+                 <td width="250" align="left" valign="middle"><input name="pwd" value="259520" id="pwd" type="password" /></td>
+                 <td valign="middle">
+                 	 <span id="msg2"></span>
+                 </td>
+            </tr>
+                        <tr>
+            	<td><div class="td_spacer"></div></td>
+                <td width="40">
+                	<div class="td_spacer"></div>
+                </td>
+                <td colspan="2" valign="middle" align="left">
+                	<input id="chkRememberMe" name="remember_me" @chb type="checkbox" />&nbsp;<label>记住我</label>
+                </td>
+             </tr>
+             <tr>
+             	<td><div class="td_spacer"></div></td>
+                <td width="40">
+                	<div class="td_spacer"></div>
+                </td>
+                <td colspan="2" align="left" valign="middle">
+                	<div class="left">
+                        <div class="left">
+                            <a id="submit_lnk" title="Log In" href="javascript:void(0)"  onclick="login()" class="login" style="margin: 0; padding: 0;"></a>
+                           
+                        </div> 
+                    </div>
+                </td>
+             </tr>
+            
+         </table>
+        </form>
+        <!-- end form -->
+    </div>
+    <div class="ie6_login_spacer"></div>
+</div>
+            <div class="clear"></div>
+            <div class="footer_shadow"></div>
+            <div class="clear"></div>
+            
+            <div style="color: #84a4be;" class="left">
+    <div style="width: 150px" class="left">
+        &copy; 2013 mengzl wms.
+    </div>
+
+</div>            
+            
+            <div class="clear"></div>
+            <div class="spacer20"></div>
+			        </div>
+    </body>
+</html>

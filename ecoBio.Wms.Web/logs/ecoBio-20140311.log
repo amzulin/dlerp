@@ -1,0 +1,10 @@
+2014-03-11 22:03:38,020 [11] ERROR - depot.reportdepotpart “undefined”附近有语法错误。
+2014-03-11 22:04:22,589 [11] ERROR - depot.reportdepotpart “undefined”附近有语法错误。
+2014-03-11 22:31:29,842 [23] ERROR - depot.reportorderpart 代码 块缺少结束字符“}”。请确保此块内的所有“{”都有匹配的“}”字符，并且任何“}”都不会解释为标记。
+
+2014-03-11 22:31:29,873 [23] ERROR - depot.reportorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-11 22:35:01,525 [24] ERROR - depot.reportorderpart 关键字 'order' 附近有语法错误。
+2014-03-11 22:35:28,217 [23] ERROR - depot.reportorderpart 列名 'returnAmount' 无效。
+列名 'returnAmount' 无效。
+列名 'returnAmount' 无效。
+2014-03-11 22:35:56,001 [24] ERROR - depot.reportorderpart 列名 'returnAmount' 无效。

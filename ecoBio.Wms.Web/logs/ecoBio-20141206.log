@@ -1,0 +1,2 @@
+2014-12-06 00:21:19,282 [16] ERROR - stockin.semilistpart 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.V_ProductSemi”不兼容。类型“proName”的成员在同名的数据读取器中没有对应的列。
+2014-12-06 00:21:19,318 [16] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

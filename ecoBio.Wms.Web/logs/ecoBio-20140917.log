@@ -1,0 +1,9 @@
+2014-09-17 02:28:13,387 [30] ERROR - cost.updatebomnode The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.BomMain'. A member of the type, 'bomId', does not have a corresponding column in the data reader with the same name.
+2014-09-17 02:32:45,577 [9] ERROR - cost.updatebomnode The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.BomMain'. A member of the type, 'bomId', does not have a corresponding column in the data reader with the same name.
+2014-09-17 02:39:15,382 [17] ERROR - cost.updatebomnode The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.BomMain'. A member of the type, 'bomId', does not have a corresponding column in the data reader with the same name.
+2014-09-17 02:44:58,251 [6] ERROR - cost.updatebomnode The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.BomMain'. A member of the type, 'bomId', does not have a corresponding column in the data reader with the same name.
+2014-09-17 22:06:08,250 [9] ERROR - main.printwin 未将对象引用设置到对象的实例。
+2014-09-17 22:19:59,574 [13] ERROR - main.printwin 未将对象引用设置到对象的实例。
+2014-09-17 22:20:09,152 [15] ERROR - main.printwin 未将对象引用设置到对象的实例。
+2014-09-17 22:27:24,388 [12] ERROR - main.printsale 未将对象引用设置到对象的实例。
+2014-09-17 22:28:30,841 [8] ERROR - main.printsale 未将对象引用设置到对象的实例。

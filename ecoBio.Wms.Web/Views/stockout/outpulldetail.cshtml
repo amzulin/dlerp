@@ -1,0 +1,94 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.StockDetailModel>;
+    var pi = 1;
+    var no = Model.no;
+    var mc = Model.mc as List<Enterprise.Invoicing.ViewModel.KeyValue>;
+ }
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th> 
+      <th width="7%">物料类别</th>
+    <th width="15%">物料名称</th>
+    <th width="15%">物料规格</th>
+    <th width="8%">仓库</th>
+    <th width="8%">数量</th>
+    <th width="10%">备注</th>
+    <th width="6%">类别</th>
+    <th width="6%">操作</th>
+  </tr>
+  </thead>
+ <tbody id="tabbody">
+   
+     @foreach (var item in list)
+     {
+         if (item.type == "delete")
+         {
+             continue; 
+         }     
+  <tr>
+      <td class="endwise_title">@pi</td> 
+      <td>
+           @{
+         var h = mc.FirstOrDefault(p => p.value == item.materialCategory);
+         if(h!=null)
+         {
+             <span>@h.text</span>
+         }
+         else
+         {
+             <span>未知类别</span>
+         }
+            }
+      </td>    
+      <td class="endwise_title">@Html.Raw(item.materialName)</td>
+    <td class="endwise_title">@item.materialModel</td>
+      <td>@item.depotName</td>
+    <td>@item.amount</td><td>@item.remark</td>
+    <td  class="endwise_title">@if(item.type=="add"){
+         <span>新增</span>
+        }
+        else
+                               {  <span>修改</span>
+                               }
+    </td>
+    <td class="endwise_title">
+        
+      @if (item.type != "add")
+      {   
+           <span onclick="editone('@item.detailSn.ToString()','@item.materialNo.ToString()','@item.materialName.ToString()','@item.materialModel.ToString()','@item.materialCategory.ToString()',@item.depotId,@item.amount,'@item.remark');" class="edit"></span>
+      }
+            <span onclick="deleteone('@item.stockNo','@item.detailSn.ToString()','@item.materialNo');" title="删除">删除</span>
+     
+	</td>
+  </tr>
+      pi++;
+     }
+@if (list.Count > 0)
+{
+    <tr><td colspan="9" style="text-align:center;"><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save('@no');" >提交</a></td></tr>
+    
+}
+
+  </tbody>
+</table>
+<script>
+
+    function save(no)
+    {
+        var r = $("#txtremark").val();
+        var d = $("#txtdeport").val();
+        $.post("../stockout/saveoutpull", { no: no, type: type, remark: r ,deport:d}, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../stockout/outlist";
+            }
+        });
+    }
+
+</script>

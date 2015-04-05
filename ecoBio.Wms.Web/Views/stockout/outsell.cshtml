@@ -1,0 +1,191 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.StockModel;
+    var mc = Model.mc as List<SelectListItem>;
+    var depots = Model.depots as List<SelectListItem>;
+    depots.Insert(0, new SelectListItem { Value = "0", Text = "请选择仓库" });
+    string order = "";
+    var ddl = Model.ddl as List<Enterprise.Invoicing.Entities.Models.Supplier>;
+    var supplier = 0;
+    if (type == "edit")
+    {
+        supplier = one.supplierId;
+        ViewBag.Title = "编辑销售出库单";
+        order = one.bomOrderNo;
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增销售出库单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：出库管理 > <a href="../stockout/outlist">出库单列表</a> > 销售出库 </div>
+<div class="content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer" style="height:80px;">
+<label>出库单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@no" />
+<label>出库部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  style="width:90px;" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>出库人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" style="width:50px;"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>仓库：</label><input name="" id="txtdeport" type="text" value=""/> <label>备注：</label><input name="" id="txtremark" type="text" value=""  style="width:200px;"/>  
+<br />
+<label>客户：</label><input name="" type="text" id="txtcustomer2"  style="width:250px;" /> 
+<label>客户订单：</label><select id="ddlorderno" onchange="changeorder()" style="width:120px;"><option value="">请选择</option></select>
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer" style="height:80px;">
+<label>出库单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@one.stockNo" /><label>
+<label>出库部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:90px;" value="@one.depName"/>
+<label>出库人：</label><input name="" type="text" readonly="readonly" class="input_gray" style="width:50px;" value="@one.staffName" />   
+<label>仓库：</label><input name="" id="txtdeport" type="text" value="@one.deportStaff"/><label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark" style="width:200px;"/>  
+        <br />
+<label>客户：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:250px;" value="@one.supplierName"/>
+<label>客户订单：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:120px;" value="@one.bomOrderNo"/>
+</div>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>出库明细</h2>
+<div  id="detail_table">
+@{
+    Html.RenderAction("outselldetail", "stockout", new { no = no, order = order });   
+}
+</div> 
+
+
+
+</div>
+
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+
+
+    var hdetail = 0;
+    var hcount = 0;
+    var hmaterial = "";
+    var hname = "";
+    var hmodel = "";
+    var htype = "";
+    supplierid = '@supplier';
+    order = '';
+    $(function () {
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+
+        $("#txtcustomer2").autocomplete({
+            source: function (request, response) {
+                var key = $("#txtcustomer2").val();
+                $.get("../main/querycustomer", { key: key, type: 1 }, function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.name,
+                            name: item.name,
+                            value: item.id,
+                        }
+                    }));
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                var item = ui.item.name;
+                $("#txtcustomer2").val(ui.item.name);
+                $("#ddlorderno").html("<option value=''>请选择</option>");
+                supplierid = ui.item.value;
+                suppliername = ui.item.name;
+                $.get("../stockout/getcustomerorder", { supplier: supplierid }, function (data) {
+                    var html = "<option value=''>请选择</option>";
+                    for (var o = 0; o < data.length; o++) {
+                        html += "<option value='" + data[o].value + "'>" + data[o].id + "</option>";
+                    }
+                    $("#ddlorderno").html(html);
+                });
+
+
+                return false;
+            }
+        });
+       
+    });
+    function changeorder() {
+        order = $("#ddlorderno").val();
+        if (order == '') { $("#detail_table").hide(); } else $("#detail_table").show();
+        $("#detail_table").load("../stockout/outselldetail", { no: no, order: order }, function (data) { });
+    }
+    function savedetail() {
+        var txtcount = $("#txtcount").val();
+        var txtp = $("#txtprice").val();
+        var txtr = $("#txtrem").val();
+        var depot = $("#ddldepot").val();
+        var depotname = $('#ddldepot option:selected').text();
+        var mc = $("#ddlmc").val();
+        if (hmaterial == "" || depot == "0" || txtcount == "" || isNaN(txtcount) || txtp == "" || isNaN(txtp)) {
+            $.dialog.alert("请选择物料、数量、仓库、单价！");
+            return false;
+        }     
+        var ctxt = parseInt(txtcount);
+        if (ctxt < 1) {
+            $.dialog.alert("输入数量必须大于0");
+            return false;
+        }  
+        var ptxt = parseFloat(txtp);
+        if (ptxt <= 0) {
+            $.dialog.alert("销售单价必须大于0");
+            return false;
+        }
+        $.post("../stockout/saveoutselltemp", { detail: hdetail, type: htype, no: no, detail: hdetail, m: hmaterial, mc: mc, depot: depot, depotname: depotname, name: hname, model: hmodel, count: ctxt, price: ptxt, remark: txtr }, function (data) {
+            if (data.status == "error") {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $("#detail_table").load("../stockout/outselldetail", { no: no }, function (data) { });
+                $("#txtcount").val('');
+                $("#ddldepot").val('0');
+                $("#txtmaterial").val('');
+                $("#txtprice").val('');
+                hdetail = 0;
+                htype = "add";
+            }
+        });
+    }
+    function editone(detailid, m,name,model,mc,deopid, c,r,p) {
+        hdetail = detailid;
+        hmaterial = m, hname = name, hmodel = model, hcount = c;
+        $("#ddlmc").val(mc);
+        $("#ddldepot").val(deopid);
+        $("#txtmaterial").val(name);
+        $("#txtcount").val(c);
+        $("#txtrem").val(r);
+        $("#txtprice").val(p);
+        htype = "edit";
+    }
+    function deleteone(rno, id, m) {
+        if (confirm("确定删除？")) {
+            $.post('../stockout/deleteoutsell', { no: no, detail: id, m: m }, function (data) {
+                if (data == "ok") {
+                    $("#detail_table").load("../stockout/outselldetail", { no: no }, function (data) { });
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+    
+ 
+</script>

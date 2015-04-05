@@ -1,0 +1,7 @@
+2013-10-16 10:20:12,086 [7] ERROR - Home.platform 未将对象引用设置到对象的实例。
+2013-10-16 13:12:52,880 [73] ERROR - management.weeklyservice 该字符串未被识别为有效的 DateTime。
+2013-10-16 13:32:06,099 [74] ERROR - management.servicemonth 该字符串未被识别为有效的 DateTime。
+2013-10-16 15:30:36,911 [20] ERROR - management.weeklyservice 索引和长度必须引用该字符串内的位置。
+参数名: length
+2013-10-16 16:59:04,573 [47] ERROR - CommunicationUser.upload1 StartIndex 不能小于 0。
+参数名: startIndex

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "采购需求申请单列表";
+
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：采购需求申请 > 采购需求申列表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>入库单号：<input name="" type="text" id="txtkey"  />
+    <select id="ddlstatus">
+        <option value="0">未完工</option>
+        <option value="1">已完工</option>
+    </select>
+<a class="btn_search" href="javascript:void(0);" id="btn" onclick="loadlistpart(1);"></a>
+
+</div>
+
+<!--表格内容-->
+
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("requirelistpart", "purchase");   
+}
+</div>
+
+    </div>
+<script>  
+
+    parturl = "../purchase/requirelistpart";
+    csparas = 'requireNo,isover';
+    htmlids = 'txtkey,ddlstatus';
+
+</script>

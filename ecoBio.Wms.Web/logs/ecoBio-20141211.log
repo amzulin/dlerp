@@ -1,0 +1,4 @@
+2014-12-11 22:02:23,903 [101] ERROR - delegate.needbuytab “System.Dynamic.ExpandoObject”未包含“price”的定义
+2014-12-11 22:02:23,919 [101] ERROR - delegate.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-11 22:04:21,451 [100] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-11 22:04:21,466 [100] ERROR - delegate.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

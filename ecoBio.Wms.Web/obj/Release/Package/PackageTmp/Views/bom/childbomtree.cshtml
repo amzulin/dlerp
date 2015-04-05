@@ -1,0 +1,325 @@
+﻿@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "BOM查看";
+    var type = Model.type;
+
+    var one = Model.one as Enterprise.Invoicing.ViewModel.V_BomMaterial;
+    var bomjson = Model.bomjson;
+
+    var canedit = 0;
+    if (type == "edit" && Enterprise.Invoicing.Web.Masterpage.CheckRight("childbom_update"))
+    {
+        canedit = 1;
+    }
+    }    
+<link href="~/Scripts/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
+    <script src="~/Scripts/lib/ligerUI/js/core/base.js"></script>
+    <script src="~/Scripts/lib/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="~/Scripts/lib/ligerUI/js/plugins/ligerTextBox.js"></script>  
+    <script src="~/Scripts/lib/ligerUI/js/plugins/ligerMenu.js"></script>    
+    
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > <a href="../bom/childbomlist"> 子BOM管理</a> >子BOM查看 </div>
+
+
+
+
+<div class="data_content">
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>子BOM</h2>
+<table style="margin-top:10px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr style="height:50px;font-size:14px;"><td colspan="2">子名称：@one.bomName</td><td>版本：@one.version</td><td>备注：@one.remark</td><td>快速码：@one.materialCate</td><td></td></tr>
+        <tr><td colspan="6">
+          <div id="maingrid"></div> 
+            </td></tr>
+   @if (type == "edit" && Enterprise.Invoicing.Web.Masterpage.CheckRight("childbom_update"))
+   {
+  @*   <tr><td>更新第<span id="spindex">0</span>行</td>
+        <td>单价：<input type="text" id="txtprice" /></td>
+        <td>备注：<input type="text" id="txtremark" /></td><td></td><td></td>
+        <td><a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="update();">提交</a></td>
+    </tr>
+    <tr><td><span id="spkmindex">添加新科目</span></td> 
+        <td>项目：<input type="text" id="txtkm" /></td>
+        <td>单价：<input type="text" id="txtkamount" /></td>
+        <td>单价：<input type="text" id="txtkprice" /></td>
+        <td>备注：<input type="text" id="txtkremark" /></td>
+        <td><a class="btn_refer2" href="javascript:void(0);" id="btn2" onclick="addNewRow();">提交</a></td>
+    </tr>*@
+   }
+   else
+   {
+        <input type="hidden" id="txtprice" />
+    <input type="hidden" id="txtremark" />
+   }
+</table>
+
+        </div>
+    
+
+
+    </div>
+
+
+
+<script>
+    var id = '@one.bomId', type = '@type', selectid = 0, isroot = 0, isvir = 0, canclick = 0;
+    var onewin = '';
+
+    var treedata = { Rows: eval('@Html.Raw(bomjson)') };
+    var canedit = '@canedit';
+    $(function () {
+        menu = $.ligerMenu({
+            top: 100, left: 100, width: 120, items:
+            [
+            { text: '增加下级', click: itemadd, icon: 'add' },
+            { text: '修改本节点', click: itemedit, icon: 'edit' },
+            { line: true },
+                { text: '删除本节点', click: itemdel, icon: 'delete' },
+                { text: '删除所选', click: itemdelall, icon: 'delete' }
+            ]
+        });
+        if (canedit == '1') {
+            manager = $("#maingrid").ligerGrid({
+                columns: [
+                    { display: '物料编码', id: 'id1', name: 'no', width: 160, align: 'left', render: function (record) { if (record.ischild == true) return "子BOM"; else return record.no; } },
+                    { display: '物料名称', name: 'name', width: 180, align: 'left' },
+                    { display: '规格', name: 'model', width: 280, align: 'left' },
+                    { display: '单位', name: 'useunit', width: 50, align: 'left' },
+                    { display: '数量', name: 'amount', width: 50, align: 'left' },
+                    { display: '类别', name: 'cate', width: 50, align: 'left' },
+                    { display: '备注', name: 'remark', width: 80, align: 'left', render: function (record) { if (record.remark != 'null') return record.remark; else return ''; } }
+                ], width: '100%', height: '97%',checkbox :true,
+                data: treedata, alternatingRow: false, usePager: false, enabledSort: false, enabledEdit: true, rownumbers: true, tree: { columnId: 'id1' },
+                //onSelectRow: function (rowdata, rowindex) {
+                //    manager.updateRow(rowdata, {
+                //        // cost: rowdata.price != '' ? clxs(rowdata.price * rowdata.amount) : ''
+                //    });
+
+
+                //    if (rowdata.id == 0) { costsn = 0; return false; }
+                //    costsn = rowdata.sn; mybom = rowdata.id;
+                //    rowindex = rowdata.__index; iskm = rowdata.km;
+                //    oldamount = rowdata.amount;
+                //    oldremark = rowdata.remark;
+                //},
+                //onContextmenu: function (parm, e) {
+                //    var rowdata = parm.data;
+                //    rowindex = rowdata.__index; manager.select(rowindex);
+                //    menu.show({ top: e.pageY, left: e.pageX });
+                //    return false;
+                //},
+                onContextmenu: function (node, e) {
+                    selectid = node.data.id;
+                    isroot = node.data.isroot;
+                    canclick = node.data.canclick;
+                    menu.show({ top: e.pageY, left: e.pageX });
+                    return false;
+                }
+            }
+);
+        }
+        else {
+            manager = $("#maingrid").ligerGrid({
+                columns: [
+                    { display: '物料编码', id: 'id1', name: 'no', width: 160, align: 'left', render: function (record) { if (record.ischild == true) return "子BOM"; else return record.no; } },
+                    { display: '物料名称', name: 'name', width: 200, align: 'left' },
+                    { display: '规格', name: 'model', width: 280, align: 'left' },
+                    { display: '单位', name: 'useunit', width: 50, align: 'left' },
+                    { display: '数量', name: 'amount', width: 60, align: 'left' },
+                    { display: '类别', name: 'cate', width: 50, align: 'left' },
+                    { display: '备注', name: 'remark', width: 80, align: 'left', render: function (record) { if (record.remark != 'null') return record.remark; else return ''; } }
+                ], width: '100%', height: '97%',
+                data: treedata, alternatingRow: false, usePager: false, enabledSort: false, rownumbers: true, tree: { columnId: 'id1' }
+            }
+    );
+        }
+    });
+    function addNewRow() {
+        manager.select(0);
+        var row = manager.getSelectedRow();
+        //参数1:rowdata(非必填)
+        //参数2:插入的位置 Row Data
+        //参数3:之前或者之后(非必填)
+        manager.addRow({
+            km: 1, id: 0, sn: 0, no: '新增科目', name: '', amount: 1, price: 1, cost: 1, useunit: "", unit: '', unit2: '', amount2: "", remark: '', index: 0
+
+        }, row, true);//document.getElementById("chkbefore").checked
+    }
+
+    function deleteRow(item, i) {
+        var row = manager.getSelectedRow();
+        if (row.sn == 0 && row.km == 1)
+            manager.deleteSelectedRow(rowindex);
+        else {
+            $.dialog.confirm('你确定要删除这掉消息吗？', function () {
+                //upd(costsn, iskm, 'delm', 0, 0, '');
+                upd(row.sn, row.id, row.km == 1 ? 'delk' : 'delm', row.name, row.amount, row.price, row.remark);
+            }, function () {
+            });
+        }
+    }
+    function updateRow(item, i) {
+        var row = manager.getSelectedRow();
+        if (!row) { alert('请选择行'); return; }
+        var t = 'addk';
+        if (row.km == 1 && row.sn == 0) t = 'addk';
+        else if (row.km == 1 && row.sn > 0) t = 'updk';
+        else if (row.km == 0 && row.sn == 0) t = 'addm';
+        else if (row.km == 0 && row.sn > 0) t = 'updm';
+        else return false;
+        if (row.name==''||row.amount==''||row.price=='') {
+            alert((row.name == '' ? "请填写项目名称;" : "") + (row.amount == '' ? "数量不能为空;" : "") + (row.price == '' ? "单价不能为空;" : ""));
+            return false;
+        }
+        else upd(row.sn, row.id, t, row.name, row.amount, row.price, row.remark);
+    }
+
+    function upd(id, mybom, type, name, amount, price, rmk) {
+        $.post("../cost/updatebomnode",
+                   {
+                       id: id,mybom: mybom, forbom: bomid, type: type,name:name,amount: amount, price: price, remark: rmk
+                   }, function (data) {
+                       if (data.status == false) {
+                           alert(data.message);
+                           return false;
+                       }
+                       else {
+                           $.dialog.tips(data.message);
+                           $("#tdtotal").text(data.value);
+
+                           var row = manager.getSelectedRow();
+                           if (type == 'delm') {
+                               manager.updateRow(row, {
+                                   cost: '', price: ''
+                               });
+                           }
+                           else if (type == 'delk') {
+                               manager.deleteSelectedRow(row.__index);
+                           }
+
+                          
+                       }
+                   });
+    }
+
+    function clxs(v) {
+        var vstr = v.toString();
+        if (v == '') return '';
+        if (vstr.indexOf('.') == -1) return v;
+        var first = v.toFixed(4);
+        var fstr = first.toString();
+        var newv = '';
+        var lasti = 0;
+        for (var i = fstr.length - 1; i >= 0; i--) {
+            if (fstr[i] != '0' || fstr[i] == '.') {
+                lasti=i;
+                break;
+            }
+        }
+       // if (v[lasti] == '.')
+        return fstr.substr(0, lasti+1);
+       // else { }
+    }
+
+
+
+
+    function itemdel(item, i) {
+        if (canclick == '0') {
+            $.dialog.tips('本节点不可操作');
+            return false;
+        }
+        if (isroot == '1') {
+            $.dialog.tips('根节点不允许删除');
+            return false;
+        }
+        var tips = "删除节点同时会将其子节点一并删除，确定删除本节点吗？";
+        var durl = "../bom/deletebom";
+        $.dialog.confirm(tips, function () {
+            $.post(durl, { id: selectid, forbom: id }, function (data) {
+                if (data.status == true) { $.dialog.tips("删除成功"); loadgrid(); }
+                else $.dialog.alert(data.message);
+            });
+        }, function () {
+        });
+    }
+    function itemdelall(item, i) {
+        var tips = "删除节点同时会将其子节点一并删除，确定删除所选吗？";
+        var durl = "../bom/deletebomselect";
+        var selects = manager.getSelectedRows();
+        var ids = [];
+        var hadroot = 0;
+        $.each(selects, function (i, m) {
+            if (m.isroot == 0) {
+                ids.push(m.id);
+            }
+            else hadroot = 1;
+        });
+        if (hadroot == 1) {
+            $.dialog.tips('根节点不允许删除');
+            return false;
+        }
+
+        if (ids.length < 1) {
+            $.dialog.tips('未选择要删除的BOM节点');
+            return false;
+        }
+        $.dialog.confirm(tips, function () {
+            $.post(durl, { forids: ids.toString() }, function (data) {
+                if (data.status == true) { $.dialog.tips("删除成功"); loadgrid(); }
+                else $.dialog.alert(data.message);
+            });
+        }, function () {
+        });
+    }
+    function itemadd(item, i) {
+        if (canclick == '0') {
+            $.dialog.tips('本节点不可添加');
+            return false;
+        }
+        onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+            title: '新增BOM节点',
+            content: 'url:../bom/bomnode?type=add&id=' + selectid
+        });
+    }
+    function itemvirtual(item, i) {
+        if (isroot != '1') {
+            $.dialog.tips('只有根节点可以增加！');
+            return false;
+        }
+        onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+            title: '新增非物料项目',
+            content: 'url:../bom/bomvirtual?type=add&forbom=' + id + '&id=' + selectid
+        });
+    }
+
+    function itemedit(item, i) {
+        if (isroot == '1') {
+            $.dialog.tips('根节点不允许编辑');
+            return false;
+        }
+        if (canclick == '0') {
+            $.dialog.tips('本节点不可编辑');
+            return false;
+        }
+        var tips = "修改BOM节点";
+        var durl = 'url:../bom/bomnode?type=edit&id=' + selectid;
+        onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+            title: tips,
+            content: durl
+        });
+    }
+
+    function loadgrid() {
+        if (onewin != '') onewin.close();
+        var uid = new Date();
+        location.reload();
+        // window.location.href = '../bom/bomone?type=edit&id=' + id + '&uid=' + uid;
+    }
+
+    </script>

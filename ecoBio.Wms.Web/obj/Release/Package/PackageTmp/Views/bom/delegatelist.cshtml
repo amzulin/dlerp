@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "委外单列表";
+
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：委外单 > 委外单列表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>委外单号：<input name="" type="text" id="txtkey"  />
+    <select id="ddlstatus">
+        <option value="0">未完工</option>
+        <option value="1">已完工</option>
+    </select>
+<a class="btn_search" href="javascript:void(0);" id="btn" onclick="loadlistpart(1);"></a>
+
+</div>
+
+<!--表格内容-->
+
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("delegatelistpart", "bom");   
+}
+</div>
+
+    </div>
+<script>  
+
+    parturl = "../bom/delegatelistpart";
+    csparas = 'delegateNo,isover';
+    htmlids = 'txtkey,ddlstatus';
+
+</script>

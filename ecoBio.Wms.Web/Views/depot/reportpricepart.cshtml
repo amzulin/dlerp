@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_MaterialPriceModel>;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>报表明细</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('suppliername')">供应商</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('materialNo')">物料编码</th>
+    <th width="15%" style="cursor:pointer;" onclick="orderlistp('materialName')">物料名称</th>
+    <th width="15%" style="cursor:pointer;" onclick="orderlistp('materialModel')">物料规格</th>
+    <th width="5%" style="cursor:pointer;" onclick="orderlistp('unit')">单位</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('price')">价格</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('startdate')">启用日期</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('status')">状态</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('remark')">备注</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>
+             <td>@item.supplierName</td>
+    <td>@item.materialNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>  
+             <td>@item.unit</td>
+       <td>@item.price</td>
+    <td>@item.startDate.ToString("yyyy-MM-dd")</td>
+    <td title="@(item.status==2&&item.endDate.HasValue?"终止日期："+item.endDate.Value.ToString("yyyy-MM-dd"):"")" >@(item.status==0?"未启用":(item.status==1?"启用":"终止"))</td>
+<td>@item.remark</td>
+    <td>    
+         
+	</td>
+</tr>
+         pi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="10">无价格明细</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+       
+	 @Html.Partial("~/Views/Shared/page_page.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+    </div>
+
+
+<script>  
+    page = '@page';
+</script>

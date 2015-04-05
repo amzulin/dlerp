@@ -1,0 +1,3 @@
+2014-11-12 21:31:46,489 [26] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2014-11-12 21:39:01,755 [33] ERROR - bom.bomlist 仅对 LINQ to Entities 中已排序的输入支持方法“Skip”。必须在调用“Skip”方法之前调用方法“OrderBy”。

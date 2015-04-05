@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "领料退单报表";
+    var deplist = Model.deplist as List<SelectListItem>;
+    deplist.Insert(0, new SelectListItem { Value = "-1", Text = "全部" });
+  
+    var depots = Model.tdepots as List<SelectListItem>;
+    depots.Insert(0, new SelectListItem { Value = "-1", Text = "全部" });
+    var staffs = Model.staffs as List<SelectListItem>;
+    staffs.Insert(0, new SelectListItem { Value = "-1", Text = "全部" });
+    var suppliers = Model.suppliers as List<SelectListItem>;
+    suppliers.Insert(0, new SelectListItem { Value = "-1", Text = "全部" });
+    var customer = Model.customer as List<SelectListItem>;
+    customer.Insert(0, new SelectListItem { Value = "-1", Text = "全部" });
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：报表查询 > 时序表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+    <table>
+        <tr><td style="width:80px;text-align:right;">部门：</td><td>@Html.DropDownList("ddldep",deplist)</td>
+            <td style="width:80px;text-align:right;">员工：</td><td>@Html.DropDownList("ddlstaff",staffs)</td>
+            <td style="width:80px;text-align:right;">状态：</td><td>
+            <select id="ddls">
+                <option value="-1">全部</option>
+                <option value="0">未审核</option>
+                <option value="1">已审核</option>
+                <option value="4">作废</option>
+            </select></td>
+            <td style="width:80px;text-align:right;">物料：</td><td><input name="" type="text" id="txtm" /></td>
+            <td style="width:80px;text-align:right;">规格：</td><td><input name="" type="text" id="txtg" /></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">数量区间：</td><td><input name="" type="text" id="txtless" /></td>
+            <td style="text-align:right;">至：</td><td><input name="" type="text" id="txtbig" /></td>
+            <td style="text-align:right;">日期：</td><td><input name="" type="text" id="from" /></td>
+            <td style="text-align:right;">至：</td><td><input name="" type="text" id="to" /></td>
+            <td style="text-align:right;"></td><td></td>
+        </tr>
+        <tr><td style="text-align:right;">仓库：</td><td>@Html.DropDownList("ddlfdepot",depots)</td>
+            <td style="text-align:right;">供应商：</td><td>@Html.DropDownList("ddlsup",suppliers)</td> 
+            <td style="text-align:right;">客户：</td><td>@Html.DropDownList("ddlcus",customer)</td>  
+            <td style="text-align:right;">单号：</td><td><input name="" type="text" id="txtno" /></td>
+            <td style="width:80px;text-align:right;">类别：</td><td>
+            <select id="ddlt">
+                <option value="-1">全部</option>
+                <option value="采购申请">采购申请</option>
+                <option value="采购单">采购单</option>
+                <option value="产品入库单">产品入库单</option>
+                <option value="采购入库单">采购入库单</option>
+                <option value="盘点入库单">盘点入库单</option>
+                <option value="其他入库单">其他入库单</option>
+                <option value="销售出库单">销售出库单</option>
+                <option value="直接销售出库单">直接销售出库单</option>
+                <option value="领料出库单">领料出库单</option>
+                <option value="BOM领料出库单">BOM领料出库单</option>
+                <option value="其他出库单">其他出库单</option>
+                <option value="以旧换新">以旧换新</option>
+                <option value="采购退单">采购退单</option>
+                <option value="领料退单">领料退单</option>
+            </select></td>
+        </tr>
+        <tr><td colspan="10" style="text-align:center;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+            <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+            </td></tr>
+    </table>
+</div>
+
+<!--表格内容-->
+
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("timetabpart", "depot");   
+}</div>
+
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+    $(function () {
+        $("#from").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#to").datepicker({
+            dateFormat: "yy-mm-dd",
+            maxDate: new Date(),
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+    });
+    function pageload(p) {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../depot/timetabpart", { page: page, where: para, orderby: orderby }, function () { });
+    }
+    function orderlistp(by) {
+        if (orderby.indexOf('desc') != -1) orderby = by + " asc";
+        else orderby = by + " desc";
+        pageload(page);
+    }
+    function excel()
+    {
+        para = "";
+        geturl();
+        window.location.href = "../depot/exceltimetab?where=" + para + "&orderby=" + orderby;
+  }
+    function geturl() {
+        var dep = $("#ddldep").val();
+        var staff = $("#ddlstaff").val();
+        var ddls = $("#ddls").val();
+        var ddlfdepot = $("#ddlfdepot").val();
+        var ddltdepot = $("#ddltdepot").val();
+        var ddlt = $("#ddlt").val();
+        var ddlsup = $("#ddlsup").val();
+        var ddlcus = $("#ddlcus").val();
+        var m = $("#txtm").val();
+        var g = $("#txtg").val();
+        var no = $("#txtno").val();
+        var less = $("#txtless").val();
+        var big = $("#txtbig").val();
+        var start = $("#from").val();
+        var end = $("#to").val();
+        para = "";
+        if (ddlt != '-1') para += " and reprottype='" + ddlt + "'";
+        if (ddls != '-1') para += ' and status=' + ddls;
+        if (ddlfdepot != '-1') para += ' and depotid=' + ddlfdepot;
+        if (dep != '-1') para += 'and depid=' + dep;
+        if (staff != '-1') para += ' and staffId=' + staff;
+        if (m != '') para += " and (materialName like '%" + m + "%' or materialNo like '%" + m + "%' )";
+        if (g != '') para += " and  materialModel like '%" + g + "%'";
+        if (no != '') para += " and showno like '%" + no + "%'";
+        if (ddlsup != '-1' && ddlcus != '-1') para += ' and supplierid in(' + ddlsup + ',' + ddlcus + ')';
+        else if (ddlsup != '-1' && ddlcus == '-1') para += ' and supplierid =' + ddlsup;
+        else if (ddlsup == '-1' && ddlcus != '-1') para += ' and supplierid =' + ddlcus;
+
+        if (start != '') para += " and createdate>='" + start + "'";
+        if (end != '') para += " and createdate<'" + end + "'";
+        if (less != '') {
+            if (isNaN(less)) {
+                $.dialog.alert("请输出正确数字！");
+                return false;
+            }
+            para += ' and amount1>=' + less;
+        }
+        if (big != '') {
+            if (isNaN(big)) {
+                $.dialog.alert("请输出正确数字！");
+                return false;
+            }
+            para += ' and amount1<' + big;
+        }
+        return para;
+    }
+    
+</script>

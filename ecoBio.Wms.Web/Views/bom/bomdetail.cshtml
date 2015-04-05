@@ -1,0 +1,196 @@
+﻿@{
+    Layout = null;
+    var one = Model.one as Enterprise.Invoicing.Entities.Models.V_BomOrderDetailModel;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BomOrderDetailListModel>;
+    //var virtusl = Model.virtusl as List<Enterprise.Invoicing.Entities.Models.V_BomOrderVirtualDetail>;
+    var count = list.Count; //var count2 = virtusl.Count;
+    var type = Model.type;
+    var sn = Model.sn;
+    var no = Model.no;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>客户订单明细</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var type = '@type';
+        var count = '@count';
+        $(function () {
+
+            $(".txtdate").datepicker({
+                dateFormat: "yy-mm-dd",
+                showOn: "button",
+                buttonImageOnly: true,
+                buttonImage: '../images/front/public/calendar.gif',
+                changeMonth: true,
+                numberOfMonths: 1
+            });
+        });
+        function save(st) {
+            var ids = [], counts = [], dates = [], remarks = [];
+            for (var i = 0; i < count; i++) {
+                var txt1 = $("#txtamount_" + i);
+                var txt2 = $("#txtdate_" + i);
+                var txt3 = $("#txtremark_" + i);
+                var c = txt1.val();
+                if (c=="") {
+                   alert("物料第"+(i+1)+"行数量不能为空!");
+                    return false;
+                }
+                if (isNaN(c)) {
+                    alert("物料第" + (i + 1) + "行数量格式有误!");
+                    return false;
+                }
+                if (Number(c)<0) {
+                    alert("物料第" + (i + 1) + "行数量不能小于0!");
+                    return false;
+                }
+                ids.push(txt1.attr("fid"));
+                counts.push(txt1.val());
+                dates.push(txt2.val());
+                remarks.push(txt3.val());
+            }
+            var sns = [], amounts = [], prices = [], bzs = [];
+            //for (var i = 0; i < count2; i++) {
+            //    var amount = $("#txtamount2_" + i).val();
+            //    var price = $("#txtamount3_" + i).val();
+            //    var remark = $("#txtremark2_" + i).val();
+            //    if (isNaN(amount) || isNaN(price) || Number(amount) < 0 || Number(price) < 0)
+            //        if (Number(c) < 0) {
+            //            alert("非物料第" + (i + 1) + "行数据格式错误!");
+            //            return false;
+            //        }
+            //    sns.push($("#txtamount2_" + i).attr("fid"));
+            //    amounts.push(amount);
+            //    prices.push(price);
+            //    bzs.push(remark);
+            //}
+            $.dialog.tips('提交中...', 4, 'loading.gif');
+            $.post("../bom/savebomdetail",
+                {
+                    sn: '@sn', no: '@no', ids: ids.toString(), counts: counts.toString(), dates: dates.toString(), remarks: remarks.toString(), st: st,
+                    sns: sns.toString(), amounts: amounts.toString(), prices: prices.toString(), bzs: bzs.toString()
+                }, function (data) {
+                if (data.status == true) {
+                    W.loadgrid();
+                }
+                else {
+                    alert(data.message);
+                    return false;
+                }
+            });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table  width="100%" border="0" cellspacing="0" cellpadding="0" class="intable ">
+      <thead>
+        <tr>
+          <th width="5%">序号</th> 
+    <th width="10%">物料编码</th>
+    <th width="20%">物料名称</th>
+    <th width="28%">物料规格</th>
+    <th width="12%">数量</th>
+    <th width="12%">交期</th>
+    <th width="13%">备注</th>
+        </tr>
+      </thead>
+          <tbody>
+              @if (count > 0)
+              {
+
+                  for (int i = 0; i < list.Count; i++)
+                  {
+                      var m = list[i];
+                  <tr>
+                      <td>@(i + 1)</td>
+                      <td>@m.materialNo</td>
+                      <td>@m.materialName</td>
+                      <td>@m.materialModel</td>                 
+                          @if (type == "view" || one.hadRequire == true)
+                          {                          
+                      <td>@(m.bomAmount+" "+m.unit)</td>
+                      <td>@(m.needDate.HasValue ? m.needDate.Value.ToString("yyyy-MM-dd") : "")</td>
+                      <td>@m.remark</td>
+                          }
+                          else if (type == "edit" && one.hadRequire == false)
+                          {         
+                      <td> <input type="text" value="@Math.Round(m.bomAmount, m.xslength)" class="amount" fid="@m.detailListSn" id="txtamount_@i" style="width:60px;" />@m.unit </td>
+                      <td> <input type="text" value="@(m.needDate.HasValue ? m.needDate.Value.ToString("yyyy-MM-dd") : "")" fid="@m.detailListSn" id="txtdate_@i"  style="width:60px;"  class="txtdate"  /></td>
+                      <td><input type="text" value="@m.remark" class="amount" fid="@m.detailListSn" id="txtremark_@i"  style="width:80px;" /> </td>
+                          }
+                
+                  </tr>
+                  }
+              }
+              else
+              {
+                  <tr><td colspan="8" style="text-align:center;"><span>无BOM明细</span></td></tr>
+              }
+              </tbody></table>
+       <div class="clear"></div>
+       <div style="height:20px;"></div>
+
+       @*@if (virtusl.Count > 0)
+       {
+           <table  width="100%" border="0" cellspacing="0" cellpadding="0" class="intable ">
+      <thead>
+        <tr>
+          <th width="5%">序号</th> 
+    <th width="40%">科目</th>
+    <th width="15%">数量</th>
+    <th width="15%">单价</th>
+    <th width="15%">总价</th>
+    <th width="10%">备注</th>
+        </tr>
+      </thead>
+          <tbody>
+              @for (int i = 0; i < virtusl.Count; i++)
+                  {
+                      var m = virtusl[i];
+                  <tr>
+                      <td>@(i + 1)</td>
+                      <td>@m.virtualName</td>
+                      @if (type == "view" || one.hadRequire == true)
+                          { 
+                      <td>@Math.Round(m.sAmount,2)</td>
+                      <td>@Math.Round(m.sPrice,2)</td>
+                      <td>@Math.Round(m.sAmount*m.sPrice,2)</td>
+                       <td>@m.remark</td>                      
+                          }
+                          else if (type == "edit" && one.hadRequire == false)
+                          {         
+                      <td> <input type="text" value="@Math.Round(m.sAmount,2)" class="amount2" fid="@m.virtualSn" id="txtamount2_@i" style="width:80px;" /> </td>
+                      <td> <input type="text" value="@Math.Round(m.sPrice,2)" class="amount3" fid="@m.virtualSn" id="txtamount3_@i" style="width:80px;" /> </td>
+                      <td> <input type="text" value="@Math.Round(m.sAmount*m.sPrice,2)" class="amount4" fid="@m.virtualSn" id="txtamount4_@i" style="width:80px;" /> </td>
+                      <td><input type="text" value="@m.remark" class="amount5" fid="@m.virtualSn" id="txtremark2_@i"  style="width:80px;" /> </td>
+                          }
+                  </tr>
+                  }
+        
+              </tbody></table>
+       }*@
+       
+       <div class="clear"></div>
+       <div style="height:20px;"></div>
+                  @if (type == "edit" && one.hadRequire == false)
+                  {
+               <div style="text-align:center;"><a href="javascript:void(0);" onclick="save('only');" class="btn_refer2">保存修改</a>
+                   <a href="javascript:void(0);" onclick="save('require');" class="btn_refer2">提交并生成需求单</a></div>
+                  }
+</div>
+</div>
+</body>
+</html>

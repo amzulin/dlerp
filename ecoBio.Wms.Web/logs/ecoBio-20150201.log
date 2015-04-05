@@ -1,0 +1,6 @@
+2015-02-01 20:21:50,901 [7] ERROR - depot.stockreportpart 关键字 'and' 附近有语法错误。
+2015-02-01 20:50:20,351 [9] ERROR - depot.stockreportpart 关键字 'and' 附近有语法错误。
+2015-02-01 20:50:37,600 [7] ERROR - depot.stockreportpart 关键字 'and' 附近有语法错误。
+2015-02-01 21:24:58,633 [9] ERROR - depot.reportdepotpart 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2015-02-01 21:24:58,663 [9] ERROR - depot.reportdepot 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

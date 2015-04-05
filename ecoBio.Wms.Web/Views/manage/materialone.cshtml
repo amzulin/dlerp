@@ -1,0 +1,212 @@
+﻿
+@{
+    Layout = null;
+    var one = Model.model as Enterprise.Invoicing.Entities.Models.Material;
+    var nofix = Model.nofix as List<SelectListItem>;
+    var units = Model.units as List<SelectListItem>;
+    var units2 = Model.units2 as List<SelectListItem>;
+    var type = Model.type;
+    var id = Model.id;
+    if (type=="edit"&&id!="")
+    {
+        var myfix = one.materialNo.Substring(0, 4);
+        var dep = nofix.FirstOrDefault(p => p.Value == myfix);
+        if (dep != null)
+        {
+            dep.Selected = true;
+        }
+        var unit = units.FirstOrDefault(p => p.Value == one.unit);
+        if (unit!=null)
+        {
+            unit.Selected = true;
+        }
+        var unit2 = units2.FirstOrDefault(p => p.Value == one.unit2);
+        if (unit2 != null)
+        {
+            unit2.Selected = true;
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id = '@id', type = '@type';
+        $(function () {
+            $("#ddlcate1").change(function () {
+                var uid = new Date();
+                var c = $("#ddlcate1").val();
+                $("#ddlcatediv").load("../main/materialcate2?cate=" + encodeURI(c) + "&uid=" + uid.getTime(), function (data) { });
+            });
+            if (type=='edit') {
+                $("#ddlnofix").attr("disabled", "true");
+            }
+        });
+        function save() {
+            var rad = $('input:radio[name="radcheck"]:checked').val();
+            var no = $("#txtno").val();
+            var name = $("#txtname").val();
+            var model = $("#txtmodel").val();
+            var bmc = $("#ddlcate1").val();
+            var fix = $("#ddlnofix").val();
+            var mc = $("#ddlmc").val();
+            var unit = $("#ddlunit").val();
+            var remark = $("#txtremark").val();
+            var fastcode = $("#txtfastcode").val();
+            var tunumber = $("#txttu").val();
+            var pinyin = $("#txtpinyin").val();
+            var xslength = $("#txtxslength").val();
+            var image = $("#filename").val();
+
+
+            var unit2 = $("#ddlunit2").val();
+            var xs = $("#txtxs").val();
+            if (unit2 != '' && (unit == ''||xs == '' || isNaN(xs) || parseFloat(xs) < 0))
+            {
+                $.dialog.alert("存在单位2时，单位1和系统必须都存在，系数为大于0数字！");
+                return false;
+            }
+            if (name == '') {
+                $.dialog.alert("物料名称不能为空！");
+                return false;
+            }
+            if (isNaN(xslength) || Number(xslength) < 0 || Number(xslength) > 4) {
+
+                $.dialog.alert("精度只能为0至4之间的整数！");
+                return false;
+            }
+            $.dialog.tips('提交中...', 4, 'loading.gif');
+            //id,depId, string name, string mobile, string email, string duty, string remark
+            $.post("../manage/savematerial",
+                {
+                    type: type, no: no, fix: fix, rad: rad, name: name, model: model, mc: mc, bmc: bmc, xslength: xslength, unit: unit, remark: remark, pinyin: pinyin, fastcode: fastcode, tunumber: tunumber,
+                    unit2: unit2, xs: xs, image: image
+                }, function (data) {
+                    if (data.status == false) {
+                        $.dialog.alert(data.message);
+                        return false;
+                    }
+                    else {
+                        W.loadgrid();
+                    }
+                });
+        }
+
+        function uploadfile() {
+            var formid = 'fileimage';
+            $("#fileimage").ajaxSubmit({
+                dataType: 'json', //数据格式为json 
+                beforeSend: function () { //开始上传                   
+                    $("#" + formid + " span[id=sp_msg]").attr("class", "loading"); //上传按钮显示上传中 
+                },
+                success: function (data) {
+                    if (data.status == false) {
+                      alert(data.message);
+                        $("#" + formid + " span[id=sp_msg]").attr("class", "error");
+                    }
+                    else {
+                        $("#" + formid + " div[id=div_upload]").show();
+                        $("#" + formid + " input[id=filename]").val(data.value);
+                        $("#" + formid + " span[id=sp_filename]").text(data.value2);
+                        $("#" + formid + " span[id=sp_msg]").removeClass("loading");
+
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="21%" align="right">物料编码：</td>
+    <td width="23%">@Html.DropDownList("ddlnofix",nofix)</td>
+    <td width="21%" align="right">图序：</td>
+    <td width="35%"><input name="" id="txttu" value="@one.tunumber" type="text" /></td>
+  </tr>
+  <tr>
+    <td width="21%" align="right">物料大类：</td>
+    <td width="23%">  @{Html.RenderAction("materialcate1", "main", new { select=one.bigcate});}</td>
+    <td width="21%" align="right">所属小类：</td>
+    <td width="35%" id="ddlcatediv"> @{Html.RenderAction("materialcate2", "main", new { cate = one.bigcate ,select=one.category});}</td>
+  </tr>
+<tr>
+    <td align="right"> 物料名称：</td>
+    <td colspan="3"><input id="txtname" type="text" value="@one.materialName" style="width:410px;"  /></td>
+  </tr>
+<tr>
+<tr>
+    <td align="right">规格型号：</td>
+    <td colspan="3"><input name="" id="txtmodel" value="@one.materialModel" type="text" style="width:410px;" /></td>
+  </tr>
+<tr>
+    <td align="right"> 快捷编码：</td>
+    <td><input id="txtfastcode" type="text" value="@one.fastcode" /></td>
+    <td align="right">拼音检索：</td>
+    <td><input name="" id="txtpinyin" value="@one.pinyin" type="text" /></td>
+  </tr>
+  <tr>
+    <td align="right">单位：</td>
+    <td>@Html.DropDownList("ddlunit",units)</td>
+      
+    <td align="right">单位2：</td>
+    <td>@Html.DropDownList("ddlunit2",units2)</td>
+  </tr>
+<tr>
+    <td align="right"> 精度：</td>
+    <td><input id="txtxslength" type="text" value="@one.xslength" /></td>
+    
+    <td align="right"> 系数：</td>
+    <td><input id="txtxs" type="text" value="@(one.ratio.HasValue?Math.Round( one.ratio.Value,4).ToString():"")" /></td>
+  </tr>
+  <tr>
+    <td align="right">备注：</td>
+    <td>
+        <input id="txtremark" name="" value="@one.remark" type="text" />
+    </td>
+      <td align="right">状态：</td>
+    <td>
+        &nbsp;<input id="rad1" name="radcheck" type="radio" value="1" checked="checked"  style="width:20px;"/>正常  
+        &nbsp;<input style="width:20px;" id="rad0" name="radcheck" type="radio" value="0" />停用
+    </td>
+    </tr>
+    <tr>
+        <td align="right">物料图片</td>
+    <td height="50" colspan="3">
+        <form action="../main/fileuploadactin" id="fileimage" method="post">
+         <input type="hidden" id="filetype" name="filetype" value="material" />
+         <input id="myfile" type="file" name="myfile" style="width:250px;" /> 
+         <span id="sub" class="btn3" onclick="uploadfile();">上传</span>  
+         <input type="hidden" id="filename" name="filename" value="@one.image" />
+   
+    <span id="sp_msg"></span>
+    <div id="div_upload"  style="display:none;" class="adjunct"><span class="adjunct_icon"></span>
+        <span id="sp_filename"></span><span id="spbtn_delete" style="margin-left:8px;" class="round_delete" onclick="deletefile();"></span></div>
+     </form>
+    </td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3"><input name="" id="txtno" value="@one.materialNo" type="hidden" />
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a><span>备注：如果存在转化，关系为单位1=单位2/系数，单位1为常用单位，单位2为bom使用的小单位</span>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

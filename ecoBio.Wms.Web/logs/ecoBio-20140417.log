@@ -1,0 +1,2 @@
+2014-04-17 22:04:50,327 [10] ERROR - stockout.returnlistpart 可能由于暂时性失败引发了异常。如果您在连接到 SQL Azure 数据库，请考虑使用 SqlAzureExecutionStrategy。
+2014-04-17 22:04:50,369 [10] ERROR - stockout.returnlist 可能由于暂时性失败引发了异常。如果您在连接到 SQL Azure 数据库，请考虑使用 SqlAzureExecutionStrategy。

@@ -1,0 +1,22 @@
+2013-10-26 21:59:56,217 [9] ERROR - stockout.outpull 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-26 22:04:46,315 [36] ERROR - stockout.inlistview 未找到分部视图“inlistview”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/stockout/inlistview.aspx
+~/Views/stockout/inlistview.ascx
+~/Views/Shared/inlistview.aspx
+~/Views/Shared/inlistview.ascx
+~/Views/stockout/inlistview.cshtml
+~/Views/stockout/inlistview.vbhtml
+~/Views/Shared/inlistview.cshtml
+~/Views/Shared/inlistview.vbhtml
+2013-10-26 22:04:46,331 [36] ERROR - stockout.outlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-26 22:05:13,358 [38] ERROR - stockout.inlistview 未找到分部视图“inlistview”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/stockout/inlistview.aspx
+~/Views/stockout/inlistview.ascx
+~/Views/Shared/inlistview.aspx
+~/Views/Shared/inlistview.ascx
+~/Views/stockout/inlistview.cshtml
+~/Views/stockout/inlistview.vbhtml
+~/Views/Shared/inlistview.cshtml
+~/Views/Shared/inlistview.vbhtml
+2013-10-26 22:05:13,359 [38] ERROR - stockout.outlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-26 22:05:40,774 [41] ERROR - stockout.outlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

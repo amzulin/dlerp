@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BomOrderDetailModel>;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }    
+     }
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>报表明细</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlistp('bomOrderNo')">订单号</th>
+    <th width="7%" style="cursor:pointer;" onclick="orderlistp('materialNo')">编码</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlistp('materialName')">物料名称</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlistp('materialModel')">物料规格</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlistp('tunumber')">图号</th>
+    <th width="5%" style="cursor:pointer;" onclick="orderlistp('Amount')">总数</th>
+    <th width="5%" style="cursor:pointer;" onclick="orderlistp('sellAmount')">已发</th>
+    <th width="5%" style="cursor:pointer;" onclick="orderlistp('Price')">单价</th>
+    <th width="9%">总价</th>
+    <th width="9%" style="cursor:pointer;" onclick="orderlistp('detaildate')">交货日期</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlistp('status')">状态</th>
+    <th width="9%" style="cursor:pointer;" onclick="orderlistp('detailremark')">备注</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+    <td>@pi</td>
+    <td title="@(item.depName + item.staffName)">@item.bomOrderNo</td>
+    <td>@item.materialNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td>@item.tunumber</td>
+    <td>@item.Amount</td>
+    <td>@item.sellAmount</td>
+    <td>@if (Enterprise.Invoicing.Web.Masterpage.CheckRight("ordermoney_report"))
+        {
+        <span>@item.Price.ToString("N")</span>
+        }</td>
+    <td>
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("ordermoney_report"))
+        {
+        <span>@((item.Amount * item.Price).ToString("N"))</span>
+        }
+    </td>
+    <td>@(item.sendDate.HasValue ? item.sendDate.Value.ToString("yyyy-MM-dd") : "") </td>
+    <td>@Enterprise.Invoicing.Common.Utils.GetStatus(item.status)</td>
+    <td>@item.remark</td>
+    <td>    
+         
+	</td>
+</tr>
+        pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="10">无采购申请单明细</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+       
+	 @Html.Partial("~/Views/Shared/page_page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+    </div>
+
+
+<script>  
+     page = '@page';    
+</script>

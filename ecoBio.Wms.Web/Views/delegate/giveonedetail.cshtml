@@ -1,0 +1,96 @@
+﻿@{
+    var givemodel = Model.backmodel as Enterprise.Invoicing.Entities.Models.V_ProductGiveModel;
+    var psdetail = Model.psdetail as List<Enterprise.Invoicing.Entities.Models.V_ProductPullDetail>;
+    var givedetail = Model.givedetail as List<Enterprise.Invoicing.Entities.Models.V_ProductGiveDetail>;
+
+    }
+
+@if (psdetail.Count > 0)
+{    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th>编码</th>
+    <th>名称</th>
+    <th>规格</th>
+    <th>单位</th>
+    <th>已领数量</th>
+    <th>本次交还</th>
+    <th>备注</th>
+  </tr>
+  </thead>
+ <tbody>
+@foreach (var item in psdetail)
+{
+    var hadpull = givedetail.FirstOrDefault(p => p.pullDetailSn == item.pullSn);
+     <tr>
+         <td>@item.materialNo</td>
+         <td>@item.materialName</td>
+         <td>@item.materialModel</td>
+         <td>@item.unit</td>         
+         <td>@(Math.Round(item.realAmount,4))</td>
+         <td><input type="text" mytype="txtback" isp="1" mno="@item.materialNo"   onblur="materialc('txtpa_@item.materialNo',@(Math.Round(item.realAmount,4)))" id="txtpa_@item.materialNo" productsn="@item.pullSn" detailsn="@(hadpull == null ? 0 : hadpull.giveSn)" total="@Math.Round(item.realAmount,4)" value="@(hadpull == null ? "" : hadpull.giveSn.ToString())"  style="width:80px;" /></td>
+         <td><input type="text" mytype="txtremark" id="txtpr_@item.materialNo" value="@(hadpull == null ? "" : hadpull.remark)" /></td>
+     </tr>
+}
+  </tbody>
+</table>
+
+     <div style=" text-align:center; height:46px; padding-top:10px; width:935px; background:#f7fbff; border-top:1px solid #c6d9e7;">
+<a class="btn_refer2" href="javascript:void(0);" onclick="save()">提交</a>
+</div>
+}
+else
+{
+<div>无工单明细</div>
+}
+<script>
+
+    function save() {
+
+
+        var deport = $("#txtdeport").val();
+        var pullamount = $("#txtpull").val();
+        var dategive = $("#dategive").val();
+        var remark = $("#txtremark").val();
+        if (orderno == '') {
+            $.dialog.alert("请选择领料单号");
+            return false;
+        }
+        if (pullamount == '') {
+            $.dialog.alert("交货数量不能为空");
+            return false;
+        }
+        if (dategive == '') {
+            $.dialog.alert("交货日期不能为空");
+            return false;
+        }
+        var material = [], product = [], jsamount = [], amount = [], remarks = [];
+        var txts = $("input[mytype='txtback']");
+        var txtr = $("input[mytype='txtremark']");
+        for (var i = 0; i < txts.length; i++) {
+            var txt = $(txts[i]);
+            if (txt.val() == '') continue;
+            product.push(txt.attr("productsn"));
+            amount.push(txt.val());
+            remarks.push($(txtr[i]).val());
+        }
+
+        $.post("../delegate/savegiveone", {
+            no: no, type: type, giveamount: pullamount,
+            deport: deport, givedate: dategive,
+            remark: remark, pullno: orderno,
+            pulldetail: product.toString(), amount: amount.toString(), remarks: remarks.toString()
+        }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../delegate/givelist";
+            }
+        });
+    }
+
+
+</script>

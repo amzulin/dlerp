@@ -1,0 +1,12 @@
+2014-09-11 07:44:54,718 [6] ERROR - cost.paylistpart The specified cast from a materialized 'System.Double' type to the 'System.Decimal' type is not valid.
+2014-09-11 07:44:54,733 [6] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-11 08:15:55,095 [18] ERROR - cost.paydetailview 未将对象引用设置到对象的实例。
+2014-09-11 08:15:55,111 [18] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-11 08:18:53,378 [5] ERROR - cost.paydetailview 未将对象引用设置到对象的实例。
+2014-09-11 08:18:53,393 [5] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-11 08:21:46,815 [8] ERROR - cost.paydetailview The specified cast from a materialized 'System.Int32' type to the 'System.Double' type is not valid.
+2014-09-11 20:11:08,296 [18] ERROR - account.verification The provider did not return a 'DbSpatialServices' instance. In order to use the 'DbGeography' or 'DbGeometry' spatial types the EF provider being used must support spatial types and all prerequisites for the provider must be installed. See http://go.microsoft.com/fwlink/?LinkId=287183 for details.
+2014-09-11 20:43:18,584 [18] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-09-11 20:45:05,022 [12] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-09-11 20:46:31,911 [22] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-09-11 22:53:12,744 [35] ERROR - bom.bomvirtual d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\bomvirtual.cshtml(23): error CS0103: 当前上下文中不存在名称“bom”

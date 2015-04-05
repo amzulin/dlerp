@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "BOM成本核算";
+     }
+
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：BOM成本核算 > BOM列表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+    <table>
+        <tr><td style="width:80px;text-align:right;">编码：</td><td><input name="" type="text" id="txtno" /></td>
+            <td style="width:80px;text-align:right;">名称：</td><td><input name="" type="text" id="txtm" /></td>
+            <td style="width:80px;text-align:right;">规格：</td><td><input name="" type="text" id="txtg" /></td>
+            <td style="width:80px;text-align:right;">备注：</td><td><input name="" type="text" id="txtr" /></td>
+         </tr>
+        <tr>            
+            <td style="text-align:right;">成本范围：</td><td><input name="" type="text" id="from" /></td>
+            <td style="text-align:right;">至：</td><td><input name="" type="text" id="to" /></td>
+            <td style="text-align:right;"></td><td><a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询</a></td>
+            <td style="text-align:right;"></td><td></td>
+        </tr>
+    </table>
+</div>
+
+<!--表格内容-->
+
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("bomcostpart", "cost");   
+}</div>
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+    $(function () { });
+    function excel(id) {
+        para = "";
+        geturl();
+        var url = "../cost/excelbomcost?id=" + id;
+        window.location.href = encodeURI(url);
+    }
+    function pageload(p) {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../cost/bomcostpart", { page: page, where: para, orderby: orderby }, function () { });
+    }
+    function orderlistp(by) {
+        if (orderby.indexOf('desc') != -1) orderby = by + " asc";
+        else orderby = by + " desc";
+        pageload(page);
+    }
+    function geturl() {
+        var no = $("#txtno").val();
+        var m = $("#txtm").val();
+        var g = $("#txtg").val();
+        var r = $("#txtr").val();
+        var start = $("#from").val();
+        var end = $("#to").val();
+        para = "";
+        if (no != '') para += " and  materialNo like '%" + no + "%'";
+        if (m != '') para += " and (materialName like '%" + m + "%' or tunumber like '%" + m + "%'  )";
+        if (g != '') para += " and  materialModel like '%" + g + "%'";
+        if (r != '') para += " and  (bomremark like '%" + r + "%' or materialremark like '%" + r + "%')";
+        if (start != '' && !isNaN(start)) para += " and rootcost>='" + start + "'";
+        if (end != '' && !isNaN(end)) para += " and rootcost<='" + end + "'";
+        return para;
+    }
+    function editone(t, id) {
+        window.location.href = "../cost/bomcostview?type=" + t + "&id=" + id;
+    }
+</script>

@@ -1,0 +1,121 @@
+﻿
+@{
+    var no = Model.no;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BomOrderDetailModel>;
+
+    var index = Model.index;
+    int status = Model.status;
+    int over = Model.over;
+    var pi = 1;
+    }
+
+    
+
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th width="3%">序号</th> 
+    <th width="8%">物料编码</th>
+    <th width="12%">物料名称</th>
+    <th width="12%">物料规格</th>
+    <th width="6%">数量</th>
+    <th width="7%">单价</th>
+    <th width="8%">总价</th>
+    <th width="7%">交期</th>
+    <th width="8%">备注</th>
+    <th width="9%">操作</th>
+        </tr>
+      </thead>
+          <tbody>
+     @if (list.Count>0)
+     {
+        foreach (var item in list)
+     {  
+  <tr>
+      <td class="endwise_title">@pi</td>  
+    <td class="endwise_title">@item.materialNo</td>  
+      <td class="endwise_title">@(item.materialName+(item.version!=null&&item.version!=""?"("+item.version+")":""))</td>
+    <td class="endwise_title">@item.materialModel</td>  
+    <td>@(item.Amount.ToString()+(item.OrderOutAmount>0?"领料"+item.OrderOutAmount.ToString():""))</td>
+      <td>
+          @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("ordermoney_page"))
+          {
+              <span>@item.Price.ToString("N")</span>
+          }
+      </td>
+      <td>
+          @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("ordermoney_page"))
+          {
+              <span>@((item.Price*item.Amount).ToString("N"))</span>
+          }
+         </td>
+      <td>@(item.sendDate.HasValue?item.sendDate.Value.ToString("yyyy-MM-dd"):"")</td>
+      <td>@item.OrderDetailRemark</td>
+
+    <td class="endwise_title">
+        @if (item.status==1&&over!=1&&status!=4)
+        {
+            if (item.hadRequire)
+            {
+                <span onclick="delcreate('requrie',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">删除采购申请</span>
+            }
+            else
+            { 
+                <span onclick="create('requrie',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">生成采购申请</span>
+            }
+            
+            if (item.haddelegate)
+            {
+                <span onclick="delcreate('delegate',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">删除委外工单</span>
+            }
+            else
+            { 
+                <span onclick="create('delegate',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">生成委外工单</span>
+            }
+            
+            if (item.hadproduce)
+            {
+                <span onclick="delcreate('produce',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">删除领料工单</span>
+            }
+            else
+            { 
+                <span onclick="create('produce',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">生成领料工单</span>
+            }
+          
+            @*if (item.hadBom)
+            {
+                if (item.OrderOutAmount==0&&Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_opt"))
+                {
+                    if (item.hadRequire||item.sellAmount>0)
+                    {
+                        <span onclick="detailopt('view',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">查看</span>
+                    }
+                    else
+                    {
+                        <span onclick="detailopt('edit',@index,'@item.bomOrderNo',@item.detailSn,'修改BOM')" style="cursor:pointer;">修改</span><span> </span><span onclick="detailopt('del',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">删除</span>
+                    }
+                }
+                else if (item.OrderOutAmount > 0 || item.sellAmount > 0 || Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_view"))
+                {
+                     <span onclick="detailopt('view',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">查看</span>
+                }  
+            }
+            else if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_opt") && item.sellAmount == 0)
+            {
+                <span onclick="detailopt('create',@index,'@item.bomOrderNo',@item.detailSn,'生成BOM')" style="cursor:pointer;">生成</span><span> </span>
+                <span onclick="detailopt('del',@index,'@item.bomOrderNo',@item.detailSn)" style="cursor:pointer;">删除</span>
+            }*@
+        }
+	</td>
+  </tr>
+         pi++;
+      }    
+     }
+     else
+     {
+        <tr>
+  <td colspan="13"  bgcolor="#FFFFFF" style="text-align:left;">无明细</td></tr> 
+     }
+</tbody>
+    </table> 
+

@@ -1,0 +1,213 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.Entities.Models.V_ProductPullModel;
+    var product = Model.product as Enterprise.Invoicing.Entities.Models.V_ProductionModel;
+    if (type == "edit")
+    {
+        ViewBag.Title = "编辑领料工单";
+    }
+    else
+    {
+        type = "add";
+        one.produceNo = product.produceNo;
+        ViewBag.Title = "新增领料工单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：您当前的位置：委外发货管理 > 新增领料工单  </div>
+<div class="data_content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (product==null||product.isclose==true||product.isover==1||product.valid==false)
+    {
+        <div>对应委外单号有误</div>
+    }
+    else{
+    if (type == "add")
+    {
+<div class="material_refer" style="height:120px;">
+<label>领料单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@no" />
+<label>领料部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  style="width:90px;" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>操作人员：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" style="width:50px;"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>仓库：</label><input name="" id="txtdeport" type="text" value=""/> <label>备注：</label><input name="" id="txtremark" type="text" value=""/>  
+   <br />
+<label>对应领料单：</label>@(one.produceNo+"产品信息:"+product.produceNo+product.productName+product.productModel+",总数:"+product.productAmount+",未生产:"+(product.productAmount- product.productBackAmount)  )
+   <br /><label>本次生产：</label><input name="" id="txtpull" type="text"  onblur="calu(@(product.productAmount- product.productBackAmount));" value=""/>  
+<label>领料日期：</label><input name="" id="datepull" readonly="readonly" type="text" value="@DateTime.Now.ToString("yyyy-MM-dd")"/> 
+<label>生产完成日期：</label><input name="" id="dateback" readonly="readonly" type="text" value="@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"/>   
+</div>
+    }
+else if (type == "edit")
+{
+    <div class="material_refer" style="height:120px;">
+<label>领料单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@one.pullNo" /><label>
+<label>出库部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:90px;" value="@one.depName"/>
+<label>操作人员：</label><input name="" type="text" readonly="readonly" class="input_gray" style="width:50px;" value="@one.staffName" />   
+<label>仓库：</label><input name="" id="txtdeport" type="text" value="@one.deportStaff"/><label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark"/>  
+           <br />
+<label>对应领料单：</label>@(one.produceNo+"产品信息:"+product.produceNo+product.productName+product.productModel+",总数:"+product.productAmount  )
+   <br /><label>本次生产：</label><input name="" id="txtpull" type="text" value="@one.makeAmount" onblur="calu(@(product.productAmount- product.productBackAmount));"/>  
+<label>领料日期：</label><input name="" id="datepull" readonly="readonly" type="text" value="@one.pullDate.ToString("yyyy-MM-dd")"/>  
+<label>生产完成日期：</label><input name="" id="dateback" readonly="readonly" type="text" value="@one.backDate.ToString("yyyy-MM-dd")"/>
+</div>
+}
+else{
+<span>操作类别有误</span>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>领料明细</h2>
+<div style="min-height:250px;" id="detail_table">
+@{
+    Html.RenderAction("pullonedetail", "delegate", new { backno = no, productno = one.produceNo });   
+}
+</div> 
+
+
+
+</div>
+    }
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+    var addbomid = 0;
+    var orderno = "@one.produceNo";
+    var details = [];
+    $(function () {
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        $("#dateback").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });
+        $("#datepull").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });        
+    });
+
+    function editone(detailid,bid,pi) {
+        var depotid = $("#depot_" + pi).val();
+        var ta = $("#damount_" + pi).val();
+        var rm = $("#dremark_" + pi).val();
+        if (ta == "" || isNaN(ta) || parseInt(ta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#damount_" + pi).focus();
+            return false;
+        }
+        $.post("../bom/savebomouttemp", { detail: detailid, no: no, sn: sn, bomid: bid, depot: depotid, count: ta, remark: rm, type: 'edit' }, function (data) {
+            if (parseInt( data)>0) {
+                $.dialog.tips("提交成功！");
+            }
+            else {
+                $.dialog.tips("提交失败！");
+            }
+        });
+
+    }
+    function deleteone(detailsn, bid) {
+
+        var ta = $("#txtamount").val();
+        if (ta == "" || isNaN(ta) || parseInt(ta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#txtamount").focus();
+            return false;
+        }
+        if (confirm("确定删除？")) {
+            $.post('../bom/deletebomout', { no: no, sn: sn, detail: detailsn, bomid: bid }, function (data) {
+                if (data == "ok") {
+                    $("#detail_table").load("../bom/bomoutdetail", { sn: sn, no: no, amount: ta }, function () { });
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+    function addone() {
+        if (addbomid == 0) {
+            alert("请选择订单产品的BOM物料！");
+            $("#txtbommaterial").focus();
+            return false;
+        }
+        var depotid = $("#ndepot").val();
+        var ta = $("#ndamount").val();
+        var rm = $("#ndremark").val();
+        if (ta == "" || isNaN(ta) || parseInt(ta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#ndamount").focus();
+            return false;
+        }
+        var mta = $("#txtamount").val();
+        if (mta == "" || isNaN(mta) || parseInt(mta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#txtamount").focus();
+            return false;
+        }
+        $.post("../bom/savebomouttemp", { detail: 0, no: no, sn: sn, bomid: addbomid, depot: depotid, count: ta, remark: rm, type: 'add' }, function (data) {
+            if (parseInt(data) > 0) {
+                $.dialog.tips("提交成功！");
+                addbomid = 0;
+                $("#txtbommaterial").val('');
+                $("#detail_table").load("../bom/bomoutdetail", { sn: sn, no: no, amount: mta }, function () { });
+            }
+            else {
+                $.dialog.tips("提交失败！");
+            }
+        });
+    }
+
+    function materialc(id, total) {
+        var txt = $("#" + id).val();
+        if (isNaN(txt)) {
+            $.dialog.tips("数量格式不正确");
+            $("#" + id).val('');
+            return false;
+        }
+        if (parseFloat(txt) < 0 || parseFloat(txt) > parseFloat(total)) {
+            $.dialog.tips("数量格式不正确");
+            $("#" + id).val(parseFloat(txt) < 0 ? '' : total);
+            return false;
+        }
+    }
+
+    function calu(t) {
+        var amount = $("#txtpull").val();
+        if (isNaN(amount) || parseInt(amount) <= 0) {
+            $.dialog.tips("数量格式不正确");
+            $("#txtpull").val('');
+            return false;
+        }
+        if (parseFloat(amount) > t) {
+            $.dialog.tips("未生产数量为：" + t);
+            $("#txtpull").val(t);
+            amount = t;
+        }
+        var txts = $("input[mytype='txtback']");
+        $.each(txts, function (i, m) {
+            var one = $(m);
+            if (amount == '') amount = 0;
+            var bs = parseFloat(one.attr("bom"));
+            var txtv = (parseFloat(amount) * bs).toFixed(4);
+            $("#sp_" + $(m).attr("mno")).text(txtv==0.0000?'':txtv);
+            one.val(txtv == 0.0000 ? '' : txtv);
+            one.attr("js", txtv);
+        });
+    }
+</script>

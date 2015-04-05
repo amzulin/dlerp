@@ -1,0 +1,91 @@
+﻿
+@{
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.PurchaseModel;
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.PurchaseDetailModel>;
+
+    var pi = 1;
+    }
+@if (one!=null)
+{
+    
+
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th width="5%">明细</th>
+            @if (one.type==1)
+            {
+                 <th width="13%">申请单号</th>
+          <th width="8%">物料编码</th>
+                        <th width="12%">物料名称</th>
+          <th width="12%">物料规格</th>
+            }
+            else
+            {
+
+          <th width="9%">物料编码</th>
+          <th width="15%">物料名称</th>
+          <th width="20%">物料规格</th>
+            }
+          <th width="5%" >单位</th>
+          <th width="6%">数量</th>
+          <th width="8%">单价</th>
+          <th width="8%">总价</th>
+              @if (one.type==1)
+            {
+          <th width="7%">未入库</th>
+          <th width="6%">退单</th>
+              }
+            else
+            {
+          <th width="7%">未入库</th>
+          <th width="7%">退单</th>
+              }
+          <th width="10%">备注</th>
+        </tr>
+      </thead>
+          <tbody>
+     @if (list.Count>0)
+     {
+        foreach (var item in list)
+     {  
+  <tr>
+      <td>@pi</td>
+      @if (one.type==1)
+            {
+      <td><a href="../purchase/requirelist?no=@item.requireNo">@item.requireNo</a></td>
+      }
+    <td title="编码 @item.materialNo">@item.materialNo</td>
+    <td title="编码 @item.materialNo">@item.materialName</td>
+    <td title="图号 @item.materialTu">@item.materialModel</td>
+    <td>@item.materialUnit</td>
+    <td>@item.poAmount</td>
+    <td>
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("purchasemoney_page"))
+        {
+            <span>@item.poPrice</span>
+        }
+    </td>
+    <td>
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("purchasemoney_page"))
+        {
+            <span>@(item.poPrice*item.poAmount)</span>
+        }
+    </td>
+    <td>@item.poRemain</td>
+    <td>@item.returnAmount</td>
+    <td>@item.remark</td>
+  </tr>
+         pi++;
+      }    
+     }
+     else
+     {
+        <tr>
+  <td colspan="10"  bgcolor="#FFFFFF" style="text-align:left;">无申请明细</td></tr> 
+     }
+</tbody>
+    </table> 
+
+}

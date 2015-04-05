@@ -1,0 +1,75 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel>;
+    var pi = 1;
+    var no = Model.no;
+ }
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="8%">编码</th>
+    <th width="13%">物料名称</th>
+    <th width="16%">物料规格</th>
+    <th width="12%">物料图号</th>
+    <th width="8%">数量</th>
+     <th width="10%">需求日期</th>
+     <th width="10%">备注</th>
+    <th width="8%">操作</th>
+  </tr>
+  </thead>
+ <tbody id="tabbody">
+   
+     @foreach (var item in list)
+     {
+         if (item.type == "delete")
+         {
+             continue; 
+         }     
+  <tr>
+      <td class="endwise_title">@pi</td>
+    <td  class="endwise_title">@item.materialNo</td>
+      <td class="endwise_title">@Html.Raw(item.materialName)</td>
+    <td class="endwise_title">@item.materialModel</td>
+    <td class="endwise_title">@item.materialTu</td>
+    <td>@item.orderAmount</td>
+      <td>@(item.needdate<DateTime.Now.AddYears(5)?item.needdate.ToString("yyyy-MM-dd"):"") </td>
+      <td>@item.remark</td>
+    <td class="endwise_title">
+        
+      @if (item.type != "add")
+      {   
+           <span onclick="editone('@item.detailSn.ToString()','@item.materialNo.ToString()','@item.materialName.ToString()','@item.materialModel.ToString()',@item.orderAmount,'@(item.needdate<DateTime.Now.AddYears(5)?item.needdate.ToString("yyyy-MM-dd"):"")','@item.remark','@item.materialTu');" class="edit"></span>
+      }
+            <span onclick="deleteone('@item.requireNo','@item.detailSn.ToString()','@item.materialNo');" title="删除">删除</span>
+     
+	</td>
+  </tr>
+      pi++;
+     }
+@if (list.Count > 0)
+{
+    <tr><td colspan="9" style="text-align:center;"><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save('@no');" >提交</a></td></tr>
+    
+}
+
+  </tbody>
+</table>
+<script>
+
+    function save(no)
+    {
+        var r = $("#txtremark").val();
+        $.post("../purchase/saverequiredetail", { no: no,type:type,remark:r }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../purchase/requirelist";
+            }
+        });
+    }
+
+</script>

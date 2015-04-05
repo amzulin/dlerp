@@ -1,0 +1,2 @@
+2014-04-26 20:03:17,098 [65] ERROR - manage.materialone “System.Dynamic.ExpandoObject”未包含“nofix”的定义
+2014-04-26 21:41:55,290 [11] ERROR - account.verification The provider did not return a 'DbSpatialServices' instance. In order to use the 'DbGeography' or 'DbGeometry' spatial types the EF provider being used must support spatial types and all prerequisites for the provider must be installed. See http://go.microsoft.com/fwlink/?LinkId=287183 for details.

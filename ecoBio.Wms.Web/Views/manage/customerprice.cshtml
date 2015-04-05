@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "客户价格管理";
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_MaterialPriceModel>;
+    int id = Model.id;
+    var suppler = Model.suppler;
+    var name = Model.name as string;
+    var wl = Model.model as string;
+    var page = Model.page as string;
+    int canadd = Model.canadd;
+    int canedit = Model.canedit;
+    int pi = 1;
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > <a href="../manage/customer?page=@page"> 客户管理</a> >@suppler 价格管理</div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>物料：<input name="" type="text" id="txtname" value="@name" />规格：<input name="" type="text" id="txtmodel" value="@wl" />
+<a class="btn_search" href="javascript:void(0);" id="btn"></a>
+</div>
+    @if (canadd==1||canedit==1)
+    {      
+<div class="material_refer" style="height:40px;">
+<label>物料：</label><input name="" type="text" id="txtmaterial"  style="width:220px;" /><input type="hidden" id="txtid" value="0"/>
+<label>价格：</label><input name="" id="txtprice"  type="text"  style="width:60px;" value=""/>
+<label>启用日期：</label><input name="" id="txtdate"  readonly="readonly" type="text"  style="width:80px;" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+<label>备注：</label><input name="" id="txtremark" type="text" value=""  style="width:150px;"/>  
+<a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" id="btnopt" onclick="saveprice();" >添加</a><span id="btncel" style="display:none;" onclick="canledit()">取消</span>
+</div>  
+    }
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>客户列表</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="4%">序号</th>
+    <th width="8%">物料编码</th>
+    <th width="18%">物料名称</th>
+    <th width="22%">物料规格</th>
+    <th width="5%">单位</th>
+    <th width="8%">价格</th>
+    <th width="10%">启用日期</th>
+    <th width="5%">状态</th>
+    <th width="10%">备注</th>
+    <th width="10%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>
+    <td>@item.materialNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td>@item.unit</td>
+    <td>@item.price</td>
+    <td>@item.startDate.ToString("yyyy-MM-dd")</td>
+    <td title="@(item.status==2&&item.endDate.HasValue?"终止日期："+item.endDate.Value.ToString("yyyy-MM-dd"):"")" >@(item.status==0?"未启用":(item.status==1?"启用":"终止"))</td>
+    <td>@item.remark</td>
+    <td>    
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_priceupdate") && item.status != 1)
+            {  <span onclick="editone(@item.priceId,'@item.materialNo','@(item.materialNo+" "+item.materialName+" "+item.materialModel)',@item.price,'@item.startDate.ToString("yyyy-MM-dd")','@item.remark')" class="edit"></span>}
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_pricedelete") && item.status != 1)
+            {     <span onclick="deleteone(@item.priceId);"  title="删除">删除</span>  }
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_pricecheck")&&item.status!=1)
+         {     <span onclick="check(@item.priceId,1,'启用');"  title="启用">启用</span>  }
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_supplier_pricecheck") && item.status == 1)
+         {     <span onclick="check(@item.priceId,2,'终止');"  title="终止">终止</span>  }
+	</td>
+</tr>
+         pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="9">无客户价格信息</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    </div>
+<script>  
+    var id='@id', page = '@page',name='@name',model='@wl';
+
+    var priceid = 0, canadd = '@canadd', canedit = '@canedit';
+    $(function () {   
+        $("#btn").click(query);
+        $("#txtdate").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });
+    });
+
+    function query() {
+        var dd = $("#txtname").val();
+        var dd2 = $("#txtmodel").val();
+        window.location.href = "../manage/customerprice?id=@id&page=@page" + (dd != "" ? "&name=" + dd : "") + (dd2 != "" ? "&model=" + dd2 : "");
+    }
+    function editone(id,m,n,p,d,r)
+    {
+        $("#txtid").val(id); hmaterial = m;
+        $("#txtmaterial").val(n);
+        $("#txtprice").val(p);
+        $("#txtdate").val(d);
+        $("#txtremark").val(r);
+        $("#btnopt").text("修改");
+        $("#btncel").show();
+    }
+    function canledit() {
+        $("#txtid").val('0'); hmaterial ='';
+        $("#txtmaterial").val('');
+        $("#txtprice").val('');
+        //$("#txtdate").val(d);
+        $("#txtremark").val('');
+        $("#btnopt").text("添加");
+        $("#btncel").hide();
+    }
+    function deleteone(id) {
+        if (confirm("确定删除该价格？")) {
+            $.post("../manage/deletecustomerprice", { priceid: id }, function (data) {
+                if (data.status == true) {
+                    $.dialog.tips("删除成功");
+                    query();
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                }
+            });
+        }
+        else
+            return false;
+
+    }
+    function check(id,to,tips) {
+        if (confirm("确定" + tips + "该价格？")) {
+            $.post("../manage/checkcustomerprice", { priceid: id, to: to }, function (data) {
+                if (data.status == true) {
+                    $.dialog.tips(tips+"成功");
+                    query();
+                }
+                else {
+                    $.dialog.alert(tips + "失败！");
+                }
+            });
+        }
+        else
+            return false;
+
+    }
+    
+    function saveprice() {
+        priceid = Number($("#txtid").val());
+        if (priceid == 0 && canadd != '1') { $.dialog.tips('无添加价格权限'); return false; }
+        if (priceid != 0 && canedit != '1') { $.dialog.tips('无修改价格权限'); return false; }
+        
+        var p = $("#txtprice").val();
+        var d = $("#txtdate").val();
+        var r = $("#txtremark").val();
+        if (hmaterial==''||d==''||p==''||isNaN(p)||Number(p)<0) {
+            { $.dialog.tips((hmaterial == '' ? '请选择物料；' : '') || (d == '' ? '请填写启用日期；' : '') || (p == '' ? '请填写价格；' : '') || (isNaN(p) ? '价格需要为数值' : '') || (Number(p) < 0 ? '价格不能小于0；' : '')); return false; }
+        }
+        $.post("../manage/savecustomerprice", { id: id,priceid:priceid, material: hmaterial,price:p,date:d,remark:r }, function (data) {
+            if (data.status == true) {
+                $("#txtid").val('0')
+                $.dialog.tips(priceid==0?"添加成功":"修改成功");
+                query();
+            }
+            else {
+                $.dialog.alert("操作失败！");
+            }
+        });
+    }
+</script>

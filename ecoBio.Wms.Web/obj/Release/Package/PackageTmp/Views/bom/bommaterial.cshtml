@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "物料查BOM";
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BomMaerialTwo>; 
+    var key = Model.key as string;
+    string valid = Model.valid;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > BOM管理 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>关键字：<input name="" type="text" id="txtkey" value="@key" />
+<a class="btn_search" href="javascript:void(0);" id="btn"></a>
+    <input type="hidden" id="hidpage" value="@page" />
+
+    @Html.Partial("~/Views/Shared/page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../bom/bommaterial"}
+       })
+</div>
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>BOM物料列表</h2>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th nowrap="nowrap">序号</th>
+    <th nowrap="nowrap">物料编码</th>
+    <th nowrap="nowrap">物料名称</th>
+    <th nowrap="nowrap">物料型号</th>
+    <th nowrap="nowrap">类别</th>
+    <th nowrap="nowrap">所在BOM</th>
+    <th nowrap="nowrap">名称</th>
+    <th nowrap="nowrap">型号</th>
+    <th nowrap="nowrap">版本</th>
+    <th nowrap="nowrap">状态</th>
+    <th nowrap="nowrap">启用日期</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td nowrap="nowrap">@pi</td>    
+    <td nowrap="nowrap">@item.materialNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td nowrap="nowrap">@item.materialCate</td>
+    <td nowrap="nowrap">@item.parent_materialNo</td>
+    <td>@item.parent_materialName</td>
+    <td>@item.parent_materialModel</td>
+    <td>@item.parent_verison</td>
+    <td nowrap="nowrap">@(item.parent_status.HasValue?(item.parent_status == 1 ? "启用" : "禁用"):"")</td>
+    <td nowrap="nowrap">@(item.parent_start.HasValue?item.parent_start.Value.ToString("yyyy-MM-dd"):"")</td>
+</tr>
+         pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="10">无BOM物料信息</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+	 @Html.Partial("~/Views/Shared/page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../bom/bommaterial"}
+       })
+    </div>
+
+
+    </div>
+<script>  
+    var page = '@page';
+    var onewin;
+    $(function () {   
+        $("#btn").click(query);
+    });
+
+    function query() {
+        var dd = $("#txtkey").val();
+        window.location.href = "../bom/bommaterial?page=" + page + (dd != "" ? "&key=" + dd : "");
+    }
+    function loadgrid() {
+        query();
+        onewin.close();
+    }
+</script>

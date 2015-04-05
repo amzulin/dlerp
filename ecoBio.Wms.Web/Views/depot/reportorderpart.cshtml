@@ -1,0 +1,93 @@
+﻿@{
+    Layout = null;
+
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_ReceiptDetail>;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+
+    }
+    
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>报表明细</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlistp('datatype')">类别</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlistp('showno')">单号</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlistp('materialNo')">编码</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('materialName')">物料名称</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('materialModel')">物料规格</th>
+    <th width="9%" style="cursor:pointer;" onclick="orderlistp('materialTu')">图号</th>
+    <th width="5%" style="cursor:pointer;" onclick="orderlistp('amount1')">采购</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlistp('amount3')">价格</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlistp('createDate')">采购日期</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlistp('detaildate')">交货日期</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlistp('status')">状态</th>
+    <th width="5%" style="cursor:pointer;" onclick="orderlistp('detailremark')">备注</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+    <td>@pi</td>
+    <td title="@(item.dep+item.staff)">@item.datatype</td>
+    <td>@item.showno</td>
+    <td>@item.materialNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td >@item.materialTu</td>
+    <td>@item.amount1</td>
+    <td>
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("purchasemoney_report"))
+          {
+              <span>@item.amount3</span>
+        }
+    </td>
+    <td>@item.createDate.ToString("yyyy-M-dd")</td>
+    <td>@(item.detaildate.HasValue?( item.detaildate.Value<DateTime.Now.AddYears(5)?item.detaildate.Value.ToString("yyyy-MM-dd"):""):"") </td>
+    <td>
+        @if (item.isover == 1)
+         {
+            <span>完工</span> 
+         }
+         else
+         {
+            <span>@item.statustype</span>
+         }
+    </td>
+    <td>@item.detailremark</td>
+    <td>    
+         
+	</td>
+</tr>
+         pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="9">无库存明细</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+       
+	 @Html.Partial("~/Views/Shared/page_page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+    </div>
+
+
+<script>  
+    page = '@page';
+    
+</script>

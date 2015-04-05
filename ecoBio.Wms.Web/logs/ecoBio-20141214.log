@@ -1,0 +1,22 @@
+2014-12-14 17:46:05,573 [6] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-14 17:46:34,669 [6] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-14 17:51:02,727 [5] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-14 18:59:45,639 [50] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-14 19:12:43,738 [53] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-14 19:24:26,874 [45] ERROR - delegate.savesneedbuy 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.Entities.Models.V_DelegateSendDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2014-12-14 19:50:22,161 [29] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-14 19:53:51,800 [6] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-14 20:05:39,846 [6] ERROR - delegate.needbuytab 未将对象引用设置到对象的实例。
+2014-12-14 20:05:55,636 [6] ERROR - delegate.saverequirebuytemp 对于“Enterprise.Invoicing.Web.Controllers.delegateController”中方法“System.Web.Mvc.ActionResult saverequirebuytemp(System.String, System.String, System.Decimal, System.Decimal, System.String, System.String, System.String, System.String, System.String, System.String, System.String, System.String)”的不可以为 null 的类型“System.Decimal”的参数“price”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2014-12-14 20:06:08,078 [6] ERROR - delegate.saverequirebuytemp 对于“Enterprise.Invoicing.Web.Controllers.delegateController”中方法“System.Web.Mvc.ActionResult saverequirebuytemp(System.String, System.String, System.Decimal, System.Decimal, System.String, System.String, System.String, System.String, System.String, System.String, System.String, System.String)”的不可以为 null 的类型“System.Decimal”的参数“price”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2014-12-14 20:25:33,456 [7] ERROR - delegate.delegatelistpart 列名 'delegateNo' 无效。
+2014-12-14 20:25:33,502 [7] ERROR - delegate.delegatelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-14 20:29:13,533 [12] ERROR - delegate.delegatedetailview 未将对象引用设置到对象的实例。
+2014-12-14 20:29:13,542 [12] ERROR - delegate.delegatelistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-14 20:29:13,543 [12] ERROR - delegate.delegatelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-14 20:37:48,732 [23] ERROR - delegate.delegatedetailview 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2014-12-14 20:37:48,732 [23] ERROR - delegate.delegatelistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-14 20:37:48,733 [23] ERROR - delegate.delegatelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

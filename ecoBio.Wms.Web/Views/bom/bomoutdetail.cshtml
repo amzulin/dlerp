@@ -1,0 +1,99 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.V_BomMaterial>;
+    var pi = 1;
+    var no = Model.no;
+    var sn = Model.sn;
+    var depots = Model.depots as List<SelectListItem>;
+ }
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th> 
+      <th width="6%">类别</th>
+    <th width="8%">物料编码</th>
+    <th width="16%">物料名称</th>
+    <th width="17%">物料规格</th>
+    <th width="9%">剩余数量</th>
+    <th width="10%">仓库</th>
+    <th width="9%">数量</th>
+    <th width="12%">备注</th>
+    <th width="8%">操作</th>
+  </tr>
+  </thead>
+ <tbody id="tabbody">
+   
+     @foreach (var item in list)
+     {
+         if (item.type == "delete")
+         {
+             continue; 
+         }     
+  <tr>
+      <td class="endwise_title">@pi</td> 
+      <td>@item.materialCate</td>    
+      <td class="endwise_title">@item.materialNo</td>
+      <td class="endwise_title">@Html.Raw(item.materialName)</td>
+    <td class="endwise_title">@item.materialModel</td>    <td class="endwise_title">@(item.amount)</td>
+   <td>
+           @{
+             var sel = depots.FirstOrDefault(p => p.Selected==true);
+             if (sel!=null)
+             {
+                 sel.Selected = false;
+             }
+         var h = depots.FirstOrDefault(p => p.Value == item.deoptid.ToString());
+         if (h != null)
+         {
+             h.Selected = true;
+         }
+         @Html.DropDownList("depot_"+pi,depots)
+            }
+      </td>  
+    <td>
+       <input type="text" style="width:60px;"  id="damount_@pi" value="@item.outamount" /> </td><td><input style="width:90px;"  type="text" id="dremark_@pi" value="@item.remark" /></td>
+    
+    <td class="endwise_title">      
+           <span onclick="editone('@item.outdetailsn.ToString()',@item.bomId,@pi);">提交</span>
+            <span onclick="deleteone('@item.outdetailsn.ToString()','@item.bomId');" title="删除">删除</span>     
+	</td>
+  </tr>
+      pi++;
+     }
+@if (list.Count > 0)
+{
+    <tr><td colspan="10" style="text-align:center;"><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save('@no');" >保存</a></td></tr>
+    
+}
+
+  </tbody>
+</table>
+<script>
+
+    function save(no) {
+        var r = $("#txtremark").val();
+        if (supplier == 0 || sn == 0) {
+            $.dialog.alert("请选择客户和客户的订单产品");
+            return false;
+        }
+        var d = $("#txtdeport").val();
+        var ta = $("#txtamount").val();
+        if (ta == "" || isNaN(ta) || parseFloat(ta) <=0) {
+            alert("请输入不小于0的正确领料数量！");
+            $("#txtamount").focus();
+            return false;
+        }
+
+        $.post("../bom/savebomout", { no: no, type: type, remark: r, supplier: supplier, sn: sn, amount: ta }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../stockout/outlist";
+            }
+        });
+    }
+
+</script>

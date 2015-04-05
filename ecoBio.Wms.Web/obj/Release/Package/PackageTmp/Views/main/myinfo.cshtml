@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "myinfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var info = Model.info as Enterprise.Invoicing.ViewModel.LoginUser;
+}
+
+<div class="content"><div class="layout_guild"><i></i>您当前的位置：个人信息 </div>
+<div class="content_main">
+    <table style="width:500px; margin:0px auto;">
+        <tr>
+            <td width="30%">姓名：</td><td width="70%">@info.name</td>
+        </tr>
+        <tr><td>登录名:</td><td>@info.userid</td></tr>
+        <tr><td>所在部门:</td><td>@info.dep_name</td></tr>
+        <tr><td>所属角色:</td><td>@info.role_name</td></tr>
+        <tr><td>上次登录时间:</td><td>@info.login_time.ToString("yyyy-MM-dd HH:mm:ss")</td></tr>
+        <tr><td>修改密码：</td><td></td></tr>
+           <tr><td>原有密码：</td><td><input type="password" id="txtn0" /></td></tr>
+           <tr><td>新密码：</td><td><input type="password" id="txtn1" /></td></tr>
+           <tr><td>密码确认：</td><td><input type="password" id="txtn2" /></td></tr>
+         <tr><td></td><td><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save();" >修改密码</a></td></tr>
+    </table>
+    </div></div>
+<script>
+    function save()
+    {
+        var n1 = $("#txtn0").val();
+        var n2 = $("#txtn1").val();
+        var n3 = $("#txtn2").val();
+        if (n1==""||n2==""||n3=="") {
+            $.dialog.alert("旧密码和新密码不能为空！");
+            return false;
+        }
+        if (n2.length<6||n2.length>20) {
+            $.dialog.alert("密码长度为6至20位！");
+            return false;
+        }
+        if (n2!=n3) {
+            $.dialog.alert("两次密码输入不一致！");
+            return false;
+        }
+        $.post("../main/uppwd", { oldpwd: n1, newpwd: n2 }, function (data) {
+            if (data.status == true) {
+                $.dialog.tips("密码修改成功");
+                $("#txtn0").val('');
+                $("#txtn1").val('');
+                $("#txtn2").val('');
+            }
+            else $.dialog.alert(data.message);
+        });
+    }
+</script>

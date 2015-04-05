@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "库存查询";
+    var depots = Model.depots as List<SelectListItem>;
+    depots.Insert(0, new SelectListItem { Value = "0", Text = "全部" });
+    var mc = Model.mc as List<SelectListItem>;
+    mc.Insert(0, new SelectListItem { Value = "0", Text = "全部" });    
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：报表查询 > 库存查询 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+      <table>
+        <tr><td style="width:80px;text-align:right;">仓库：</td><td>@Html.DropDownList("ddldep",depots)</td>
+            <td style="width:80px;text-align:right;">物料类别：</td><td>@Html.DropDownList("ddlmc",mc)</td>
+            <td style="width:80px;text-align:right;">物料：</td><td><input style="width:80px;" name="" type="text" id="txtm" /></td>
+            <td style="width:80px;text-align:right;">物料规格：</td><td><input style="width:80px;" name="" type="text" id="txtg" /></td>
+            <td style="width:80px;text-align:right;">数量区间 ：</td><td><input style="width:40px;" name="" type="text" id="txtless" /></td>
+            <td style="width:80px;text-align:right;">数量至：</td><td><input style="width:40px;" name="" type="text" id="txtbig" /></td>
+        </tr>
+        <tr><td colspan="10" style="text-align:center;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+            <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+            </td></tr>
+    </table>
+</div>
+
+<!--表格内容-->
+
+<!--表格内容-->
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("reportdepotpart", "depot");   
+}
+
+
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+    function pageload(p)
+    {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../depot/reportdepotpart", { page: page, where: para, orderby: orderby }, function () { });
+    }
+    function orderlistp(by)
+    {
+        if (orderby.indexOf('desc') != -1) orderby = by + " asc";
+        else orderby = by + " desc";
+        pageload(page);
+    }
+    function excel() {
+        para = "";
+        geturl();
+        window.location.href = "../depot/exceldepot?where=" +  para+"&orderby="+orderby;
+    }
+    function geturl()
+    {
+        para = "";
+        var dep = $("#ddldep").val();
+        var mc = $("#ddlmc").val();
+        var m = $("#txtm").val();
+        var g = $("#txtg").val();
+        var less = $("#txtless").val();
+        var big = $("#txtbig").val();
+        if (dep != '0') para += ' and depotId=' + dep;
+        if (mc != '0') para += " and category ='" + mc + "'";
+        if (m != '') para += " and (materialName like '%" + m + "%' or materialNo like '%" + m + "%' )";
+        if (g != '') para += " and  materialModel like '%" + g + "%'";
+        if (less != '') {
+            if (isNaN(less)) {
+                $.dialog.alert("请输入正确数字！");
+                return false;
+            }
+            para += ' and depotAmount>=' + less;
+        }
+        if (big != '') {
+            if (isNaN(big)) {
+                $.dialog.alert("请输入正确数字！");
+                return false;
+            }
+            para += ' and depotAmount<' + big;
+        }
+    }
+</script>

@@ -1,0 +1,5 @@
+2013-10-15 13:24:23,978 [397] ERROR - datacenter.datainput "@" 字符后不应有 "{"。一旦位于代码块的正文中(@if {}、@{}，等等)，您就不需要使用 "@{" 来切换到代码。
+
+2013-10-15 15:50:22,412 [10] ERROR - datacenter.inputstep 找不到方法:“Boolean ecoBio.Wms.ExcelRead.ServiceWeekly.TxtRemark(System.String, System.String, System.String)”。
+2013-10-15 15:57:48,673 [54] ERROR - datacenter.datainput 输入字符串的格式不正确。
+2013-10-15 15:58:51,760 [14] ERROR - datacenter.datainput 输入字符串的格式不正确。

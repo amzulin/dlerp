@@ -1,0 +1,53 @@
+2013-10-21 00:54:40,142 [94] ERROR - purchase.orderlist d:\软件开发\code\ecoBio.Wms.Web\Views\purchase\orderlist.cshtml(11): error CS1061: “Enterprise.Invoicing.ViewModel.PurchaseModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.PurchaseModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2013-10-21 00:56:07,621 [10] ERROR - purchase.orderlist 未将对象引用设置到对象的实例。
+2013-10-21 01:03:01,413 [10] ERROR - purchase.orderone d:\软件开发\code\ecoBio.Wms.Web\Views\purchase\orderone.cshtml(43): error CS1061: “Enterprise.Invoicing.ViewModel.PurchaseModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.PurchaseModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2013-10-21 01:10:22,304 [92] ERROR - purchase.orderdetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2013-10-21 01:13:55,004 [6] ERROR - purchase.orderdetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2013-10-21 01:14:32,118 [5] ERROR - purchase.orderdetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2013-10-21 01:17:41,531 [9] ERROR - purchase.orderdetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2013-10-21 01:21:04,606 [5] ERROR - purchase.orderdetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2013-10-21 01:21:36,490 [5] ERROR - purchase.saveorderdetailtemp 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2013-10-21 01:28:56,163 [14] ERROR - purchase.saveorderdetailtemp 输入字符串的格式不正确。
+2013-10-21 01:37:30,671 [6] ERROR - purchase.requiredetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”。
+2013-10-21 01:37:30,686 [6] ERROR - purchase.requireone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 01:38:07,494 [9] ERROR - purchase.requiredetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”。
+2013-10-21 01:38:07,495 [9] ERROR - purchase.requireone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 01:38:08,551 [13] ERROR - purchase.requiredetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”。
+2013-10-21 01:38:08,552 [13] ERROR - purchase.requireone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 01:38:08,835 [11] ERROR - purchase.requiredetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”。
+2013-10-21 01:38:08,836 [11] ERROR - purchase.requireone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 01:38:09,109 [6] ERROR - purchase.requiredetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”。
+2013-10-21 01:38:09,109 [6] ERROR - purchase.requireone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 01:41:49,961 [5] ERROR - purchase.requiredetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”。
+2013-10-21 01:41:49,977 [5] ERROR - purchase.requireone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 01:45:11,494 [7] ERROR - purchase.orderdetail 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseRequireDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2013-10-21 01:45:11,526 [7] ERROR - purchase.orderone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 02:14:04,720 [12] ERROR - purchase.orderdetailview 未将对象引用设置到对象的实例。
+2013-10-21 02:14:04,736 [12] ERROR - purchase.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 12:08:59,230 [5] ERROR - purchase.requireorder d:\软件开发\code\ecoBio.Wms.Web\Views\purchase\requireorder.cshtml(74): error CS0103: 当前上下文中不存在名称“input”
+2013-10-21 14:34:59,260 [72] ERROR - purchase.needbuytab d:\软件开发\code\ecoBio.Wms.Web\Views\purchase\needbuytab.cshtml(42): error CS0103: 当前上下文中不存在名称“rm”
+2013-10-21 14:34:59,279 [72] ERROR - purchase.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 14:35:43,187 [73] ERROR - purchase.needbuytemp 未找到分部视图“needbuytemp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/purchase/needbuytemp.aspx
+~/Views/purchase/needbuytemp.ascx
+~/Views/Shared/needbuytemp.aspx
+~/Views/Shared/needbuytemp.ascx
+~/Views/purchase/needbuytemp.cshtml
+~/Views/purchase/needbuytemp.vbhtml
+~/Views/Shared/needbuytemp.cshtml
+~/Views/Shared/needbuytemp.vbhtml
+2013-10-21 14:35:43,187 [73] ERROR - purchase.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-21 17:54:43,172 [33] ERROR - purchase.saverequirebuytemp 未找到分部视图“saverequirebuytemp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/purchase/saverequirebuytemp.aspx
+~/Views/purchase/saverequirebuytemp.ascx
+~/Views/Shared/saverequirebuytemp.aspx
+~/Views/Shared/saverequirebuytemp.ascx
+~/Views/purchase/saverequirebuytemp.cshtml
+~/Views/purchase/saverequirebuytemp.vbhtml
+~/Views/Shared/saverequirebuytemp.cshtml
+~/Views/Shared/saverequirebuytemp.vbhtml
+2013-10-21 18:00:59,004 [35] ERROR - purchase.savesneedbuy 输入字符串的格式不正确。
+2013-10-21 18:17:04,194 [14] ERROR - purchase.savesneedbuy 输入字符串的格式不正确。
+2013-10-21 18:20:43,879 [6] ERROR - purchase.savesneedbuy 输入字符串的格式不正确。
+2013-10-21 23:17:32,237 [12] ERROR - purchase.orderlist “@”字符后不应有“if”关键字。在代码内部，不需要在像“if”这样的构造前加上前缀“@”。
+

@@ -1,0 +1,10 @@
+2013-10-11 08:56:26,404 [26] ERROR - material.inventory “@”字符后不应有“if”关键字。在代码内部，不需要在像“if”这样的构造前加上前缀“@”。
+
+2013-10-11 09:51:49,217 [10] ERROR - material.forpdfy “System.Dynamic.ExpandoObject”未包含“list”的定义
+2013-10-11 09:52:05,362 [11] ERROR - material.forpdfy “System.Dynamic.ExpandoObject”未包含“list”的定义
+2013-10-11 15:42:15,003 [66] ERROR - partialpage.ParamsQuery 索引超出了数组界限。
+2013-10-11 15:42:15,094 [66] ERROR - processpara.overall 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-11 15:43:17,811 [64] ERROR - partialpage.ParamsQuery “System.Dynamic.ExpandoObject”未包含“un2”的定义
+2013-10-11 15:43:17,824 [64] ERROR - processpara.overall 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-11 15:44:17,503 [64] ERROR - partialpage.ParamsQuery “System.Dynamic.ExpandoObject”未包含“un2”的定义
+2013-10-11 15:44:17,505 [64] ERROR - processpara.overall 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

@@ -1,0 +1,13 @@
+2014-12-31 00:02:01,771 [11] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2014-12-31 00:15:21,510 [21] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2014-12-31 00:16:42,719 [27] ERROR - delegate.backlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\backlistpart.cshtml(9): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateBackModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateBackModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2014-12-31 00:16:42,740 [27] ERROR - delegate.backlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-31 00:17:10,924 [21] ERROR - delegate.backlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\backlistpart.cshtml(72): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateBackModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateBackModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2014-12-31 00:17:10,924 [21] ERROR - delegate.backlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-31 00:17:58,901 [11] ERROR - delegate.backlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\backlistpart.cshtml(82): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateBackModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateBackModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2014-12-31 00:17:58,901 [11] ERROR - delegate.backlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-31 00:18:15,316 [27] ERROR - delegate.backlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\backlistpart.cshtml(86): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateBackModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateBackModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2014-12-31 00:18:15,317 [27] ERROR - delegate.backlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-31 00:35:49,013 [9] ERROR - main.printwin 索引超出了数组界限。

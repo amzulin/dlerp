@@ -1,0 +1,51 @@
+﻿
+@{
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.ReturnModel;
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.ReturnDetailModel>;
+    var mc = Model.mc as List<Enterprise.Invoicing.ViewModel.KeyValue>;
+    var pi = 1;
+    }
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th width="5%" align="center">明细</th>
+    <th width="15%" height="20" align="center">采购单号</th>
+    <th width="15%">入库单号</th>
+    <th width="12%">物料名称</th>
+    <th width="15%">物料规格</th>
+    <th width="10%">物料图号</th>
+    <th width="6%">采购</th>
+    <th width="6%">入库</th>
+    <th width="6%" >退单</th>
+    <th width="10%">仓库</th>
+        </tr>
+      </thead>
+          <tbody>
+     @if (list.Count>0)
+     {
+        foreach (var item in list)
+     {  
+  <tr>
+      <td>@pi</td>
+      <td><a href="../purchase/orderlist?no=@item.purchaseNo"> @item.purchaseNo</a></td>
+      <td><a href="../stockin/inlist?no=@item.stockinNo">@item.stockinNo</a></td>
+    <td title="编码 @item.materialNo">@item.materialName</td>
+    <td title="编码 @item.materialNo">@item.materialModel</td>
+    <td title="图号 @item.materialTu">@item.materialTu</td>
+    <td>@item.orderAmoutn</td>
+      <td>@item.inAmount</td>
+      <td>@item.returnAmount</td>
+      <td>@item.depotName</td>
+  </tr>
+         pi++;
+      }    
+     }
+     else
+     {
+        <tr>
+  <td colspan="10"  bgcolor="#FFFFFF" style="text-align:left;">无退单明细</td></tr> 
+     }
+</tbody>
+    </table> 
+

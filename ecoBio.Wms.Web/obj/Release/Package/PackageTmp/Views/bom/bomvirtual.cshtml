@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+
+    var one = Model.model as Enterprise.Invoicing.Entities.Models.BomVirtual;
+    var type = Model.type;
+    var id = Model.id;
+    var forbom = Model.forbom;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id = '@id', type = '@type', forbom = '@forbom'; 
+  
+        function save() {
+            var remark = $("#txtremark").val();
+            var amount = $("#txtamount").val();
+            var price = $("#txtprice").val();
+            var km = $("#txtkm").val();
+            if (amount == ''||price==''||km=='') {
+                alert("请填写科目，数量，单价！");
+                return false;
+            }
+            if (isNaN(amount)|| Number(amount)<0||isNaN(price)|| Number(price)<0) {
+                alert("数量或单价格式有误！");
+                return false;
+            }
+            $.post("../bom/savevirtual",
+               {
+                   id: id, type: type, amount: amount, price: price, remark: remark, km: km, forbom: forbom
+               }, function (data) {
+                   if (data.status == false) {
+                      alert(data.message);
+                       return false;
+                   }
+                   else {
+                       W.loadgrid();
+                   }
+               });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td width="21%" align="right">科目：</td>
+    <td colspan="3"><input name="" style="width:400px;" type="text" id="txtkm"  value="@(type=="edit"?one.virtualName:"")"  /></td>
+  </tr>
+  <tr>
+    <td width="21%" align="right">数量：</td>
+    <td width="23%"><input name="" type="text" id="txtamount" class="input_width_120px" value="@(type=="edit"?Math.Round(one.vAmount,2).ToString():"")" /></td>
+    <td width="21%" align="right">单价：</td>
+    <td width="35%"><input name="" type="text" id="txtprice" class="input_width_120px" value="@(type=="edit"?Math.Round(one.vPrice,2).ToString():"")" /></td>
+  </tr>
+  <tr>
+    <td width="21%"  align="right">备注：</td>
+    <td  colspan="3"><input name="" style="width:400px;" type="text" id="txtremark" value="@(type=="edit"?one.remark.ToString():"")" /></td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3">
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

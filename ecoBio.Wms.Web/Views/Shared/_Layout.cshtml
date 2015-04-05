@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - 公司进销存系统</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    
+    @using Trirand.Web.Mvc
+    @Styles.Render("~/Content/themes/base/jquery-ui.css")
+    @Styles.Render("~/Content/themes/layout_menu.css")
+   @Styles.Render("~/Content/themes/wms_front.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery-ui-1.8.20.min.js")
+    @Scripts.Render("~/Scripts/jquery-ui-date-cn_zh.js")
+    @Scripts.Render("~/Scripts/page/_layout.js") 
+    @Scripts.Render("~/Scripts/front_menu/stuHover.js") 
+    @Scripts.Render("~/Scripts/lhgdialog/lhgdialog.js") 
+    @Scripts.Render("~/Scripts/Lodop6.161/LodopFuncs.js") 
+    <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+	    <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 pluginspage="install_lodop32.exe"></embed>
+    </object> 
+</head>
+<body>
+    <div class="container">
+        <div class="page_head">
+<span style="padding-left:160px;color:#0D5DA0;font-size:30px;line-height:50px;text-align:left; font-family:'Microsoft YaHei';font-weight: 500;">吉嘉鸿精密机械进销存系统</span>
+<ul>
+<li>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td align="left">  
+          @if (Enterprise.Invoicing.Web.Masterpage.CurrUser.name==null)
+	{
+        Response.Redirect("../account/login");
+	}        
+           欢迎您 @Html.ActionLink(Enterprise.Invoicing.Web.Masterpage.CurrUser.name, "myinfo", "main",new {}, new {@class="user_center" })
+      </td>
+      <td align="center">  
+          @Html.ActionLink("通讯中心"+(Enterprise.Invoicing.Web.Masterpage.MsgCount>0?"("+Enterprise.Invoicing.Web.Masterpage.MsgCount.ToString()+")":""), "rece", "message", new { }, new { @class = "mes" })  
+          
+      </td>
+	  <td align="right"> @Html.ActionLink("退出", "LogOff", "Account",new {}, new {@class="goout" })</td>
+    </tr>
+  </table>
+
+    </li>
+<li></li>
+</ul>
+</div>
+        <div id="client_list">
+                               
+            </div>
+            @{            Html.RenderAction("mainmenu", "main");   }
+                  
+            @RenderSection("featured", required: false)            
+                @RenderBody()
+
+<div class="clear"></div> 
+<div class="footer">©Copyright 2013-2020 mengzl</div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "库存报表";
+    var depots = Model.depots as List<SelectListItem>;
+    depots.Insert(0, new SelectListItem { Value = "0", Text = "全部" });
+    List<SelectListItem> year = new List<SelectListItem>();
+    year.Add(new SelectListItem { Value = "", Text = "全部" });
+    for (int i = 0; i < 3; i++)
+    {
+        year.Add(new SelectListItem { Value = DateTime.Now.AddYears(0 - i).Year.ToString(), Text = DateTime.Now.AddYears(0 - i).Year.ToString() });
+    } 
+    List<SelectListItem> month = new List<SelectListItem>();
+    month.Add(new SelectListItem { Value = "", Text = "全部" });
+    for (int i = 1; i <= 12; i++)
+    {
+        var mstr = i.ToString();
+        if(i<10){
+            mstr = "0" + i.ToString();
+        }
+        month.Add(new SelectListItem { Value = mstr, Text = mstr + "月" });
+    } 
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：报表查询 > 库存报表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+      <table>
+        <tr><td style="width:80px;text-align:right;">仓库：</td><td>@Html.DropDownList("ddldep",depots)</td>
+            <td style="width:80px;text-align:right;">年份：</td><td>@Html.DropDownList("ddlyear",year)</td>
+            <td style="width:80px;text-align:right;">月份：</td><td>@Html.DropDownList("ddlmonth",month)</td>
+            <td style="width:80px;text-align:right;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a></td><td>
+            <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!--表格内容-->
+
+<!--表格内容-->
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("stockreportpart", "depot");   
+}
+
+
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+    function pageload(p)
+    {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../depot/stockreportpart", { page: page, where: para, orderby: orderby }, function () { });
+    }
+    function orderlistp(by)
+    {
+        if (orderby.indexOf('desc') != -1) orderby = by + " asc";
+        else orderby = by + " desc";
+        pageload(page);
+    }
+    function excel() {
+        para = "";
+        geturl();
+        window.location.href = "../depot/excelstock?where=" +  para+"&orderby="+orderby;
+    }
+    function geturl()
+    {
+        para = "";
+        var dep = $("#ddldep").val();
+        var mc = $("#ddlyear").val();
+        var m = $("#ddlmonth").val();
+        if (dep != '0') para += ' and depotId=' + dep;
+        if (mc != '0' || m != '') para += " and stockMonth like '" + mc + m + "%'";
+    }
+    function dc(dep,month) {
+        para = "";
+        geturl();
+        window.location.href = "../depot/stockdc?where=" +  para+"&orderby="+orderby;
+    }
+</script>

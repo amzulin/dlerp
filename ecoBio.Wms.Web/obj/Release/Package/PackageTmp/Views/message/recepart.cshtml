@@ -1,0 +1,115 @@
+﻿@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.MsgReceModel>;
+
+    var page = Model.pageIndex;
+    var pi = 1;
+    var dpi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+
+
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>收件箱</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="7%">类别</th>
+    <th width="10%">发送部门</th>
+    <th width="8%">发送人</th>
+    <th width="40%">标题</th>
+    <th width="10%">发送时间</th>
+    <th width="5%">状态</th>
+    <th width="5%">附件</th>
+    <th width="10%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr @(item.isRead?"":"style='font-weight:bold;'")>
+      <td>@pi</td>
+    <td>@item.msgcate</td>
+    <td>@item.senddepname</td>
+    <td>@item.sendstaffname</td>
+    <td><span title="@item.title" onclick="showmsg(@item.receId)">@item.title</span></td>
+    <td>@item.createDate.ToString("yyyy-MM-dd")</td>
+    <td>@(item.isRead?"已读":"未读")</td>
+    <td>@if(item.hadAttr){
+            <a  target='_blank' href='../filepath/message/@item.fileGuid'>下载</a>
+        }</td>
+    <td> 
+
+                    <span  onclick="deletemsg(@item.receId);"  title="删除">删除</span> 
+
+ 
+	</td>
+    </tr>
+        pi++;
+        dpi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="9">未收到消息</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+
+	 @Html.Partial("~/Views/Shared/page_load.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+    </div>
+
+
+<script>  
+    var page = '@page';
+    $(function () {       
+
+    });
+
+
+    function deletemsg(id) {
+        if (confirm("确定删除消息？")) {
+            $.post('../message/deleterece', { id: id }, function (data) {
+                if (data.status == true) {
+                    $.dialog.tips("删除成功");
+                    query();
+                }
+                else {
+                    $.dialog.alert("删除失败！请重试");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+
+    function showmsg(id) {
+        $.post("../message/showmsg", { id: id }, function (data) {
+            if (data.status == true) {
+                onewin = $.dialog({
+                    id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+                    title: "消息查看-" + data.value,
+                    content: '<table style="margin-top:10px;" width="500px" border="0" cellspacing="0" cellpadding="0">'
+                        + '<tr><td>' + data.message + '</td></tr></table>'
+                });
+            }
+            else {
+                $.dialog.alert("打开失败");
+            }
+        });
+    }
+</script>

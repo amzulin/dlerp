@@ -1,0 +1,5 @@
+﻿@{
+    var list = Model.list as List<SelectListItem>;
+    list.Insert(0, new SelectListItem { Text="请选择",Value="" });
+    }
+<div>@Html.DropDownList("ddlcate1",list)</div>

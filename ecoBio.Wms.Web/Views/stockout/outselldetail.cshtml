@@ -1,0 +1,109 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_StockOutPurchase>;
+    var pi = 1;
+    var no = Model.no;
+    var order = Model.order; 
+    var depots = Model.depots as List<SelectListItem>;
+    depots.Insert(0, new SelectListItem { Value = "0", Text = "请选择仓库" }); 
+ }
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th> 
+    <th width="10%">编码</th>
+    <th width="20%">物料名称</th>
+    <th width="25%">物料规格</th>
+    <th width="10%">仓库</th>
+    <th width="10%">剩余数量</th>
+    <th width="10%">数量</th>
+    <th width="10%">备注</th>
+  </tr>
+  </thead>
+ <tbody id="tabbody">
+   
+     @foreach (var item in list)
+     {
+         if (item.depotId>0)
+         {
+             var seldep = depots.FirstOrDefault(p => p.Value == item.depotId.ToString());
+             if (seldep!=null)
+             {
+                 seldep.Selected = true;
+             }
+         }        
+  <tr>
+    <td class="endwise_title">@pi</td>     
+    <td class="endwise_title">@item.materialNo</td>
+    <td class="endwise_title">@Html.Raw(item.materialName)</td>
+    <td class="endwise_title">@item.materialModel</td>
+    <td>@Html.DropDownList("ddldepost_"+pi,depots)</td>
+    <td>@(item.Amount-item.sellAmount)</td>
+    <td>
+    <input id="txtamount_@pi" style="width:80px;" sell="@item.sellAmount" amount="@item.Amount" ordersn="@item.orderSn" material="@item.materialNo" outsn="@(item.outDetailSn)" value="@item.outAmount" />
+    </td>
+    <td><input id="txtremark_@pi" style="width:80px;" value="@item.remark" /></td>
+  </tr>
+      pi++;
+     }
+@if (list.Count > 0)
+{
+    <tr><td colspan="8" style="text-align:center;"><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save('@no','@order');" >提交</a></td></tr>
+    
+}
+
+  </tbody>
+</table>
+<script>
+    var count='@list.Count'
+    function save(no, order) {
+        if (supplierid == 0 || order == '') {
+            $.dialog.alert("请选择客户和客户的订单");
+            return false;
+        }
+        var msg = '';
+        var r = $("#txtremark").val();
+        var d = $("#txtdeport").val();
+        var outsnlist = [], ordersnlist = [], remarklist = [], amountlist = [], depotlist = [], materiallist = [];
+        for (var i = 1; i <= count; i++) {
+            var input = $("#txtamount_" + i);
+            var v = input.val();
+            var ordersn = input.attr("ordersn");
+            var outsn = input.attr("outsn");
+            var sell = input.attr("sell");
+            var amount = input.attr("amount");
+
+            var material = input.attr("material");
+            if (outsn == '0' && (v == '' || v == '0')) continue;
+            var depot = $("#ddldepost_" + i).val();
+            if (v != '' && (isNaN(v) || Number(v) < 1)) msg += '第' + i + '行请输入大于0的整数数量；';
+            if (amount - sell < v) msg += '第' + i + '行数量超出范围；';
+            if (depot == '0') msg += '第' + i + '行数未选择仓库；';
+            depotlist.push(depot);
+            outsnlist.push(outsn);
+            ordersnlist.push(ordersn);
+            remarklist.push($("#txtremark_" + i).val());
+            materiallist.push(material);
+            amountlist.push(v);
+        }
+        if (ordersnlist.length < 1) msg += '未填写销售明细；';
+        if (msg != '') {
+            $.dialog.alert(msg);
+            return false;
+        }
+        $.post("../stockout/saveoutsell_2", {
+            no: no, type: type, supplier: supplierid, remark: r, deport: d, order: order,
+            outsnlist: outsnlist.toString(), ordersnlist: ordersnlist.toString(), remarklist: remarklist.toString(), amountlist: amountlist.toString(), depotlist: depotlist.toString(), materiallist: materiallist.toString()
+        }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../stockout/outlist";
+            }
+        });
+    }
+
+</script>

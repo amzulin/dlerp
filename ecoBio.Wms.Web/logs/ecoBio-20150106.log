@@ -1,0 +1,5 @@
+2015-01-06 21:44:48,360 [9] ERROR - delegate.giveonedetail “System.Dynamic.ExpandoObject”未包含“boms”的定义
+2015-01-06 21:44:48,378 [9] ERROR - delegate.giveone 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2015-01-06 21:48:10,990 [43] ERROR - delegate.savepullone “,”附近有语法错误。
+2015-01-06 21:53:41,843 [7] ERROR - delegate.savepullone “,”附近有语法错误。
+2015-01-06 21:55:22,129 [9] ERROR - delegate.savegiveone 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.Production”不兼容。类型“materialNo”的成员在同名的数据读取器中没有对应的列。

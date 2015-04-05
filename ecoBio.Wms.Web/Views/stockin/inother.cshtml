@@ -1,0 +1,169 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.StockModel;
+    var mc = Model.mc as List<SelectListItem>;
+    var depots = Model.depots as List<SelectListItem>;
+    depots.Insert(0, new SelectListItem {  Value="0",Text="请选择仓库"});
+    if (type == "edit")
+    {
+        ViewBag.Title = "编辑入库单";
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增入库单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：入库管理 > <a href="../stockin/inlist">入库单列表</a> > 其他入库 </div>
+<div class="content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer">
+<label>入库单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@no" />
+<label>入库部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>入库人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>仓库：</label><input name="" id="txtdeport" type="text" value=""/><label>备注：</label><input name="" id="txtremark" type="text" value=""/>  
+@*<a href="javascript:void(0);" id="btncreate" class="btn_refer">提交</a>*@
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer">
+<label>入库单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@one.stockNo" />
+<label>入库部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" value="@one.depName"/>
+<label>入库人：</label><input name="" type="text" readonly="readonly" class="input_gray" value="@one.staffName" />   
+<label>仓库：</label><input name="" id="txtdeport" type="text" value="@one.deportStaff"/><label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark"/>  
+</div>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>入库明细</h2>
+<div class="add">
+    <ul>
+        <li>
+ 
+<label>物料类别：</label>
+           @Html.DropDownList("ddlmc",mc,new{style="width:100px;"})
+</li>
+        <li>
+ 
+<label>物料：</label>
+            <input name="" type="text" id="txtmaterial" class="input_width_80px"/>
+</li>
+         <li>
+<label>数量：</label><input name="" type="text" id="txtcount" class="input_width_80px"/></li>
+         <li>
+<label>仓库：</label>@Html.DropDownList("ddldepot",depots,new{name="ddldepot", style="width:100px;"})</li>
+         <li>
+<label>备注：</label><input name="" type="text" id="txtrem" class="input_width_80px"/></li>
+         <li>
+<a  href="javascript:void(0);" id="btngl" class="gray_btn">保存</a>
+    <input type="hidden" id="hidcount" value="0" />
+    <input type="hidden" id="hiddetail" value="" />
+    <input type="hidden" id="hidarr" value="" />
+</li>   </ul>
+</div>
+<div  id="detail_table">
+@{
+    Html.RenderAction("inotherdetail", "stockin", new { outno = no });   
+}
+</div> 
+
+
+
+</div>
+
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+
+
+    var hdetail = 0;
+    var hcount = 0;
+
+    var htype = "";
+    $(function () {
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+
+        $("#btngl").click(savedetail);//新增
+
+        $("#ddlmc").change(function () {
+            $("#txtmaterial").val("");
+            hmaterial = "";
+            hname = "";
+            hmodel = "";
+        });
+
+
+       
+    });
+
+    function savedetail() {
+        var txtcount = $("#txtcount").val();
+        var depot = $("#ddldepot").val();
+        var remark = $("#txtrem").val();
+        var depotname = $('#ddldepot option:selected').text();
+        var mc = $("#ddlmc").val();
+        if (hmaterial == "" || depot == "0" || txtcount == "" || isNaN(txtcount)) {
+            $.dialog.alert("请选择物料、数量、仓库！");
+            return false;
+        }     
+        var ctxt = parseInt(txtcount);
+        if (ctxt < 1) {
+            $.dialog.alert("输入数量必须大于0");
+            return false;
+        }
+        $.post("../stockin/saveinothertemp", { detail: hdetail, type: htype, no: no, detail: hdetail, m: hmaterial, mc: mc, depot: depot, depotname: depotname, name: hname, model: hmodel, count: ctxt, remark: remark }, function (data) {
+            if (data.status == "error") {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $("#detail_table").load("../stockin/inotherdetail", { no: no }, function (data) { });
+                $("#txtcount").val('');
+                $("#ddldepot").val('0');
+                $("#txtmaterial").val('');
+                $("#txtrem").val('');
+                hdetail = 0;
+                htype = "add";
+            }
+        });
+    }
+    function editone(detailid, m,name,model,mc,deopid, c,r) {
+        hdetail = detailid;
+        hmaterial = m, hname = name, hmodel = model, hcount = c;
+        $("#ddlmc").val(mc);
+        $("#ddldepot").val(deopid);
+        $("#txtmaterial").val(name);
+        $("#txtcount").val(c);
+        $("#txtrem").val(r);
+        htype = "edit";
+    }
+    function deleteone(rno, id, m) {
+        if (confirm("确定删除？")) {
+            $.post('../stockin/deleteinother', { no: no, detail: id, m: m }, function (data) {
+                if (data == "ok") {
+                    $("#detail_table").load("../stockin/inotherdetail", { no: no }, function (data) { });
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+    
+ 
+</script>

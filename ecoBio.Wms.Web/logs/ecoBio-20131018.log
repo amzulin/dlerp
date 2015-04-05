@@ -1,0 +1,10 @@
+2013-10-18 10:11:35,828 [22] ERROR - material.saveoutputdetailtemp 索引超出了数组界限。
+2013-10-18 11:02:20,178 [19] ERROR - material.outputdetail LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.
+2013-10-18 11:02:58,923 [16] ERROR - material.outputdetail LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.
+2013-10-18 11:03:40,227 [25] ERROR - material.outputdetail Unable to cast the type 'System.Double' to type 'System.Object'. LINQ to Entities only supports casting EDM primitive or enumeration types.
+2013-10-18 11:04:16,561 [14] ERROR - material.outputdetail Unable to cast the type 'System.Double' to type 'System.Object'. LINQ to Entities only supports casting EDM primitive or enumeration types.
+2013-10-18 11:06:04,589 [9] ERROR - material.outputdetail LINQ to Entities does not recognize the method 'System.String ToString()' method, and this method cannot be translated into a store expression.
+2013-10-18 11:07:00,671 [9] ERROR - material.outputdetail Unable to cast the type 'System.Double' to type 'System.Object'. LINQ to Entities only supports casting EDM primitive or enumeration types.
+2013-10-18 11:08:00,898 [19] ERROR - material.outputdetail Unable to cast the type 'System.Double' to type 'System.Object'. LINQ to Entities only supports casting EDM primitive or enumeration types.
+2013-10-18 13:22:57,932 [22] ERROR - material.saveoutputdetail 输入字符串的格式不正确。
+2013-10-18 15:18:56,338 [49] ERROR - material.forpdfy “System.Dynamic.ExpandoObject”未包含“list”的定义

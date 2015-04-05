@@ -1,0 +1,93 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.StockDetailModel>;
+    var pi = 1;
+    var no = Model.no;
+ }
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th>序号</th> 
+    <th>编码</th>
+    <th>物料名称</th>
+    <th>物料规格</th>
+    <th>数量</th>
+    <th>单价</th>
+    <th>合计</th>
+    <th>备注</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+ <tbody id="tabbody" maxtr="@list.Count">
+   
+     @foreach (var item in list)
+     {     
+  <tr id="dtr_@pi" m="@item.materialNo" p="@item.price" c="@item.amount" r="@item.remark">
+    <td>@pi</td>     
+    <td>@item.materialNo</td>
+    <td>@Html.Raw(item.materialName)</td>
+    <td>@item.materialModel</td>
+    <td>@item.amount</td>
+    <td>@item.price</td>
+    <td>@(Math.Round(item.amount*item.price,4)) </td>      
+    <td>@item.remark</td><td><a href="javascript:void(0);" onclick="deldetail(@pi);">删除</a></td>
+  </tr>
+         pi++;
+     }
+  </tbody>
+</table>
+ <div id="btndiv" style="text-align:center;display:@(list.Count > 0?"block":"none");"><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save();" >提交</a></div>
+
+  
+<script>
+    var count='@list.Count'
+    function save() {
+        if (supplierid == 0) {
+            $.dialog.alert("请选择客户和客户的订单");
+            return false;
+        }
+        var tr = parseInt($("#tabbody").attr("maxtr"));
+        if (tr < 1) {
+            $.dialog.alert("请填写销售明细！");
+            return false;
+        }
+        var msg = '';
+        var pricelist = [], remarklist = [], amountlist = [], materiallist = [];
+ 
+        for (var i = 1; i <= tr; i++) {
+            var mtr = $("#dtr_" + i);
+            pricelist.push(mtr.attr('p'));
+            materiallist.push(mtr.attr('m'));
+            amountlist.push(mtr.attr('c'));
+            remarklist.push(mtr.attr('r'));
+        }
+        if (materiallist.length < 1 || amountlist.length < 1 || amountlist.length != materiallist.length) msg += '未填写销售明细；';
+        if (msg != '') {
+            $.dialog.alert(msg);
+            return false;
+        }
+        $.post("../stockout/saveouttsell_2", {
+            no: no, type: type, supplier: supplierid, remark: $("#txtremark").val(), deport: $("#txtdeport").val(), express: $("#ddlexpress").val(), expresscode: $("#txtexpress").val(), date: $("#dateout").val(),
+            pricelist: pricelist.toString(), materiallist: materiallist.toString(), remarklist: remarklist.toString(), amountlist: amountlist.toString()
+        }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../stockout/outlist";
+            }
+        });
+    }
+
+    function deldetail(tr) {
+        var count = parseInt($("#tabbody").attr("maxtr"));
+        $("#dtr_" + tr).remove();
+        for (var i = tr + 1; i <= count; i++) {
+            $("#dtr_" + i).attr("id", "dtr_" + (i - 1));
+        }
+        $("#tabbody").attr("maxtr", (count - 1))
+    }
+
+</script>

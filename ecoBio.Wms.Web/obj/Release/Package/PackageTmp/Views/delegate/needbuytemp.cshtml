@@ -1,0 +1,75 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_DelegateSendDetailModel>;
+    List<string> delegateno = new List<string>();
+    }
+
+
+
+<div class="right_area_active_list">
+@if (list!=null&&list.Count>0)
+{
+    foreach (var item in list)
+	{        
+    if (!delegateno.Contains(item.delegateNo))
+    {
+        var xlist = list.Where(p => p.delegateNo == item.delegateNo).ToList();
+        <hr />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+  <thead>
+  <tr>
+    <th>委外物料</th>
+    <th>名称</th>
+    <th>规格</th>
+    <th>委外数量</th>
+    <th>单价</th>   
+      <th>总金额</th>   
+ </tr>
+  </thead>
+    <tbody><tr>
+           <td>@xlist[0].productNo</td>
+    <td>@xlist[0].productName</td>
+    <td>@xlist[0].productModel</td>
+    <td>@xlist[0].productAmount</td>
+    <td>@xlist[0].price</td>
+    <td>@(Math.Round(xlist[0].price*xlist[0].productAmount,4))</td>
+    </tr>
+        <tr><td colspan="6" style="text-align:left;">
+            发货明细
+            </td></tr>
+       <tr><td colspan="6">
+           <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+                 <thead>
+  <tr>
+    <th>物料</th>
+    <th>名称</th>
+    <th>规格</th>
+    <th>计算数量</th>
+    <th>实发数量</th>    
+    <th>备注</th>    
+ </tr>  </thead>
+    <tbody>
+        @foreach (var mx in xlist)
+        {
+            <tr>
+            <td>@mx.materialNo</td>
+            <td>@mx.materialName</td>
+            <td>@mx.materialModel</td>
+            <td>@mx.theoryAmount</td>
+            <td>@mx.realAmount</td>
+            <td>@mx.remark</td>
+        </tr>
+        }
+           </tbody></table>
+           </td></tr>
+    </tbody>
+</table>
+
+        delegateno.Add(item.delegateNo);
+    }
+	}
+   } 
+</div>
+
+    <div style=" text-align:center; height:46px; padding-top:10px; width:765px; background:#f7fbff; border-top:1px solid #c6d9e7;">
+<a class="btn_refer2" href="javascript:void(0);" onclick="savestockin()">提交</a>
+</div>

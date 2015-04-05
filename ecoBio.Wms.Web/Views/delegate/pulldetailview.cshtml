@@ -1,0 +1,46 @@
+﻿
+@{
+    var no = Model.no;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_ProductPullDetail>;
+
+    var pi = 1;
+    }
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th>明细</th>
+          <th>物料编码</th>
+          <th>物料名称</th>
+          <th>物料规格</th>
+          <th>单位</th>
+          <th>计算数量</th>
+          <th>实领数量</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+          <tbody>
+     @if (list.Count>0)
+     {
+        foreach (var item in list)
+     {  
+  <tr>
+      <td>@pi</td>
+    <td>@item.materialNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td>@item.unit</td>
+    <td>@item.theoryAmount</td>
+    <td>@item.realAmount</td>
+    <td>@item.remark</td>
+  </tr>
+         pi++;
+      }    
+     }
+     else
+     {
+        <tr>
+  <td colspan="9"  bgcolor="#FFFFFF" style="text-align:left;">无领料明细</td></tr> 
+     }
+</tbody>
+    </table> 
+

@@ -1,0 +1,11 @@
+2014-03-10 09:08:06,973 [9] ERROR - purchase.needbuylist 未找到分部视图“~/Views/Shared/page_process.cshtml”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Shared/page_process.cshtml
+2014-03-10 09:08:06,987 [9] ERROR - purchase.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-10 20:16:06,007 [132] ERROR - depot.reportdepotpart d:\program\code\ecoBio.Wms.Web\Views\depot\reportdepotpart.cshtml(36): error CS1061: “Enterprise.Invoicing.Entities.Models.V_ReportDepot”不包含“materialCategory”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_ReportDepot”的第一个参数的扩展方法“materialCategory”(是否缺少 using 指令或程序集引用?)
+2014-03-10 20:16:06,019 [132] ERROR - depot.reportdepot 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-10 20:20:12,854 [122] ERROR - depot.reportdepotpart “:”附近有语法错误。
+2014-03-10 23:14:05,522 [112] ERROR - depot.exceldepot “undefined”附近有语法错误。
+2014-03-10 23:16:26,121 [117] ERROR - depot.exceldepot “by”附近有语法错误。
+2014-03-10 23:21:15,195 [112] ERROR - depot.exceldepot 未能找到路径“C:\tempfile\747bbb0e-c29d-408c-895c-50dbe2afcbb4.xls”的一部分。
+2014-03-10 23:21:51,715 [117] ERROR - depot.reportrequirepart d:\program\code\ecoBio.Wms.Web\Views\depot\reportrequirepart.cshtml(48): error CS1501: “ToString”方法没有任何重载采用 1 个参数
+2014-03-10 23:21:51,716 [117] ERROR - depot.reportrequire 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

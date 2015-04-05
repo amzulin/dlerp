@@ -1,0 +1,9 @@
+2014-10-09 20:31:55,377 [14] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-10-09 20:01:11,551 [7] ERROR - purchase.needbuytab 对于“Enterprise.Invoicing.Web.Controllers.purchaseController”中方法“System.Web.Mvc.ActionResult needbuytab(System.String, Int32, System.String)”的不可以为 null 的类型“System.Int32”的参数“supplier”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2014-10-09 20:01:11,582 [7] ERROR - purchase.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-10-09 20:42:37,669 [5] ERROR - purchase.needbuytab 从具体化“System.Decimal”类型到“System.String”类型的指定强制转换无效。
+2014-10-09 20:42:39,655 [5] ERROR - purchase.needbuytab 从具体化“System.Decimal”类型到“System.String”类型的指定强制转换无效。
+2014-10-09 21:49:45,778 [13] ERROR - bom.orderlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\orderlistpart.cshtml(61): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BomOrderModel”不包含“isclose”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BomOrderModel”的第一个参数的扩展方法“isclose”(是否缺少 using 指令或程序集引用?)
+2014-10-09 21:49:45,856 [13] ERROR - bom.orderlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

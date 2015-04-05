@@ -1,0 +1,19 @@
+2014-09-16 00:55:35,891 [12] ERROR - cost.excelbomcost The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.V_BomCostModel'. A member of the type, 'costId', does not have a corresponding column in the data reader with the same name.
+2014-09-16 20:11:31,138 [13] ERROR - bom.bomdetail d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\bomdetail.cshtml(28): error CS0103: 当前上下文中不存在名称“count2”
+2014-09-16 20:11:39,873 [10] ERROR - bom.bomdetail d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\bomdetail.cshtml(28): error CS0103: 当前上下文中不存在名称“count2”
+2014-09-16 22:29:35,399 [6] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2014-09-16 23:20:03,053 [24] ERROR - cost.bomcostview 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2014-09-16 23:20:36,760 [24] ERROR - cost.bomcostview 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2014-09-16 23:20:37,589 [30] ERROR - cost.bomcostview 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2014-09-16 23:20:37,951 [24] ERROR - cost.bomcostview 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2014-09-16 23:20:38,106 [30] ERROR - cost.bomcostview 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2014-09-16 23:20:38,275 [30] ERROR - cost.bomcostview 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+
+2014-09-16 23:20:38,407 [24] ERROR - cost.bomcostview 显式表达式 块缺少结束字符“)”。请确保此块内的所有“(”都有匹配的“)”字符，并且任何“)”都不会解释为标记。
+

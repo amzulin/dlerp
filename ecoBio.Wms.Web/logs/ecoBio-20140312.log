@@ -1,0 +1,8 @@
+2014-03-12 19:32:18,199 [24] ERROR - depot.reportstockin “System.Dynamic.ExpandoObject”未包含“list”的定义
+2014-03-12 19:58:27,035 [41] ERROR - depot.reportstockout “System.Dynamic.ExpandoObject”未包含“list”的定义
+2014-03-12 20:27:14,942 [13] ERROR - depot.excelstockout 未将对象引用设置到对象的实例。
+2014-03-12 20:52:59,566 [29] ERROR - depot.reportold2newpart d:\program\code\ecoBio.Wms.Web\Views\depot\reportold2newpart.cshtml(2): error CS0103: 当前上下文中不存在名称“nulll”
+2014-03-12 20:52:59,582 [29] ERROR - depot.reportold2new 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-12 22:40:15,991 [50] ERROR - depot.timetab “System.Dynamic.ExpandoObject”未包含“fdepots”的定义
+2014-03-12 22:40:45,365 [57] ERROR - depot.timetab 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-03-12 23:02:44,965 [38] ERROR - main.autopost 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)

@@ -1,0 +1,135 @@
+﻿
+@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_DelegateBackModel>;
+    int count = 0;
+    var first = "";
+    if (list!=null&&list.Count>0)
+    {
+        first = list[0].backNo;
+        count = list.Count;
+    }
+    var page = Model.pageIndex;
+    var pi = 1;
+    var dpi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>委外收货单</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="14%" style="cursor:pointer;" onclick="orderlist('backNo')" >收货单号</th>
+    <th width="14%" style="cursor:pointer;" onclick="orderlist('sendNo')" >发货单</th>
+    <th width="15%" style="cursor:pointer;" onclick="orderlist('supplierName')" >供应商</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlist('depName')">收货部门</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlist('staffName')">收货人</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlist('createDate')">收货时间</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlist('status')">状态</th>
+    <th width="14%" style="cursor:pointer;" onclick="orderlist('remark')">备注</th>
+    <th width="10%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr><td colspan="10">
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tbody>
+        <tr  id="tr_@dpi" onclick="loaddetail(@dpi,'../delegate/backdetailview?no=@item.backNo')">
+      <td width="5%">@pi</td>
+    <td width="14%">@item.backNo</td>
+    <td width="14%">@item.sendNo</td>
+    <td width="15%">@item.supplierName</td>
+    <td width="8%">@item.depName</td>
+    <td width="6%">@item.staffName</td>
+    <td width="8%">@item.backDate.ToString("yyyy-MM-dd")</td>
+    <td width="6%">
+        @if (item.isover == 1)
+        {
+            <span>完工</span> 
+        }
+        else
+        {
+            <span>@Enterprise.Invoicing.Common.Utils.GetStatus(item.status)</span>
+        }
+
+    </td>
+    <td width="14%">
+       <span> @item.remark</span></td>
+    <td width="10%">   
+        @if (item.isover!=1)
+        {
+            
+            if (Enterprise.Invoicing.Web.Masterpage.CheckRight("delegateback_check")&&item.canfs)
+            {
+                <a href="javascript:void(0);" onclick="changestatus('delegateback','@item.backNo',@item.status,'../delegate/backlist?page=@page')">@Html.Raw(Enterprise.Invoicing.Common.Utils.GetBtnStr(item.status))</a>
+            }  
+          if (item.status==0)
+          {              
+           if (Enterprise.Invoicing.Web.Masterpage.CheckRight("delegateback_update")||item.staffId==Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+            {
+               <a href="backone?type=edit&page=@page&no=@item.backNo" title="修改">修改</a>
+            }
+              if (Enterprise.Invoicing.Web.Masterpage.CheckRight("delegateback_invalid"))
+            {
+           <a href="javascript:void(0);" onclick="changestatus('delegateback','@item.backNo',-1,'../delegate/backlist?page=@page')"  title="作废">作废</a>
+        }
+              if (Enterprise.Invoicing.Web.Masterpage.CheckRight("delegateback_delete") || item.staffId == Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+            {
+            <span onclick="deleteone('../delegate/backdelete','@item.backNo','申请单');"  title="删除">删除</span>  
+            }  
+          }
+        }
+          @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("delegateback_print"))
+          {
+              <span onclick="print('委外收货单','delegateback','@item.backNo');"  title="打印">打印</span>
+          }  
+	</td>
+   </tr>
+                	  </tbody>
+    </table>      
+          <div  id="detai_div_@dpi" style="display:none;">
+              @{
+         Html.RenderAction("backdetailview", "delegate", new { no = "" });
+      }
+        </div>
+
+             </td></tr>
+         pi++;
+         dpi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="10">无收货单</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+	 @Html.Partial("~/Views/Shared/page_load.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",""},{"url","../delegate/backlist"}
+       })
+    </div>
+<script>  
+    var c = '@count';
+    var detail = [];
+    var close = [];
+    page = '@page'
+    $(function () {
+        for (var i = 0; i < c; i++) {
+            detail.push(0);
+            close.push(0);
+        }
+        @*if ('@first' != '') {
+            loaddetail(1, '../delegate/backdetailview?no=@first');
+        }*@
+    });  
+</script>

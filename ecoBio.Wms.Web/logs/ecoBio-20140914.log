@@ -1,0 +1,58 @@
+2014-09-14 11:37:25,529 [14] ERROR - stockout.saveoutsell_2 未将对象引用设置到对象的实例。
+2014-09-14 12:56:19,134 [33] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 13:00:48,119 [22] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 13:10:30,013 [25] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 13:25:08,868 [10] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 13:29:24,087 [29] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 13:35:07,501 [24] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 13:46:11,858 [18] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 13:49:45,147 [11] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 17:23:24,447 [56] ERROR - system.user 值不能为 null 或为空。
+参数名: linkText
+2014-09-14 17:28:35,254 [13] ERROR - cost.billlistpart “,”附近有语法错误。
+2014-09-14 17:28:35,296 [13] ERROR - cost.billlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-14 17:33:20,733 [60] ERROR - cost.billlistpart 列名 'supplierName' 无效。
+2014-09-14 17:33:20,742 [60] ERROR - cost.billlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-14 17:35:40,023 [62] ERROR - cost.billlistpart The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.V_BillCost'. A member of the type, 'billType', does not have a corresponding column in the data reader with the same name.
+2014-09-14 17:35:40,034 [62] ERROR - cost.billlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-14 17:42:54,844 [60] ERROR - cost.billlistpart The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.V_BillCost'. A member of the type, 'staffMake', does not have a corresponding column in the data reader with the same name.
+2014-09-14 17:42:54,854 [60] ERROR - cost.billlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-14 17:45:40,588 [59] ERROR - cost.billlistpart The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.V_BillCost'. A member of the type, 'depId', does not have a corresponding column in the data reader with the same name.
+2014-09-14 17:45:40,598 [59] ERROR - cost.billlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-14 17:55:32,445 [60] ERROR - cost.billlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\billlistpart.cshtml(47): error CS0029: 无法将类型“string”隐式转换为“bool”
+2014-09-14 17:55:32,454 [60] ERROR - cost.billlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-14 17:59:14,800 [59] ERROR - cost.billlistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\billlistpart.cshtml(68): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BillCost”不包含“staffId”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BillCost”的第一个参数的扩展方法“staffId”(是否缺少 using 指令或程序集引用?)
+2014-09-14 17:59:14,835 [59] ERROR - cost.billlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-14 18:19:46,837 [57] ERROR - cost.billone 未将对象引用设置到对象的实例。
+2014-09-14 18:23:30,199 [8] ERROR - cost.billone 未将对象引用设置到对象的实例。
+2014-09-14 18:54:03,720 [5] ERROR - cost.savebilldetail 未将对象引用设置到对象的实例。
+2014-09-14 18:57:28,373 [10] ERROR - cost.savebilldetail 违反了 PRIMARY KEY 约束“PK_BillCost”。不能在对象“dbo.BillCost”中插入重复键。重复键值为 (BX20140914-0002)。
+语句已终止。
+2014-09-14 18:58:55,025 [9] ERROR - cost.savebilldetail 未将对象引用设置到对象的实例。
+2014-09-14 19:01:26,361 [10] ERROR - cost.savebilldetail The specified cast from a materialized 'System.Int32' type to the 'System.String' type is not valid.
+2014-09-14 19:03:47,313 [9] ERROR - cost.savebilldetail The specified cast from a materialized 'System.Int32' type to the 'System.String' type is not valid.
+2014-09-14 19:04:46,826 [10] ERROR - cost.savebilldetail The specified cast from a materialized 'System.Int32' type to the 'System.String' type is not valid.
+2014-09-14 20:55:07,135 [7] ERROR - cost.savebilldetail The specified cast from a materialized 'System.Int32' type to the 'System.String' type is not valid.
+2014-09-14 21:41:16,699 [6] ERROR - cost.billdetailview 列名 'stockoutNo' 无效。
+列名 'bomOrderNo' 无效。
+2014-09-14 21:52:26,998 [15] ERROR - cost.savebilldetail The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.BillCostDetail'. A member of the type, 'billNo', does not have a corresponding column in the data reader with the same name.
+2014-09-14 21:55:26,576 [9] ERROR - cost.savebilldetail The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.BillCostDetail'. A member of the type, 'billNo', does not have a corresponding column in the data reader with the same name.
+2014-09-14 21:55:57,017 [9] ERROR - cost.savebilldetail The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.BillCostDetail'. A member of the type, 'billNo', does not have a corresponding column in the data reader with the same name.
+2014-09-14 21:58:20,057 [7] ERROR - cost.billone “billNo”附近有语法错误。
+2014-09-14 22:04:40,901 [7] ERROR - cost.billone “billNo”附近有语法错误。
+2014-09-14 22:04:54,863 [10] ERROR - cost.billone “billNo”附近有语法错误。
+2014-09-14 22:06:34,600 [11] ERROR - cost.billone 未将对象引用设置到对象的实例。
+2014-09-14 22:10:19,498 [5] ERROR - cost.billone d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\billone.cshtml(9): error CS0029: 无法将类型“System.Collections.Generic.List<Enterprise.Invoicing.Entities.Models.BillCostDetail>”隐式转换为“System.Collections.Generic.List<Enterprise.Invoicing.Entities.Models.V_BillCostDetail>”
+2014-09-14 22:10:38,137 [8] ERROR - cost.billone d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\billone.cshtml(79): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BillCostDetail”不包含“BillCost”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BillCostDetail”的第一个参数的扩展方法“BillCost”(是否缺少 using 指令或程序集引用?)
+2014-09-14 22:10:56,567 [5] ERROR - cost.billone d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\billone.cshtml(82): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BillCostDetail”不包含“detailSn”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BillCostDetail”的第一个参数的扩展方法“detailSn”(是否缺少 using 指令或程序集引用?)
+2014-09-14 22:13:41,369 [11] ERROR - cost.billone d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\billone.cshtml(82): error CS1061: “Enterprise.Invoicing.Entities.Models.V_BillCostDetail”不包含“sn”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_BillCostDetail”的第一个参数的扩展方法“sn”(是否缺少 using 指令或程序集引用?)
+2014-09-14 22:30:27,956 [11] ERROR - stockout.outselldetail d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\stockout\outselldetail.cshtml(35): error CS1061: “int”不包含“HasValue”的定义，并且找不到可接受类型为“int”的第一个参数的扩展方法“HasValue”(是否缺少 using 指令或程序集引用?)
+2014-09-14 22:30:27,957 [11] ERROR - stockout.outsell 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

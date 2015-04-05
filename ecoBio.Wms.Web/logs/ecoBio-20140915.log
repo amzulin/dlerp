@@ -1,0 +1,6 @@
+2014-09-15 08:20:32,136 [157] ERROR - manage.materialone “System.Dynamic.ExpandoObject”未包含“units2”的定义
+2014-09-15 21:34:17,160 [24] ERROR - cost.bomcostpart 列名 'supplierName' 无效。
+2014-09-15 21:34:17,198 [24] ERROR - cost.bomcost 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-15 22:55:23,754 [27] ERROR - cost.bomcostview The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.V_BomCostModel'. A member of the type, 'costId', does not have a corresponding column in the data reader with the same name.
+2014-09-15 22:58:16,444 [25] ERROR - cost.bomcostview The data reader is incompatible with the specified 'Enterprise.Invoicing.Entities.Models.V_BomCostModel'. A member of the type, 'costId', does not have a corresponding column in the data reader with the same name.
+2014-09-15 23:46:49,555 [16] ERROR - account.verification An error occurred while executing the command definition. See the inner exception for details.

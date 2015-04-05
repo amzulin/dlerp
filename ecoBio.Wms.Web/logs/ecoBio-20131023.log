@@ -1,0 +1,6 @@
+2013-10-23 22:56:20,919 [43] ERROR - stockin.inlist d:\软件开发\code\ecoBio.Wms.Web\Views\stockin\inlist.cshtml(74): error CS1502: 与“Enterprise.Invoicing.Common.Utils.GetStatus(int)”最匹配的重载方法具有一些无效参数
+2013-10-23 22:56:55,049 [42] ERROR - stockin.inlist d:\软件开发\code\ecoBio.Wms.Web\Views\stockin\inlist.cshtml(74): error CS1502: 与“Enterprise.Invoicing.Common.Utils.GetStatus(int)”最匹配的重载方法具有一些无效参数
+2013-10-23 22:57:31,339 [44] ERROR - stockin.inproduct d:\软件开发\code\ecoBio.Wms.Web\Views\stockin\inproduct.cshtml(38): error CS1061: “Enterprise.Invoicing.ViewModel.StockModel”不包含“requireNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.StockModel”的第一个参数的扩展方法“requireNo”(是否缺少 using 指令或程序集引用?)
+2013-10-23 23:01:38,180 [42] ERROR - stockin.inproduct d:\软件开发\code\ecoBio.Wms.Web\Views\stockin\inproduct.cshtml(8): error CS0029: 无法将类型“int”隐式转换为“string”
+2013-10-23 23:56:24,472 [16] ERROR - stockin.inlistview 未将对象引用设置到对象的实例。
+2013-10-23 23:56:24,611 [16] ERROR - stockin.inlist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

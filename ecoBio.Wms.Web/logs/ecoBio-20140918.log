@@ -1,0 +1,6 @@
+2014-09-18 21:08:34,831 [6] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2014-09-18 22:05:29,358 [10] ERROR - manage.supplierprice d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\manage\supplierprice.cshtml(17): error CS0103: 当前上下文中不存在名称“key”
+2014-09-18 23:11:32,093 [27] ERROR - manage.supplierprice “System.Dynamic.ExpandoObject”未包含“cnaddd”的定义
+2014-09-18 23:32:59,965 [23] ERROR - manage.supplierprice 列名 'fastcode' 无效。
+2014-09-18 23:45:14,341 [28] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。

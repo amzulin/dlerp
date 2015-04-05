@@ -1,0 +1,129 @@
+﻿@{
+    
+}
+@{
+    ViewBag.Title = "半成品仓物料明细";
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.DepotDetailModel>;
+    var mc = Model.mc as List<Enterprise.Invoicing.ViewModel.KeyValue>;
+    int count = 0;  
+    var key = Model.key as string;
+    var depotid = Model.depotid;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：物料库存 > 半成品仓 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>关键字：<input name="" type="text" id="txtkey" value="@key" />
+<a class="btn_search" href="javascript:void(0);" id="btn"></a>
+    <input type="hidden" id="hidpage" value="@page" />
+</div>
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>采购申请单</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="15%">物料类别</th>
+    <th width="20%">物料名称</th>
+    <th width="20%">物料规格</th>
+    <th width="8%">单位</th>
+    <th width="10%">库存</th>
+    <th width="15%">备注</th>
+    <th width="7%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>
+    <td>@{
+         var hc = mc.FirstOrDefault(p => p.value == item.materialCategory);
+         if (hc != null)
+         {
+             <span>@hc.text</span> 
+         }
+         else
+         {
+        <span>@("类别"+item.materialCategory)</span>
+         }
+        }
+    </td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td>@item.materialUnit</td>
+    <td>@item.amout</td>
+    <td>@item.remark</td>
+    <td>    
+         
+	</td>
+</tr>
+         pi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="8">无库存明细</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+       
+	 @Html.Partial("~/Views/Shared/page.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../depot/rawmaterial"}
+       })
+    </div>
+
+
+    </div>
+<script>  
+    var page='@page'
+    $(function () {       
+
+        $("#btn").click(function () {
+            var dd = $("#txtkey").val();
+            window.location.href = "../depot/rawmaterial?page=" + page + (dd != "" ? "&key=" + dd : "");
+        });
+
+        $("#txtkey").autocomplete({
+            source: function (request, response) {
+                var key = $("#txtkey").val();
+                $.get("../main/querydepotmaterial", { key: key, depotid: '@depotid' }, function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.name,
+                            model: item.model,
+                            value: item.code,
+                        }
+                    }));
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                var item = ui.item.name;
+                $("#txtkey").val(ui.item.label);            
+                return false;
+            }
+        });
+
+    });
+
+    
+</script>

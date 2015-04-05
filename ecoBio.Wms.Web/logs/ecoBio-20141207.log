@@ -1,0 +1,16 @@
+2014-12-07 21:06:46,157 [45] ERROR - stockin.semilistpart 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.V_ProductSemi”不兼容。类型“semiDate”的成员在同名的数据读取器中没有对应的列。
+2014-12-07 21:06:46,196 [45] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-07 21:10:16,136 [46] ERROR - stockin.semilistpart 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.V_ProductSemi”不兼容。类型“semiDate”的成员在同名的数据读取器中没有对应的列。
+2014-12-07 21:10:16,144 [46] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-07 21:14:58,473 [45] ERROR - stockin.semilistpart 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.V_ProductSemi”不兼容。类型“semiDate”的成员在同名的数据读取器中没有对应的列。
+2014-12-07 21:14:58,484 [45] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-07 21:16:36,236 [45] ERROR - stockin.semilistpart 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.V_ProductSemi”不兼容。类型“semiDate”的成员在同名的数据读取器中没有对应的列。
+2014-12-07 21:16:36,236 [45] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-07 21:16:38,102 [41] ERROR - stockin.semilistpart 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.V_ProductSemi”不兼容。类型“semiDate”的成员在同名的数据读取器中没有对应的列。
+2014-12-07 21:16:38,102 [41] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-07 21:16:39,059 [41] ERROR - stockin.semilistpart 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.V_ProductSemi”不兼容。类型“semiDate”的成员在同名的数据读取器中没有对应的列。
+2014-12-07 21:16:39,059 [41] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-07 21:24:11,966 [10] ERROR - stockin.semilistpart 数据读取器与指定的“Enterprise.Invoicing.Entities.Models.V_ProductSemi”不兼容。类型“semiDate”的成员在同名的数据读取器中没有对应的列。
+2014-12-07 21:24:11,976 [10] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-07 21:32:20,232 [11] ERROR - stockin.semilistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\stockin\semilistpart.cshtml(72): error CS1026: 应输入 )
+2014-12-07 21:32:20,242 [11] ERROR - stockin.semilist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

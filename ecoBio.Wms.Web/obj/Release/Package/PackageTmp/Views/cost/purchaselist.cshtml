@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "报销单列表";
+     }
+
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：采购管理 > 普通采购单列列表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+    <table>
+        <tr>
+            <td style="width:80px;text-align:right;">科目：</td><td><input name="" type="text" id="txtkm" /></td>
+            <td style="width:80px;text-align:right;">单号：</td><td><input name="" type="text" id="txtno" /></td>
+            <td style="text-align:right;">部门：</td><td><input name="" type="text" id="txtbm" /></td> 
+            <td style="text-align:right;">人员：</td><td><input name="" type="text" id="txtry" /></td> 
+            <td style="text-align:right;">供应商：</td><td><input name="" type="text" id="txtbz" /></td> 
+         </tr>
+        <tr>            
+            <td style="text-align:right;">创建日期：</td><td><input name="" type="text" id="from" /></td>
+            <td style="text-align:right;">至：</td><td><input name="" type="text" id="to" /></td> 
+        </tr>
+        <tr><td colspan="8" style="text-align:center;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询</a>
+            </td></tr>
+    </table>
+</div>
+
+<!--表格内容-->
+
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("purchaselistpart", "cost");   
+}</div>
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+    $(function () {
+        $("#from").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#to").datepicker({
+            dateFormat: "yy-mm-dd",
+            maxDate: new Date(),
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+    });
+    function pageload(p) {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../cost/purchaselistpart", { page: page, where: para, orderby: orderby }, function () { });
+    }
+    function orderlistp(by) {
+        if (orderby.indexOf('desc') != -1) orderby = by + " asc";
+        else orderby = by + " desc";
+        pageload(page);
+    }
+    function geturl() {
+        var km = $("#txtkm").val();
+        var no = $("#txtno").val();
+        var bz = $("#txtbz").val();
+        var start = $("#from").val();
+        var end = $("#to").val();
+        var bm = $("#txtbm").val();
+        var ry = $("#txtry").val();
+        para = "";
+        if (bm != '') para += " and depName like '%" + bm + "%'";
+        if (ry != '') para += " and makeName like '%" + ry + "%'";
+        if (km != '') para += " and  billTitle like '%" + km + "%'";
+        if (no != '') para += " and  billNo like '%" + sup + "%'";
+        if (bz != '') para += " and( remark like '%" + bz + "%' or detailRemark like '%" + bz + "%')";
+        if (start != '') para += " and createdate>='" + start + "'";
+        if (end != '') para += " and createdate<'" + end + "'";
+        return para;
+    }
+
+</script>

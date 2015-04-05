@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+    var one = Model.model as Enterprise.Invoicing.Entities.Models.Dictionary;
+    var type = Model.type;
+    var id = Model.id;
+    var ronly="";
+    if (type=="edit"&&id!="")
+    {
+        ronly = "class=input_gray readonly=readonly";
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id='@id',  type='@type';
+        function save() {
+            var rad = $('input:radio[name="radcheck"]:checked').val();
+            var no = $("#txtno").val();
+            var name = $("#txtname").val();
+            var value = $("#txtvalue").val();
+            var remark = $("#txtremark").val();
+            if (no == "" || value == '') {
+                $.dialog.alert("字典编码和值不能为空！");
+                return false;
+            }
+            $.dialog.tips('提交中...', 4, 'loading.gif');
+            //id,depId, string name, string mobile, string email, string duty, string remark
+            $.post("../system/savedictionary",
+                {
+                    type: type, no: no, rad: rad, name: name, value: value, remark: remark
+                }, function (data) {
+                    if (data.status == false) {
+                        $.dialog.alert(data.message);
+                        return false;
+                    }
+                    else {
+                        W.loadgrid();
+                    }
+                });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="21%" align="right">字典编码：</td>
+    <td width="23%"><input name="" id="txtno" value="@one.dictionaryKey" type="text" @ronly /></td>
+    <td width="21%" align="right">字典名称：</td>
+    <td width="35%"><input id="txtname" type="text" value="@one.dictionaryLable" /></td>
+  </tr>
+  <tr>
+    <td align="right">字典值：</td>
+    <td height="50" colspan="3">        
+        <textarea id="txtvalue" cols="20" rows="4">@one.dictionaryValue</textarea>
+    </td>
+    </tr>
+  <tr>
+    <td align="right">备注：</td>
+    <td height="50" colspan="3">
+        <input id="txtremark" name="" value="@one.remark" type="text" />
+    </td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3">
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

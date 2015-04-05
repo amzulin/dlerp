@@ -1,0 +1,2 @@
+2014-12-05 22:12:03,041 [24] ERROR - stockin.semionedetail 未将对象引用设置到对象的实例。
+2014-12-05 22:12:03,074 [24] ERROR - stockin.semione 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

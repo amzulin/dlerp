@@ -1,0 +1,31 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.KeyValue>;
+        var no=Model.no;
+        var query=Model.query;
+        var supplier = Model.supplier;
+    }
+<ul>
+@if (list!=null&&list.Count>0)
+{
+    var index=0;
+    foreach (var item in list)
+    {
+        <li id="li_@index" abc="@index"><a href="javascript:void(0);" onclick="sel_order('@item.text','@item.value')">@item.text</a>
+            @if (@item.value!="")
+            {
+                <i></i>
+            } 
+        </li>
+    }
+}
+else
+{
+    <li>不存在销售单</li>
+}
+</ul>
+
+	@Html.Partial("~/Views/Shared/page_load.cshtml", new ViewDataDictionary()
+       {           
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+

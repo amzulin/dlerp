@@ -1,0 +1,10 @@
+2013-11-25 16:05:27,268 [45] ERROR - purchase.orderdetailview The cast to value type 'System.DateTime' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+2013-11-25 16:05:38,954 [45] ERROR - purchase.orderdetailview The cast to value type 'System.DateTime' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+2013-11-25 16:05:43,348 [44] ERROR - purchase.orderdetailview The cast to value type 'System.DateTime' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+2013-11-25 19:03:46,687 [10] ERROR - purchase.orderdetailview The cast to value type 'System.DateTime' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+2013-11-25 19:11:18,104 [5] ERROR - purchase.orderdetailview The cast to value type 'System.DateTime' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+2013-11-25 21:05:21,317 [25] ERROR - stockin.saveinordertemp 值不能为 null。
+参数名: source
+2013-11-25 21:05:21,850 [16] ERROR - stockin.saveinordertemp 值不能为 null。
+参数名: source
+2013-11-25 21:11:02,210 [9] ERROR - main.printwin 未将对象引用设置到对象的实例。

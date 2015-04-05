@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "系统主页";
+    var all = Model.list as List<Enterprise.Invoicing.Entities.Models.Menu>;
+    var require = Model.require;
+   var order = Model.order;
+   var sin = Model.sin;
+   var sout = Model.sout;
+   var oret = Model.oret;
+   var sret = Model.sret;
+   var o2n = Model.o2n;
+   var bomorder = Model.bomorder;
+   var cls = "content";
+   if (all.Count>14)
+   {
+       cls = "data_content";
+   }
+   }
+
+<div class="@cls">
+<div class="content_main">
+
+@*<div class="in">*@
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="center_limits_table">
+<tr>
+    <td width="50%" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="center_limits_table">
+<thead>
+<tr>
+    <th colspan="2" height="24" bgcolor="#EAF1F7">
+       我的功能列表</th>
+  </tr>
+ </thead>
+ @if (all != null && all.Count > 0)
+ {
+     var first = all.Where(p => p.parentNo == null || p.parentNo == p.menuNo);
+     foreach (var item in first)
+     {
+         <tr>
+             <td width="14%"  align="center" bgcolor="#f7fbff"> 
+                 @item.menuName
+             </td>
+             <td  width="86%">
+                 @{
+                     var second = all.Where(p => p.parentNo == item.menuNo && p.parentNo != p.menuNo);
+            foreach (var sitem in second)
+            {
+                <div class="center_limits">
+	<ul>
+	<li class="sec_menu">
+                 @if (sitem.menuType==1)
+                 {
+                     <a href="../@sitem.menuUrl">@sitem.menuName</a>
+                 }
+        else{
+                <span> @sitem.menuName</span>
+                 }
+	</li>
+	</ul>
+	<ul>
+                 @{
+                     var third = all.Where(p => p.parentNo == sitem.menuNo && p.parentNo != p.menuNo);
+                foreach (var titem in third)
+                {
+                 <li>   <a href="../@titem.menuUrl">@titem.menuName</a></li>
+                }
+                     }
+	</ul>
+	</div>
+            }
+                     }
+             </td>
+         </tr>
+     }
+ }
+    </table>
+    </td>
+    <td width="50%" style="vertical-align:top;" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="center_limits_table" style="float:right;">
+        <thead>
+<tr>
+    <th colspan="2" height="24" bgcolor="#EAF1F7">
+       待审核列表</th>
+  </tr>
+ </thead>
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("require_check"))
+    { 
+        <tr><td width="40%" height="24" bgcolor="#f7fbff" align="center">待审核采购申请单</td><td><a href="../purchase/requirelist"> @require</a></td></tr>
+    }
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("order_check"))
+    { 
+        <tr><td width="40%" height="24" bgcolor="#f7fbff" align="center">待审核采购单</td><td><a href="../purchase/orderlist">@order</td></tr>
+    }
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_check"))
+    { 
+        <tr><td width="40%" height="24" bgcolor="#f7fbff" align="center">待审核BOM订单</td><td><a href="../bom/orderlist">@bomorder</td></tr>
+    }
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockin_check"))
+    { 
+        <tr><td width="40%"  height="24" bgcolor="#f7fbff" align="center">待审核入库单</td><td><a href="../stockin/inlist">@sin</td></tr>
+    }
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_check"))
+    { 
+        <tr><td width="40%" height="24" bgcolor="#f7fbff" align="center">待审核出库单</td><td><a href="../stockout/outlist">@sout</td></tr>
+    }
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockin_return_check"))
+    { 
+        <tr><td width="40%" height="24" bgcolor="#f7fbff" align="center">待审核采购退单</td><td><a href="../stockin/returnlist">@oret</td></tr>
+    }
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_return_check"))
+    { 
+        <tr><td width="40%" height="24" bgcolor="#f7fbff" align="center">待审核领料退单</td><td><a href="../stockout/returnlist">@sret</td></tr>
+    }
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_old2new_check"))
+    { 
+        <tr><td width="40%" height="24" bgcolor="#f7fbff" align="center">待审核以旧换新</td><td><a href="../stockout/changelist">@o2n</td></tr>
+    }
+     
+    </table>
+    </td>
+</tr>
+  </table>
+      
+    <div class="clear"></div>
+    
+@*</div>*@
+
+
+</div></div>

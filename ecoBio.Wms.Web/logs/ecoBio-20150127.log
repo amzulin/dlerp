@@ -1,0 +1,1 @@
+2015-01-27 21:58:06,244 [8] ERROR - depot.stockreport d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\depot\stockreport.cshtml(9): error CS0029: 无法将类型“int”隐式转换为“string”

@@ -1,0 +1,19 @@
+2013-10-10 11:15:02,844 [8] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 11:49:23,445 [21] ERROR - waterregula.anaerobic “System.Dynamic.ExpandoObject”未包含“select1”的定义
+2013-10-10 11:49:28,934 [24] ERROR - waterregula.anaerobic “System.Dynamic.ExpandoObject”未包含“select1”的定义
+2013-10-10 11:51:30,763 [22] ERROR - partialpage.upchartandgrid 未将对象引用设置到对象的实例。
+2013-10-10 13:11:52,907 [22] ERROR - costanalysis.structure 可为空的对象必须具有一个值。
+2013-10-10 14:23:06,168 [10] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 14:24:26,202 [30] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 14:28:15,208 [7] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 14:28:51,016 [6] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 14:31:11,356 [20] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 14:32:58,087 [13] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 14:33:32,187 [13] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 14:36:37,995 [11] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 14:39:33,708 [7] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-10-10 15:31:51,084 [14] ERROR - material.reportdetail 未将对象引用设置到对象的实例。
+2013-10-10 15:31:51,111 [14] ERROR - material.report 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-10-10 15:52:55,555 [19] ERROR - material.tabledetail 遇到的结束标记“tr”没有匹配的起始标记。您的起始标记/结束标记是否匹配?
+
+2013-10-10 15:52:55,567 [19] ERROR - material.filetable 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

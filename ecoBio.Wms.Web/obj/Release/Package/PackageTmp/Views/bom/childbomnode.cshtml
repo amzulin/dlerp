@@ -1,0 +1,102 @@
+﻿@{
+    Layout = null;
+
+    var one = Model.model as Enterprise.Invoicing.ViewModel.V_BomMaterial;
+    var type = Model.type;
+    var id = Model.id;
+    var ddlcate = Model.ddlcate as List<SelectListItem>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id = '@id', type = '@type';
+        var hmaterial = '';
+        $(function () {
+            if (type=='edit') {
+                hmaterial='@one.bomId'
+            }
+            $("#txtmaterial").autocomplete({
+                source: function (request, response) {
+                    var key = $("#txtmaterial").val();
+                    $.get("../main/querychildbom", { key: key}, function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label:   item.name + " 版本:" + item.version + " 备注:" + item.remark,
+                                name: item.name,
+                                version: item.version,
+                                remark: item.remark,
+                                value: item.id
+                            }
+                        }));
+                    });
+                },
+                minLength: 1,
+                select: function (event, ui) {
+                    var item = ui.item.name;
+                    $("#txtmaterial").val(ui.item.name + " " + ui.item.version + " " + ui.item.remark);
+                    hmaterial = ui.item.value;
+                    hname = ui.item.name;
+                    hmodel = ui.item.version;
+                    return false;
+                }
+            });
+        });
+        function save() {
+            if (hmaterial == '') {
+                $.dialog.alert("请选择BOM根节点产品！");
+                return false;
+            }
+            var remark = $("#txtremark").val();
+            var amount = 1;
+            var loss = 0
+            var cate = "子BOM";
+            $.post("../bom/savechildbomnode",
+               {
+                   id: id, type: type, amount: amount, cate: cate, child: hmaterial, remark: remark, loss: loss
+               }, function (data) {
+                   if (data.status == false) {
+                      alert(data.message);
+                       return false;
+                   }
+                   else {
+                       W.loadgrid();
+                   }
+               });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td width="21%" align="right">子BOM：</td>
+    <td colspan="3"><input name="" style="width:400px;" type="text" id="txtmaterial"  value="@(type=="edit"?one.bomName.ToString()+" "+one.version:"")"  /></td>
+  </tr>  
+  <tr>
+    <td  align="right">备注：</td>
+    <td><input name="" type="text" id="txtremark" value="@(type=="edit"?one.remark.ToString():"")" /></td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3">
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

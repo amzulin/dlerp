@@ -1,0 +1,163 @@
+﻿@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_StockOutModel>;
+    int count = 0;
+    var first = "";
+    if (list != null && list.Count > 0)
+    {
+        first = list[0].stockoutNo;
+        count = list.Count;
+    }
+    var page = Model.pageIndex;
+    var pi = 1;
+    var dpi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+    string viewname = "";
+     }
+
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>出库单</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="14%" style="cursor:pointer;" onclick="orderlist('stockoutNo')" >出库单号</th>
+    <th width="15%" style="cursor:pointer;" onclick="orderlist('depName')" >部门</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlist('staffName')" >出库人</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlist('createDate')" >出库时间</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlist('outType')" >类别</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlist('status')" >状态</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlist('remark')" >备注</th>
+    <th width="16%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr><td colspan="9">
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tbody>
+        <tr  id="tr_@dpi" onclick="loaddetail(@dpi,'../stockout/outlistview?no=@item.stockoutNo')">
+      <td width="5%">@pi</td>
+    <td width="14%">@item.stockoutNo</td>
+    <td width="15%">@item.depName</td>
+    <td width="8%">@item.staffName</td>
+    <td width="12%">@item.createDate.ToString("yyyy-MM-dd")</td>
+            @{
+         var supplier = item.supplierName;
+         if (item.outType==3)
+         {
+             supplier += "订单号:"+item.bomOrderNo+" 物料;"+item.materialName+item.materialModel+",领料" + item.outAmount;
+         }
+         var ptitle = Enterprise.Invoicing.Common.Utils.GetStockName("out", item.outType);
+            <td width="8%" title="@supplier" >@ptitle</td>
+            }
+    <td width="10%">
+        @if (item.isover == 1)
+        {
+            <span>完工</span> 
+        }
+        else
+        {
+            <span>@Enterprise.Invoicing.Common.Utils.GetStatus(item.status)</span>
+        }
+
+    </td>
+    <td width="12%">@item.remark</td>
+    <td width="16%">   
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_check"))
+        { 
+       <a href="javascript:void(0);" onclick="changestatus('stockout','@item.stockoutNo',@item.status,'../stockout/outlist?page=@page')">@Html.Raw(@Enterprise.Invoicing.Common.Utils.GetBtnStr(item.status))</a>
+        }
+          @if (item.status == 0)
+          {
+              if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_update") || item.staffId == Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+              {
+                  switch (item.outType)
+                  {
+                      case 1:
+                      <a href="outsell?type=edit&page=@page&no=@item.stockoutNo" title="修改">修改</a>
+                          break;
+                      case 2:
+                      <a href="outpull?type=edit&page=@page&no=@item.stockoutNo" title="修改">修改</a>
+                          break;
+                      case 3:
+                      <a href="../bom/bomout?type=edit&page=@page&no=@item.stockoutNo" title="修改">修改</a>
+                          break;
+                      case 4:
+                      <a href="outtsell?type=edit&page=@page&no=@item.stockoutNo" title="修改">修改</a>
+                          break;
+                      case 8:
+                      <a href="outother?type=edit&page=@page&no=@item.stockoutNo" title="修改">修改</a>
+                          break;
+                      default:
+                          break;
+                  }
+              } if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_invalid"))
+              {
+       <a href="javascript:void(0);" onclick="changestatus('stockout','@item.stockoutNo',-1,'../stockout/outlist?page=@page')" title="作废">作废</a>}
+              if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_delete") || item.staffId == Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+              {  <span onclick="deleteone('../stockout/outdelete','@item.stockoutNo','@(ptitle + "单")');"  title="删除">删除</span>    }
+          }
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_print"))
+          {
+              if (item.outType != 1 && item.outType != 4)
+              {
+                  <span onclick="print('@(ptitle + "单")','stockout','@item.stockoutNo');"  title="打印">打印</span>
+              }
+              else
+              {
+              <span onclick="printsale('@item.stockoutNo');"  title="打印">打印</span>
+              }
+          }   
+	</td>
+   </tr>
+                	  </tbody>
+    </table>      
+          <div  id="detai_div_@dpi" style="display:none;">
+              @{
+          Html.RenderAction("outlistview", "stockout", new { no = "" });
+      }
+        </div>
+
+             </td></tr>
+          pi++;
+          dpi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="9">无出库单</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+	 @Html.Partial("~/Views/Shared/page_load.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+    </div>
+
+<script>  
+    var c = '@count';
+    var detail = [];
+    var close = [];
+    page='@page'
+    $(function () {       
+        for (var i = 0; i < c; i++) {
+            detail.push(0);
+            close.push(0);
+        }
+        if ('@first' != '') {
+           // loaddetail(1, '../stockout/inlistview?no=@first');
+        }
+    });
+</script>

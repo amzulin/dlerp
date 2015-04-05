@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+    var one = Model.model as Enterprise.Invoicing.Entities.Models.Department;
+    var type = Model.type;
+    var id = Model.id;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id='@id',  type='@type';
+        function save() {
+            var rad = $('input:radio[name="radcheck"]:checked').val();
+            var name = $("#txtname").val();
+            var phone = $("#txtphone").val();
+            var leader = $("#txtleader").val();
+            var remark = $("#txtremark").val();
+            if (name == '') {
+                $.dialog.alert("部门名称不能为空！");
+                return false;
+            }
+            $.dialog.tips('提交中...', 4, 'loading.gif');
+            $.post("../manage/savedepment",
+                {
+                    id: id, rad: rad, depname: name, phone: phone, leader: leader, remark: remark
+                }, function (data) {
+                if (data.status == false) {
+                    $.dialog.alert(data.message);
+                    return false;
+                }
+                else {
+                    W.loadgrid();
+                }
+            });
+        }
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="21%" align="right">部门名称：</td>
+    <td width="23%"><input id="txtname" name="" type="text" value="@one.depName" /></td>
+    <td width="21%" align="right">部门电话：</td>
+    <td width="35%"><input id="txtmobile" name="" value="@one.phone" type="text" /></td>
+  </tr>
+  <tr>
+    <td align="right">负责人：</td>
+    <td><input name="" id="txtleader" value="@one.leader" type="text" /></td>
+    <td align="right">状态：</td>
+    <td>
+        &nbsp;<input id="rad1" name="radcheck" type="radio" value="1" checked="checked"  style="width:20px;"/>正常  
+        &nbsp;<input style="width:20px;" id="rad0" name="radcheck" type="radio" value="0" />停用
+    </td>
+  </tr>
+  <tr>
+    <td align="right">备注：</td>
+    <td height="50" colspan="3">
+        <input id="txtremark" name="" value="@one.remark" type="text" />
+    </td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td height="50" colspan="3">
+        <a href="javascript:void(0);" onclick="save();" class="btn_refer2">提交</a>
+    </td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

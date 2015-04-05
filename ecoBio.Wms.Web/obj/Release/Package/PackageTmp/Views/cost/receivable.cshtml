@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "应收款列表";
+     }
+
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：费用管理 > 应收款列表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+    <table>
+        <tr><td style="width:80px;text-align:right;">客户：</td><td><input name="" type="text" id="txtcustomer" style="width:200px;" /></td>
+            <td style="width:80px;text-align:right;">物料：</td><td><input name="" type="text" id="txtm" /></td>
+            <td style="width:80px;text-align:right;">规格：</td><td><input name="" type="text" id="txtg" /></td>
+            <td style="text-align:right;">是否退单：</td><td><select id="ddlr"><option value="-1">全部</option><option value="0">无退单</option><option value="1">有退单</option></select></td> 
+         </tr>
+        <tr>            
+            <td style="text-align:right;">销售日期：</td><td><input name="" type="text" id="from" /></td>
+            <td style="text-align:right;">至：</td><td><input name="" type="text" id="to" /></td>
+            <td style="text-align:right;">订单号：</td><td><input name="" type="text" id="txtpo" /></td>
+            <td style="text-align:right;">出库单号：</td><td><input name="" type="text" id="txtin" /></td>
+        </tr>
+        <tr><td colspan="10" style="text-align:center;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+            <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+            </td></tr>
+    </table>
+</div>
+
+<!--表格内容-->
+
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("receivablepart", "cost");   
+}</div>
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+    $(function () {
+        $("#from").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#to").datepicker({
+            dateFormat: "yy-mm-dd",
+            maxDate: new Date(),
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+    });
+    function excel() {
+        para = "";
+        geturl();
+        var url = "../cost/excelreceivable?where=" + para + "&orderby=" + orderby;
+        window.location.href = encodeURI(url);// "../cost/excelreceivable?where=" + para + "&orderby=" + orderby;
+    }
+    function pageload(p) {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../cost/receivablepart", { page: page, where: para, orderby: orderby }, function () { });
+    }
+    function orderlistp(by) {
+        if (orderby.indexOf('desc') != -1) orderby = by + " asc";
+        else orderby = by + " desc";
+        pageload(page);
+    }
+    function geturl() {
+        var sup = $("#txtcustomer").val();
+        var m = $("#txtm").val();
+        var g = $("#txtg").val();
+        var po = $("#txtpo").val();
+        var si = $("#txtin").val();
+        var start = $("#from").val();
+        var end = $("#to").val();
+        var ddlr = $("#ddlr").val();
+        para = "";
+        if (ddlr == '0') para += ' and returnAmount=0 ';
+        if (ddlr == '1') para += ' and returnAmount>0 ';
+        if (m != '') para += " and (materialName like '%" + m + "%' or materialNo like '%" + m + "%' or tunumber like '%" + m + "%'  )";
+        if (g != '') para += " and  materialModel like '%" + g + "%'";
+        if (sup != '') para += " and  suppliername like '%" + sup + "%'";
+        if (po != '') para += " and bomOrderNo like '%" + po + "%'";
+        if (si != '') para += " and stockoutNo like '%" + si + "%'";
+        if (start != '') para += " and createdate>='" + start + "'";
+        if (end != '') para += " and createdate<'" + end + "'";
+        return para;
+    }
+
+
+    //展开明细
+    function loaddetailp(i,id) {
+        if (i == detailindex) {
+            var s = $("#detai_div_" + detailindex).css("display");
+            if (s == "none") {
+                $("#tr_" + detailindex).addClass("active");
+                $("#detai_div_" + detailindex).css("display", "block");
+            }
+            else {
+                $("#detai_div_" + detailindex).css("display", "none");
+                $("#tr_" + detailindex).removeClass("active"); return false;
+            }
+      //     
+        }
+
+        $("#detai_div_" + detailindex).css("display", "none");
+        $("#tr_" + detailindex).removeClass("active");
+        detailindex = i;
+
+        para = "";
+        geturl();
+       // if (detail[i - 1] == 0) {//第一次加载数据
+            var uid = new Date();
+            $("#detai_div_" + i).load("../cost/receivableview?uid=" + uid.getTime(), { supplier: id, where: para }, function (data) { });
+         //   detail[i - 1] = 1;
+      //  }
+        $("#tr_" + detailindex).addClass("active");
+        $("#detai_div_" + detailindex).css("display", "block");
+    }
+
+</script>

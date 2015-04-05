@@ -1,0 +1,12 @@
+2014-05-26 10:56:24,803 [38] ERROR - stockin.savereturnonetemp 索引超出了数组界限。
+2014-05-26 10:56:56,003 [28] ERROR - stockin.savereturnonetemp 索引超出了数组界限。
+2014-05-26 11:01:32,554 [10] ERROR - stockin.savereturnonetemp 值不能为 null。
+参数名: source
+2014-05-26 11:08:13,083 [5] ERROR - stockin.savereturnonetemp 索引超出了数组界限。
+2014-05-26 11:13:56,977 [8] ERROR - stockin.savereturnonetemp 索引超出了数组界限。
+2014-05-26 14:10:32,985 [14] ERROR - stockin.saveinordertemp 索引超出了数组界限。
+2014-05-26 14:24:46,985 [12] ERROR - stockout.savecanreturntemp 未将对象引用设置到对象的实例。
+2014-05-26 14:41:08,613 [15] ERROR - stockout.savecanreturnrtemp 未将对象引用设置到对象的实例。
+2014-05-26 14:42:56,704 [15] ERROR - stockout.savecanreturnrtemp 未将对象引用设置到对象的实例。
+2014-05-26 17:58:55,999 [29] ERROR - main.autopost 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+2014-05-26 21:23:23,456 [19] ERROR - account.verification 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。

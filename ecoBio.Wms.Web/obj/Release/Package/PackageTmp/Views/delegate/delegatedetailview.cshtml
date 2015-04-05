@@ -1,0 +1,85 @@
+﻿
+@{
+    var no = Model.no;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_DelegateSendDetailModel>;
+    List<string> delegateno = new List<string>();
+    var pi = 1; var pi2 = 1;
+    }
+
+
+@if (list!=null&&list.Count>0)
+{
+    foreach (var item in list)
+	{        
+    if (!delegateno.Contains(item.delegateNo))
+    {
+        var xlist = list.Where(p => p.delegateNo == item.delegateNo).ToList();
+        pi2 = 1;
+        <hr />
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow" style="margin-left:0px;">
+  <thead>
+  <tr>
+    <th>委外工单</th>
+    <th>委外物料</th>
+    <th>名称</th>
+    <th>规格</th>
+    <th>委外数量</th>
+    <th>交货数量</th>
+    <th>单价</th>   
+      <th>总金额</th>   
+ </tr>
+  </thead>
+    <tbody><tr> <td>@xlist[0].delegateNo</td>
+           <td>@xlist[0].productNo</td>
+    <td>@xlist[0].productName</td>
+    <td>@xlist[0].productModel</td>
+    <td>@xlist[0].productAmount</td>
+    <td>@xlist[0].backProduct</td>
+         @if(Enterprise.Invoicing.Web.Masterpage.CheckRight("delegatesendshowmoney_page")){
+    <td>@xlist[0].price</td>
+    <td>@(Math.Round( xlist[0].price*xlist[0].productAmount,4))</td>
+        }
+        else{
+             <td></td><td></td>
+        }
+    </tr>
+        <tr><td colspan="8" style="text-align:left;">
+            发货明细
+            </td></tr>
+       <tr><td colspan="8">
+           <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow" style="margin-left:0px;">
+                 <thead>
+  <tr> <th>序号</th>
+    <th>物料</th>
+    <th>名称</th>
+    <th>规格</th>
+    <th>计算数量</th>
+    <th>实发数量</th>    
+    <th>备注</th>    
+ </tr>  </thead>
+    <tbody>
+        @foreach (var mx in xlist)
+        {
+            <tr><td>@pi2</td>
+            <td>@mx.materialNo</td>
+            <td>@mx.materialName</td>
+            <td>@mx.materialModel</td>
+            <td>@mx.theoryAmount</td>
+            <td>@mx.realAmount</td>
+            <td>@mx.remark</td>
+        </tr>
+            pi2++;
+        }
+           </tbody></table>
+           </td></tr>
+    </tbody>
+</table>
+
+        delegateno.Add(item.delegateNo);
+    }
+	}
+   }
+else{
+<div>无发货明细</div>
+}
+

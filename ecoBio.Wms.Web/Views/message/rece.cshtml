@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "消息中心-收件箱";
+
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：消息中心 > 收件列表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>消息查询：<input name="" type="text" id="txtkey" /> 
+    类别：<input name="" type="text" id="txtcate" />
+<a class="btn_search" href="javascript:void(0);" id="btn" onclick="loadlistpart(1);"></a>
+<a   href="../message/send"  class="btn_refer2">发送记录</a>
+<a  onclick="sendone()"  class="btn_refer2">发送消息</a>
+</div>
+
+<!--表格内容-->
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("recepart", "message");   
+}
+
+
+    </div>
+<script>  
+    parturl = "../purchase/orderlistpart";
+    csparas = 'purchaseNo';
+    htmlids = 'txtkey';
+
+    var onewin='';
+    function sendone() {
+        onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 740, height: 530, resize: false,
+            title: "发送信息",
+            content: 'url:../message/sendone'
+        });
+
+    }
+    function query() {
+        if (onewin != '') onewin.close();
+        var cate = $("#txtcate").val();
+        var key = $("#txtkey").val();
+        $("#partlistdiv").load("../message/recepart", { page: page, cate: cate, key: key }, function (data) { });
+    }
+</script>

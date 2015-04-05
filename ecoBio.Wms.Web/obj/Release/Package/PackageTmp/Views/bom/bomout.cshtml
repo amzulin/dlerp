@@ -1,0 +1,315 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.StockModel;
+    var bom = Model.bom as Enterprise.Invoicing.Entities.Models.V_BomOrderDetailModel;
+    var depots = Model.depots as List<SelectListItem>;
+    
+    var ddl = Model.ddl as List<Enterprise.Invoicing.Entities.Models.Supplier>;
+    var supplierid = 0;
+    int sn = 0;
+    double amount = 0;
+    if (type == "edit")
+    {
+        supplierid = one.supplierId;
+        ViewBag.Title = "编辑BOM领料单";
+        sn = one.bomdetailsn.Value;
+        amount = one.amount;
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增BOM领料单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：出库管理 > <a href="../stockout/outlist">出库单列表</a> > BOM领料 </div>
+<div class="data_content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer" style="height:120px;">
+<label>领料单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@no" />
+<label>领料部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  style="width:90px;" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>领料人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" style="width:50px;"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>仓库：</label><input name="" id="txtdeport" type="text" value=""/> <label>备注：</label><input name="" id="txtremark" type="text" value=""/>  
+   <br />
+<label>订单客户：</label>
+    <input name="" type="text" id="txtcustomer2"  style="width:300px;" />
+    <label>客户订单：</label>    
+    <select style="width:120px;" id="ddlorder"></select>
+       <br />
+    <label>订单明细：</label><select style="width:300px;" id="ddldetail"></select>
+    <label>数量：</label><input name="" style="width:80px;"  id="txtamount" type="text" value=""/>  
+<a href="javascript:void(0);" id="btncreate" onclick="change3();" class="btn_refer">提交</a>
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer" style="height:120px;">
+<label>出库单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@one.stockNo" /><label>
+    客户：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:90px;" value="@one.supplierName"/>
+<label>出库部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:90px;" value="@one.depName"/>
+<label>出库人：</label><input name="" type="text" readonly="readonly" class="input_gray" style="width:50px;" value="@one.staffName" />   
+<label>仓库：</label><input name="" id="txtdeport" type="text" value="@one.deportStaff"/><label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark"/>  
+           <br />
+<label>订单客户：</label>@one.supplierName
+    <label>客户订单：</label>@bom.bomOrderNo
+           <br />
+    <label>订单明细：</label>@(bom.materialNo+" "+bom.materialName+" "+bom.materialModel)
+    <label>数量：</label><input name="" style="width:80px;"  id="txtamount" type="text" value="@one.amount"/>  
+</div>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>出库明细</h2>
+<div class="add">
+    <ul>
+        <li>
+ 
+<label>物料：</label>
+            <input name="" type="text" id="txtbommaterial" style="width:250px;"  />
+</li>
+         <li>
+<label>数量：</label><input name="" type="text" id="ndamount" class="input_width_60px"/></li>
+         <li>
+<label>仓库：</label>@Html.DropDownList("ndepot",depots)</li>
+        <li>
+<label>备注：</label><input name="" type="text" id="ndremark" class="input_width_80px"/></li>
+         <li>
+<a  href="javascript:void(0);" id="btngl" class="gray_btn">添加</a>
+    <input type="hidden" id="hidcount" value="0" />
+    <input type="hidden" id="hiddetail" value="" />
+    <input type="hidden" id="hidarr" value="" />
+</li>   </ul>
+</div>
+<div style="min-height:250px;" id="detail_table">
+@{
+    Html.RenderAction("bomoutdetail", "bom", new { no = no,sn=sn,amount=amount });   
+}
+</div> 
+
+
+
+</div>
+
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+
+
+    var hdetail = 0;
+    var hcount = 0;
+    var hmaterial = "";
+    var hname = "";
+    var hmodel = "";
+    var htype = "";
+    var supplierid = '@supplierid';
+
+    var addbomid = 0;
+    var orderno = "";
+    var sn =parseInt( '@sn');
+    var details = [];
+    $(function () {
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        $("#txtcustomer2").autocomplete({
+            source: function (request, response) {
+                var key = $("#txtcustomer2").val();
+                $.get("../main/querycustomer", { key: key, type: 1 }, function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.name,
+                            name: item.name,
+                            value: item.id,
+                        }
+                    }));
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                var item = ui.item.name;
+                $("#txtcustomer2").val(ui.item.name);
+                supplierid = ui.item.value;
+                suppliername = ui.item.name;
+                change1();
+
+
+                return false;
+            }
+        });
+        $("#btngl").click(addone);//新增
+        $("#ddl").change(change1);
+        $("#ddlorder").change(change2);
+
+
+        $("#txtbommaterial").autocomplete({
+            source: function (request, response) {
+                if (sn == 0) {
+                    $.dialog.tips("请选择客户订单产品！");
+                    return false;
+                }
+                var key = $("#txtbommaterial").val();
+                $.get("../main/querybommaterial", { key: key, sn: sn }, function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: "类别：" + item.mc + " 物料:" + item.name + " 型号:" + item.model,
+                            value:item.bomid
+                        }
+                    }));
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $("#txtbommaterial").val(ui.item.label);
+                addbomid = ui.item.value;
+                return false;
+            }
+        });
+
+    });
+
+    function editone(detailid,bid,pi) {
+        var depotid = $("#depot_" + pi).val();
+        var ta = $("#damount_" + pi).val();
+        var rm = $("#dremark_" + pi).val();
+        if (ta == "" || isNaN(ta) || parseInt(ta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#damount_" + pi).focus();
+            return false;
+        }
+        $.post("../bom/savebomouttemp", { detail: detailid, no: no, sn: sn, bomid: bid, depot: depotid, count: ta, remark: rm, type: 'edit' }, function (data) {
+            if (parseInt( data)>0) {
+                $.dialog.tips("提交成功！");
+            }
+            else {
+                $.dialog.tips("提交失败！");
+            }
+        });
+
+    }
+    function deleteone(detailsn, bid) {
+
+        var ta = $("#txtamount").val();
+        if (ta == "" || isNaN(ta) || parseInt(ta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#txtamount").focus();
+            return false;
+        }
+        if (confirm("确定删除？")) {
+            $.post('../bom/deletebomout', { no: no, sn: sn, detail: detailsn, bomid: bid }, function (data) {
+                if (data == "ok") {
+                    $("#detail_table").load("../bom/bomoutdetail", { sn: sn, no: no, amount: ta }, function () { });
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+    function addone() {
+        if (addbomid == 0) {
+            alert("请选择订单产品的BOM物料！");
+            $("#txtbommaterial").focus();
+            return false;
+        }
+        var depotid = $("#ndepot").val();
+        var ta = $("#ndamount").val();
+        var rm = $("#ndremark").val();
+        if (ta == "" || isNaN(ta) || parseInt(ta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#ndamount").focus();
+            return false;
+        }
+        var mta = $("#txtamount").val();
+        if (mta == "" || isNaN(mta) || parseInt(mta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#txtamount").focus();
+            return false;
+        }
+        $.post("../bom/savebomouttemp", { detail: 0, no: no, sn: sn, bomid: addbomid, depot: depotid, count: ta, remark: rm, type: 'add' }, function (data) {
+            if (parseInt(data) > 0) {
+                $.dialog.tips("提交成功！");
+                addbomid = 0;
+                $("#txtbommaterial").val('');
+                $("#detail_table").load("../bom/bomoutdetail", { sn: sn, no: no, amount: mta }, function () { });
+            }
+            else {
+                $.dialog.tips("提交失败！");
+            }
+        });
+    }
+    function change1() {
+        //supplierid = $("#ddl").val();
+        orderno = "";
+        sn = 0; details = [];
+        if (supplierid == 0) {
+            return false;
+        }
+        $("#ddlorder").empty();
+        $("#ddldetail").empty();
+        $("#detail_table").empty(); 
+        $.post("../bom/getsupplierorder", { supplierid: supplierid }, function (data) {
+            if (data != "") {
+                var order = data.orders;
+                details = data.details;              
+                var htmlo = "<option value=''>请选择订单</option>";
+                for (var i = 0; i < order.length; i++) {
+                    htmlo += "<option value='" + order[i].Value + "'>" + order[i].Text + "</option>";
+                }
+                $("#ddlorder").html(htmlo);
+
+            }
+        });
+    }
+    function change2() {
+        orderno = $("#ddlorder").val();
+        sn = 0;
+        if (no == "") {
+            $("#detail_table").empty();
+            return false;
+        }
+        $("#ddldetail").empty();
+        $("#detail_table").empty();
+        var htmld = "<option value=''>请选择产品明细</option>";
+        for (var i = 0; i < details.length; i++) {
+            if (details[i].no == orderno) {
+                htmld += "<option value='" + details[i].sn + "'>" + details[i].mno + details[i].mname + details[i].nmodel + "（订单数:" + details[i].amount + ";已领料:" + details[i].outamount + "）" + "</option>";
+            }
+            $("#ddldetail").html(htmld);
+        }
+    }
+    function change3() {
+        sn = $("#ddldetail").val();
+        if (sn == "0") return false;
+        var ta = $("#txtamount").val();
+        if (ta == "" || isNaN(ta) || parseInt(ta) < 1) {
+            alert("请输入不小于1的正确领料数量！");
+            $("#txtamount").focus();
+            return false;
+        }
+        for (var i = 0; i < details.length; i++) {
+            if (details[i].sn == sn) {
+                if (details[i].amount <= details[i].outamount) {
+                    alert("该产品已领料完，请选择其他产品！");
+                    return false;
+                }
+                if (details[i].amount - details[i].outamount < parseInt(ta)) {
+                    alert("领料数量超出订单的剩余数量，请重新填写！");
+                    $("#txtamount").focus();
+                    return false;
+                }
+                $("#detail_table").load("../bom/bomoutdetail", { sn: sn, no: no, amount: ta }, function () { });
+            }
+        }
+    }
+</script>

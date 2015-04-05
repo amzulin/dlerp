@@ -1,0 +1,40 @@
+﻿
+@{
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BillCostDetail>;
+
+    var pi = 1;
+    }
+
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th width="5%">明细</th>
+          <th width="25%">科目</th>
+          <th width="10%">金额</th>
+          <th width="10%">日期</th>        
+          <th width="50%" >备注</th>   
+        </tr>
+      </thead>
+          <tbody>
+     @if (list.Count>0)
+     {
+        foreach (var item in list)
+     {  
+  <tr>
+      <td>@pi</td>
+    <td>@item.billTitle</td>
+    <td>@item.cost</td>
+    <td>@item.billDate.ToString("yyyy-MM-dd")</td>
+    <td>@item.remark</td>
+  </tr>
+         pi++;
+      }    
+     }
+     else
+     {
+        <tr>
+  <td colspan="5"  bgcolor="#FFFFFF" style="text-align:left;">无报销明细</td></tr> 
+     }
+</tbody>
+    </table> 
+

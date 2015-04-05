@@ -1,0 +1,13 @@
+2014-12-10 22:39:50,801 [6] ERROR - delegate.requireorder if 块缺少结束字符“}”。请确保此块内的所有“{”都有匹配的“}”字符，并且任何“}”都不会解释为标记。
+
+2014-12-10 22:42:16,894 [23] ERROR - delegate.requireorder d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\requireorder.cshtml(39): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateSendModel”不包含“purchaseNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateSendModel”的第一个参数的扩展方法“purchaseNo”(是否缺少 using 指令或程序集引用?)
+2014-12-10 22:42:40,646 [23] ERROR - delegate.requireorder d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\requireorder.cshtml(40): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateSendModel”不包含“suppliername”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateSendModel”的第一个参数的扩展方法“suppliername”(是否缺少 using 指令或程序集引用?)
+2014-12-10 22:43:20,661 [12] ERROR - delegate.requireorder d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\delegate\requireorder.cshtml(116): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateSendModel”不包含“suppliername”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateSendModel”的第一个参数的扩展方法“suppliername”(是否缺少 using 指令或程序集引用?)
+2014-12-10 22:43:36,112 [13] ERROR - delegate.needbuylist 数据读取器包含多个字段。多个字段对于 EDM 基元或枚举类型无效。
+2014-12-10 22:43:36,143 [13] ERROR - delegate.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-10 22:47:08,323 [9] ERROR - delegate.needbuylist 数据读取器包含多个字段。多个字段对于 EDM 基元或枚举类型无效。
+2014-12-10 22:47:09,736 [9] ERROR - delegate.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-10 22:48:08,933 [10] ERROR - delegate.needbuylist 数据读取器包含多个字段。多个字段对于 EDM 基元或枚举类型无效。
+2014-12-10 22:48:08,934 [10] ERROR - delegate.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-12-10 22:51:45,290 [10] ERROR - delegate.needbuytemp 无法将类型为“System.Collections.Generic.List`1[Enterprise.Invoicing.Entities.Models.V_DelegateSendDetailModel]”的对象强制转换为类型“System.Collections.Generic.List`1[Enterprise.Invoicing.ViewModel.PurchaseDetailModel]”。
+2014-12-10 22:51:45,306 [10] ERROR - delegate.requireorder 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

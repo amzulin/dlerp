@@ -1,0 +1,225 @@
+﻿@{
+    var type = Model.type;
+    var no = Model.no;
+    var outno = Model.outno;
+    var one = Model.one as Enterprise.Invoicing.ViewModel.ReturnModel;
+    if (type == "edit")
+    {
+        ViewBag.Title = "编辑直接销售退单";
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增直接销售退单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：出库管理 > 新增直接销售退单 </div>
+<div class="content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer">
+<label>直接销售退单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" style="width:100px;" value="@no" />
+<label>退单部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  style="width:90px;" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>退单人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" style="width:50px;"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>仓库：</label><input name="" id="txtdeport" type="text" value=""/><label>备注：</label><input name="" id="txtremark" type="text" value=""/>  
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer">
+<label>直接销售退单号：</label><input name="" type="text" readonly="readonly"  class="input_gray"  style="width:100px;" value="@one.returnNo" />
+<label>退单部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:90px;" value="@one.depName"/>
+<label>退单人：</label><input name="" type="text" readonly="readonly" class="input_gray" style="width:50px;" value="@one.staffName" />   
+<label>仓库：</label><input name="" id="txtdeport" type="text" value="@one.deportStaff"/><label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark"/>  
+</div>
+}
+<div class="content_main">
+<!--左侧导航-->
+<div id="sidebar_left">
+<h2>退单号</h2>
+<div>
+<input type="text" value="关键字" id="txtquery" /><a href="javascript:void(0);" onclick="btnquery()" class="btn">查询</a>
+</div>
+    
+<div id="div_ul">
+    @{
+        Html.RenderAction("canreturnlist", "stockout", new { no = no, returntype = 4, query = "" });   
+    }
+</div>
+</div>
+
+<!--左侧导航结束-->
+
+<!--右侧表格-->
+<div id="right_area">
+<h3 id="t_order">@outno</h3>
+<div class="clear"></div>
+<div id="div_tab" class="right_area_list">
+  @{
+      Html.RenderAction("canreturntab", "stockout", new { no = no, outno = outno, pagesize=3 });   
+    }
+</div>
+
+    <div id="tab_haddetail">
+@{
+    Html.RenderAction("canreturntemp", "stockout", new { no = no });   
+    }  
+</div>
+</div>
+
+</div>
+
+</div>
+<script>    
+    var selectindex = 0;
+    var outno = '@outno';
+    var no = '@no';
+    $(function () {
+        var type = $("#hidtype").val();
+        if (type == "add") {
+            $("#txtinsn").removeAttr("readonly");
+        }
+
+        $("#txtquery").autocomplete({
+            source: function (request, response) {
+                var key = $("#txtquery").val();
+                $.get("../stockout/queryorder", { key: key, outtype: 4 }, function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.value,
+                            value: item.value
+                        }
+                    }));
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                var item = ui.item;
+            }
+        });
+        $("#txtquery").focus(function () {
+            var v = $("#txtquery").val();
+            if (v == "关键字") {
+                $("#txtquery").val("");
+            }
+        });
+        $("#txtquery").blur(function () {
+            var v = $("#txtquery").val();
+            if (v == "") {
+                $("#txtquery").val("关键字");
+            }
+        });
+
+    });
+    function btnquery() {
+        var key = $("#txtquery").val();
+        if (key == "关键字") key = "";
+        $("#div_ul").load("../stockout/canreturnlist", { query: key, no: no, returntype: 4 }, function (data) { });
+    }
+    function sel_order(o, inno) {
+        if (o == outno) return;
+        outno = o;
+        $("#t_order").text(outno);
+        $("#div_tab").load("../stockout/canreturntab", { outno: outno, no: inno }, function (data) { });
+    }
+
+    function saveindeail() {
+        var txts = $("input[ftype='txtin']");
+        var txtp = $("select[ftype='txtinp']");
+        var txtr = $("input[ftype='txtrem']");
+        if (txts.length < 1 || txts.length!=txtp.length) {
+            $.dialog.alert("无退单明细！");
+            return false;
+        }
+        var details = [];
+        var counts = [];
+        var prices = [];
+        var models = [];
+        var remarks = [];
+        var msg = "";
+        for (var i = 0; i < txts.length; i++) {
+            var o = $(txts[i]);
+            var cu = o.attr("cu");
+            //if (cu == 1) {
+            var zc = o.attr("zc");
+            var ic = o.attr("ic");
+            var hc = o.attr("hc");
+            var detail = o.attr("detail");
+            var tabindex = o.attr("tabindex");
+            var m = o.attr("m");
+            var vp = $("#ddldepot" + tabindex).val();         
+            var v = o.val();
+            if (v == "") v = 0;
+            if (isNaN(zc) || isNaN(ic) || isNaN(v) || isNaN(vp) || vp=='0') {
+                msg += ("第" + (tabindex + 1) + "行数量格式有误或未选择仓库！");
+            }
+            zc = Number(zc);
+            ic = Number(ic);
+            hc = Number(hc);
+            v = Number(v);
+            vp = Number(vp);
+            if (v < 0 || v > zc || vp < 0) {
+                msg += ("第" + (tabindex + 1) + "行数量或仓库有误！");
+            }
+            if (v > 0 && vp <= 0) {
+                msg += ("第" + (tabindex + 1) + "行未选择仓库！");
+            }
+            if (hc+ v > zc) {
+                msg += ("第" + (tabindex + 1) + "行最多可退单的数量为：" + (zc - hc).toString() + "！");
+            }
+            var r = $(txtr[i]);
+            remarks.push(r.val());
+            details.push(detail);
+            counts.push(v);
+            prices.push(vp);
+            models.push(m);
+            //}
+        }
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        if (details.length < 1 && details.length != counts.length) {
+            $.dialog.alert("提交数据格式有误！");
+            return false;
+        }
+        $.post("../stockout/savecanreturntemp", { outno: outno, no: no, details: details.toString(), counts: counts.toString(), depotids: prices.toString(), models: models.toString(), remarks: remarks.toString() }, function (data) {
+            $("#tab_haddetail").load("../stockout/canreturntemp", { no: no }, function (data) { });
+        });
+
+    }
+    function deldetailtemp(sn,m) {
+        $.post("../stockout/deletecanreturntemp", {no:no, sn: sn, m: m }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $("#tab_haddetail").load("../stockout/canreturntemp", { no: no }, function (data) { });
+
+            }
+        });
+    }
+    function savestockin() {
+        var r = $("#txtremark").val();
+        var d = $("#txtdeport").val();
+        $.post("../stockout/savecanreturn", { no: no, type: '@type', remark: r, deport: d, returntype: 1 }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功...', 1, 'loading.gif');
+                window.location.href = "../stockout/rselllist";
+            }
+        });
+    }
+    function loadlistpart(page) {
+        var query = $("#txtquery").val();
+        if (query == '关键字') query = '';
+        $("#div_ul").load("../stockout/canreturnlist", { no: no,returntype:4, query: query, page: page }, function () { });
+    }
+</script>

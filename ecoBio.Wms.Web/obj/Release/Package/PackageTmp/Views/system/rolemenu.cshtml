@@ -1,0 +1,213 @@
+﻿@{
+    Layout = null;
+    var all = Model.all as List<Enterprise.Invoicing.Entities.Models.Menu>;
+    var had = Model.had as List<Enterprise.Invoicing.Entities.Models.Menu>;
+    var id = Model.id;
+
+    string hadstr = "";
+    if (had != null && had.Count > 0)
+    {
+        hadstr += "[";
+        for (int i = 0; i < had.Count; i++)
+        {
+            hadstr += "\"" + had[i].menuNo + "\"";
+            if (i != had.Count - 1)
+            {
+                hadstr += ",";
+            }
+        }
+        hadstr += "]";
+    }
+    else
+    {
+        hadstr = "[]";
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色菜单</title>
+    <link href="~/Content/themes/wms_front.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+      <script src="~/Scripts/lhgdialog/lhgdialog.js"></script> 
+      <script src="~/Scripts/jquery-ui-date-cn_zh.js"></script> 
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script>
+        var api = frameElement.api, W = api.opener, cDG;
+        var id='@id';
+        var had=eval(@Html.Raw(hadstr));
+        var add='';
+        var del='';    $(function(){
+            $("input[chbtype='rolepower']").removeAttr("checked");
+            for (var i = 0; i < had.length; i++) {    
+                $("#chb_"+had[i]).attr("checked","checked");
+            }
+        });
+        function select_all()
+        {
+            var chb = $("#chb_all"); 
+            var v = chb.attr("checked");
+            var  list= $("input[chbtype='rolepower']"); 
+            $.each(list,function(i,item){
+                var ol=$(item);
+                var fid=ol.attr("fid"); 
+                if (typeof (v) == "undefined") {//取消选择
+                    sel_del(fid); 
+                }
+                else
+                {
+                    sel_add(fid);
+                }
+            });
+       
+        }
+        function select_p(id)
+        {
+            var chb = $("#chb_" + id);    
+            var v = chb.attr("checked");
+            var level=chb.attr("level");
+            var list=[];
+            if (typeof (v) == "undefined") {//取消选择            
+                if (level=="1"||level=="2") {
+                    if(level=="1")list= $("input[level1='"+id+"']");  
+                    if(level=="2")list= $("input[level2='"+id+"']");
+                    $.each(list,function(i,item){
+                        var ol=$(item);
+                        var fid=ol.attr("fid");
+                        sel_del(fid);
+                    });
+                    sel_del(id);
+                }
+                else sel_del(id);
+            }
+            else
+            {
+                if (level=="1"||level=="2") {
+                    if(level=="1")list= $("input[level1='"+id+"']");  
+                    if(level=="2")
+                    { 
+                        var id1=chb.attr("level1");                
+                        sel_add(id1);
+                        list= $("input[level2='"+id+"']");
+                    }
+                    $.each(list,function(i,item){
+                        var ol=$(item);
+                        var fid=ol.attr("fid");
+                        sel_add(fid);
+                    });
+                    sel_add(id);
+                }
+                else
+                {
+                    var id1=chb.attr("level1");
+                    var id2=chb.attr("level2");
+                    sel_add(id1);
+                    sel_add(id2);
+                    sel_add(id);
+                }
+            }
+        }
+        function sel_add(v)
+        {
+            $("#chb_"+v).attr("checked","checked");
+            v=v+"#";
+            var ai=add.indexOf(v);
+            var di=del.indexOf(v);
+            if(ai==-1)add+=v;
+            if(di!=-1)del=del.replace(v,"");
+            $("#hidadd").val(add);
+            $("#hiddel").val(del);
+        }
+        function sel_del(v)
+        {  
+            $("#chb_"+v).removeAttr("checked");
+            v=v+"#";
+            var ai=add.indexOf(v);
+            var di=del.indexOf(v);
+            if(ai!=-1)add=add.replace(v,"");
+            if(di==-1)del+=v;
+            $("#hidadd").val(add);
+            $("#hiddel").val(del);
+        }
+        function save()
+        {
+            $.dialog.tips('提交中...', 1, 'loading.gif');
+            $.post("../system/saverolemenu", { id: id, add:add,del:del}, function (data) {
+                if (data.status ==false) {
+                    $.dialog.alert(data.message);
+                    return false;
+                }
+                else
+                { 
+                    $.dialog.tips('操作成功...', 1, 'loading.gif');
+                    add='';
+                    del=''; 
+                    $("#hidadd").val(add);
+                    $("#hiddel").val(del);
+                    W.loadmenu();
+                }
+            });
+        }     
+    </script>
+</head>
+<body  class="add_pop_box">
+    <div>
+   <div class="in">
+@if (all!=null&&all.Count>0)
+    {    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="center_limits_table">
+<thead>
+<tr>
+    <th width="14%" height="24" bgcolor="#EAF1F7">
+        <input class="input_checkbox" id="chb_all" onclick="select_all()" type="checkbox" />菜单</th>
+    <th width="16%" bgcolor="#EAF1F7">模块</th>
+    <th width="70%" bgcolor="#EAF1F7">权限</th>
+  </tr>
+ </thead>
+ @if (all != null && all.Count > 0)
+ {
+     var first = all.Where(p => p.parentNo == null || p.parentNo == p.menuNo);
+     foreach (var item in first)
+     {
+         <tr>
+             <td width="14%"  align="center" bgcolor="#f7fbff"> 
+                 <input class="input_checkbox" chbtype="rolepower" level="1" id="chb_@item.menuNo" fid="@item.menuNo" onclick="select_p('@item.menuNo')" type="checkbox"  class="input_checkbox" />@item.menuName
+             </td>
+             <td colspan="2">
+                 @{
+                     var second = all.Where(p => p.parentNo == item.menuNo && p.parentNo != p.menuNo);
+            foreach (var sitem in second)
+            {
+                <div class="center_limits">
+	<ul>
+	<li class="sec_menu"><input class="input_checkbox" chbtype="rolepower" level="2" level1="@item.menuNo" fid="@sitem.menuNo" id="chb_@sitem.menuNo" onclick="select_p('@sitem.menuNo')" type="checkbox" />@sitem.menuName</li>
+	</ul>
+	<ul>
+                 @{
+                     var third = all.Where(p => p.parentNo == sitem.menuNo && p.parentNo != p.menuNo);
+                foreach (var titem in third)
+                {
+                     <li><input class="input_checkbox" chbtype="rolepower" level="3" level1="@item.menuNo" fid="@titem.menuNo" level2="@sitem.menuNo"  id="chb_@titem.menuNo" onclick="select_p('@titem.menuNo')" type="checkbox" />@titem.menuName</li>
+                }
+                     }
+	</ul>
+	</div>
+            }
+                     }
+             </td>
+         </tr>
+     }
+     <tr><td colspan="3" align="center" height="50"><a href="javascript:void(0);" onclick="save();" class="btn_refer">提交</a></td></tr>
+ }
+    </table>  
+     }
+<input type="hidden" id="hidadd" value="" />
+<input type="hidden" id="hiddel" value="" />
+</div>
+</div>
+</body>
+</html>

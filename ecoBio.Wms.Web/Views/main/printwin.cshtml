@@ -1,0 +1,247 @@
+﻿@{
+    Layout = null;
+    #region 分支
+    string key = Model.key;
+    string title = Model.title;
+    bool showPrice = Model.showPrice;
+    string head = "";
+    switch (key)
+    {
+        case "require":
+            head = "序号|5%,物料名称|27%,物料规格|20%,数量|10%,单位|8%,需求日期|15%,备注|15%";
+            break;
+        case "delegate":
+            head = "序号|5%,物料编码|10%,物料名称|27%,物料规格|25%,数量|10%,单位|8%,备注|15%";
+            break;
+        case "produce":
+            head = "序号|5%,物料编码|10%,物料名称|22%,物料规格|22%,数量|10%,已领|10%,单位|8%,备注|13%";
+            break;
+        case "producepull":
+            head = "序号|5%,物料编码|10%,物料名称|22%,物料规格|22%,数量|10%,实领|10%,单位|8%,备注|13%";
+            break;
+        case "producegive":
+            head = "序号|5%,物料编码|10%,物料名称|22%,物料规格|22%,实领|10%,交回|10%,单位|8%,备注|13%";
+            break;
+        case "order":
+            if (showPrice) { head = "序号|5%,物料名称|20%,物料规格|20%,数量|25%,单位|10%,单价|10%,小计|10%,交货日期|15%,备注|10%"; }
+            else
+            {
+                head = "序号|5%,物料名称|28%,物料规格|28%,数量|25%,单位|10%,交货日期|15%,备注|14%";
+            }
+            break;
+        case "stockin":
+            head = "序号|5%,物料名称|20%,物料规格|20%,入库数量|10%,单位|10%,仓库|10%,来源单号|15%,备注|10%";
+            break;
+        case "stockout":
+            head = "序号|5%,物料名称|25%,物料规格|25%,数量|10%,单位|10%,仓库|10%,备注|15%";
+            break;
+        case "change":
+            head = "序号|5%,物料名称|20%,物料规格|20%,数量|10%,单位|8%,类别|6%,仓库|15%,备注|16%";
+            break;
+        case "orderreturn":
+            head = "序号|5%,物料名称|20%,物料规格|20%,数量|8%,单位|8%,来源单号|14%,仓库|15%,备注|10%";
+            break;
+        case "stockreturn":
+            head = "序号|5%,物料名称|15%,物料规格|15%,领料|6%,退回|6%,单位|7%,来源单号|21%,退回仓库|15%,备注|10%";
+            break;
+        case "bomorder":
+           if (showPrice) {  head = "序号|5%,物料编码|12%,物料名称|18%,物料规格|18%,数量|6%,单价|6%,总价|11%,交期|12%,备注|12%";//
+           }
+           else{
+               head = "序号|5%,物料编码|12%,物料名称|22%,物料规格|26%,数量|6%,交期|14%,备注|15%";
+           }
+            break;
+        case "bomorderdetail":
+            head = "序号|5%,物料名称|25%,物料规格|25%,类别|10%,数量|10%,交期|14%,备注|15%";
+            break;
+        case "bill":
+            head = "序号|5%,科目|50%,金额|10%,日期|10%,备注|25%";
+            break;
+        case "purchase2":
+            head = "序号|5%,科目|30%,单价|10%,数量|10%,金额|10%,日期|10%,供应商|25%";
+            break;
+        case "stocksemi":
+            head = "序号|5%,物料名称|18%,物料规格|20%,数量|6%,单价|8%,金额|12%,日期|14%,备注|17%";
+            break;
+        case "delegatesend":
+            head = "序号|5%,物料编码|10%,物料名称|20%,物料规格|20%,数量|8%,单价|8%,金额|12%,备注|17%";
+            break;
+        case "delegateback":
+            head = "序号|5%,类别|5%,编码|10%,名称|20%,规格|20%,数量|10%,委外单号|15%,备注|15%";
+            break;
+        default:
+            break;
+    }
+    #endregion
+    var pm = Model.pm as Enterprise.Invoicing.ViewModel.PrintHeadModel;
+    var datas = Model.datas as List<string>;
+   
+    var pages = datas.Count / 4;
+    if(datas.Count%4>0)
+    {
+        pages += 1;
+    }
+    var index = 1;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+   @*<link href="~/Content/themes/wms_front.css" rel="stylesheet" />*@
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Lodop6.161/LodopFuncs.js"></script>
+    <title>tab</title>
+    <object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+    </object>
+    <script>
+        var LODOP;
+
+        $(function () {
+            LODOP = getLodop(document.getElementById('LODOP_OB'), document.getElementById('LODOP_EM'));
+        });
+        function print(i)
+        {
+
+            var style = "<style>" +$("#mystyle").html() + "</style>";
+            var html = style + "<body>" + $("#print_div_" + i).html() + "</body>";
+            LODOP.PRINT_INIT("");
+            LODOP.ADD_PRINT_HTM(1, 1, "100%", "100%", html);//加入打印文本
+            LODOP.SET_PRINT_PAGESIZE(1, 2200, 1370, "requirepage");//纸张大小
+            LODOP.SET_PREVIEW_WINDOW(1, 0, 0, 1000, 630, "");//预览窗口大小
+            LODOP.PREVIEW();
+        }
+    </script>
+    <style id="mystyle">
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+        html, body {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-style: normal;
+    word-spacing: 2px;
+    word-wrap: break-word;
+}
+        .rep_title {
+    font-size: 20px;
+    font-weight: bold;
+    height: 25px;
+    padding-top:10px;
+    text-align: center;
+    width:760px;
+}
+.add_btn { 
+    background: url("../../images/front/public/btn_bg.png") no-repeat scroll left -461px rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    height: 31px;
+    line-height: 31px;
+    text-align: center;
+    vertical-align: middle;
+    width: 93px;
+}
+.tab_head {
+    border-right: 1px solid #666666;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0; width:760px;
+}
+.tab_head thead th {
+    border: 1px solid #666666;
+    background: none repeat scroll 0 0;font-size: 16px;
+    height:30px;
+}
+.tab_head tbody td {
+    border: 1px solid #666666;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 5px;
+    text-align: left;
+}
+        .tab_top {
+            font-size:15px;
+        }
+    </style>
+</head>
+<body>
+    @for (int i = 1; i <= pages; i++)
+    { 
+    <div id="print_div_@i"  style="margin-left:20px;width:760px; border: 1px solid #666666;">
+        <div class="rep_title">@("苏州逗乐儿童用品有限公司  "+title)</div>
+        <table border="0" cellspacing="0" cellpadding="0" class="tab_top">
+  <tr>
+    <td width="28%" height="40" style="text-align:left;">@pm.depName</td>
+    <td width="30%"style="text-align:center;">日期：@pm.date.ToString("yyyy-MM-dd HH:mm:ss")</td>
+    <td width="30%"style="text-align:center;">编号：@pm.No</td>
+    <td width="12%"style="text-align:right;font-size:12px;"><i>@("第"+i+"页 共"+pages+"页")</i></td>
+  </tr>
+</table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tab_head">
+        @{
+            string[] heads = head.Split(',');
+            var myindex = 0;
+                    <thead>
+                        <tr>
+                            @foreach (var item in heads)
+                            {
+                                var t = item.Split('|');
+                                <th width="@t[1]">@t[0]</th>
+                            }
+                        </tr>
+                    </thead>
+            <tbody>
+                @for (int k = 0; k < 4; k++)
+                {
+                    index = (i - 1) * 4 + k;
+                    if (datas.Count < (index + 1))
+                    {
+                        break; 
+                    }
+                    var ds = datas[index].Split(',');
+                                <tr><td>@(index+1)</td>
+                                    @foreach (var cell in ds)
+                                    {
+                                        <td>@Html.Raw(cell)</td>
+                                    }
+                                </tr>
+                                    index++; myindex++;
+              }
+                                
+                                
+                        </tbody>
+        }
+    </table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tab_top" style="margin-top:@((4-myindex)*26)px;">
+  <tr>
+    <td width="20%" height="40" style="text-align:right;">制单人：@pm.makeStaff</td>
+    <td width="20%" style="text-align:right;">审核：@pm.checkStaff</td>
+      @if (key == "delegate" || key == "produce" || key == "producepull"|| key == "producegive")
+      {
+           <td colspan="2" style="text-align:right;">
+        @if (pm.showdeport)
+        {
+            <span>@pm.deportStaff</span>
+        }
+    </td>
+      }else{
+    <td width="20%" style="text-align:right;">
+        @if (pm.showdeport)
+        {
+            <span>@pm.deportStaff</span>
+        }
+    </td>
+    <td width="40%"></td>}
+  </tr>
+</table>
+    </div> <div  style="margin-left:20px;width:760px;text-align:center;">
+    <a  style="text-align:center;text-decoration: none;font-size:11px;" href="javascript:void(0);" id="btngl" class="add_btn" onclick="print(@i);" >@("打印第"+i+"页 共"+pages+"页")</a></div>
+    <hr />
+    }
+</body>
+</html>

@@ -1,0 +1,4 @@
+2014-09-19 20:31:08,338 [15] ERROR - manage.supplier An error occurred while executing the command definition. See the inner exception for details.
+2014-09-19 20:32:42,294 [19] ERROR - manage.supplier An error occurred while executing the command definition. See the inner exception for details.
+2014-09-19 22:32:27,998 [18] ERROR - depot.notbackpart 未将对象引用设置到对象的实例。
+2014-09-19 22:32:28,036 [18] ERROR - depot.notback 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

@@ -1,0 +1,223 @@
+﻿@{
+    Layout = null;
+    #region 分支
+    bool showPrice = Model.showPrice;
+    string head =  "";        
+    #endregion
+    if (showPrice){ head = "序号|5%,物料名称|20%,物料规格|20%,数量|10%,单价|12%,金额|13%,备注|20%";   
+    }
+    else {
+        head = "序号|5%,物料名称|30%,物料规格|30%,数量|10%,备注|25%";   
+    } 
+    var pm = Model.pm as Enterprise.Invoicing.ViewModel.PrintHeadModel;
+    var sup = Model.sup as Enterprise.Invoicing.Entities.Models.Supplier;
+    var datas = Model.datas as List<string>;
+    decimal total = 0;
+    for (int z = 0; z < datas.Count; z++)
+    {
+        var o = datas[z].Split(',');
+        if (showPrice)
+        {
+            total += Convert.ToDecimal(o[4]);
+        }
+    }
+    string totalstr = Enterprise.Invoicing.Common.Utils.NumGetStr((double)total);
+    var pages = datas.Count / 4;
+    if(datas.Count%4>0)
+    {
+        pages += 1;
+    }
+    var index = 1;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+   @*<link href="~/Content/themes/wms_front.css" rel="stylesheet" />*@
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Lodop6.161/LodopFuncs.js"></script>
+    <title>tab</title>
+    <object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+    </object>
+    <script>
+        var LODOP;
+
+        $(function () {
+            LODOP = getLodop(document.getElementById('LODOP_OB'), document.getElementById('LODOP_EM'));
+        });
+        function print(i)
+        {
+
+            var style = "<style>" +$("#mystyle").html() + "</style>";
+            var html = style + "<body>" + $("#print_div_" + i).html() + "</body>";
+            LODOP.PRINT_INIT("");
+            LODOP.ADD_PRINT_HTM(1, 1, "100%", "100%", html);//加入打印文本
+            LODOP.SET_PRINT_PAGESIZE(1, 2200, 1370, "requirepage");//纸张大小
+            LODOP.SET_PREVIEW_WINDOW(1, 0, 0, 1000, 630, "");//预览窗口大小
+            LODOP.PREVIEW();
+        }
+    </script>
+    <style id="mystyle">
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+        html, body {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-style: normal;
+    word-spacing: 2px;
+    word-wrap: break-word;
+}
+        .rep_title {
+    font-size: 20px;
+    font-weight: bold;
+    height: 30px;
+    text-align: center;
+    width:760px;
+}
+.add_btn { 
+    background: url("../../images/front/public/btn_bg.png") no-repeat scroll left -461px rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    height: 31px;
+    line-height: 31px;
+    text-align: center;
+    vertical-align: middle;
+    width: 93px;
+}
+.tab_head {
+    border-right: 1px solid #666666;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0; width:760px;
+}
+.tab_head thead th {
+    border: 1px solid #666666;
+    background: none repeat scroll 0 0;font-size: 15px;
+    height:24px;
+}
+.tab_head tbody td {
+    border: 1px solid #666666;
+
+    padding-left: 5px;
+    text-align: left;  font-size:14px;
+}
+        .tab_top {
+            font-size:15px;
+        } 
+        .tab_bottom {border: 1px solid #666666;
+            font-size:15px;
+        }
+        .tab_bottom tbody td {
+    border-bottom: 1px solid #666666;
+    padding-left: 5px;
+}
+        .tab_4 {
+            font-size:15px;
+        }
+    </style>
+</head>
+<body>
+    @for (int i = 1; i <= pages; i++)
+    { 
+    <div id="print_div_@i"  style="margin-left:20px;width:760px; border: 1px solid #666666;">
+        <div class="rep_title">苏州逗乐儿童用品有限公司 送（提）货单</div>
+        <table border="0" cellspacing="0" cellpadding="0" class="tab_top">
+  <tr>
+    <td width="33%" style="text-align:left;">购货单位：@pm.depName</td>
+    <td width="25%" style="text-align:left;">电话：@sup.phone</td>
+    <td width="30%" style="text-align:left;">销单号码：@pm.No</td>
+    <td width="12%" style="text-align:right;font-size:12px;"><i>@("第"+i+"页 共"+pages+"页")</i></td>
+  </tr>
+            <tr>
+    <td style="text-align:left;" colspan="2">单位地址：@sup.address</td>
+    <td style="text-align:left;" colspan="2">日期：@pm.date.ToString("yyyy-MM-dd HH:mm:ss")</td>
+  </tr>
+</table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tab_head">
+        @{
+            string[] heads = head.Split(',');
+            var myindex = 0;
+            decimal myamout = 0;
+                    <thead>
+                        <tr>
+                            @foreach (var item in heads)
+                            {
+                                var t = item.Split('|');
+                                <th width="@t[1]">@t[0]</th>
+                            }
+                        </tr>
+                    </thead>
+            <tbody>
+                @for (int k = 0; k < 4; k++)
+                {
+                    index = (i - 1) * 4 + k;
+                    if (datas.Count < (index + 1))
+                    {
+                        break; 
+                    }
+                    var ds = datas[index].Split(',');
+                                <tr><td>@(index+1)</td>
+                                    @for (int c = 0; c < ds.Length; c++)
+                                    {
+                                         <td>@Html.Raw(ds[c])</td>
+                                  }
+                                </tr>
+                    if (showPrice)
+                    {
+                        myamout += Convert.ToDecimal(ds[4]);
+                    }
+                                    index++; myindex++;
+              }
+                                
+                                
+                        </tbody>
+        }
+    </table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tab_bottom" style="margin-top:@((4-myindex)*26)px;">
+        <tr><td style="text-align:left;" colspan="4">本页小计：@(showPrice?myamout.ToString("N"):"")</td></tr>  <tr><td style="text-align:left;" colspan="2">本次合计：@(showPrice?total.ToString("N"):"")</td><td style="text-align:left;" colspan="2">大写：@(showPrice?totalstr:"")</td></tr>
+  <tr>
+    <td width="20%" style="text-align:left;">制单人：@pm.makeStaff</td>
+    <td width="20%" style="text-align:left;">审核：@pm.checkStaff</td>
+    <td width="20%" style="text-align:left;">
+        @if (pm.showdeport)
+        {
+            <span>仓库：@pm.deportStaff</span>
+        }
+    </td>
+    <td width="40%">客户回签：</td>
+  </tr>
+</table>
+
+            <table border="0" cellspacing="0" cellpadding="0" class="tab_4">     <tr><td colspan="3" style="height: 15px;"></td></tr>
+  <tr>
+    <td style="text-align:left;" colspan="2">供方地址：苏州市相城区通成路80号</td>
+    <td style="text-align:left;">联系电话：0512-65993999</td>
+  </tr>
+  <tr>
+    <td width="30%" style="text-align:left;">传真号码：0512-65944698</td>
+    <td width="40%" style="text-align:left;">联系人：业务员</td>
+    <td width="30%" style="text-align:left;">邮箱地址：</td>
+  </tr>
+                <tr><td colspan="3" style="text-align:left;">备注信息：</td></tr>
+</table>
+        <hr />       
+        <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;购销协议</strong>
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;【第一联存根(白)&nbsp;第二联财务(红)&nbsp;第三联客户(蓝)&nbsp;第四联回单(绿)&nbsp;第五联出门(黄)】</strong></p>
+        <p>甲方：供货单位 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙方：购货单位</p>
+        <p>乙方购进以上商品货款由签定之日起，乙方保证在（&nbsp;&nbsp;&nbsp;&nbsp;）天内付清，乙方逾期不付清该货款，甲方有权将逾期金额按月息25‰利率向乙方收取违约金，如需现金支付，需卖方出具收款收据。商品质量以甲方提供的检验单为标准及双方确认的图纸技术要求为标准，如有质量问题，乙方在收货后10内提出，逾期视为合格。经双方授权人签字生效，若双方发生争议，有甲方所在地法院管辖，此单并作诉讼依据</p>
+        <hr />
+    
+
+    </div> <div  style="margin-left:20px;width:760px;text-align:center;">
+    <a  style="text-align:center;text-decoration: none;font-size:11px;" href="javascript:void(0);" id="btngl" class="add_btn" onclick="print(@i);" >@("打印第"+i+"页 共"+pages+"页")</a></div>
+    <hr />
+ }
+</body>
+</html>

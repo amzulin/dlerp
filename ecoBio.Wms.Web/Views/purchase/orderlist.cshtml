@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "采购订单单列表";
+
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：采购订单 > 采购订单列表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>采购单号：<input name="" type="text" id="txtkey" />
+<a class="btn_search" href="javascript:void(0);" id="btn" onclick="loadlistpart(1);"></a>
+</div>
+
+<!--表格内容-->
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("orderlistpart", "purchase");   
+}
+
+
+    </div>
+<script>  
+    parturl = "../purchase/orderlistpart";
+    csparas = 'purchaseNo';
+    htmlids = 'txtkey';
+</script>

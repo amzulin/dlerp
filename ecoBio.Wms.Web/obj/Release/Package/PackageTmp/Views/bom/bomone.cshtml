@@ -1,0 +1,269 @@
+﻿@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "BOM管理";
+    var one = Model.model as Enterprise.Invoicing.ViewModel.V_BomMaterial;
+    var type = Model.type;
+    var id = Model.id;
+
+    var bomjson = Model.bomjson;
+    var ddlcate = Model.ddlcate as List<SelectListItem>;
+
+}    
+<link href="~/Scripts/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
+    <script src="~/Scripts/lib/ligerUI/js/core/base.js"></script>
+    <script src="~/Scripts/lib/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="~/Scripts/lib/ligerUI/js/plugins/ligerTree.js"></script>
+    <script src="~/Scripts/lib/ligerUI/js/plugins/ligerMenu.js" type="text/javascript"></script>
+    
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > <a href="../bom/bomlist"> BOM管理</a> >BOM维护 </div>
+
+
+
+
+<div class="data_content">
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>@(type=="add"?"新建BOM（选择产品作为根节点）":"BOM维护（右键选择操作）")</h2>
+<table style="margin-top:10px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+    @if (type=="add")
+    {     
+  <tr>
+    <td width="10%" align="right">产品：</td>
+    <td width="40%">
+        <input name="" type="text" id="txtmaterial" style="width:300px;"/>
+    </td>          
+    <td width="10%" align="right">版本：</td><td width="10%">
+        <input name="" type="text" id="txtversion"  style="width:50px;" value="" />
+    </td>
+      <td width="10%" align="right">备注：</td><td width="40%">
+        <input name="" type="text" id="txtremark"  style="width:300px;"/>
+    </td>
+  </tr>   
+        <tr><td colspan="4" style="text-align:center;"><a href="javascript:void(0);" onclick="save1();" class="btn_refer2">提交</a></td></tr>
+    }
+    else
+    {        
+        <tr><td colspan="4">
+          <ul id="tree1">   </ul> 
+            </td></tr>
+    }
+</table>
+
+        </div>
+    
+
+
+    </div>
+
+
+
+<script>
+    var id = '@id', type = '@type', selectid = 0, isroot = 0, isvir=0,canclick=0;
+        var onewin='';
+        var json = '';
+        if ('@Html.Raw(bomjson)'!='') json = eval('[(' + '@Html.Raw(bomjson)' + ')]');
+                var manager = null;
+        $(function () {
+
+            menu = $.ligerMenu({
+                top: 100, left: 100, width: 120, items:
+                [
+                { text: '增加下级', click: itemadd, icon: 'add' },
+                { text: '增加子BOM', click: itemchild, icon: 'add' },
+                //{ text: '增加非物料项目', click: itemvirtual, icon: 'add' },
+                { text: '修改本节点', click: itemedit, icon: 'edit' },
+                { line: true },
+                { text: '删除本节点', click: itemdel, icon: 'delete' },
+                { text: '删除所选', click: itemdelall, icon: 'delete' }
+                ]
+            });
+            if (json != '') {
+                manager = $("#tree1").ligerTree({
+                    data: json, isExpand: true, nodeWidth: 800,
+                    idFieldName: 'id', onContextmenu: function (node, e) {
+                        selectid = node.data.id;
+                        isroot = node.data.isroot;
+                        isvir = node.data.isvir;
+                        canclick = node.data.canclick;
+                        menu.show({ top: e.pageY, left: e.pageX });
+                        return false;
+                    }
+                });
+
+
+//                manager = $("#maingrid").ligerGrid({
+//                    columns: [
+//                    //{ display: '序号', name: 'index',  width: 50, type: 'int', align: 'left' },
+//                        { display: '物料编码', id: 'id1', name: 'no', width: 130, align: 'left' },
+//                        { display: '物料名称', name: 'name', width: 170, align: 'left', editor: { type: 'text' } },
+//                        { display: '规格', name: 'model', width: 250, align: 'left' },
+//                        { display: '单位', name: 'useunit', width: 50, align: 'left' },
+//                        {
+//                            display: '数量', name: 'amount', width: 60, align: 'left',
+//                            editor: { type: 'float' }
+//                        },
+//                    {
+//                        display: '备注', name: 'remark', width: 80, align: 'left', editor: { type: 'text' }, render: function (record) {
+//                            if (record.remark != 'null') return record.remark; else return '';
+//                        }
+//                    }
+//                    ], width: '100%', height: '97%',
+//                    data: json, alternatingRow: false, usePager: false, enabledSort: false, enabledEdit: true, rownumbers: true, tree: { columnId: 'id1' },
+//                    onContextmenu: function (node, e) {
+//                        selectid = node.data.id;
+//                        isroot = node.data.isroot;
+//                        isvir = node.data.isvir;
+//                        canclick = node.data.canclick;
+//                        menu.show({ top: e.pageY, left: e.pageX });
+//                        return false;
+//                    }
+//                }
+//);
+
+
+            }
+        });
+        function save1()
+        {
+            if (hmaterial == '') {
+                $.dialog.alert("请选择BOM根节点产品！");
+                return false;
+            }
+            var remark = $("#txtremark").val();
+            var version = $("#txtversion").val();
+            //if (loss == "" || isNaN(loss) || Number(loss) < 0 || Number(loss) > 99) {
+            //    $.dialog.alert("损耗率为0至99之间的整数！");
+            //    return false;
+            //}
+            $.post("../bom/savebom",
+               {
+                   type: 'add', cate: '', material: hmaterial, remark: remark, version: version
+               }, function (data) {
+                   if (data.status == false) {
+                       $.dialog.alert(data.message);
+                       return false;
+                   }
+                   else {
+                       window.location.href = '../bom/bomone?type=edit&id=' + data.value
+                   }
+               });
+        }   
+        function itemdel(item, i) {
+            if (canclick == '0') {
+                $.dialog.tips('本节点不可操作');
+                return false;
+            }
+            if (isroot == '1') {
+                $.dialog.tips('根节点不允许删除');
+                return false;
+            }
+            var tips = "删除节点同时会将其子节点一并删除，确定删除本节点吗？";
+            var durl = "../bom/deletebom";
+            if (isvir == '1') {
+                tips = "确定删除本科目节点吗？";
+                durl = "../bom/deletevirtual";
+            }
+            $.dialog.confirm(tips, function () {
+                $.post(durl, { id: selectid,forbom:id }, function (data) {
+                    if (data.status == true) { $.dialog.tips("删除成功"); loadgrid(); }
+                    else $.dialog.alert(data.message);
+                });
+            }, function () {
+            });
+        }
+        function itemdelall(item, i) {
+            var tips = "删除节点同时会将其子节点一并删除，确定删除所选吗？";
+            var durl = "../bom/deletebomselect";
+            var selects = manager.getChecked();
+            var ids = [];
+            var hadroot = 0;
+            $.each(selects, function (i, m) {
+                if (m.data.isroot == "0") {
+                    ids.push(m.data.id);
+                }
+                else hadroot = 1;
+            });
+            if (hadroot == 1) {
+                $.dialog.tips('根节点不允许删除');
+                return false;
+            }
+
+            if (ids.length < 1) {
+                $.dialog.tips('未选择要删除的BOM节点');
+                return false;
+            }
+            $.dialog.confirm(tips, function () {
+                $.post(durl, { forids: ids.toString() }, function (data) {
+                    if (data.status == true) { $.dialog.tips("删除成功"); loadgrid(); }
+                    else $.dialog.alert(data.message);
+                });
+            }, function () {
+            });
+        }
+        function itemadd(item, i)
+        {
+            if (canclick == '0' || isvir == '1') {
+                $.dialog.tips('本节点不可添加');
+                return false;
+            }
+            onewin = $.dialog({
+                id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+                title: '新增BOM节点',
+                content: 'url:../bom/bomnode?type=add&id=' + selectid
+            });
+        }
+        function itemchild(item, i)
+        {
+            if (canclick == '0' || isvir == '1') {
+                $.dialog.tips('本节点不可添加');
+                return false;
+            }
+            onewin = $.dialog({
+                id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+                title: '新增子BOM节点',
+                content: 'url:../bom/childbomnode?type=add&id=' + selectid
+            });
+        }
+        function itemvirtual(item, i) {
+            if (isroot != '1') {
+                $.dialog.tips('只有根节点可以增加！');
+                return false;
+            }
+            onewin = $.dialog({
+                id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+                title: '新增非物料项目',
+                content: 'url:../bom/bomvirtual?type=add&forbom=' + id + '&id=' + selectid
+            });
+        }
+
+        function itemedit(item, i) {
+            if (isroot == '1')
+            {
+                $.dialog.tips('根节点不允许编辑');
+                return false;
+            }
+            if (canclick == '0') {
+                $.dialog.tips('本节点不可编辑');
+                return false;
+            }
+            var tips = "修改BOM节点";
+            var durl = 'url:../bom/bomnode?type=edit&id=' + selectid;
+            if (isvir == '1') {
+                tips = "修改BOM科目";
+                durl = 'url:../bom/bomvirtual?type=edit&id=' + selectid+"&forbom=" + id;
+            }
+            onewin = $.dialog({
+                id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+                title: tips,
+                content: durl
+            });
+        }
+
+        function loadgrid() {
+            if (onewin != '') onewin.close();
+            var uid = new Date();
+            location.reload();
+           // window.location.href = '../bom/bomone?type=edit&id=' + id + '&uid=' + uid;
+        }
+    </script>

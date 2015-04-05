@@ -1,0 +1,162 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.Entities.Models.V_ProductSemi;
+    if (type == "edit")
+    {
+        ViewBag.Title = "编辑盘点单";
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增盘点单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：盘点管理 > <a href="../stockin/semilist">盘点单列表</a> > 盘点盘点 </div>
+<div class="content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer">
+<label>盘点单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@no" />
+<label>盘点人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>盘点日期：</label><input name="" id="txtdate" type="text" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer">
+<label>盘点单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@one.semiNo" />
+<label>盘点人：</label><input name="" type="text" readonly="readonly" class="input_gray" value="@one.staffName" />   
+<label>盘点日期：</label><input name="" id="txtdate" type="text" value="@one.semiDate.ToString("yyyy-MM-dd")" />
+</div>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>盘点明细</h2>
+<div class="add">
+    <ul>
+        <li> <label>物料名称：</label><input name="" type="text" id="proname" style="width:200px;"/></li>
+        <li> <label>物料规格：</label><input name="" type="text" id="promodel" style="width:200px;"/></li>
+        <li>&nbsp;<input style="width:20px;" id="radadd" name="radcheck" type="radio" value="0" />盘亏  &nbsp;  <input id="radred" checked="checked" name="radcheck" type="radio" value="1"  style="width:20px;"/>盘盈</li> 
+        <li><label>数量：</label><input name="" type="text" id="txtcount"  style="width:60px;" /></li>  
+        <li><label>单价：</label><input name="" type="text" id="txtprice"  style="width:60px;" /></li>
+         <li><label>备注：</label><input name="" type="text" id="txtrem"  style="width:200px;" /></li>
+         <li><a  href="javascript:void(0);" id="btngl" class="gray_btn">新增</a></li>   
+    </ul>
+</div>
+<div  id="detail_table">
+@{
+    Html.RenderAction("semionedetail", "stockin", new { outno = no });   
+}
+</div> 
+
+
+
+</div>
+
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+
+
+    var hdetail = 0;
+    var hcount = 0;
+
+    var htype = "";
+    var hrad = 0; //0亏，1盈
+    $(function () {
+        $("#txtdate").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+
+
+        $("#btngl").click(savedetail);//新增       
+    });
+
+    function savedetail() {
+        var rad = $('input:radio[name="radcheck"]:checked').val();
+        var txtcount = $("#txtcount").val();
+        var txtpice = $("#txtprice").val();
+        var remark = $("#txtrem").val();
+        var m = $("#proname").val();
+        var n = $("#promodel").val();
+        if ( m == "" || txtcount == "" || isNaN(txtcount) || txtpice == "" || isNaN(txtpice)) {
+            $.dialog.alert("请填写正确的名称、数量、单价！");
+            return false;
+        }     
+        var ctxt = parseInt(txtcount);
+        if (ctxt <= 0) {
+            $.dialog.alert("输入数量必须大于0");
+            return false;
+        }
+        var ptxt = parseInt(txtpice);
+        if (ctxt <= 0) {
+            $.dialog.alert("输入单价必须大于0");
+            return false;
+        }
+        $.post("../stockin/savesemionetemp", { rad: rad, no: no, detail: hdetail, m: m, n: n, count: txtcount, price: txtpice, remark: remark }, function (data) {
+            if (data.status == "error") {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $("#detail_table").load("../stockin/semionedetail", { no: no }, function (data) { });
+                hdetail = 0;
+                $("#txtcount").val('');
+                $("#txtprice").val('0');
+                $("#proname").val('');
+                $("#promodel").val('');
+                $("#txtrem").val('');
+                htype = "add";
+            }
+        });
+    }
+    function editone(detailid, m,n,c,p,r) {
+        hdetail = detailid;
+        $("#proname").val(m);
+        $("#promodel").val(n);
+        $("#txtprice").val(p);
+        $("#txtrem").val(r);
+        if (c < 0) {
+            $("#txtcount").val(0 - c);
+            $("#radadd").attr("checked", "checked");
+        }
+        else {
+            $("#txtcount").val(c);
+            $("#radred").attr("checked", "checked");
+        }
+        htype = "edit";
+    }
+    function deleteone(rno, id, m,n) {
+        if (confirm("确定删除？")) {
+            $.post('../stockin/deletesemione', { no: no, detail: id, m: m, m: n }, function (data) {
+                if (data == "ok") {
+                    $("#detail_table").load("../stockin/semionedetail", { no: no }, function (data) { });
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                    return false;
+                }
+            });
+        }
+        else
+            return false;
+    }
+    
+ 
+</script>

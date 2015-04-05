@@ -1,0 +1,3 @@
+2014-10-29 21:25:24,519 [33] ERROR - system.dictionary 找不到方法:“System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration System.Data.Entity.ModelConfiguration.Configuration.PrimitivePropertyConfiguration.HasDatabaseGeneratedOption(System.Nullable`1<System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption>)”。
+2014-10-29 21:37:30,330 [8] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText

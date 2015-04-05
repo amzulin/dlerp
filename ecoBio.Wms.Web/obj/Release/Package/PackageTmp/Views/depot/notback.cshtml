@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "供应商未交货报表";
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：报表查询 > 供应商未交货表 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+      <table>
+        <tr><td style="width:80px;text-align:right;">供应商：</td><td><input name="" type="text" id="supplier" sn="0"  style="width:200px;" /></td>
+            <td style="width:80px;text-align:right;">订单号：</td><td><input name="" type="text" id="txtno" sn="0"  style="width:100px;" /></td>
+            <td style="width:80px;text-align:right;">物料：</td><td><input style="width:80px;" name="" type="text" id="txtm" /></td>
+            <td style="width:80px;text-align:right;">物料规格：</td><td><input style="width:80px;" name="" type="text" id="txtg" /></td>
+        </tr>
+         <tr>  
+             <td style="text-align:right;">订单日期：</td><td><input style="width:60px;"  name="" type="text" id="from"/></td>
+            <td style="text-align:right;">至：</td><td><input style="width:60px;"  name="" type="text" id="to"  /></td>
+             <td style="text-align:right;">交货日期：</td><td><input style="width:60px;"  name="" type="text" id="from2"/></td>
+            <td style="text-align:right;">至：</td><td><input style="width:60px;"  name="" type="text" id="to2"  /></td></tr>
+        <tr><td colspan="8" style="text-align:center;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+            <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+            </td></tr>
+    </table>
+</div>
+
+<!--表格内容-->
+
+<!--表格内容-->
+<div id="partlistdiv">
+    @{
+        Html.RenderAction("notbackpart", "depot");   
+}
+
+
+    </div>
+<script>
+    page = 1;
+    var para = "";
+    var orderby = "";
+    $(function () {
+        $("#from").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#to").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#to").datepicker({
+            dateFormat: "yy-mm-dd",
+            maxDate: new Date(),
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#from").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+        $("#from2").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#to2").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#to2").datepicker({
+            dateFormat: "yy-mm-dd",
+            maxDate: new Date(),
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#from2").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+    })
+    function pageload(p)
+    {
+        page = p;
+        para = "";
+        geturl();
+        $("#partlistdiv").load("../depot/notbackpart", { page: page, where: para, orderby: orderby }, function () { });
+    }
+    function orderlistp(by)
+    {
+        if (orderby.indexOf('desc') != -1) orderby = by + " asc";
+        else orderby = by + " desc";
+        pageload(page);
+    }
+    function excel() {
+        para = "";
+        geturl();
+        var url = encodeURI("../depot/excelnotback?where=" + para + "&orderby=" + orderby);
+        window.location.href = url;// "../depot/excelprice?where=" + para + "&orderby=" + orderby;
+    }
+    function geturl() {
+        para = "";
+        var dep = $("#supplier").val();
+        var ps = $("#txtno").val();
+        var m = $("#txtm").val();
+        var g = $("#txtg").val();
+        var start = $("#from").val();
+        var end = $("#to").val();
+        var start2 = $("#from2").val();
+        var end2 = $("#to2").val();
+        if (dep != '') para += " and  suppliername like '%" + dep + "%'";
+        if (ps != '-1') para += " and purchaseNo like '%" + ps + "%'";
+        if (m != '') para += " and (materialName like '%" + m + "%' or materialNo like '%" + m + "%' )";
+        if (g != '') para += " and  materialModel like '%" + g + "%'";
+
+
+        if (start != '') para += " and createDate>='" + start + "'";
+        if (end != '') para += " and createDate<'" + end + "'";
+
+        if (start2 != '') para += " and senddate>='" + start2 + "'";
+        if (end2 != '') para += " and senddate<'" + end2 + "'";
+
+    }
+</script>

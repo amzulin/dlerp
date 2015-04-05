@@ -1,0 +1,132 @@
+﻿@{
+    var backmodel = Model.backmodel as Enterprise.Invoicing.Entities.Models.V_DelegateBackModel;
+    var backdetail = Model.backdetail as List<Enterprise.Invoicing.Entities.Models.V_DelegateBackDetail>;
+    var senddetail = Model.senddetail as List<Enterprise.Invoicing.Entities.Models.V_DelegateSendDetailModel>;
+
+    List<string> product = new List<string>();
+    }
+@foreach (var item in senddetail)
+{
+    if (!product.Contains(item.delegateNo))
+    {
+    var mysend=senddetail.Where(p=>p.delegateNo==item.delegateNo).ToList();
+        var hadb = backdetail.FirstOrDefault(p => p.isProduct == true && p.materialNo == item.productNo);
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="10%">交货编码</th>
+    <th width="20%">交货名称</th>
+    <th width="25%">交货规格</th>
+    <th width="10%">委外数量</th>
+    <th width="10%">已交数量</th>
+    <th width="10%">交货数量</th>
+    <th width="15%">备注</th>
+  </tr>
+  </thead>
+ <tbody>
+     <tr>
+         <td>@item.productNo</td>
+         <td>@item.productName</td>
+         <td>@item.productModel</td>
+         <td>@item.productAmount</td>
+         <td>@item.backProduct</td>
+         <td><input type="text" mytype="txtback" isp="1" mno="@item.productNo"  dele="@item.delegateNo" onblur="materialc('txtpa_@item.delegateNo',@(item.productAmount-item.backProduct))" id="txtpa_@item.delegateNo" detailsn="@(hadb == null ? 0 : hadb.detailSn)" total="@(item.productAmount-item.backProduct)" value="@(hadb == null ? "" : hadb.backAmount.ToString())"  style="width:80px;" /></td>
+         <td><input type="text" mytype="txtremark" id="txtpr_@item.delegateNo" value="@(hadb == null ? "" : hadb.remark)" /></td>
+     </tr>
+  </tbody>
+</table>
+    
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="10%">原料编码</th>
+    <th width="25%">原料名称</th>
+    <th width="25%">原料规格</th>
+    <th width="10%">发货数量</th>
+    <th width="10%">返还数量</th>
+    <th width="20%">备注</th>
+  </tr>
+  </thead>
+ <tbody>
+    
+        @foreach (var material in mysend)
+        {
+            var hadm = backdetail.FirstOrDefault(p => p.isProduct == false && p.materialNo == material.materialNo);
+       
+
+     <tr>
+         <td>@material.materialNo</td>
+         <td>@material.materialName</td>
+         <td>@material.materialModel</td>
+         <td>@material.realAmount</td>
+         <td><input type="text" mytype="txtback" isp="0" mno="@material.materialNo" dele="@item.delegateNo" onblur="materialc('txtma_@(item.delegateNo+material.materialNo)',@material.realAmount)" id="txtma_@(item.delegateNo+material.materialNo)" detailsn="@(hadm == null ? 0 : hadm.detailSn)" total="@material.realAmount" value="@(hadb == null ? "" : hadb.backAmount.ToString())" style="width:80px;" /></td>
+         <td><input type="text" mytype="txtremark" id="txtmr_@(item.delegateNo+material.materialNo)" value="@(hadm == null ? "" : hadm.remark)" /></td>
+     </tr>
+
+        }  
+ </tbody>
+</table>
+    <hr />
+        product.Add(item.delegateNo);
+    }
+}
+@if (senddetail.Count>0)
+{
+     <div style=" text-align:center; height:46px; padding-top:10px; width:935px; background:#f7fbff; border-top:1px solid #c6d9e7;">
+<a class="btn_refer2" href="javascript:void(0);" onclick="save()">提交</a>
+</div>
+}else{
+<div>无委外明细</div>
+}
+<script>
+
+    function save() {
+
+
+        var deport = $("#txtdeport").val();
+        var date = $("#dateback").val();
+        var remark = $("#txtremark").val();
+
+        if (supplierid == 0 ) {
+            $.dialog.alert("请选择供应商");
+            return false;
+        }
+        if (orderno == '') {
+            $.dialog.alert("请选择委外发货单号");
+            return false;
+        }
+        if (date == '') {
+            $.dialog.alert("请填写交货日期");
+            return false;
+        }
+        var material = [],product=[],amount=[],remarks=[],delegates=[];
+        var txts = $("input[mytype='txtback']");
+        var txtr = $("input[mytype='txtremark']");
+        for (var i = 0; i < txts.length; i++) {
+            var txt = $(txts[i]);
+            if (txt.val() == '') continue;
+            material.push(txt.attr("mno"));
+            product.push(txt.attr("isp"));
+            delegates.push(txt.attr("dele"));
+            amount.push(txt.val());
+            remarks.push($(txtr[i]).val());
+        }
+
+        $.post("../delegate/savebackone", {
+            no: no, type: type,
+            deport:deport,date:date,
+            remark: remark, sendno: orderno,
+            material: material.toString(), product: product.toString(), amount: amount.toString(), remarks: remarks.toString(), delegates: delegates.toString()
+        }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../delegate/backlist";
+            }
+        });
+    }
+
+</script>

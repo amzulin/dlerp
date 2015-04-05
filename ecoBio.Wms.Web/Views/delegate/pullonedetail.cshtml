@@ -1,0 +1,105 @@
+﻿@{
+    var backmodel = Model.backmodel as Enterprise.Invoicing.Entities.Models.V_ProductPullModel;
+    var psdetail = Model.psdetail as List<Enterprise.Invoicing.Entities.Models.V_ProductionDetailModel>;
+    var pulldetail = Model.pulldetail as List<Enterprise.Invoicing.Entities.Models.V_ProductPullDetail>;
+
+    var boms = Model.boms as List<Enterprise.Invoicing.Entities.Models.BomMain>;
+    }
+
+@if (psdetail.Count > 0)
+{    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="8%">编码</th>
+    <th width="18%">名称</th>
+    <th width="25%">规格</th>
+    <th width="6%">单位</th>
+    <th width="7%">生成数量</th>
+    <th width="7%">已领数量</th>
+    <th width="7%">计算数量</th>
+    <th width="8%">本次领料</th>
+    <th width="14%">备注</th>
+  </tr>
+  </thead>
+ <tbody>
+@foreach (var item in psdetail)
+{
+    var hadpull = pulldetail.FirstOrDefault(p => p.semiId == item.detailSn);
+    var bom = boms.FirstOrDefault(p => p.materialNo == item.materialNo);
+     <tr>
+         <td>@item.materialNo</td>
+         <td>@item.materialName</td>
+         <td>@item.materialModel</td>
+         <td>@item.unit</td>         
+         <td>@(Math.Round(item.amount.Value,4))</td>
+         <td>@(Math.Round(item.outAmount.Value,4))</td>
+         <td><span id="sp_@item.materialNo">@(hadpull!=null?hadpull.theoryAmount.ToString():"")</span></td>
+         <td><input type="text" mytype="txtback" isp="1" mno="@item.materialNo" bom="@(bom!=null?bom.amount:0)" js="0"  onblur="materialc('txtpa_@item.materialNo',@(Math.Round(item.amount.Value,4) - Math.Round(item.outAmount.Value,4)))" id="txtpa_@item.materialNo" productsn="@item.detailSn" detailsn="@(hadpull == null ? 0 : hadpull.pullSn)" total="@(Math.Round(item.amount.Value,4) - Math.Round(item.outAmount.Value,4))" value="@(hadpull == null ? "" : hadpull.realAmount.ToString())"  style="width:80px;" /></td>
+         <td><input type="text" mytype="txtremark" id="txtpr_@item.materialNo" value="@(hadpull == null ? "" : hadpull.remark)" /></td>
+     </tr>
+}
+  </tbody>
+</table>
+
+     <div style=" text-align:center; height:46px; padding-top:10px; width:935px; background:#f7fbff; border-top:1px solid #c6d9e7;">
+<a class="btn_refer2" href="javascript:void(0);" onclick="save()">提交</a>
+</div>
+}
+else
+{
+<div>无工单明细</div>
+}
+<script>
+
+    function save() {
+
+
+        var deport = $("#txtdeport").val();
+        var pullamount = $("#txtpull").val();
+        var backdate = $("#dateback").val();
+        var pulldate = $("#datepull").val();
+        var remark = $("#txtremark").val();
+        if (orderno == '') {
+            $.dialog.alert("请选择领料单号");
+            return false;
+        }
+        if (pullamount == '') {
+            $.dialog.alert("生产数量不能为空");
+            return false;
+        }
+        if (backdate == '' || pulldate == '') {
+            $.dialog.alert("交货日期,领料日期不能为空");
+            return false;
+        }
+        var material = [], product = [], jsamount = [], amount = [], remarks = [];
+        var txts = $("input[mytype='txtback']");
+        var txtr = $("input[mytype='txtremark']");
+        for (var i = 0; i < txts.length; i++) {
+            var txt = $(txts[i]);
+            if (txt.val() == '') continue;
+            material.push(txt.attr("mno"));
+            jsamount.push(txt.attr("js"));
+            product.push(txt.attr("productsn"));
+            amount.push(txt.val());
+            remarks.push($(txtr[i]).val());
+        }
+
+        $.post("../delegate/savepullone", {
+            no: no, type: type,pullamount:pullamount,
+            deport: deport, backdate: backdate, pulldate: pulldate,
+            remark: remark, productno: orderno,
+            material: material.toString(), product: product.toString(), amount: amount.toString(), jsamount: jsamount.toString(), remarks: remarks.toString()
+        }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../delegate/pulllist";
+            }
+        });
+    }
+
+
+</script>

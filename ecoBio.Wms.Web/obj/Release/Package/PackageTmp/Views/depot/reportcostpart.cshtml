@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.MaterialCostModel>;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }    
+     }
+
+<!--表格内容-->
+<style>
+    .cl1 {
+    width:7%; border-top: 1px solid #9fb6cd;
+    }
+    .cl2 {
+    width:37%; border-top: 1px solid #9fb6cd;
+    }
+    .cl3 {
+    width:20%; border-top: 1px solid #9fb6cd;
+    }
+    .cl4 {
+    width:18%; border-top: 1px solid #9fb6cd;
+    }
+    .cl5 {
+    width:18%;   border-top: 1px solid #9fb6cd;
+    }
+</style>
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>报表明细</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlistp('materialNo')">编码</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlistp('materialName')">物料名称</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlistp('materialModel')">物料规格</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('tunumber')">图号</th>
+    <th width="5%" style="cursor:pointer;" onclick="orderlistp('category')">类别</th>
+    <th width="42%" style="cursor:pointer;" onclick="orderlistp('Price')">
+        <table width="100%"><tr><td class="cl1"></td><td class="cl2">供应商</td><td class="cl3">采购日期</td><td class="cl4">单价</td><td class="cl5">数量</td></tr></table>
+    </th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+    <td>@pi</td>
+    <td>@item.materialNo</td>
+    <td>@item.MaterialName</td>
+    <td>@item.MaterialModel</td>
+    <td>@item.th</td>
+    <td>@item.category</td>
+    <td>@Html.Raw(item.longInfo.Replace("cl1","class='cl1'").Replace("cl2","class='cl2'").Replace("cl3","class='cl3'").Replace("cl4","class='cl4'").Replace("cl5","class='cl5'"))</td>
+</tr>
+         pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="9">无采购明细</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+       
+	 @Html.Partial("~/Views/Shared/page_page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+    </div>
+
+
+<script>  
+     page = '@page';    
+</script>

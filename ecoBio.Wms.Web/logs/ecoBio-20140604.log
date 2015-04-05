@@ -1,0 +1,3 @@
+2014-06-04 22:13:07,220 [57] ERROR - bom.bomdetail d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\bomdetail.cshtml(70): error CS0136: 不能在此范围内声明名为“one”的局部变量，因为这样会使“one”具有不同的含义，而它已在“父级或当前”范围中表示其他内容了
+2014-06-04 22:19:58,538 [63] ERROR - bom.bomdetail “System.Dynamic.ExpandoObject”未包含“model”的定义
+2014-06-04 22:20:41,492 [60] ERROR - bom.bomdetail 未将对象引用设置到对象的实例。

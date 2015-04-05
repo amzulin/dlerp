@@ -1,0 +1,15 @@
+D:\软件开发\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\bin\Release\Enterprise.Invoicing.ViewModel.dll
+D:\软件开发\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\bin\Release\Enterprise.Invoicing.ViewModel.pdb
+D:\软件开发\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.csprojResolveAssemblyReference.cache
+D:\软件开发\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.dll
+D:\软件开发\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.pdb
+D:\program\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\bin\Release\Enterprise.Invoicing.ViewModel.dll
+D:\program\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\bin\Release\Enterprise.Invoicing.ViewModel.pdb
+D:\program\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.csprojResolveAssemblyReference.cache
+D:\program\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.dll
+D:\program\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.pdb
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\bin\Release\Enterprise.Invoicing.ViewModel.dll
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\bin\Release\Enterprise.Invoicing.ViewModel.pdb
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.csprojResolveAssemblyReference.cache
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.dll
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.ViewModel\obj\Release\Enterprise.Invoicing.ViewModel.pdb

@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "角色管理";
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.Role>; 
+    var key = Model.key as string;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：系统设置 > 角色管理 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>关键字：<input name="" type="text" id="txtkey" value="@key" />
+<a class="btn_search" href="javascript:void(0);" id="btn"></a>
+    <input type="hidden" id="hidpage" value="@page" />
+</div>
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>角色列表</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="35%">角色名称</th>
+    <th width="10%">金额权限</th>
+    <th width="15%">备注</th>
+    <th width="35%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>
+    
+    <td>@item.roleName</td>
+    <td>@item.showPrice</td>
+    <td>@item.remark</td>
+    <td>    
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("system_role_menu"))
+            {  <a href="javascript:void(0);" onclick="power(0,@item.roleSn,'@item.roleName');">菜单权限</a>}
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("system_role_function"))
+            {  <a href="javascript:void(0);" onclick="power(1,@item.roleSn,'@item.roleName');">功能权限</a>}
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("system_role_update"))
+            {     <span onclick="editone('edit',@item.roleSn)" class="edit"></span>}
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("system_role_delete"))
+            {    <span onclick="deleteone(@pi,'@item.roleSn');"  title="删除">删除</span>  }
+	</td>
+</tr>
+         pi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="4">无角色信息</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+             @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("system_role_add"))
+            {  <div style="float:left"><span  onclick="editone('add',0)"  class="add_btn">新增角色</span></div>}
+	 @Html.Partial("~/Views/Shared/page.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../system/role"}
+       })
+    </div>
+
+
+    </div>
+<script>  
+    var page = '@page';
+    var onewin;
+    var pwin;
+    $(function () {   
+        $("#btn").click(query);
+    });
+
+    function query() {
+        var dd = $("#txtkey").val();
+        window.location.href = "../system/role?page=" + page + (dd != "" ? "&key=" + dd : "");
+    }
+    function loadgrid() {
+        query();
+        onewin.close();
+    }
+    function editone(t,id)
+    {
+         onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+            title: t == "add" ? '新增角色' : "角色信息",
+            content: 'url:../system/roleone?type=' + t + '&id=' + id
+        });
+
+    }
+    function loadmenu() {
+        pwin.close();
+    }
+    function power(t,id,name)
+    {
+        if (t == 0) {
+            pwin = $.dialog({
+                id: 'win_repair', lock: true, max: false, min: false, width: 600, height: 400, resize: false,
+                title: "角色：" + name + " 的菜单权限设置信息",
+                content: 'url:../system/rolemenu?id=' + id
+            });
+        }
+        else if (t == 1) {
+            pwin = $.dialog({
+                id: 'win_repair', lock: true, max: false, min: false, width: 600, height: 400, resize: false,
+                title: "角色：" + name + " 的功能权限设置信息",
+                content: 'url:../system/rolefunction?id=' + id
+            });
+        }
+
+    }
+    function deleteone(i, id) {
+        if (confirm("确定删除该角色？")) {
+            var dd = $("#txtkey").val();
+            $.post("../system/deleterole", { id: id }, function (data) {
+                if (data.status == true) {
+                    window.location.href = "../system/role?page=" + page + (dd != "" ? "&key=" + dd : "");
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                }
+            });
+        }
+        else
+            return false;
+
+    }
+    
+</script>

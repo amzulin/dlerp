@@ -1,0 +1,98 @@
+﻿
+@{
+    var no = Model.no;
+    var inlist = Model.inlist as List<Enterprise.Invoicing.ViewModel.StockDetailModel>;
+    var outlist = Model.outlist as List<Enterprise.Invoicing.ViewModel.StockDetailModel>;
+    var mc = Model.mc as List<Enterprise.Invoicing.ViewModel.KeyValue>;
+    var pi = 1;
+    }
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th width="5%">明细</th>
+          <th width="10%">类别</th>
+          <th width="10%">物料类别</th>
+          <th width="15%">物料名称</th>
+          <th width="15%">物料规格</th>
+          <th width="12%">物料图号</th>
+          <th width="5%" >单位</th>
+          <th width="10%">仓库</th>
+          <th width="8%">数量</th>
+          <th width="10%">备注</th>
+        </tr>
+      </thead>
+          <tbody>
+     @{
+         
+     if (inlist.Count>0)
+     {
+        foreach (var item in inlist)
+     {  
+  <tr>
+      <td>@pi</td>
+      <td>旧物料入库</td>
+      <td>
+          @{
+         var h = mc.FirstOrDefault(p => p.value == item.materialCategory);
+         if(h!=null)
+         {
+             <span>@h.text</span>
+         }
+         else
+         {
+             <span>未知类别</span>
+         }
+            }
+      </td>
+    <td title="编码 @item.materialNo">@item.materialName</td>
+    <td title="编码 @item.materialNo">@item.materialModel</td>
+    <td title="编码 @item.materialNo">@item.materialTu</td>
+    <td>@item.materialUnit</td>
+      <td>@item.depotName</td>
+    <td>@item.amount</td>
+    <td>@item.remark</td>
+  </tr>
+         pi++;
+      }    
+     }
+              
+     if (outlist.Count>0)
+     {
+         foreach (var item in outlist)
+     {  
+  <tr>
+      <td>@pi</td>
+      <td>新物料出库</td>
+      <td>
+          @{
+         var h = mc.FirstOrDefault(p => p.value == item.materialCategory);
+         if(h!=null)
+         {
+             <span>@h.text</span>
+         }
+         else
+         {
+             <span>未知类别</span>
+         }
+            }
+      </td>
+    <td title="编码 @item.materialNo">@item.materialName</td>
+    <td title="编码 @item.materialNo">@item.materialModel</td>
+    <td title="编码 @item.materialNo">@item.materialTu</td>
+    <td>@item.materialUnit</td>
+      <td>@item.depotName</td>
+    <td>@item.amount</td>
+    <td>@item.remark</td>
+  </tr>
+         pi++;
+      }    
+     }
+     if(inlist.Count==0&&outlist.Count==0)
+     {
+        <tr>
+  <td colspan="9"  bgcolor="#FFFFFF" style="text-align:left;">无以旧换新明细</td></tr> 
+     }
+     }
+</tbody>
+    </table> 
+

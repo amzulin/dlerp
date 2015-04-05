@@ -1,0 +1,48 @@
+﻿
+@{
+    var no = Model.no;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_DelegateOrderDetail>;
+
+    var pi = 1;
+    }
+<table  width="94%" border="0" cellspacing="0" cellpadding="0" class="table_common_yellow ">
+      <thead>
+        <tr>
+          <th width="5%">明细</th>
+          <th width="10%">物料编码</th>
+          <th width="16%">物料名称</th>
+          <th width="16%">物料规格</th>
+          <th width="12%">物料图号</th>
+          <th width="6%" >单位</th>
+          <th width="10%">委外总数</th>
+          <th width="10%">已发数量</th>
+          <th width="15%">备注</th>
+        </tr>
+      </thead>
+          <tbody>
+     @if (list.Count>0)
+     {
+        foreach (var item in list)
+     {  
+  <tr>
+      <td>@pi</td>
+    <td>@item.materialNo</td>
+    <td title="编码 @item.materialNo">@item.materialName</td>
+    <td title="编码 @item.materialNo">@item.materialModel</td>
+    <td title="编码 @item.materialNo">@item.tunumber</td>
+    <td>@item.unit</td>
+    <td>@item.detailAmount.Value.ToString("N")</td>
+    <td>@item.sendAmount.Value.ToString("N")</td>
+    <td>@item.detailRemark</td>
+  </tr>
+         pi++;
+      }    
+     }
+     else
+     {
+        <tr>
+  <td colspan="9"  bgcolor="#FFFFFF" style="text-align:left;">无明细</td></tr> 
+     }
+</tbody>
+    </table> 
+

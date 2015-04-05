@@ -1,0 +1,2 @@
+2014-11-06 21:23:30,633 [74] ERROR - bom.producelistpart 对象名 'V_ProductionModel' 无效。
+2014-11-06 21:23:30,664 [74] ERROR - bom.producelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。

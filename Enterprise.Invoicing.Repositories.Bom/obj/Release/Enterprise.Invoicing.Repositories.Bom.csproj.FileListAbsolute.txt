@@ -1,0 +1,12 @@
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\Enterprise.Invoicing.Repositories.Bom.dll
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\Enterprise.Invoicing.Repositories.Bom.pdb
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\Enterprise.Invoicing.Entities.dll
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\Enterprise.Invoicing.Repositories.dll
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\Enterprise.Invoicing.ViewModel.dll
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\EntityFramework.dll
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\Enterprise.Invoicing.Entities.pdb
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\Enterprise.Invoicing.Repositories.pdb
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\bin\Release\Enterprise.Invoicing.ViewModel.pdb
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\obj\Release\Enterprise.Invoicing.Repositories.Bom.csprojResolveAssemblyReference.cache
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\obj\Release\Enterprise.Invoicing.Repositories.Bom.dll
+D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Repositories.Bom\obj\Release\Enterprise.Invoicing.Repositories.Bom.pdb

@@ -1,0 +1,247 @@
+﻿
+@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BomOrderModel>;
+    int count = 0;
+    var first = "";
+    if (list!=null&&list.Count>0)
+    {
+        first = list[0].bomOrderNo;
+        count = list.Count;
+    }
+    var page = Model.pageIndex;
+    var pi = 1;
+    var dpi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>BOM订单</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="13%" style="cursor:pointer;" onclick="orderlist('bomOrderNo')" >订单号</th>
+    <th width="16%" style="cursor:pointer;" onclick="orderlist('supplierName')">客户</th>
+    <th width="7%" style="cursor:pointer;" onclick="orderlist('orderType')">类别</th>
+    <th width="8%" style="cursor:pointer;" onclick="orderlist('depName')">部门</th>
+    <th width="7%" style="cursor:pointer;" onclick="orderlist('staffName')">人员</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlist('createDate')">时间</th>
+    <th width="6%" style="cursor:pointer;" onclick="orderlist('status')">状态</th>
+    <th width="12%" style="cursor:pointer;" onclick="orderlist('remark')">备注</th>
+    <th width="16%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr><td colspan="10">
+             <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<tbody>
+        <tr  id="tr_@dpi" onclick="loaddetail(@dpi,'../bom/orderlistview?over=@item.isover&os=@item.status&index=@pi&no=@item.bomOrderNo')">
+      <td width="5%">@pi</td>
+    <td width="13%">@item.bomOrderNo</td>
+    <td width="16%">@item.supplierName</td>
+    <td width="7%">@item.orderType</td>
+    <td width="8%">@item.depName</td>
+    <td width="7%">@item.staffName</td>
+    <td width="10%">@item.createDate.ToString("yyyy-MM-dd")</td>
+    <td width="6%">
+        @if (item.isover == 1) {<span>完工</span> }
+        else{
+            <span>@Enterprise.Invoicing.Common.Utils.GetStatus(item.status)</span>
+        }
+    </td>
+    <td width="12%">@item.remark</td>
+    <td width="16%">   
+      @if (item.status==0&&item.isover!=1&&item.isclose==false)
+      {
+            if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_check"))
+            {
+                <a href="javascript:void(0);" onclick="changestatus('bomorder','@item.bomOrderNo',@item.status,'../bom/orderlist?page=@page')">审核</a>
+            }
+            if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_update")||item.staffId==Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+            {
+               <a href="orderone?type=edit&page=@page&no=@item.bomOrderNo" title="修改">修改</a>
+            }
+            if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_invalid"))
+            {
+                <a href="javascript:void(0);" onclick="changestatus('bomorder','@item.bomOrderNo',-1,'../bom/orderlist?page=@page')"  title="作废">作废</a>
+            }
+            if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_delete") || item.staffId == Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+            {
+                <span onclick="deleteone('../bom/bomdelete','@item.bomOrderNo','客户订单');"  title="删除">删除</span>  
+            } 
+      }
+      else if (item.status == 1 && item.isover != 1 && item.canfs && item.isclose == false)
+      {
+            if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_check"))
+            {
+                <a href="javascript:void(0);" onclick="changestatus('bomorder','@item.bomOrderNo',@item.status,'../bom/orderlist?page=@page')">返审</a>
+            }
+        }
+
+
+
+
+@*            @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_check"))
+            {
+                <a href="javascript:void(0);" onclick="changestatus('bomorder','@item.bomOrderNo',@item.status,'../bom/orderlist?page=@page')">@Html.Raw(Enterprise.Invoicing.Common.Utils.GetBtnStr(item.status))</a>
+            }  
+          @if (item.status==0)
+          {              
+           if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_update")||item.staffId==Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+            {
+               <a href="orderone?type=edit&page=@page&no=@item.bomOrderNo" title="修改">修改</a>
+        }
+              if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_invalid"))
+            {
+           <a href="javascript:void(0);" onclick="changestatus('bomorder','@item.bomOrderNo',-1,'../bom/orderlist?page=@page')"  title="作废">作废</a>
+        }
+              if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_delete") || item.staffId == Enterprise.Invoicing.Web.Masterpage.CurrUser.staffid)
+            {
+            <span onclick="deleteone('../bom/bomdelete','@item.bomOrderNo','客户订单');"  title="删除">删除</span>  
+        }  
+          }*@
+          @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomorder_print"))
+          {
+              <span onclick="print('客户订单','bomorder','@item.bomOrderNo');"  title="打印">打印</span>
+          }  
+	</td>
+   </tr>
+                	  </tbody>
+    </table>      
+          <div  id="detai_div_@dpi" style="display:none;">
+              @{
+         Html.RenderAction("orderlistview", "bom", new { no = "", index = pi });
+      }
+        </div>
+
+             </td></tr>
+         pi++;
+         dpi++;
+ }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="10">无BOM订单</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+	 @Html.Partial("~/Views/Shared/page_load.cshtml",new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",""},{"url","../bom/orderlist"}
+       })
+    </div>
+<script>  
+    var c = '@count';
+    var detail = [];
+    var close = [];
+    page = '@page';
+    var onewin;
+    $(function () {
+        for (var i = 0; i < c; i++) {
+            detail.push(0);
+            close.push(0);
+        }
+    });
+
+    function detailopt(t, pi, no, sn,tn) {
+        if (t == 'del') {
+            if (confirm("确定删除？")) {
+                $.post('../bom/deleteorderdetail', { no: no, sn: sn }, function (data) {
+                    if (data == "ok") {
+                        $.dialog.tips("删除成功");
+                        var uid = new Date();
+                        $("#detai_div_" + pi).load("../bom/orderlistview?no=" + no + "&index=" + pi + "&uid=" + uid.getTime(), function (data) { });
+                    }
+                    else {
+                        $.dialog.alert("删除失败！");
+                        return false;
+                    }
+                });
+            }
+            else
+                return false;
+        }
+        else if (t == 'create') {
+            if (confirm("确定" + tn + "？")) {
+                $.post('../bom/bomoptcreate', { no: no, sn: sn }, function (data) {
+                    if (data.status == true) {
+                        $.dialog.tips(tn + "成功");
+                        var uid = new Date();
+                        $("#detai_div_" + pi).load("../bom/orderlistview?no=" + no + "&index=" + pi + "&uid=" + uid.getTime(), function (data) { });
+
+                        if (confirm("生成成功，是否打开编辑窗口？")) {
+                            onewin = $.dialog({
+                                id: 'win_repair', lock: false, max: false, min: false, width: 900, height: 600, resize: true,
+                                title: "修改BOM信息",
+                                content: 'url:../bom/bomdetail?type=edit&no=' + no + '&sn=' + sn
+                            });
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    else {
+                        $.dialog.alert(data.message);
+                        return false;
+                    }
+                });
+            }
+            else
+                return false;
+        }
+        else {
+            onewin = $.dialog({
+                id: 'win_repair', lock: true, max: false, min: false, width: 900, height: 600, resize: false,
+                title: t == 'edit' ? "修改BOM信息" : "查看BOM信息",
+                content: 'url:../bom/bomdetail?type=' + t + '&no=' + no + '&sn=' + sn
+            });
+        }
+
+    }
+
+    function loadgrid()
+    {
+        onewin.close();
+    }
+
+    function create(type, index, no, sn) {
+
+        if (confirm("确定生成" + (type == 'requrie' ? "采购申请单" : (type == 'delegate' ? "委外加工单" : "生产加工单")) + "？")) {
+            $.post('../bom/bomoptcreate', { type: type, no: no, sn: sn }, function (data) {
+                if (data.status == true) {
+                    $.dialog.tips("创建成功");
+                    var uid = new Date();
+                    $("#detai_div_" + index).load("../bom/orderlistview?over=0&os=0&no=" + no + "&index=" + index + "&uid=" + uid.getTime(), function (data) { });
+                }
+                else {
+                    $.dialog.alert(data.message);
+                    return false;
+                }
+            });
+        }
+    }
+    function delcreate(type, index, no, sn) {
+
+        if (confirm("确定删除" + (type == 'requrie' ? "采购申请单" : (type == 'delegate' ? "委外加工单" : "生产加工单")) + "？")) {
+            $.post('../bom/bomoptdelete', { type: type, no: no, sn: sn }, function (data) {
+                if (data.status == true) {
+                    $.dialog.tips("删除成功");
+                    var uid = new Date();
+                    $("#detai_div_" + index).load("../bom/orderlistview?over=0&os=0&no=" + no + "&index=" + index + "&uid=" + uid.getTime(), function (data) { });
+                }
+                else {
+                    $.dialog.alert(data.message);
+                    return false;
+                }
+            });
+        }
+    }
+</script>

@@ -1,0 +1,14 @@
+2014-10-27 10:33:43,282 [53] ERROR - bom.delegatelistpart 列名 'deletgateNo' 无效。
+2014-10-27 10:33:43,298 [53] ERROR - bom.delegatelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-10-27 10:36:33,575 [30] ERROR - bom.delegatelistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\delegatelistpart.cshtml(46): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateOrderModel”不包含“depName”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateOrderModel”的第一个参数的扩展方法“depName”(是否缺少 using 指令或程序集引用?)
+2014-10-27 10:36:33,584 [30] ERROR - bom.delegatelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-10-27 10:37:57,883 [52] ERROR - bom.delegatelistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\bom\delegatelistpart.cshtml(65): error CS1061: “Enterprise.Invoicing.Entities.Models.V_DelegateOrderModel”不包含“canfs”的定义，并且找不到可接受类型为“Enterprise.Invoicing.Entities.Models.V_DelegateOrderModel”的第一个参数的扩展方法“canfs”(是否缺少 using 指令或程序集引用?)
+2014-10-27 10:37:57,883 [52] ERROR - bom.delegatelist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-10-27 20:42:00,948 [45] ERROR - bom.delegateone “System.Dynamic.ExpandoObject”未包含“ddl”的定义
+2014-10-27 20:48:17,150 [42] ERROR - bom.delegateone 未将对象引用设置到对象的实例。
+2014-10-27 20:51:29,259 [5] ERROR - bom.delegateone 未将对象引用设置到对象的实例。
+2014-10-27 20:52:43,513 [9] ERROR - bom.delegateone 未将对象引用设置到对象的实例。
+2014-10-27 20:56:24,702 [8] ERROR - bom.delegateone 未将对象引用设置到对象的实例。
+2014-10-27 22:58:48,395 [11] ERROR - bom.delegatedelete 列名 'WX20141027' 无效。
+2014-10-27 23:56:23,045 [18] ERROR - system.dictionary 值不能为 null 或为空。
+参数名: linkText

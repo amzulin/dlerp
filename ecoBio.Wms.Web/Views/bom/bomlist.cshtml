@@ -1,0 +1,301 @@
+﻿@{
+    ViewBag.Title = "BOM管理";
+    var list = Model.list as List<Enterprise.Invoicing.ViewModel.V_BomMaterial>; 
+    var key = Model.key as string;
+    string valid = Model.valid;
+    var page = Model.pageIndex;
+    var pi = 1;
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    }
+     }
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：管理控制 > BOM管理 </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_search"><i></i>关键字：<input name="" type="text" id="txtkey" value="@key" />
+    状态：<select id="ddlstatus">
+        <option @(valid=="1"?"selected=selected":"") value="1">已启用</option>
+        <option @(valid==""?"selected=selected":"") value="">全部</option>
+        <option @(valid=="0"?"selected=selected":"") value="0">已禁用</option>
+
+       </select>
+<a class="btn_search" href="javascript:void(0);" id="btn"></a>
+     @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bom_add"))
+             {
+    <span  onclick="editone('add',0)"  class="btn_refer2">新增BOM</span>
+             }
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bom_delete"))
+      {     <span onclick="deletemany();" class="btn_refer2" title="删除所选">删除所选</span>  }
+    <input type="hidden" id="hidpage" value="@page" />
+
+    @Html.Partial("~/Views/Shared/page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../bom/bomlist"}
+       })
+</div>
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>BOM列表</h2>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="3%"> <input type="checkbox" id="chball" onclick="    selectall()" style="width:20px;" /></th>
+       <th width="5%">序号</th>
+    <th width="8%">物料编码</th>
+    <th width="13%">物料名称</th>
+    <th width="22%">物料型号</th>
+    <th width="8%">版本</th>
+    <th width="8%">日期</th>
+    <th width="5%">状态</th>
+
+    <th width="8%">备注</th>
+
+    <th width="20%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td><input type="checkbox" id="chb_@item.bomId" onclick="chbone(@item.bomId)" forid="@item.bomId" mytype="person"  style="width:20px;" /></td> 
+      <td>@pi</td>    
+    <td>@item.materialNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td>@item.version</td>
+    <td>@(item.status == 0 ? (item.endDate.HasValue ? item.endDate.Value.ToString("yyyy-MM-dd") : "已停用") : (item.startDate.HasValue ? item.startDate.Value.ToString("yyyy-MM-dd") : "已启用"))</td>
+    <td>@(item.status == 1 ? "启用" : "禁用")</td>
+    <td>@item.remark</td>
+    <td>    
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bom_view"))
+              {  <span title="查看" onclick="editone('view',@item.bomId)" class="view"></span>}
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bom_export"))
+              {  <span title="导出EXCEL" onclick="editone('export',@item.bomId)" >导出</span>}
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bom_update"))
+              {  <span title="修改" onclick="editone('edit',@item.bomId)" class="edit"></span>
+              <span title="@(item.status == 1 ? "禁用" : "启用")" onclick="editone('status',@item.bomId,@(item.status == 1 ? "0" : "1"))" >@(item.status == 1 ? "禁用" : "启用")</span>
+              }
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bom_copy") && item.status == 1)
+              {  <span title="复制" onclick="bomcopy(@item.bomId,'@item.materialNo','@(item.materialNo + " " + item.materialName + " " + item.materialModel)')" >复制</span>}
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bom_delete"))
+         {     <span onclick="deleteone(@pi,'@item.bomId');"  title="删除">删除</span>  }
+	</td>
+</tr>
+         pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="10">无BOM信息</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+	 @Html.Partial("~/Views/Shared/page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize},{"otherParam",Model.otherParam},{"url","../bom/bomlist"}
+       })
+    </div>
+
+
+    </div>
+<script>  
+    var page = '@page';
+    var onewin;
+    $(function () {   
+        $("#btn").click(query);
+    });
+
+    function query() {
+        var dd = $("#txtkey").val();
+        var ds = $("#ddlstatus").val();
+        window.location.href = "../bom/bomlist?page=" + page + (dd != "" ? "&key=" + dd : "") + (ds != "" ? "&valid=" + ds : "");
+    }
+    function loadgrid() {
+        query();
+        onewin.close();
+    }
+    function editone(t, id,s) {
+        if (t == 'view') window.location.href = '../bom/bomview?id=' + id;
+        else if (t == 'status') {
+            if (confirm("确定" + (s == 0 ? "禁用" : "启用") + "该BOM？")) {
+                var dd = $("#txtkey").val();
+                var ds = $("#ddlstatus").val();
+                $.post("../bom/bomvalid", { id: id, valid: s }, function (data) {
+                    if (data.status == true) {
+                        $.dialog.tips("操作成功 ");
+                        window.location.href = "../bom/bomlist?page=" + page + (dd != "" ? "&key=" + dd : "") + (ds != "" ? "&valid=" + ds : "");
+                    }
+                    else {
+                        $.dialog.alert((s == 0 ? "禁用" : "启用")+"失败！");
+                    }
+                });
+            }
+            else
+                return false;
+        }
+        else
+            window.location.href = '../bom/bomone?type=' + t + '&id=' + id;
+
+        // onewin = $.dialog({
+        //    id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+        //    title: t == "add" ? '新增BOM' : "BOM信息",
+        //    content: 'url:../bom/bomone?type=' + t + '&id=' + id
+        //});
+
+    }
+    function deleteone(i, id) {
+        if (confirm("确定删除该BOM？")) {
+            var dd = $("#txtkey").val();
+            var ds = $("#ddlstatus").val();
+            $.post("../bom/deletebom", { id: id }, function (data) {
+                if (data.status == true) {
+                    window.location.href = "../bom/bomlist?page=" + page + (dd != "" ? "&key=" + dd : "") + (ds != "" ? "&valid=" + ds : "");
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                }
+            });
+        }
+        else
+            return false;
+
+    }
+    function deletemany() {
+
+        var forids=[];
+        var list = $("input[mytype='person']");
+        $.each(list, function (i, m) { 
+            var chb=$(m).attr("checked");
+            if (chb=="checked") {
+                forids.push($(m).attr("forid"));
+            }
+        });
+        if (forids.length<1) {
+            $.dialog.alert("请选择要删除的BOM！");
+            return false;
+        }
+        if (confirm("确定删除选择的BOM？")) {
+            var dd = $("#txtkey").val();
+            var ds = $("#ddlstatus").val();
+            $.post("../bom/deletebomselect", { forids: forids.toString() }, function (data) {
+                if (data.status == true) {
+                    window.location.href = "../bom/bomlist?page=" + page + (dd != "" ? "&key=" + dd : "") + (ds != "" ? "&valid=" + ds : "");
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                }
+            });
+        }
+        else
+            return false;
+
+    }
+    function bomcopy(bomid, material, name) {
+        onewin = $.dialog({
+            id: 'win_repair', lock: true, max: false, min: false, width: 570, height: 400, resize: false,
+            title: name + " BOM复制",
+            content: '<table style="margin-top:10px;" width="500px" border="0" cellspacing="0" cellpadding="0">'
+            + '<tr style="height:30px;">'
+            + '<td width="20%" align="right">原BOM物料：</td>'
+            + '<td width="30%" colspan="3"><input name="" type="text" id="txtname" class="input_gray" value="' + name + '" style="width:400px;" /></td>'
+            + '</tr><tr style="height:30px;">'
+            + '<td align="right">选择新物料：</td>'
+            + '<td colspan="3"><input name="" type="text" id="txtmaterial" value="" style="width:400px;" /></td>'
+            + '</tr><tr style="height:30px;">'
+            + '<td  align="right">版本：</td>'
+            + '<td  ><input name="" type="text" id="txtversion" value="" /></td>'
+            + '<td align="right">备注：</td><td><input name="" type="text" id="txtremark"/></td>'
+            + '</tr>'
+            + '</table>'
+                              , init: function () {
+
+                                  $("#txtmaterial").autocomplete({
+                                      source: function (request, response) {
+                                          var key = $("#txtmaterial").val();
+                                          var mc = '';
+                                          $.get("../main/querymaterial", { key: key, mc: mc }, function (data) {
+                                              response($.map(data, function (item) {
+                                                  return {
+                                                      label: item.code + " 物料:" + item.name + " 型号:" + item.model,
+                                                      name: item.name,
+                                                      model: item.model,
+                                                      tu: item.tu,
+                                                      value: item.code,
+                                                  }
+                                              }));
+                                          });
+                                      },
+                                      minLength: 1,
+                                      select: function (event, ui) {
+                                          var item = ui.item.name;
+                                          $("#txtmaterial").val(ui.item.value + " " + ui.item.name + " " + ui.item.model);
+                                          hmaterial = ui.item.value;
+                                          hname = ui.item.name;
+                                          hmodel = ui.item.model;
+                                          hth = ui.item.tu;
+                                          return false;
+                                      }
+                                  });
+
+
+          },button: [
+      {
+          name: '提交', 
+          callback: function () {
+              var version = $("#txtversion").val();
+              var remark = $("#txtremark").val();
+              if (hmaterial == ''|| version=='') {
+                  $.dialog.alert("请选择要添加的新BOM物料和填写版本号！");
+                  return false;
+              }
+              if (hmaterial == material && version == '') {
+                  $.dialog.alert("两种BOM物料编码相同时，请填写不同版本号！");
+                  return false;
+              }
+              $.dialog.tips("BOM复制中。。。");
+              $.post("../bom/savebomcopy", { from: bomid, material: material, newmaterial: hmaterial, remark: remark, version: version }, function (data) {
+                  if (data.status == true) {
+                      query();
+                  }
+                  else {
+                      $.dialog.alert(data.message);
+                      return false;
+                  }
+              });
+          },
+          focus: true
+      },
+      {
+          name: '取消'
+      }
+                              ]
+        });
+    }
+    
+    function selectall() {
+        var chb = $("#chball").attr("checked");
+        var list = $("input[mytype='person']");
+        $.each(list, function (i, m) {
+            if (chb=="checked")   $(m).attr("checked", "checked");
+            else $(m).removeAttr("checked")
+        });
+    }
+    function chbone(id) {
+        var chbme = $("#chb_"+id).attr("checked");
+
+        if (chbme!="checked") $("#chball").removeAttr("checked")
+    } 
+</script>

@@ -1,0 +1,40 @@
+2014-09-09 22:24:04,110 [21] ERROR - cost.paylist d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\paylist.cshtml(14): error CS0103: 当前上下文中不存在名称“one”
+2014-09-09 22:24:27,581 [19] ERROR - cost.paylistpart 未将对象引用设置到对象的实例。
+2014-09-09 22:24:27,634 [19] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:27:33,615 [39] ERROR - cost.paylistpart The specified cast from a materialized 'System.Int32' type to the 'System.Decimal' type is not valid.
+2014-09-09 22:27:33,624 [39] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:30:53,922 [6] ERROR - cost.paylistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\paylistpart.cshtml(10): error CS1061: “Enterprise.Invoicing.ViewModel.NeedPayModel”不包含“purchaseNo”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.NeedPayModel”的第一个参数的扩展方法“purchaseNo”(是否缺少 using 指令或程序集引用?)
+2014-09-09 22:30:53,933 [6] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:31:22,837 [39] ERROR - cost.paylistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\paylistpart.cshtml(10): error CS0029: 无法将类型“int”隐式转换为“string”
+2014-09-09 22:31:22,838 [39] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:31:48,077 [6] ERROR - cost.paylistpart d:\软件开发\进销存\code\ecoBio.Wms.Web\Views\cost\paylistpart.cshtml(51): error CS1061: “Enterprise.Invoicing.ViewModel.NeedPayModel”不包含“createDate”的定义，并且找不到可接受类型为“Enterprise.Invoicing.ViewModel.NeedPayModel”的第一个参数的扩展方法“createDate”(是否缺少 using 指令或程序集引用?)
+2014-09-09 22:31:48,078 [6] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:33:26,096 [21] ERROR - cost.paylistpart “System.Dynamic.ExpandoObject”未包含“start”的定义
+2014-09-09 22:33:26,106 [21] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:35:40,041 [13] ERROR - cost.paydetailview 对于“Enterprise.Invoicing.Web.Controllers.costController”中方法“System.Web.Mvc.ActionResult paydetailview(Int32, System.Nullable`1[System.DateTime], System.Nullable`1[System.DateTime])”的不可以为 null 的类型“System.Int32”的参数“no”，参数字典包含一个 null 项。可选参数必须为引用类型、可以为 null 的类型或声明为可选参数。
+参数名: parameters
+2014-09-09 22:35:40,050 [13] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:35:40,051 [13] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:49:18,798 [13] ERROR - cost.paydetailview 从 varchar 数据类型到 datetime 数据类型的转换产生一个超出范围的值。
+2014-09-09 22:49:18,814 [13] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:49:18,815 [13] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:52:46,496 [10] ERROR - cost.paydetailview 从 varchar 数据类型到 datetime 数据类型的转换产生一个超出范围的值。
+2014-09-09 22:52:48,481 [10] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:52:51,194 [10] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:56:39,614 [10] ERROR - cost.paydetailview 从 varchar 数据类型到 datetime 数据类型的转换产生一个超出范围的值。
+2014-09-09 22:56:43,602 [10] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:56:45,667 [10] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:59:05,123 [5] ERROR - cost.paydetailview 从 varchar 数据类型到 datetime 数据类型的转换产生一个超出范围的值。
+2014-09-09 22:59:05,123 [5] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 22:59:05,124 [5] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 23:01:37,638 [12] ERROR - cost.paydetailview 从 varchar 数据类型到 datetime 数据类型的转换产生一个超出范围的值。
+2014-09-09 23:01:37,648 [12] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 23:01:37,649 [12] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 23:05:18,579 [17] ERROR - cost.paydetailview 从 varchar 数据类型到 datetime 数据类型的转换产生一个超出范围的值。
+2014-09-09 23:05:18,588 [17] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 23:05:18,589 [17] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 23:07:30,028 [9] ERROR - cost.paydetailview 从 varchar 数据类型到 datetime 数据类型的转换产生一个超出范围的值。
+2014-09-09 23:07:30,042 [9] ERROR - cost.paylistpart 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 23:07:30,043 [9] ERROR - cost.paylist 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2014-09-09 23:09:35,641 [13] ERROR - cost.paydetailview The specified cast from a materialized 'System.Decimal' type to the 'System.Int32' type is not valid.
+2014-09-09 23:09:37,193 [12] ERROR - cost.paydetailview The specified cast from a materialized 'System.Decimal' type to the 'System.Int32' type is not valid.

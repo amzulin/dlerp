@@ -1,0 +1,223 @@
+﻿@{
+    var type = Model.type;
+    var message = Model.message;
+    var no = Model.no;
+    var one = Model.one as Enterprise.Invoicing.Entities.Models.V_BillCost;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BillCostDetail>;
+
+    var pi = 1;
+    if (type == "edit")
+    {
+        ViewBag.Title = "编辑普通采购单";
+    }
+    else
+    {
+        type = "add";
+        ViewBag.Title = "新增普通采购单";
+    }
+}
+<div class="layout_guild"><i></i>您当前的位置：费用管理 > 普通采购单 </div>
+<div class="content">
+    <input type="hidden" value="@type" id="hidtype" />
+    <input type="hidden" value="@message" id="message" />
+    <input type="hidden" value="@no" id="hidno" /> 
+    @if (type == "add")
+    {
+<div class="material_refer" style="height:40px;">  
+
+<label>采购单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@no" />
+<label>采购部门：</label><input name="" id="txtinsn" readonly="readonly" class="input_gray" type="text"  value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.dep_name"/>
+<label>采购人：</label><input name="" id="txtperson" readonly="readonly" class="input_gray" type="text" value="@Enterprise.Invoicing.Web.Masterpage.CurrUser.name" /> 
+<label>备注：</label><input name="" id="txtremark" type="text" value=""/>    
+</div>
+    }
+
+@if (type == "edit")
+{
+    <div class="material_refer" style="height:40px;">
+<label>采购单号：</label><input name="" type="text" readonly="readonly"  class="input_gray" value="@one.billNo" />
+<label>采购部门：</label><input name="" type="text"  class="input_gray" readonly="readonly" value="@one.depName"/>
+<label>采购人：</label><input name="" type="text" readonly="readonly" class="input_gray" value="@one.makeName" />   
+<label>备注：</label><input name="" id="txtremark" type="text" value="@one.remark"/>   
+</div>
+}
+<div class="content_main">
+<h2 id="htitle"><i></i>采购明细</h2>
+<div class="add">
+    <ul>
+        <li><label>采购项目：</label><input name="" type="text" id="txtkm"  style="width:150px;"/></li>
+         <li><label>数量：</label><input name="" type="text" id="txtamount" class="input_width_80px"/></li>
+         <li><label>单价：</label><input name="" type="text" id="txtcost" class="input_width_80px"/></li>
+         <li><label>日期：</label><input name="" type="text" id="txtdate" readonly="readonly" class="input_width_80px" value="@DateTime.Now.ToString("yyyy-MM-dd")" /></li>
+         <li><label>供应商：</label><input name="" type="text" id="txtbz"  style="width:120px;" /></li>
+         <li>
+             <input type="hidden" value="0" id="hidsn" />
+             <input type="hidden" value="0" id="hidtr" />
+             <a  href="javascript:void(0);" id="btngl" onclick="savedetail();" class="gray_btn">保存</a>
+</li>   </ul>
+</div>
+<div  id="detail_table">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+    <th width="5%">序号</th>
+    <th width="25%">项目</th>
+    <th width="10%">数量</th>
+    <th width="10%">单价</th>
+    <th width="10%">金额</th>
+     <th width="10%">日期</th>
+     <th width="20%">供应商</th>
+    <th width="10%">操作</th>
+  </tr>
+  </thead>
+ <tbody id="tabbody">
+   
+     @foreach (var item in list)
+     {     
+  <tr id="tr_@pi">
+      <td id="td_1_@pi">@pi</td>
+      <td id="td_2_@pi">@item.billTitle</td>
+      <td id="td_3_@pi">@item.amount</td>
+      <td id="td_4_@pi">@item.cost</td>
+      <td id="td_5_@pi">@(item.amount* item.cost)</td>
+      <td id="td_6_@pi">@item.billDate.ToString("yyyy-MM-dd") </td>
+      <td id="td_7_@pi">@item.remark</td>
+    <td id="td_8_@pi"> <span onclick="editone(@item.detailSn,@pi,'@item.billTitle',@item.amount,@item.cost,'@item.billDate.ToString("yyyy-MM-dd")','@item.remark');" class="edit"></span>
+       <span onclick="deleteone(@item.detailSn,@pi);" title="删除">删除</span>
+    </td>
+  </tr>
+      pi++;
+     }
+  </tbody>
+</table>
+<div colspan="6" style="text-align:center;"><a class="btn_refer2" style="margin:10px;" href="javascript:void(0);" onclick="save('@no');" >提交</a></div>
+</div> 
+
+
+
+</div>
+
+</div>
+<script>    
+    var no = '@no';
+    var type = '@type';
+    var trcount = Number('@list.Count');
+
+
+    $(function () {
+        var msg = $("#message").val();
+        if (msg != "") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        $("#txtdate").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });
+    });
+
+    function savedetail() {
+
+        var tr = $("#hidtr").val();
+
+        var sn = $("#hidsn").val();
+        var km = $("#txtkm").val();
+        var amount = $("#txtamount").val();
+        var cost = $("#txtcost").val();
+        var date = $("#txtdate").val();
+        var bz = $("#txtbz").val();
+        if (km == "" || cost == "" || amount == "" || date == '' || bz == '') {
+            $.dialog.alert("请输入普通采购明细！");
+            return false;
+        }
+        if ( isNaN(cost) || parseFloat(cost) <= 0  || isNaN(amount) || parseFloat(amount) <= 0) {
+            $.dialog.alert("数量和单价需为数字！");
+            return false;
+        }
+        $.post("../cost/savepurchasedetail", { no: no, sn: sn, remark: bz, date: date, km: km, cost: cost, amount: amount, type: type }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+                var nsn = data.value;
+                no = data.value2;
+                if (Number(tr) == 0) {//添加
+                    trcount += 1;
+                    var newtr = "<tr id='tr_" + trcount + "'><td id='td_1_" + trcount + "'>" + trcount + "</td><td id='td_2_" + trcount + "'>" + km + "</td>"
+                        + "<td id='td_3_" + trcount + "'>" + amount + "</td>" + "<td id='td_4_" + trcount + "'>" + cost + "</td>" + "<td id='td_5_" + trcount + "'>" + (amount*cost) + "</td>"
+                        + "<td id='td_6_" + trcount + "'>" + date + "</td>"
+                        + "<td id='td_7_" + trcount + "'>" + bz + "</td>";
+                    newtr += "<td id='td_8_" + trcount + "'> <span onclick='editone(" + nsn + "," + trcount + ",\"" + km + "\"," + amount + "," + cost + ",\"" + date + "\",\"" + bz + "\")' class='edit'></span>";
+                    newtr += "     <span onclick='deleteone(" + nsn + "," + trcount + ")' title='删除'>删除</span></td></tr>";
+                    if (trcount > 1)
+                        $("#tr_" + (trcount - 1)).after(newtr);
+                    else { $("#tabbody").after(newtr); }
+                }
+                else {
+                    $("#td_2_" + tr).html(km);
+                    $("#td_3_" + tr).html(amount);
+                    $("#td_4_" + tr).html(cost);
+                    $("#td_5_" + tr).html(amount * cost);
+                    $("#td_6_" + tr).html(date);
+                    $("#td_7_" + tr).html(bz);
+                    var btn = "<span onclick='editone(" + sn + "," + tr + ",\"" + km + "\"," + amount + "," + cost + ",\"" + date + "\",\"" + bz + "\")' class='edit'></span>" + "     <span onclick='deleteone(" + sn + "," + tr + ")' title='删除'>删除</span>";
+                    $("#td_6_" + tr).html(btn);
+                } $("#txtkm").val('');
+                $("#hidsn").val('0'); $("#hidtr").val('0'); $.dialog.tips("保存成功");
+            }
+        });
+    }
+    function editone(sn, i, km,amount, cost, date, re) {
+        $("#hidsn").val(sn);
+        $("#hidtr").val(i);
+
+        $("#txtkm").val(km);
+        $("#txtamount").val(amount);
+        $("#txtcost").val(cost);
+        $("#txtdate").val(date);
+        $("#txtbz").val(re);
+    }
+    function deleteone(sn,i) {
+        if (confirm("确定删除？")) {
+            if (sn == 0) {
+                $("tr_" + i).remove();
+            } else {
+                $.post('../cost/deletepurchasedetail', { no: no, sn: sn }, function (data) {
+                    if (data == "ok") {
+                        $("#tr_" + i).remove();
+                    }
+                    else {
+                        $.dialog.alert("删除失败！");
+                        return false;
+                    }
+                });
+            }
+            $("#hidsn").val('0'); $("#hidtr").val('0');
+        }
+        else
+            return false;
+    }
+    
+
+    function save() {
+        var remark = $("#txtremark").val();
+
+        $.post("../cost/savepurchase", { no: no, remark: remark }, function (data) {
+            if (data.status == false) {
+                $.dialog.alert(data.message);
+                return false;
+            }
+            else {
+
+                $.dialog.tips('提交成功', 1, 'loading.gif');
+                window.location.href = "../cost/purchaselist";
+            }
+        });
+    }
+ 
+</script>

@@ -1,0 +1,22 @@
+2013-11-07 20:13:46,539 [20] ERROR - depot.reportrequire page index must be more than 0
+2013-11-07 21:16:24,917 [7] ERROR - depot.excelrequire 空路径名是非法的。
+2013-11-07 21:17:01,554 [7] ERROR - depot.excelrequire 空路径名是非法的。
+2013-11-07 21:24:09,552 [20] ERROR - depot.excelrequire 未找到视图“excelrequire”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/depot/excelrequire.aspx
+~/Views/depot/excelrequire.ascx
+~/Views/Shared/excelrequire.aspx
+~/Views/Shared/excelrequire.ascx
+~/Views/depot/excelrequire.cshtml
+~/Views/depot/excelrequire.vbhtml
+~/Views/Shared/excelrequire.cshtml
+~/Views/Shared/excelrequire.vbhtml
+2013-11-07 21:30:26,236 [5] ERROR - depot.excelrequire 未找到视图“excelrequire”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/depot/excelrequire.aspx
+~/Views/depot/excelrequire.ascx
+~/Views/Shared/excelrequire.aspx
+~/Views/Shared/excelrequire.ascx
+~/Views/depot/excelrequire.cshtml
+~/Views/depot/excelrequire.vbhtml
+~/Views/Shared/excelrequire.cshtml
+~/Views/Shared/excelrequire.vbhtml
+2013-11-07 22:36:32,579 [15] ERROR - depot.exceldepot 索引超出了数组界限。

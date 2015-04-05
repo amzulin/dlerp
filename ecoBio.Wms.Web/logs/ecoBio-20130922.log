@@ -1,0 +1,13 @@
+2013-09-22 09:52:05,018 [10] ERROR - partialpage.upchartandgrid 对象不能从 DBNull 转换为其他类型。
+2013-09-22 10:17:02,835 [15] ERROR - partialpage.upchartandgrid 未将对象引用设置到对象的实例。
+2013-09-22 10:17:39,622 [26] ERROR - partialpage.upchartandgrid 未将对象引用设置到对象的实例。
+2013-09-22 10:21:31,617 [5] ERROR - partialpage.upchartandgrid 未将对象引用设置到对象的实例。
+2013-09-22 10:45:45,763 [10] ERROR - partialpage.ParamsQuery 未将对象引用设置到对象的实例。
+2013-09-22 10:45:45,797 [10] ERROR - waterquality.overall 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-09-22 10:47:58,626 [8] ERROR - partialpage.ParamsQuery 未将对象引用设置到对象的实例。
+2013-09-22 10:47:58,692 [8] ERROR - processpara.overall 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2013-09-22 15:00:50,372 [117] ERROR - partialpage.upchartandgrid 找不到方法:“System.Collections.Generic.List`1<ecoBio.Wms.ViewModel.process_statistic> ecoBio.Wms.FlexData.WebAccountHelper.ProcessStatistic(System.String, System.DateTime, System.DateTime)”。
+2013-09-22 15:01:02,697 [121] ERROR - partialpage.upchartandgrid 找不到方法:“System.Collections.Generic.List`1<ecoBio.Wms.ViewModel.process_statistic> ecoBio.Wms.FlexData.WebAccountHelper.ProcessStatistic(System.String, System.DateTime, System.DateTime)”。
+2013-09-22 15:30:50,064 [27] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-09-22 15:31:10,935 [28] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。
+2013-09-22 15:33:06,344 [10] ERROR - datacenter.chartfullscreen 未将对象引用设置到对象的实例。

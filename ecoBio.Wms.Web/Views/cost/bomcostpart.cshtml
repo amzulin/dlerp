@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.V_BomMaterialView>;
+    var page = Model.pageIndex;
+    var pi = 1; 
+    var pageindex = Model.pageIndex;
+    var pagesize = Model.pageSize;
+    if (pageindex > 1)
+    {
+        pi = (pageindex - 1) * pagesize + 1;
+    } 
+     }
+
+
+
+<!--表格内容-->
+
+<div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>BOM列表</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th width="5%">序号</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('materialNo')">产品编码</th>
+    <th width="24%" style="cursor:pointer;" onclick="orderlistp('materialName')">产品名称</th>
+    <th width="25%" style="cursor:pointer;" onclick="orderlistp('materialModel')">产品型号</th>
+    <th width="10%" style="cursor:pointer;" onclick="orderlistp('rootCost')">成本</th>
+    <th width="16%" style="cursor:pointer;" onclick="orderlistp('bomremark')">备注</th>
+    <th width="10%">操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>@pi</td>    
+    <td>@item.materialNo</td>
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td>@(Math.Round( item.rootCost,4))</td>
+    <td>@item.bomremark</td>
+    <td>    
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomcost_view"))
+            {  <span title="查看" onclick="editone('view',@item.bomId)" class="view"></span>}
+           @*   @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomcost_export"))
+              {  <span style="cursor:pointer;" title="导出EXCEL" onclick="excel(@item.bomId)" >导出</span>}*@
+              @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomcost_update"))
+              {  <span title="修改" onclick="editone('edit',@item.bomId)" class="edit"></span>}
+	</td>
+</tr>
+         pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="7">无BOM信息</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    <div class="pagelinks_container" style="margin-bottom:10px;">
+       
+	 @Html.Partial("~/Views/Shared/page_page.cshtml", new ViewDataDictionary()
+       {
+           {"pageIndex",Model.pageIndex},{"totalCount",Model.totalCount},{"pageSize",Model.pageSize}
+       })
+    </div>
+<script>
+    page = '@page';
+</script>
