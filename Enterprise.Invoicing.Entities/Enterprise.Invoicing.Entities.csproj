@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EF98D2D6-D94D-4CA3-8CBF-77A770095B24}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Enterprise.Invoicing.Entities</RootNamespace>
+    <AssemblyName>Enterprise.Invoicing.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\苏州贝力\BeiLi.ERP\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="IServiceDB.cs" />
+    <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\BillCost.cs" />
+    <Compile Include="Models\BillCostDetail.cs" />
+    <Compile Include="Models\BomCost.cs" />
+    <Compile Include="Models\BomMain.cs" />
+    <Compile Include="Models\BomOrder.cs" />
+    <Compile Include="Models\BomOrderDetail.cs" />
+    <Compile Include="Models\BomOrderDetailList.cs" />
+    <Compile Include="Models\BomOrderVirtualList.cs" />
+    <Compile Include="Models\BomOut.cs" />
+    <Compile Include="Models\BomOutDetail.cs" />
+    <Compile Include="Models\BomVirtual.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\DelegateBack.cs" />
+    <Compile Include="Models\DelegateBackDetail.cs" />
+    <Compile Include="Models\DelegateOrder.cs" />
+    <Compile Include="Models\DelegateOrderDetail.cs" />
+    <Compile Include="Models\DelegateSend.cs" />
+    <Compile Include="Models\DelegateSendDetail.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Depot.cs" />
+    <Compile Include="Models\DepotDetail.cs" />
+    <Compile Include="Models\Dictionary.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Function.cs" />
+    <Compile Include="Models\FunctionRight.cs" />
+    <Compile Include="Models\hds0570423_dbContext.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\Log.cs" />
+    <Compile Include="Models\Mapping\AttachmentMap.cs" />
+    <Compile Include="Models\Mapping\BillCostDetailMap.cs" />
+    <Compile Include="Models\Mapping\BillCostMap.cs" />
+    <Compile Include="Models\Mapping\BomCostMap.cs" />
+    <Compile Include="Models\Mapping\BomMainMap.cs" />
+    <Compile Include="Models\Mapping\BomOrderDetailListMap.cs" />
+    <Compile Include="Models\Mapping\BomOrderDetailMap.cs" />
+    <Compile Include="Models\Mapping\BomOrderMap.cs" />
+    <Compile Include="Models\Mapping\BomOrderVirtualListMap.cs" />
+    <Compile Include="Models\Mapping\BomOutDetailMap.cs" />
+    <Compile Include="Models\Mapping\BomOutMap.cs" />
+    <Compile Include="Models\Mapping\BomVirtualMap.cs" />
+    <Compile Include="Models\Mapping\CompanyMap.cs" />
+    <Compile Include="Models\Mapping\DelegateBackDetailMap.cs" />
+    <Compile Include="Models\Mapping\DelegateBackMap.cs" />
+    <Compile Include="Models\Mapping\DelegateOrderDetailMap.cs" />
+    <Compile Include="Models\Mapping\DelegateOrderMap.cs" />
+    <Compile Include="Models\Mapping\DelegateSendDetailMap.cs" />
+    <Compile Include="Models\Mapping\DelegateSendMap.cs" />
+    <Compile Include="Models\Mapping\DepartmentMap.cs" />
+    <Compile Include="Models\Mapping\DepotDetailMap.cs" />
+    <Compile Include="Models\Mapping\DepotMap.cs" />
+    <Compile Include="Models\Mapping\DictionaryMap.cs" />
+    <Compile Include="Models\Mapping\EmployeeMap.cs" />
+    <Compile Include="Models\Mapping\FunctionMap.cs" />
+    <Compile Include="Models\Mapping\FunctionRightMap.cs" />
+    <Compile Include="Models\Mapping\JobMap.cs" />
+    <Compile Include="Models\Mapping\LogMap.cs" />
+    <Compile Include="Models\Mapping\MaterialMap.cs" />
+    <Compile Include="Models\Mapping\MaterialPriceMap.cs" />
+    <Compile Include="Models\Mapping\MenuMap.cs" />
+    <Compile Include="Models\Mapping\MenuRightMap.cs" />
+    <Compile Include="Models\Mapping\MsgReceMap.cs" />
+    <Compile Include="Models\Mapping\MsgReceModelMap.cs" />
+    <Compile Include="Models\Mapping\MsgSendMap.cs" />
+    <Compile Include="Models\Mapping\MsgSendModelMap.cs" />
+    <Compile Include="Models\Mapping\NewsMap.cs" />
+    <Compile Include="Models\Mapping\ProduceDetailMap.cs" />
+    <Compile Include="Models\Mapping\ProductCategoryMap.cs" />
+    <Compile Include="Models\Mapping\ProductGiveDetailMap.cs" />
+    <Compile Include="Models\Mapping\ProductGiveMap.cs" />
+    <Compile Include="Models\Mapping\ProductGroupMap.cs" />
+    <Compile Include="Models\Mapping\ProductionMap.cs" />
+    <Compile Include="Models\Mapping\ProductMap.cs" />
+    <Compile Include="Models\Mapping\ProductPullDetailMap.cs" />
+    <Compile Include="Models\Mapping\ProductPullMap.cs" />
+    <Compile Include="Models\Mapping\ProductSemiMap.cs" />
+    <Compile Include="Models\Mapping\PurchaseDetailMap.cs" />
+    <Compile Include="Models\Mapping\PurchaseMap.cs" />
+    <Compile Include="Models\Mapping\PurchaseRequireDetailMap.cs" />
+    <Compile Include="Models\Mapping\PurchaseRequireMap.cs" />
+    <Compile Include="Models\Mapping\PurchaseReturnDetailMap.cs" />
+    <Compile Include="Models\Mapping\PurchaseReturnMap.cs" />
+    <Compile Include="Models\Mapping\RoleMap.cs" />
+    <Compile Include="Models\Mapping\StockExchangeMap.cs" />
+    <Compile Include="Models\Mapping\StockInDetailMap.cs" />
+    <Compile Include="Models\Mapping\StockInMap.cs" />
+    <Compile Include="Models\Mapping\StockOutDetailMap.cs" />
+    <Compile Include="Models\Mapping\StockOutMap.cs" />
+    <Compile Include="Models\Mapping\StockReportMap.cs" />
+    <Compile Include="Models\Mapping\StockReturnDetailMap.cs" />
+    <Compile Include="Models\Mapping\StockReturnMap.cs" />
+    <Compile Include="Models\Mapping\SupplierMap.cs" />
+    <Compile Include="Models\Mapping\sysdiagramMap.cs" />
+    <Compile Include="Models\Mapping\V_BillCostDetailMap.cs" />
+    <Compile Include="Models\Mapping\V_BillCostMap.cs" />
+    <Compile Include="Models\Mapping\V_BomCostModelMap.cs" />
+    <Compile Include="Models\Mapping\V_BomMaerialTwoMap.cs" />
+    <Compile Include="Models\Mapping\V_BomMaterialViewMap.cs" />
+    <Compile Include="Models\Mapping\V_BomOrderDetailListModelMap.cs" />
+    <Compile Include="Models\Mapping\V_BomOrderDetailModelMap.cs" />
+    <Compile Include="Models\Mapping\V_BomOrderModelMap.cs" />
+    <Compile Include="Models\Mapping\V_BomOrderVirtualDetailMap.cs" />
+    <Compile Include="Models\Mapping\V_BomOutDetailModelMap.cs" />
+    <Compile Include="Models\Mapping\V_BomOutModelMap.cs" />
+    <Compile Include="Models\Mapping\V_BomProductMap.cs" />
+    <Compile Include="Models\Mapping\V_DelegateBackDetailMap.cs" />
+    <Compile Include="Models\Mapping\V_DelegateBackModelMap.cs" />
+    <Compile Include="Models\Mapping\V_DelegateOrderDetailMap.cs" />
+    <Compile Include="Models\Mapping\V_DelegateOrderModelMap.cs" />
+    <Compile Include="Models\Mapping\V_DelegateSendDetailModelMap.cs" />
+    <Compile Include="Models\Mapping\V_DelegateSendModelMap.cs" />
+    <Compile Include="Models\Mapping\V_MaterialCostMap.cs" />
+    <Compile Include="Models\Mapping\V_MaterialPriceModelMap.cs" />
+    <Compile Include="Models\Mapping\V_NeedPayMap.cs" />
+    <Compile Include="Models\Mapping\V_ProductGiveDetailMap.cs" />
+    <Compile Include="Models\Mapping\V_ProductGiveModelMap.cs" />
+    <Compile Include="Models\Mapping\V_ProductionDetailModelMap.cs" />
+    <Compile Include="Models\Mapping\V_ProductionModelMap.cs" />
+    <Compile Include="Models\Mapping\V_ProductMap.cs" />
+    <Compile Include="Models\Mapping\V_ProductPullDetailMap.cs" />
+    <Compile Include="Models\Mapping\V_ProductPullModelMap.cs" />
+    <Compile Include="Models\Mapping\V_ProductSemiMap.cs" />
+    <Compile Include="Models\Mapping\V_PurchaseDetailModelMap.cs" />
+    <Compile Include="Models\Mapping\V_PurchaseModelMap.cs" />
+    <Compile Include="Models\Mapping\V_PurchaseRequireModeMap.cs" />
+    <Compile Include="Models\Mapping\V_ReceiptDetailMap.cs" />
+    <Compile Include="Models\Mapping\V_ReportDepotMap.cs" />
+    <Compile Include="Models\Mapping\V_ReturnInModelMap.cs" />
+    <Compile Include="Models\Mapping\V_ReturnOutModelMap.cs" />
+    <Compile Include="Models\Mapping\V_StockChangeModelMap.cs" />
+    <Compile Include="Models\Mapping\V_StockInModelMap.cs" />
+    <Compile Include="Models\Mapping\V_StockInPurchaseMap.cs" />
+    <Compile Include="Models\Mapping\V_StockOutModelMap.cs" />
+    <Compile Include="Models\Mapping\V_StockOutPurchaseMap.cs" />
+    <Compile Include="Models\Mapping\V_StockReportMap.cs" />
+    <Compile Include="Models\Mapping\V_StockReportStatisticsMap.cs" />
+    <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\MaterialPrice.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\MenuRight.cs" />
+    <Compile Include="Models\MsgRece.cs" />
+    <Compile Include="Models\MsgReceModel.cs" />
+    <Compile Include="Models\MsgSend.cs" />
+    <Compile Include="Models\MsgSendModel.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\ProduceDetail.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductCategory.cs" />
+    <Compile Include="Models\ProductGive.cs" />
+    <Compile Include="Models\ProductGiveDetail.cs" />
+    <Compile Include="Models\ProductGroup.cs" />
+    <Compile Include="Models\Production.cs" />
+    <Compile Include="Models\ProductPull.cs" />
+    <Compile Include="Models\ProductPullDetail.cs" />
+    <Compile Include="Models\ProductSemi.cs" />
+    <Compile Include="Models\Purchase.cs" />
+    <Compile Include="Models\PurchaseDetail.cs" />
+    <Compile Include="Models\PurchaseRequire.cs" />
+    <Compile Include="Models\PurchaseRequireDetail.cs" />
+    <Compile Include="Models\PurchaseReturn.cs" />
+    <Compile Include="Models\PurchaseReturnDetail.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\StockExchange.cs" />
+    <Compile Include="Models\StockIn.cs" />
+    <Compile Include="Models\StockInDetail.cs" />
+    <Compile Include="Models\StockOut.cs" />
+    <Compile Include="Models\StockOutDetail.cs" />
+    <Compile Include="Models\StockReport.cs" />
+    <Compile Include="Models\StockReturn.cs" />
+    <Compile Include="Models\StockReturnDetail.cs" />
+    <Compile Include="Models\Supplier.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\V_BillCost.cs" />
+    <Compile Include="Models\V_BillCostDetail.cs" />
+    <Compile Include="Models\V_BomCostModel.cs" />
+    <Compile Include="Models\V_BomMaerialTwo.cs" />
+    <Compile Include="Models\V_BomMaterialView.cs" />
+    <Compile Include="Models\V_BomOrderDetailListModel.cs" />
+    <Compile Include="Models\V_BomOrderDetailModel.cs" />
+    <Compile Include="Models\V_BomOrderModel.cs" />
+    <Compile Include="Models\V_BomOrderVirtualDetail.cs" />
+    <Compile Include="Models\V_BomOutDetailModel.cs" />
+    <Compile Include="Models\V_BomOutModel.cs" />
+    <Compile Include="Models\V_BomProduct.cs" />
+    <Compile Include="Models\V_DelegateBackDetail.cs" />
+    <Compile Include="Models\V_DelegateBackModel.cs" />
+    <Compile Include="Models\V_DelegateOrderDetail.cs" />
+    <Compile Include="Models\V_DelegateOrderModel.cs" />
+    <Compile Include="Models\V_DelegateSendDetailModel.cs" />
+    <Compile Include="Models\V_DelegateSendModel.cs" />
+    <Compile Include="Models\V_MaterialCost.cs" />
+    <Compile Include="Models\V_MaterialPriceModel.cs" />
+    <Compile Include="Models\V_NeedPay.cs" />
+    <Compile Include="Models\V_Product.cs" />
+    <Compile Include="Models\V_ProductGiveDetail.cs" />
+    <Compile Include="Models\V_ProductGiveModel.cs" />
+    <Compile Include="Models\V_ProductionDetailModel.cs" />
+    <Compile Include="Models\V_ProductionModel.cs" />
+    <Compile Include="Models\V_ProductPullDetail.cs" />
+    <Compile Include="Models\V_ProductPullModel.cs" />
+    <Compile Include="Models\V_PurchaseDetailModel.cs" />
+    <Compile Include="Models\V_PurchaseModel.cs" />
+    <Compile Include="Models\V_PurchaseRequireMode.cs" />
+    <Compile Include="Models\V_ReceiptDetail.cs" />
+    <Compile Include="Models\V_ReportDepot.cs" />
+    <Compile Include="Models\V_ReturnInModel.cs" />
+    <Compile Include="Models\V_ReturnOutModel.cs" />
+    <Compile Include="Models\V_StockChangeModel.cs" />
+    <Compile Include="Models\V_StockInModel.cs" />
+    <Compile Include="Models\V_StockInPurchase.cs" />
+    <Compile Include="Models\V_StockOutModel.cs" />
+    <Compile Include="Models\V_StockOutPurchase.cs" />
+    <Compile Include="Models\V_ProductSemi.cs" />
+    <Compile Include="Models\V_StockReport.cs" />
+    <Compile Include="Models\V_StockReportStatistics.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceDB.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

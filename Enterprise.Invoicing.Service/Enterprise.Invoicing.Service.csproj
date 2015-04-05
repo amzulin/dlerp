@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0BCEE9ED-358E-412C-B873-A3344A45AFD7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Enterprise.Invoicing.Service</RootNamespace>
+    <AssemblyName>Enterprise.Invoicing.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\..\以发布\code\ecoBio.Wms.Web\bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0-rc1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseService.cs" />
+    <Compile Include="SqlHelper.cs" />
+    <Compile Include="WebAccountHelper.cs" />
+    <Compile Include="StockInService.cs" />
+    <Compile Include="StockOutService.cs" />
+    <Compile Include="ManageService.cs" />
+    <Compile Include="SystemService.cs" />
+    <Compile Include="BomService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Enterprise.Invoicing.Entities\Enterprise.Invoicing.Entities.csproj">
+      <Project>{ef98d2d6-d94d-4ca3-8cbf-77a770095b24}</Project>
+      <Name>Enterprise.Invoicing.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enterprise.Invoicing.Repositories\Enterprise.Invoicing.Repositories.csproj">
+      <Project>{d13d0758-9a0f-40c9-b6d6-1a0a6efa9c2b}</Project>
+      <Name>Enterprise.Invoicing.Repositories %28Enterprise.Invoicing.Repositories\Enterprise.Invoicing.Repositories%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enterprise.Invoicing.ViewModel\Enterprise.Invoicing.ViewModel.csproj">
+      <Project>{bc013687-c2c9-4775-ae6c-5d18ac3fe2eb}</Project>
+      <Name>Enterprise.Invoicing.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
