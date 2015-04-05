@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Invoicing.Reposi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Invoicing.Repositories.Purchase", "Enterprise.Invoicing.Repositories.Purchase\Enterprise.Invoicing.Repositories.Purchase.csproj", "{EB0D0F6A-F0C5-4EA0-AF07-BEB48DDE3FFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ecoBio.Wms.Web", "..\ecoBio.Wms.Web\ecoBio.Wms.Web.csproj", "{E6757899-CD88-44C9-ABC2-892F37B0DF85}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Invoicing.Repositories.StockIn", "Enterprise.Invoicing.Repositories.StockIn\Enterprise.Invoicing.Repositories.StockIn.csproj", "{E9188A76-8E3D-4510-ABF6-6EF08F9D5D35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Invoicing.Repositories.StockOut", "Enterprise.Invoicing.Repositories.StockOut\Enterprise.Invoicing.Repositories.StockOut.csproj", "{F72E8483-9CC1-491E-A611-EF061BC40EB7}"
@@ -32,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Invoicing.Repositories.System", "Enterprise.Invoicing.Repositories.System\Enterprise.Invoicing.Repositories.System.csproj", "{D2F98FD5-7F80-4145-9DCE-66300842810A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enterprise.Invoicing.Repositories.Bom", "Enterprise.Invoicing.Repositories.Bom\Enterprise.Invoicing.Repositories.Bom.csproj", "{39ECB220-E648-44BA-B662-A7EE404E9713}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ecoBio.Wms.Web", "ecoBio.Wms.Web\ecoBio.Wms.Web.csproj", "{E6757899-CD88-44C9-ABC2-892F37B0DF85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,16 +113,6 @@ Global
 		{EB0D0F6A-F0C5-4EA0-AF07-BEB48DDE3FFF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EB0D0F6A-F0C5-4EA0-AF07-BEB48DDE3FFF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EB0D0F6A-F0C5-4EA0-AF07-BEB48DDE3FFF}.Release|x64.ActiveCfg = Release|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|x64.ActiveCfg = Release|Any CPU
 		{E9188A76-8E3D-4510-ABF6-6EF08F9D5D35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E9188A76-8E3D-4510-ABF6-6EF08F9D5D35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9188A76-8E3D-4510-ABF6-6EF08F9D5D35}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -173,6 +163,16 @@ Global
 		{39ECB220-E648-44BA-B662-A7EE404E9713}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{39ECB220-E648-44BA-B662-A7EE404E9713}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{39ECB220-E648-44BA-B662-A7EE404E9713}.Release|x64.ActiveCfg = Release|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E6757899-CD88-44C9-ABC2-892F37B0DF85}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
