@@ -84,7 +84,8 @@ padding-right: 0px;
     }
     function dc(dep,month) {
         para = "";
-        geturl();
+        para += " and depotId=" + dep;
+        para += " and stockMonth ='" +month+ "'";
         window.location.href = "../depot/stockdc?where=" +  para+"&orderby="+orderby;
     }
 </script>

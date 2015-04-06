@@ -1,0 +1,1 @@
+2015-04-06 11:08:54,488 [9] ERROR - main.index d:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\Views\Shared\_Layout.cshtml(10): error CS0246: 未能找到类型或命名空间名称“Trirand”(是否缺少 using 指令或程序集引用?)
