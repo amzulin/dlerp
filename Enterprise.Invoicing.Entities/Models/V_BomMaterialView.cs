@@ -27,5 +27,13 @@ namespace Enterprise.Invoicing.Entities.Models
         public bool valid { get; set; }
         public int xslength { get; set; }
         public string materialremark { get; set; }
+        public int status { get; set; }
+        public string version { get; set; }
+        public bool isChild { get; set; }
+        public string bomName { get; set; }
+        public Nullable<System.DateTime> startDate { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
+        public Nullable<System.Guid> bomguid { get; set; }
+        public int rootId { get; set; }
     }
 }

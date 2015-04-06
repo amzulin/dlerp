@@ -1,1 +1,10 @@
 2015-04-06 11:08:54,488 [9] ERROR - main.index d:\软件开发\git\erpcode\dlerp\ecoBio.Wms.Web\Views\Shared\_Layout.cshtml(10): error CS0246: 未能找到类型或命名空间名称“Trirand”(是否缺少 using 指令或程序集引用?)
+2015-04-06 20:17:57,297 [19] ERROR - cost.bomcostpart 可为空的对象必须具有一个值。
+2015-04-06 20:17:57,439 [19] ERROR - cost.bomcost 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。
+2015-04-06 20:42:23,998 [27] ERROR - system.role 值不能为 null 或为空。
+参数名: linkText
+2015-04-06 22:26:21,087 [33] ERROR - cost.bomcostview The 'xslength' property on 'V_BomCostModel' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Int32'. 
+2015-04-06 22:31:12,653 [34] ERROR - cost.bomcostview 未将对象引用设置到对象的实例。
+2015-04-06 22:31:27,016 [27] ERROR - cost.bomcostview 未将对象引用设置到对象的实例。
+2015-04-06 22:39:03,608 [5] ERROR - cost.bomcostview 未将对象引用设置到对象的实例。
+2015-04-06 22:43:35,127 [8] ERROR - cost.bomcostview 未将对象引用设置到对象的实例。

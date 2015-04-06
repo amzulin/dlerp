@@ -22,7 +22,12 @@ padding-right: 0px;
             <td style="text-align:right;">成本范围：</td><td><input name="" type="text" id="from" /></td>
             <td style="text-align:right;">至：</td><td><input name="" type="text" id="to" /></td>
             <td style="text-align:right;"></td><td><a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询</a></td>
-            <td style="text-align:right;"></td><td></td>
+            <td style="text-align:right;"></td><td>
+                @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bom_updatecost"))
+              {
+                <a class="btn_refer2" href="javascript:void(0);" id="btn2" onclick="updatecost();">批量更新成本</a>
+                }
+                                               </td>
         </tr>
     </table>
 </div>
@@ -74,5 +79,48 @@ padding-right: 0px;
     }
     function editone(t, id) {
         window.location.href = "../cost/bomcostview?type=" + t + "&id=" + id;
+    }
+
+
+
+    function selectall() {
+        var chb = $("#chball").attr("checked");
+        var list = $("input[mytype='person']");
+        $.each(list, function (i, m) {
+            if (chb == "checked") $(m).attr("checked", "checked");
+            else $(m).removeAttr("checked")
+        });
+    }
+    function chbone(id) {
+        var chbme = $("#chb_" + id).attr("checked");
+
+        if (chbme != "checked") $("#chball").removeAttr("checked")
+    }
+    function updatecost() {
+        var forids = [];
+        var list = $("input[mytype='person']");
+        $.each(list, function (i, m) {
+            var chb = $(m).attr("checked");
+            if (chb == "checked") {
+                forids.push($(m).attr("forid"));
+            }
+        });
+        if (forids.length < 1) {
+            $.dialog.alert("请选择要更新成本的BOM！");
+            return false;
+        }
+        if (confirm("确定选择的BOM更新成本？")) {
+            $.post("../cost/updatebomcost", { forids: forids.toString() }, function (data) {
+                if (data.status == true) {
+                    $.dialog.tips("更新成功！");
+                    pageload(page)
+                }
+                else {
+                    $.dialog.alert("删除失败！");
+                }
+            });
+        }
+        else
+            return false;
     }
 </script>

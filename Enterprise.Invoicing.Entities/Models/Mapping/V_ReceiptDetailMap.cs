@@ -13,7 +13,7 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             // Properties
             this.Property(t => t.reprottype)
                 .IsRequired()
-                .HasMaxLength(8);
+                .HasMaxLength(14);
 
             this.Property(t => t.staff)
                 .HasMaxLength(50);

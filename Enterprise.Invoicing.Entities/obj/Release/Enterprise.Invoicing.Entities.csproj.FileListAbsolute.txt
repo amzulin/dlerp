@@ -21,3 +21,10 @@ D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Entitie
 D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Entities\obj\Release\Enterprise.Invoicing.Entities.dll
 D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Entities\obj\Release\Enterprise.Invoicing.Entities.pdb
 D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Entities\bin\Release\EntityFramework.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\bin\Release\Enterprise.Invoicing.Entities.dll.config
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\bin\Release\Enterprise.Invoicing.Entities.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\bin\Release\Enterprise.Invoicing.Entities.pdb
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\bin\Release\EntityFramework.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\obj\Release\Enterprise.Invoicing.Entities.csprojResolveAssemblyReference.cache
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\obj\Release\Enterprise.Invoicing.Entities.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\obj\Release\Enterprise.Invoicing.Entities.pdb

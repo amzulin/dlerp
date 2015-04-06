@@ -54,5 +54,6 @@ D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.StockOut\bin
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.StockOut\bin\Debug\Enterprise.Invoicing.Entities.pdb
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.StockOut\bin\Debug\Enterprise.Invoicing.Repositories.pdb
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.StockOut\bin\Debug\Enterprise.Invoicing.ViewModel.pdb
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.StockOut\obj\Debug\Enterprise.Invoicing.Repositories.StockOut.csprojResolveAssemblyReference.cache
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.StockOut\obj\Debug\Enterprise.Invoicing.Repositories.StockOut.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.StockOut\obj\Debug\Enterprise.Invoicing.Repositories.StockOut.pdb

@@ -8,7 +8,7 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
         public V_BomMaterialViewMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.bomId, t.amount, t.loss, t.rootCost, t.materialNo, t.materialName, t.valid, t.xslength });
+            this.HasKey(t => new { t.bomId, t.amount, t.loss, t.rootCost, t.materialNo, t.materialName, t.valid, t.xslength, t.status, t.isChild, t.rootId });
 
             // Properties
             this.Property(t => t.bomId)
@@ -64,6 +64,18 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.materialremark)
                 .HasMaxLength(50);
 
+            this.Property(t => t.status)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            this.Property(t => t.version)
+                .HasMaxLength(50);
+
+            this.Property(t => t.bomName)
+                .HasMaxLength(50);
+
+            this.Property(t => t.rootId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
             // Table & Column Mappings
             this.ToTable("V_BomMaterialView");
             this.Property(t => t.bomId).HasColumnName("bomId");
@@ -88,6 +100,14 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.valid).HasColumnName("valid");
             this.Property(t => t.xslength).HasColumnName("xslength");
             this.Property(t => t.materialremark).HasColumnName("materialremark");
+            this.Property(t => t.status).HasColumnName("status");
+            this.Property(t => t.version).HasColumnName("version");
+            this.Property(t => t.isChild).HasColumnName("isChild");
+            this.Property(t => t.bomName).HasColumnName("bomName");
+            this.Property(t => t.startDate).HasColumnName("startDate");
+            this.Property(t => t.endDate).HasColumnName("endDate");
+            this.Property(t => t.bomguid).HasColumnName("bomguid");
+            this.Property(t => t.rootId).HasColumnName("rootId");
         }
     }
 }

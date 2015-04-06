@@ -8,7 +8,7 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
         public V_BomCostModelMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.bomId, t.amount, t.loss, t.rootCost, t.materialNo, t.materialName, t.xslength });
+            this.HasKey(t => new { t.bomId, t.amount, t.loss, t.rootCost, t.status, t.isChild, t.rootId });
 
             // Properties
             this.Property(t => t.bomId)
@@ -23,15 +23,10 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.bomremark)
                 .HasMaxLength(200);
 
-            this.Property(t => t.remark)
-                .HasMaxLength(200);
-
             this.Property(t => t.materialNo)
-                .IsRequired()
                 .HasMaxLength(50);
 
             this.Property(t => t.materialName)
-                .IsRequired()
                 .HasMaxLength(50);
 
             this.Property(t => t.materialModel)
@@ -52,7 +47,16 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.tunumber)
                 .HasMaxLength(50);
 
-            this.Property(t => t.xslength)
+            this.Property(t => t.status)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            this.Property(t => t.version)
+                .HasMaxLength(50);
+
+            this.Property(t => t.bomName)
+                .HasMaxLength(50);
+
+            this.Property(t => t.rootId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
@@ -64,10 +68,6 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.loss).HasColumnName("loss");
             this.Property(t => t.rootCost).HasColumnName("rootCost");
             this.Property(t => t.bomremark).HasColumnName("bomremark");
-            this.Property(t => t.costId).HasColumnName("costId");
-            this.Property(t => t.price).HasColumnName("price");
-            this.Property(t => t.createDate).HasColumnName("createDate");
-            this.Property(t => t.remark).HasColumnName("remark");
             this.Property(t => t.materialNo).HasColumnName("materialNo");
             this.Property(t => t.materialName).HasColumnName("materialName");
             this.Property(t => t.materialModel).HasColumnName("materialModel");
@@ -78,6 +78,14 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.pinyin).HasColumnName("pinyin");
             this.Property(t => t.tunumber).HasColumnName("tunumber");
             this.Property(t => t.xslength).HasColumnName("xslength");
+            this.Property(t => t.status).HasColumnName("status");
+            this.Property(t => t.version).HasColumnName("version");
+            this.Property(t => t.isChild).HasColumnName("isChild");
+            this.Property(t => t.bomName).HasColumnName("bomName");
+            this.Property(t => t.startDate).HasColumnName("startDate");
+            this.Property(t => t.bomguid).HasColumnName("bomguid");
+            this.Property(t => t.rootId).HasColumnName("rootId");
+            this.Property(t => t.endDate).HasColumnName("endDate");
         }
     }
 }

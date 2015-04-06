@@ -17,17 +17,18 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
  <thead>
   <tr>
-       <th width="5%">序号</th>
-    <th width="7%" style="cursor:pointer;" onclick="orderlistp('depotName')">所在仓库</th>
-    <th width="7%" style="cursor:pointer;" onclick="orderlistp('materialNo')">物料编码</th>
-    <th width="14%" style="cursor:pointer;" onclick="orderlistp('materialName')">物料名称</th>
-    <th width="18%" style="cursor:pointer;" onclick="orderlistp('materialModel')">物料规格</th>
-    <th width="10%" style="cursor:pointer;" onclick="orderlistp('materialTu')">物料图号</th>
-    <th width="12%" style="cursor:pointer;" onclick="orderlistp('depotAmount')">库存</th>
-    <th width="8%" style="cursor:pointer;" onclick="orderlistp('price')">单价</th>
-    <th width="10%">金额</th>
-    <th width="5%" style="cursor:pointer;" onclick="orderlistp('unit')">单位</th>
-    <th width="5%" style="cursor:pointer;" onclick="orderlistp('remark')">备注</th>
+       <th nowrap="nowrap">序号</th>
+    <th nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('depotName')">所在仓库</th>
+    <th  nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('materialNo')">物料编码</th>
+    <th style="cursor:pointer;" onclick="orderlistp('materialName')">物料名称</th>
+    <th style="cursor:pointer;" onclick="orderlistp('materialModel')">物料规格</th>
+    <th style="cursor:pointer;" onclick="orderlistp('materialTu')">物料图号</th>
+    <th nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('depotAmount')">库存</th>
+    <th  nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('price')">单价</th>
+    <th  nowrap="nowrap">金额</th>
+    <th  nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('unit')">单位</th>
+    <th  nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('depotAmount')">库存2</th>
+    <th  style="cursor:pointer;" onclick="orderlistp('remark')">备注</th>
   </tr>
   </thead>
  <tbody>
@@ -40,29 +41,29 @@
     <td>@item.materialName</td>
     <td>@item.materialModel</td>
     <td>@item.materialTu</td>
-    <td>@(item.depotAmount+(item.unit2!=null&&item.unit2!=""&&item.ratio.HasValue?("  ("+(Math.Round((decimal)(item.depotAmount*item.ratio),3)).ToString()+ item.unit2+")"):""))</td>
+    <td>@item.depotAmount</td>
       <td>
            @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("depotmoney_page"))
            { 
            <span>@item.price.ToString()</span>
            }
-          </td> <td>
+          </td> 
+             <td>
            @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("depotmoney_page"))
            { 
            <span>@(Math.Round(((double)item.price * item.depotAmount), 4).ToString())</span>
            }
           </td>
               <td>@item.unit</td>
+    <td>@(item.unit2!=null&&item.unit2!=""&&item.ratio.HasValue?("  ("+(Math.Round((decimal)(item.depotAmount*item.ratio),3)).ToString()+ item.unit2+")"):"")</td>
+
     <td>@item.remark</td>
-    <td>    
-         
-	</td>
 </tr>
          pi++;
  }
      @if (list.Count < 1)
      {
-         <tr><td colspan="11">无库存明细</td></tr> 
+         <tr><td colspan="12">无库存明细</td></tr> 
      }
   </tbody>  
 </table>

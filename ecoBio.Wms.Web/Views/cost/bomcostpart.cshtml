@@ -20,39 +20,43 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
  <thead>
   <tr>
-       <th width="5%">序号</th>
-    <th width="10%" style="cursor:pointer;" onclick="orderlistp('materialNo')">产品编码</th>
-    <th width="24%" style="cursor:pointer;" onclick="orderlistp('materialName')">产品名称</th>
-    <th width="25%" style="cursor:pointer;" onclick="orderlistp('materialModel')">产品型号</th>
-    <th width="10%" style="cursor:pointer;" onclick="orderlistp('rootCost')">成本</th>
-    <th width="16%" style="cursor:pointer;" onclick="orderlistp('bomremark')">备注</th>
-    <th width="10%">操作</th>
+      <th> <input type="checkbox" id="chball" onclick="    selectall()" style="width:20px;" /></th>
+    <th nowrap="nowrap">序号</th>
+    <th nowrap="nowrap"style="cursor:pointer;" onclick="orderlistp('materialNo')">产品编码</th>
+    <th style="cursor:pointer;" onclick="orderlistp('materialName')">产品名称</th>
+    <th style="cursor:pointer;" onclick="orderlistp('materialModel')">产品型号</th> 
+    <th nowrap="nowrap">版本</th> <th nowrap="nowrap">启用日期</th>
+    <th nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('rootCost')">成本</th>
+    <th style="cursor:pointer;" onclick="orderlistp('bomremark')">备注</th>
+    <th nowrap="nowrap">操作</th>
   </tr>
   </thead>
  <tbody>
      @foreach (var item in list)
      {  
-         <tr>
+         <tr><td><input type="checkbox" id="chb_@item.bomId" onclick="chbone(@item.bomId)" forid="@item.bomId" mytype="person"  style="width:20px;" /></td> 
       <td>@pi</td>    
     <td>@item.materialNo</td>
     <td>@item.materialName</td>
     <td>@item.materialModel</td>
+    <td>@item.version</td>
+    <td>@(item.startDate.HasValue?item.startDate.Value.ToString("yyyy-MM-dd"):"")</td>
     <td>@(Math.Round( item.rootCost,4))</td>
     <td>@item.bomremark</td>
     <td>    
               @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomcost_view"))
             {  <span title="查看" onclick="editone('view',@item.bomId)" class="view"></span>}
            @*   @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomcost_export"))
-              {  <span style="cursor:pointer;" title="导出EXCEL" onclick="excel(@item.bomId)" >导出</span>}*@
+              {  <span style="cursor:pointer;" title="导出EXCEL" onclick="excel(@item.bomId)" >导出</span>}
               @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("bomcost_update"))
-              {  <span title="修改" onclick="editone('edit',@item.bomId)" class="edit"></span>}
+              {  <span title="修改" onclick="editone('edit',@item.bomId)" class="edit"></span>}*@
 	</td>
 </tr>
          pi++;
      }
      @if (list.Count < 1)
      {
-         <tr><td colspan="7">无BOM信息</td></tr> 
+         <tr><td colspan="10">无BOM信息</td></tr> 
      }
   </tbody>  
 </table>

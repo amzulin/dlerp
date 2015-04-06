@@ -641,9 +641,9 @@ namespace Enterprise.Invoicing.Web.Controllers
         {
             dynamic data = new System.Dynamic.ExpandoObject();
             if (where == null) where = "";
-            if (orderby == null || orderby == "") orderby = " order by materialname asc ";
+            if (orderby == null || orderby == "") orderby = " order by materialname asc,version asc ";
             else orderby = " order by " + orderby;
-            var list = ServiceDB.Instance.QueryModelList<V_BomMaterialView>(" select * from V_BomMaterialView  where parent_Id is null " + where + orderby).ToList();
+            var list = ServiceDB.Instance.QueryModelList<V_BomMaterialView>(" select * from V_BomMaterialView  where parent_Id is null and isChild=0 and status=1 " + where + orderby).ToList();
 
             int _page = page.HasValue ? page.Value : 1;
             int _pagesize = pagesize.HasValue ? pagesize.Value : 17;
@@ -674,8 +674,8 @@ namespace Enterprise.Invoicing.Web.Controllers
                 row += p.materialModel + "|";
                 row += p.unit + "|";
                 row += p.amount + "|";
-                row += (p.price.HasValue ? p.price.Value.ToString() : "") + "|";
-                row += (p.price.HasValue ? (p.price.Value*p.amount).ToString("N") : "") + "|";
+                row += p.rootCost + "|";
+                row += (p.rootCost*p.amount).ToString()  + "|";
                 row += p.bomremark;
                 data.Add(row);
             }
@@ -698,21 +698,21 @@ namespace Enterprise.Invoicing.Web.Controllers
 
 
             var list = bomService.GetChildBomCost(child, Convert.ToDouble(1), 1);
-            var virtuals=ServiceDB.Instance.QueryModelList<BomVirtual>("select * from BomVirtual where bomid=" + id).ToList();
-            if (virtuals != null && virtuals.Count > 0)
-            {
-                List<object> nvs = new List<object>();
-                foreach (var item in virtuals)
-                {
-                    var nvi = new { km = 1, id = 0, sn = item.virtualId, no = "其他科目", name = item.virtualName, model = "", amount = item.vAmount, price = item.vPrice.ToString("N"), cost = (item.vPrice * item.vAmount).ToString("N"), unit = "", unit2 = "", amount2 = "", remark = item.remark, index = 0 };
-                    list.Add(nvi);
+            //var virtuals=ServiceDB.Instance.QueryModelList<BomVirtual>("select * from BomVirtual where bomid=" + id).ToList();
+            //if (virtuals != null && virtuals.Count > 0)
+            //{
+            //    List<object> nvs = new List<object>();
+            //    foreach (var item in virtuals)
+            //    {
+            //        var nvi = new { km = 1, id = 0, sn = item.virtualId, no = "其他科目", name = item.virtualName, model = "", amount = item.vAmount, price = item.vPrice.ToString("N"), cost = (item.vPrice * item.vAmount).ToString("N"), unit = "", unit2 = "", amount2 = "", remark = item.remark, index = 0 };
+            //        list.Add(nvi);
                     
 
-                }
-                //var nv = new { km = 0, id = 0, sn = 0, no = "其他科目", name = "", model = "", amount = "", price = "", cost = "", unit = "", unit2 = "", amount2 = "", remark = "", index = 0, children = nvs };
-                //list.Add(nv);
+            //    }
+            //    //var nv = new { km = 0, id = 0, sn = 0, no = "其他科目", name = "", model = "", amount = "", price = "", cost = "", unit = "", unit2 = "", amount2 = "", remark = "", index = 0, children = nvs };
+            //    //list.Add(nv);
 
-            }
+            //}
             bomjson = JsonHelper.ToJson(list);
             data.one = one;
             data.bomjson = bomjson;
@@ -875,6 +875,28 @@ namespace Enterprise.Invoicing.Web.Controllers
             }
             #endregion
 
+            return Json(r, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [AjaxAction(ForAction = "bomcost", ForController = "cost")]
+        public ActionResult updatebomcost()
+        {
+            string forids = WebRequest.GetString("forids");
+            string[] ids = forids.Split(',');
+            int count = 0;
+            foreach (string item in ids)
+            {
+                if (item == "") continue;
+                System.Data.SqlClient.SqlParameter[] param =new System.Data.SqlClient.SqlParameter[1];
+                System.Data.SqlClient.SqlParameter sp = new System.Data.SqlClient.SqlParameter("@bomid", item);
+                param[0] = sp;// new System.Data.SqlClient.SqlParameter { Direction = System.Data.ParameterDirection.Input, Value = item, };
+                var bom = ServiceDB.Instance.ExecuteSqlCommand("exec usp_update_bomcost @bomid ", param);
+                    count++;
+            }
+            ReturnValue r = new ReturnValue();
+            r.status = count > 0;
+            r.message = r.status ? "" : "BOM成本更新失败";
             return Json(r, JsonRequestBehavior.AllowGet);
         }
         #endregion

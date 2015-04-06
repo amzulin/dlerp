@@ -14,3 +14,9 @@ D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Common\
 D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Common\obj\Release\Enterprise.Invoicing.Common.csprojResolveAssemblyReference.cache
 D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Common\obj\Release\ecoBio.Wms.Common.dll
 D:\软件开发\进销存\code\Enterprise.Invoicing\Enterprise.Invoicing.Common\obj\Release\ecoBio.Wms.Common.pdb
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\bin\Release\ecoBio.Wms.Common.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\bin\Release\ecoBio.Wms.Common.pdb
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\bin\Release\Newtonsoft.Json.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\obj\Release\Enterprise.Invoicing.Common.csprojResolveAssemblyReference.cache
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\obj\Release\ecoBio.Wms.Common.dll
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Common\obj\Release\ecoBio.Wms.Common.pdb

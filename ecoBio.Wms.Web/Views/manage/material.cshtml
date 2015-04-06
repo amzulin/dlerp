@@ -25,6 +25,11 @@ padding-right: 0px;
 <a class="btn_search" href="javascript:void(0);" id="btn"></a>  
     @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_material_excel")){
       <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+   } 
+    
+    @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("manage_material_price"))
+    {
+      <a class="btn_refer2" href="javascript:void(0);" onclick="updatecost()">更新核价</a>
    }
    <input type="hidden" id="hidpage" value="@page" />
 </div>
@@ -157,6 +162,21 @@ padding-right: 0px;
                 }
                 else {
                     $.dialog.alert("删除失败！");
+                }
+            });
+        }
+        else
+            return false;
+
+    }
+    function updatecost() {
+        if (confirm("确定要更新物料核价信息？")) {
+            $.post("../manage/updatematerialprice", function (data) {
+                if (data.status == true) {
+                    $.dialog.tips("物料核价更新成功！");
+                }
+                else {
+                    $.dialog.alert("更新失败: " + data.message);
                 }
             });
         }

@@ -1571,24 +1571,25 @@ namespace Enterprise.Invoicing.Repositories
             return result;
         }
 
-        public List<object> GetChildBomCost(List<V_BomCostModel> list, double amount,int index)
+        public List<object> GetChildBomCost(List<V_BomCostModel> list, double amount, int index)
         {
             List<object> result = new List<object>();
             foreach (var item in list)
             {
                 item.amount = amount * item.amount;
                 //result.Add(item);
-                var children = context.V_BomCostModel.Where(p => p.parent_Id == item.bomId).ToList();
-                if (children != null && children.Count > 0)
-                {
+                var childrenx = context.V_BomCostModel.Where(p => p.parent_Id == item.bomId);
 
+                if (childrenx != null)
+                {
+                    var children = childrenx.ToList();
                     var rows = GetChildBomCost(children, item.amount, index);
-                    result.Add(new { km = 0, id = item.bomId, sn = item.costId.HasValue ? item.costId.Value : 0, no = item.materialNo, name = item.materialName, model = item.materialModel, amount = Math.Round(item.amount, item.xslength), price = item.price.HasValue ? Math.Round(item.price.Value, 4).ToString() : "", cost = item.price.HasValue ? Math.Round(item.amount * item.price.Value, 4).ToString() : "", useunit = item.unit2 != null && item.unit2 != "" ? item.unit2 : item.unit, unit = item.unit, unit2 = item.unit2, amount2 = (item.unit2 != null && item.unit2 != "" && item.ratio.HasValue ? (Math.Round(item.amount / item.ratio.Value, 4).ToString()) : ""), remark = item.remark, index = index++, children = rows });
+                    result.Add(new { km = 0, id = item.bomId, no = item.materialNo == null ? "child" : item.materialNo, name = item.materialNo == null ? "子BOM" : item.materialName, model = item.materialModel, amount = Math.Round(item.amount, item.xslength.HasValue ? item.xslength.Value : 0), price = Math.Round(item.rootCost, 4).ToString(), cost = item.rootCost * item.amount, useunit = item.unit2 != null && item.unit2 != "" ? item.unit2 : item.unit, unit = item.unit, unit2 = item.unit2, amount2 = (item.unit2 != null && item.unit2 != "" && item.ratio.HasValue ? (Math.Round(item.amount / item.ratio.Value, 4).ToString()) : ""), remark = item.bomremark, index = index++, children = rows });
                 }
                 else
-                    result.Add(new { km = 0, id = item.bomId, sn = item.costId.HasValue ? item.costId.Value : 0, no = item.materialNo, name = item.materialName, model = item.materialModel, amount = Math.Round(item.amount, item.xslength), price = item.price.HasValue ? Math.Round(item.price.Value, 4).ToString() : "", cost = item.price.HasValue ? Math.Round(item.amount * item.price.Value, 4).ToString() : "", useunit = item.unit2 != null && item.unit2 != "" ? item.unit2 : item.unit, unit = item.unit, unit2 = item.unit2, amount2 = (item.unit2 != null && item.unit2 != "" && item.ratio.HasValue ? (Math.Round(item.amount / item.ratio.Value, 4).ToString()) : ""), remark = item.remark, index = index++ });
+                    result.Add(new { km = 0, id = item.bomId, no = item.materialNo == null ? "child" : item.materialNo, name = item.materialNo == null ? "子BOM" : item.materialName, model = item.materialModel, amount = Math.Round(item.amount, item.xslength.HasValue ? item.xslength.Value : 0), price = Math.Round(item.rootCost, 4).ToString(), cost = item.rootCost * item.amount, useunit = item.unit2 != null && item.unit2 != "" ? item.unit2 : item.unit, unit = item.unit, unit2 = item.unit2, amount2 = (item.unit2 != null && item.unit2 != "" && item.ratio.HasValue ? (Math.Round(item.amount / item.ratio.Value, 4).ToString()) : ""), remark = item.bomremark, index = index++ });
             }
-            return result;           
+            return result;
 
         }
 

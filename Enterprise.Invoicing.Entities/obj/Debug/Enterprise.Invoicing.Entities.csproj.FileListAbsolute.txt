@@ -25,6 +25,5 @@ D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\bin\Debug\Enterp
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\bin\Debug\Enterprise.Invoicing.Entities.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\bin\Debug\Enterprise.Invoicing.Entities.pdb
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\bin\Debug\EntityFramework.dll
-D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\obj\Debug\Enterprise.Invoicing.Entities.csprojResolveAssemblyReference.cache
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\obj\Debug\Enterprise.Invoicing.Entities.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Entities\obj\Debug\Enterprise.Invoicing.Entities.pdb

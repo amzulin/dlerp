@@ -234,6 +234,23 @@ namespace Enterprise.Invoicing.Web.Controllers
             return Json(r, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [AjaxAction(ForAction = "material", ForController = "manage")]
+        public ActionResult updatematerialprice()
+        {
+            ReturnValue r = new ReturnValue { status = false };
+            try
+            {
+                var bom = ServiceDB.Instance.ExecuteSqlCommand("exec usp_getpriceandreport ");
+                r.status = true;
+            }
+            catch(Exception ex) {
+                r.status = false;
+                r.message = ex.Message;
+            }
+            return Json(r, JsonRequestBehavior.AllowGet);
+        }
+
         [AjaxAction(ForAction = "material", ForController = "manage")]
         public ActionResult materialexcel(string where)
         {

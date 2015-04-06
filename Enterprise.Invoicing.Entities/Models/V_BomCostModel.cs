@@ -12,10 +12,6 @@ namespace Enterprise.Invoicing.Entities.Models
         public int loss { get; set; }
         public double rootCost { get; set; }
         public string bomremark { get; set; }
-        public Nullable<int> costId { get; set; }
-        public Nullable<double> price { get; set; }
-        public Nullable<System.DateTime> createDate { get; set; }
-        public string remark { get; set; }
         public string materialNo { get; set; }
         public string materialName { get; set; }
         public string materialModel { get; set; }
@@ -25,6 +21,14 @@ namespace Enterprise.Invoicing.Entities.Models
         public Nullable<double> ratio { get; set; }
         public string pinyin { get; set; }
         public string tunumber { get; set; }
-        public int xslength { get; set; }
+        public Nullable<int> xslength { get; set; }
+        public int status { get; set; }
+        public string version { get; set; }
+        public bool isChild { get; set; }
+        public string bomName { get; set; }
+        public Nullable<System.DateTime> startDate { get; set; }
+        public Nullable<System.Guid> bomguid { get; set; }
+        public int rootId { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
     }
 }
