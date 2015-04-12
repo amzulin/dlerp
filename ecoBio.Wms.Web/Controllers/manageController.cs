@@ -539,9 +539,10 @@ namespace Enterprise.Invoicing.Web.Controllers
             string person = WebRequest.GetString("person");
             string remark = WebRequest.GetString("remark");
             string no = WebRequest.GetString("no");
+            int settle = WebRequest.GetInt("settle", 1);
             bool valid = rad != 0 ? true : false;
             var r = manageService.SaveSupplier(id, stype, name, person, phone, address, valid, remark);
-            if (r.status) ServiceDB.Instance.ExecuteSqlCommand("update supplier set supplierno='" + no + "',fax=" + fax + " where type=" + stype + " and suppliername='" + name + "'");
+            if (r.status) ServiceDB.Instance.ExecuteSqlCommand("update supplier set supplierno='" + no + "',fax=" + fax + " ,settleDay=" + settle + " where type=" + stype + " and suppliername='" + name + "'");
             return Json(r, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]

@@ -31,6 +31,7 @@
             var phone = $("#txtphone").val();
             var person = $("#txtperson").val();
             var address = $("#txtaddress").val();
+            var settle = $("#txtday").val();
             var stype = 1;
             var remark = $("#txtremark").val();
             var no = $("#txtno").val();
@@ -41,7 +42,7 @@
             $.dialog.tips('提交中...', 4, 'loading.gif');
             $.post("../manage/savesupplier",
                 {
-                    id: id, rad: rad, name: name, phone: phone, person: person, stype: stype, address: address, remark: remark, no: no
+                    id: id, rad: rad, name: name, phone: phone, person: person, stype: stype, address: address, remark: remark, no: no, settle: settle
                 }, function (data) {
                 if (data.status == false) {
                     $.dialog.alert(data.message);
@@ -83,8 +84,15 @@
   <tr>
     <td align="right">代码：</td>
     <td><input name="" id="txtno" value="@one.supplierNo" type="text" /></td>
-    <td align="right"></td>
-    <td></td>
+    <td align="right">结算日：</td>
+    <td>
+        <select id="txtday">
+            @for (int i = 1; i < 32; i++)
+            {
+                <option value="@i" @(i==one.settleDay?"selected=selected":"")>@i 号</option>
+            }
+        </select>
+        </td>
   </tr>
   <tr>
     <td align="right">备注：</td>

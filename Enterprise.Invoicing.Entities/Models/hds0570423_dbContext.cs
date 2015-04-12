@@ -68,6 +68,9 @@ namespace Enterprise.Invoicing.Entities.Models
         public DbSet<PurchaseReturn> PurchaseReturns { get; set; }
         public DbSet<PurchaseReturnDetail> PurchaseReturnDetails { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Settlement> Settlements { get; set; }
+        public DbSet<SettlementCapital> SettlementCapitals { get; set; }
+        public DbSet<SettlementDetail> SettlementDetails { get; set; }
         public DbSet<StockExchange> StockExchanges { get; set; }
         public DbSet<StockIn> StockIns { get; set; }
         public DbSet<StockInDetail> StockInDetails { get; set; }
@@ -177,6 +180,9 @@ namespace Enterprise.Invoicing.Entities.Models
             modelBuilder.Configurations.Add(new PurchaseReturnMap());
             modelBuilder.Configurations.Add(new PurchaseReturnDetailMap());
             modelBuilder.Configurations.Add(new RoleMap());
+            modelBuilder.Configurations.Add(new SettlementMap());
+            modelBuilder.Configurations.Add(new SettlementCapitalMap());
+            modelBuilder.Configurations.Add(new SettlementDetailMap());
             modelBuilder.Configurations.Add(new StockExchangeMap());
             modelBuilder.Configurations.Add(new StockInMap());
             modelBuilder.Configurations.Add(new StockInDetailMap());

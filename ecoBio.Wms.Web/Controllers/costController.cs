@@ -149,42 +149,41 @@ namespace Enterprise.Invoicing.Web.Controllers
             return View(data);
         }
         [AjaxAction(ForAction = "receivable", ForController = "cost")]
-        public ActionResult receivablepart(int? page, int? pagesize, string where, string orderby)
+        public ActionResult receivablepart(SearchModel model, int? page, int? pagesize, string where, string orderby)
         {
             dynamic data = new System.Dynamic.ExpandoObject();
             if (where == null) where = "";
-            if (orderby == null || orderby == "") orderby = " order by supplierName asc ";
+            if (orderby == null || orderby == "") orderby = " order by settleNo desc ";
             else orderby = " order by " + orderby;
-            var list = ServiceDB.Instance.QueryModelList<V_StockOutPurchase>(" select * from V_StockOutPurchase  where stockoutno is not null " + where + orderby).ToList();
 
-            List<NeedPayModel> pays = new List<NeedPayModel>();
-            List<int> had = new List<int>();
-            foreach (var item in list)
-            {
-                if (had.Contains(item.supplierId.Value)) continue;
-                had.Add(item.supplierId.Value);
-                #region 每个客户
-                NeedPayModel pay = new NeedPayModel();
-                var ones = list.Where(p => p.supplierId == item.supplierId);
-                pay.supplierId = item.supplierId.Value;
-                pay.supplierName = item.supplierName;
-                pay.dateStart = DateTime.Now.AddYears(1);
-                pay.dateEnd = DateTime.Now.AddYears(-1);
-                pay.amount = 0;
-                pay.cost = 0;
-                foreach (var o in ones)
-                {
-                    if (o.createDate < pay.dateStart) pay.dateStart = o.createDate;
-                    if (o.createDate > pay.dateEnd) pay.dateEnd = o.createDate;
-                    pay.amount += o.outAmount;
-                    pay.cost += o.outCost;
-                }
-                pays.Add(pay);
-                #endregion
-            }
+            #region 条件
+            //if (!string.IsNullOrEmpty(model.Supplier))
+            //{
+            //    where += " and supplierName like '%"+model.Supplier+"%'";
+            //}
+            //if (!string.IsNullOrEmpty(model.QueryNo))
+            //{
+            //    where += " and settleNo like '%" + model.QueryNo + "%'";
+            //}
+            //if (model.Status.HasValue)
+            //{
+            //    where += " and status=" + model.Status.Value;
+            //}
+            //if (model.DateStart.HasValue)
+            //{
+            //    where += " and settleStart>='" + model.DateStart.Value.ToString() + "'";
+            //}
+            //if (model.DateEnd.HasValue)
+            //{
+            //    where += " and settleEnd<'" + model.DateEnd.Value.ToString() + "'";
+            //}
+            #endregion
+            var list = ServiceDB.Instance.QueryModelList<Settlement>(" select * from Settlement  where settleNo is not null " + where + orderby).ToList();
+
+
             int _page = page.HasValue ? page.Value : 1;
             int _pagesize = pagesize.HasValue ? pagesize.Value : 17;
-            var vs = pays.ToPagedList(_page, _pagesize);
+            var vs = list.ToPagedList(_page, _pagesize);
             data.list = vs;
             data.pageSize = _pagesize;
             data.pageIndex = _page;
@@ -207,34 +206,30 @@ namespace Enterprise.Invoicing.Web.Controllers
         public ActionResult excelreceivable(string where, string orderby)
         {
             if (where == null) where = "";
-            if (orderby == null || orderby == "") orderby = " order by supplierName asc ";
+            if (orderby == null || orderby == "") orderby = " order by settleNo asc ";
             else orderby = " order by " + orderby;
-            var list = ServiceDB.Instance.QueryModelList<V_StockOutPurchase>(" select * from V_StockOutPurchase  where stockoutno is not null " + where + orderby).ToList();
+            var list = ServiceDB.Instance.QueryModelList<Settlement>(" select * from Settlement  where settleNo is not null " + where + orderby).ToList();
 
-            string[] head = new string[19] { "序号", "客户", "订单号", "订单数量", "订单单价", "订单金额", "出库单号", "出库日期", "出库数量", "出库金额", "退单数量", "退单金额", "类别", "物料编码", "物料名称", "物料规格", "物料图号", "单位", "应收金额" };
+            string[] head = new string[15] { "序号", "客户", "结算单", "开始日期", "结束日期", "生成日期", "销售金额", "退单金额", "应收金额", "实收金额", "坏账金额", "审核人", "审核时间", "状态", "是否完工" };
             List<string> data = new List<string>();
             for (int i = 0; i < list.Count; i++)
             {
                 var p = list[i];
                 var row = (i + 1).ToString() + "|";
                 row += p.supplierName + "|";
-                row += p.bomOrderNo + "|";
-                row += p.Amount + "|";
-                row += p.Price + "|";
-                row += p.totalCost + "|";
-                row += p.stockoutNo + "|";
+                row += p.settleNo + "|";
+                row += p.settleStart.ToString("yyyy-MM-dd") + "|";
+                row += p.settleEnd.ToString("yyyy-MM-dd") + "|";
                 row += p.createDate.ToString("yyyy-MM-dd") + "|";
-                row += p.outAmount + "|";
-                row += p.outCost + "|";
-                row += p.returnAmount + "|";
+                row += p.firstCost + "|";
                 row += p.returnCost + "|";
-                row += p.category + "|";
-                row += p.materialNo + "|";
-                row += p.materialName + "|";
-                row += p.materialModel + "|";
-                row += p.tunumber + "|";
-                row += p.unit + "|";
-                row += (p.outCost - p.returnCost);
+                row += p.tradeCost + "|";
+                row += p.realCost + "|";
+                row += p.badCost + "|";
+                row += p.checkStaff + "|";
+                row += p.checkDate.ToString("yyyy-MM-dd") + "|";
+                row += (p.status == 0 ? "未审核" : "已审核") + "|";
+                row += (p.isover == 0 ? "未完工" : "已完工");
                 data.Add(row);
             }
 

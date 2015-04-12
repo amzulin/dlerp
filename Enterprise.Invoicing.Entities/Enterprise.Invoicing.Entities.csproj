@@ -130,6 +130,9 @@
     <Compile Include="Models\Mapping\PurchaseReturnDetailMap.cs" />
     <Compile Include="Models\Mapping\PurchaseReturnMap.cs" />
     <Compile Include="Models\Mapping\RoleMap.cs" />
+    <Compile Include="Models\Mapping\SettlementCapitalMap.cs" />
+    <Compile Include="Models\Mapping\SettlementDetailMap.cs" />
+    <Compile Include="Models\Mapping\SettlementMap.cs" />
     <Compile Include="Models\Mapping\StockExchangeMap.cs" />
     <Compile Include="Models\Mapping\StockInDetailMap.cs" />
     <Compile Include="Models\Mapping\StockInMap.cs" />
@@ -209,6 +212,9 @@
     <Compile Include="Models\PurchaseReturn.cs" />
     <Compile Include="Models\PurchaseReturnDetail.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Settlement.cs" />
+    <Compile Include="Models\SettlementCapital.cs" />
+    <Compile Include="Models\SettlementDetail.cs" />
     <Compile Include="Models\StockExchange.cs" />
     <Compile Include="Models\StockIn.cs" />
     <Compile Include="Models\StockInDetail.cs" />

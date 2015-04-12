@@ -163,6 +163,10 @@ namespace Enterprise.Invoicing.Web.Controllers
             {
                 back.status = manageService.ChangeBillStatus(no, status, Masterpage.CurrUser.staffid);
             }
+            else if (key == "settle" || key == "pay")
+            {
+                back.status = manageService.ChangeSettleStatus(no, status, Masterpage.CurrUser.staffid);
+            }
             else if (key == "delegate")
             {
                 back = bomService.ChangeDelegateStatus(no, status, Masterpage.CurrUser.name);

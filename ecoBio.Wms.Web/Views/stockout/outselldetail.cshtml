@@ -57,8 +57,9 @@
 <script>
     var count='@list.Count'
     function save(no, order) {
-        if (supplierid == 0 || order == '') {
-            $.dialog.alert("请选择客户和客户的订单");
+        var date = $("#dateout").val();
+        if (supplierid == 0 || order == '' || date=='') {
+            $.dialog.alert("请选择客户和客户的订单,销售日期");
             return false;
         }
         var msg = '';
@@ -92,7 +93,7 @@
             return false;
         }
         $.post("../stockout/saveoutsell_2", {
-            no: no, type: type, supplier: supplierid, remark: r, deport: d, order: order,
+            no: no, type: type, supplier: supplierid, remark: r, deport: d, order: order, date: date,
             outsnlist: outsnlist.toString(), ordersnlist: ordersnlist.toString(), remarklist: remarklist.toString(), amountlist: amountlist.toString(), depotlist: depotlist.toString(), materiallist: materiallist.toString()
         }, function (data) {
             if (data.status == false) {

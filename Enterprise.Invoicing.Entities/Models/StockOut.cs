@@ -32,6 +32,7 @@ namespace Enterprise.Invoicing.Entities.Models
         public string express { get; set; }
         public string expresscode { get; set; }
         public Nullable<System.DateTime> outDate { get; set; }
+        public int isSettle { get; set; }
         public virtual Department Department { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Supplier Supplier { get; set; }

@@ -37,6 +37,7 @@
             var address = $("#txtaddress").val();
             var no = $("#txtno").val();
             var fax = $("#ddlfax").val();
+            var settle = $("#txtday").val();
             var stype = 0;
             var remark = $("#txtremark").val();
             if (name == '') {
@@ -46,7 +47,7 @@
             $.dialog.tips('提交中...', 4, 'loading.gif');
             $.post("../manage/savesupplier",
                 {
-                    id: id, rad: rad, name: name, phone: phone, person: person, stype: stype, address: address, remark: remark, no: no, fax: fax
+                    id: id, rad: rad, name: name, phone: phone, person: person, stype: stype, address: address, remark: remark, no: no, fax: fax, settle: settle
                 }, function (data) {
                 if (data.status == false) {
                     $.dialog.alert(data.message);
@@ -90,9 +91,17 @@
     <td align="right">税率</td>
     <td><select id="ddlfax"><option @(one.fax==0?"selected=selected":"") value="0">不开票</option><option @(one.fax==3?"selected=selected":"")  value="3">3%</option><option @(one.fax==17?"selected=selected":"")  value="17">17%</option></select></td>
   </tr>
-  <tr>
+  <tr>  <td align="right">结算日：</td>
+    <td>
+        <select id="txtday">
+            @for (int i = 1; i < 32; i++)
+            {
+                <option value="@i" @(i==one.settleDay?"selected=selected":"")>@i 号</option>
+            }
+        </select>
+        </td>
     <td align="right">备注：</td>
-    <td height="50" colspan="3">
+    <td height="50">
         <input id="txtremark" name="" value="@one.remark" type="text" />
     </td>
     </tr>

@@ -1,2 +1,4 @@
 2015-04-07 00:30:47,972 [58] ERROR - system.user 值不能为 null 或为空。
 参数名: linkText
+2015-04-07 22:12:55,738 [13] ERROR - stockout.saveouttsell_2 列名或所提供值的数目与表定义不匹配。
+2015-04-07 22:13:07,095 [16] ERROR - stockout.saveouttsell_2 列名或所提供值的数目与表定义不匹配。

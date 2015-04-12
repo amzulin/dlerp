@@ -63,4 +63,48 @@ namespace Enterprise.Invoicing.ViewModel
 
     }
 
+    /// <summary>
+    /// 前台查询模型
+    /// </summary>
+    public class SearchModel
+    {
+        /// <summary>
+        /// 查询单号
+        /// </summary>
+        public string QueryNo { get; set; }
+        /// <summary>
+        /// 供应商
+        /// </summary>
+        public string Supplier { get; set; }
+        /// <summary>
+        /// 开始时间
+        /// </summary>
+        public DateTime? DateStart { get; set; }
+        /// <summary>
+        /// 结束时间
+        /// </summary>
+        public DateTime? DateEnd { get; set; }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public int? Status { get; set; }
+
+
+        /// <summary>
+        /// 页索引
+        /// </summary>
+        public int PageIndex { get; set; }
+        /// <summary>
+        /// 页大小 
+        /// </summary>
+        public int? PageSize { get; set; }
+        /// <summary>
+        /// 记录总数
+        /// </summary>
+        public int TotalCount { get; set; }
+        /// <summary>
+        /// 页总数
+        /// </summary>
+        public int PageCount { get; set; }
+    }
 }

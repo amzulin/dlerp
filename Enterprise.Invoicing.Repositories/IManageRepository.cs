@@ -40,6 +40,7 @@ namespace Enterprise.Invoicing.Repositories
         string GetBillNo();
         string GetTCNo();
         bool ChangeBillStatus(string no, int status, int staff);
+        bool ChangeSettleStatus(string no, int status, int staff);
 
 
         #region 消息

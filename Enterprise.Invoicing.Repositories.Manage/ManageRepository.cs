@@ -341,7 +341,7 @@ namespace Enterprise.Invoicing.Repositories
                     if (model == null)
                     {
                         #region 添加
-                        if (hadname != null) return new ReturnValue { status = false, message = "同种物料已存在，不能重复添加" };
+                        if (hadname != null) return new ReturnValue { status = false, message = "名称已存在，不能重复添加" };
                         model = new Supplier();
                         model.address = address;
                         model.phone = phone;
@@ -460,6 +460,47 @@ namespace Enterprise.Invoicing.Repositories
                 }
             }
         }
+        public bool ChangeSettleStatus(string no, int status, int staff)
+        {
+            using (var c = new InvoicingContext())
+            {
+                try
+                {
+                    var model = c.Settlements.FirstOrDefault(p => p.settleNo == no);
+                    var person = c.Employees.FirstOrDefault(p => p.staffId == staff);
+                    if (status == -1)
+                    {
+                        model.status = 4;
+                    }
+                    else
+                    {
+                        if (model.status == 0)
+                        {
+                            model.status = 1;
+                        }
+                        else if (model.status == 1)
+                        {
+                            model.status = 0;
+
+                        }
+                        else if (model.status == 4)
+                        {
+                            model.status = 0;
+                        }
+
+                    }
+                    model.checkStaff = person != null ? person.staffName : "";
+                    model.checkDate = DateTime.Now;
+                    c.Entry(model).State = EntityState.Modified;
+                    c.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }    
         #endregion
 
         #region 特采单

@@ -26,6 +26,7 @@ namespace Enterprise.Invoicing.Entities.Models
         public bool valid { get; set; }
         public int fax { get; set; }
         public string remark { get; set; }
+        public int settleDay { get; set; }
         public virtual ICollection<BomOrder> BomOrders { get; set; }
         public virtual ICollection<DelegateSend> DelegateSends { get; set; }
         public virtual ICollection<MaterialPrice> MaterialPrices { get; set; }

@@ -2943,8 +2943,7 @@ namespace Enterprise.Invoicing.Common
             if (key == "in") return GetInName(type);
             else if (key == "out") return GetOutName(type);
             else return "未知";
-        }
-
+        }    
 
         #region 数字转大写
         private static String[] Ls_ShZ = { "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "拾" };

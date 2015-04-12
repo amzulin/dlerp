@@ -42,6 +42,7 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.valid).HasColumnName("valid");
             this.Property(t => t.fax).HasColumnName("fax");
             this.Property(t => t.remark).HasColumnName("remark");
+            this.Property(t => t.settleDay).HasColumnName("settleDay");
         }
     }
 }

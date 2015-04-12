@@ -286,6 +286,7 @@ namespace Enterprise.Invoicing.Web.Controllers
             int supplier = WebRequest.GetInt("supplier", 0);
             string deport = WebRequest.GetString("deport", true);
             string order = WebRequest.GetString("order", true);
+            string date = WebRequest.GetString("date", true);
             ReturnValue r = new ReturnValue() { status = false };
 
                         string[] outsnl = outsnlist.Split(',');
@@ -305,7 +306,7 @@ namespace Enterprise.Invoicing.Web.Controllers
                             {
                                 try
                                 {
-                                    ServiceDB.Instance.ExecuteSqlCommand("update StockOut set  bomOrderNo='" + order + "' where stockoutNo='" + backno + "'");
+                                    ServiceDB.Instance.ExecuteSqlCommand("update StockOut set  outDate='" + date + "',  bomOrderNo='" + order + "' where stockoutNo='" + backno + "'");
                                     for (int i = 0; i < ordersnl.Length; i++)
                                     {
                                         var od = ServiceDB.Instance.QueryOneModel<BomOrderDetail>("select * from BomOrderDetail where detailSn=" + ordersnl[i]);
@@ -327,7 +328,7 @@ namespace Enterprise.Invoicing.Web.Controllers
                                     if (outsnl[i] == "0")
                                         ServiceDB.Instance.ExecuteSqlCommand("insert into StockOutDetail values('" + no + "','" + materiall[i] + "'," + depotl[i] + "," + ordersnl[i] + ",null," + amountl[i] + ",0,0,null,'" + remarkl[i] + "')");
                                     else if (outsnlist[i] > 0 && amountlist[i] == 0) ServiceDB.Instance.ExecuteSqlCommand("delete StockOutDetail where detailSn=" + outsnlist[i]);
-                                    else ServiceDB.Instance.ExecuteSqlCommand("update StockOutDetail set depotId=" + depotl[i] + ",outAmount=" + amountl[i] + ",remark='" + remarkl[i] + "' where detailSn=" + outsnl[i]);
+                                    else ServiceDB.Instance.ExecuteSqlCommand("update StockOutDetail set depotId=" + depotl[i] + ",outAmount=" + amountl[i] + ",remark='" + remarkl[i] + "', outDate='" + date + "' where detailSn=" + outsnl[i]);
 
                                 }
                                 r.status = true;
@@ -1743,7 +1744,7 @@ namespace Enterprise.Invoicing.Web.Controllers
                     {
                         head = ServiceDB.Instance.ExecuteSqlCommand(
                             "INSERT INTO [dbo].[StockOut] values('" + backno + "'," + Masterpage.CurrUser.staffid + "," + Masterpage.CurrUser.depId + "," + supplier
-                            + ",'',null,4,'',0,0,0,getdate(),1,0,0,'','" + remark + "','" + deport+"','"+express+"','"+expresscode+"',"+(date==""?"null":"'"+date+"'")+")");
+                            + ",'',null,4,'',0,0,0,getdate(),1,0,0,'','" + remark + "','" + deport+"','"+express+"','"+expresscode+"',"+(date==""?"null":"'"+date+"'")+",0)");
                         no = backno;
                     }
                 }

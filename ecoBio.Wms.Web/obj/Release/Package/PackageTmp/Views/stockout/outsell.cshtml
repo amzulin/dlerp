@@ -36,6 +36,7 @@
 <br />
 <label>客户：</label><input name="" type="text" id="txtcustomer2"  style="width:250px;" /> 
 <label>客户订单：</label><select id="ddlorderno" onchange="changeorder()" style="width:120px;"><option value="">请选择</option></select>
+    <label>销售日期：</label><input name="" id="dateout" readonly="readonly" style="width:90px;" type="text" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>   
 </div>
     }
 
@@ -49,6 +50,7 @@
         <br />
 <label>客户：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:250px;" value="@one.supplierName"/>
 <label>客户订单：</label><input name="" type="text"  class="input_gray" readonly="readonly" style="width:120px;" value="@one.bomOrderNo"/>
+    <label>销售日期：</label><input name="" id="dateout" readonly="readonly" style="width:90px;" type="text" value="@(one.outDate.HasValue?one.outDate.Value.ToString("yyyy-MM-dd"):DateTime.Now.ToString("yyyy-MM-dd"))"/>   
 </div>
 }
 <div class="content_main">
@@ -83,7 +85,14 @@
             $.dialog.alert(msg);
             return false;
         }
-
+        $("#dateout").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1
+        });
         $("#txtcustomer2").autocomplete({
             source: function (request, response) {
                 var key = $("#txtcustomer2").val();

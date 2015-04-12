@@ -50,7 +50,7 @@
     <td width="14%">@item.stockoutNo</td>
     <td width="15%">@item.depName</td>
     <td width="8%">@item.staffName</td>
-    <td width="12%">@item.createDate.ToString("yyyy-MM-dd")</td>
+    <td width="12%">@(item.outDate.HasValue?item.outDate.Value.ToString("yyyy-MM-dd"):item.createDate.ToString("yyyy-MM-dd"))</td>
             @{
          var supplier = item.supplierName;
          if (item.outType==3)

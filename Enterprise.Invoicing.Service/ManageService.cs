@@ -116,6 +116,9 @@ namespace Enterprise.Invoicing.Service
         public bool ChangeBillStatus(string no, int status, int staff)
         {
             return _manageRepository.ChangeBillStatus(no, status, staff);
+        }public bool ChangeSettleStatus(string no, int status, int staff)
+        {
+            return _manageRepository.ChangeSettleStatus(no, status, staff);
         }
 
 
