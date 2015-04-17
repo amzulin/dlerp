@@ -73,7 +73,7 @@
     </td>
     <td width="12%">@item.remark</td>
     <td width="16%">   
-        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_check"))
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockout_check") && item.isover == 0)
         { 
        <a href="javascript:void(0);" onclick="changestatus('stockout','@item.stockoutNo',@item.status,'../stockout/outlist?page=@page')">@Html.Raw(@Enterprise.Invoicing.Common.Utils.GetBtnStr(item.status))</a>
         }

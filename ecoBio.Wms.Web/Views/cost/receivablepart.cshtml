@@ -22,11 +22,11 @@
   <tr>
        <th nowrap="nowrap">序号</th>
     <th nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('settleNo')">结算单号</th>
-    <th style="cursor:pointer;" onclick="orderlistp('supplierName')">供应商</th>
+    <th style="cursor:pointer;" onclick="orderlistp('supplierName')">客户</th>
     <th nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('settleStart')">开始时间</th>
     <th nowrap="nowrap" style="cursor:pointer;" onclick="orderlistp('suppliername')">结束时间</th>
     <th nowrap="nowrap">销售</th>
-    <th nowrap="nowrap">退意</th>
+    <th nowrap="nowrap">退单</th>
     <th nowrap="nowrap">应收</th>
     <th nowrap="nowrap">实收</th>
     <th nowrap="nowrap">坏账</th>
@@ -43,11 +43,11 @@
     <td>@item.supplierName</td>
     <td nowrap="nowrap">@item.settleStart.ToString("yyyy-MM-dd")</td>
     <td nowrap="nowrap">@item.settleEnd.ToString("yyyy-MM-dd")</td>
-    <td>@item.firstCost</td>
-    <td>@item.returnCost</td>
-    <td>@item.tradeCost</td>
-    <td>@item.realCost</td>
-    <td>@item.badCost</td>
+    <td>@item.firstCost.ToString("f2")</td>
+    <td>@item.returnCost.ToString("f2")</td>
+    <td>@item.tradeCost.ToString("f2")</td>
+    <td>@item.realCost.ToString("f2")</td>
+    <td>@item.badCost.ToString("f2")</td>
     <td> @if (item.isover == 1)
          {
             <span>完工</span> 
@@ -69,17 +69,19 @@
                    {  
         <a href="javascript:void(0);" onclick="changestatus('settle','@item.settleNo',4,'../cost/receivable?page=@page')">撤消作废</a>
                    }
- <a href="javascript:void(0);" onclick="changestatus('settle','@item.settleNo',@item.status,'../cost/receivable?page=@page')">明细</a>
-                  <a href="javascript:void(0);" onclick="changestatus('settle','@item.settleNo',@item.status,'../cost/receivable?page=@page')">收款</a>
+ <a href="../cost/settledetail?settleno=@item.settleNo&type=0">明细</a>
+                  <a  href="javascript:void(0);" onclick="capital('@item.settleNo',0)">收款</a>
+                  <a href="javascript:void(0);"  onclick="exportelx('@item.settleNo',0)">导出明细</a>
+                  <a href="javascript:void(0);"  onclick="exportelx('@item.settleNo',1)">导出收款</a>
      @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("settle_print"))
-     { <span onclick="printurl('../main/printa4?title=应收结算单&key=@("settle&no=" + item.settleNo)');"  title="打印">打印</span> }
+     { }
              </td>
 </tr>
      pi++;
      }
      @if (list.Count < 1)
      {
-         <tr><td colspan="10">无结算单信息</td></tr> 
+         <tr><td colspan="12">无结算单信息</td></tr> 
      }
   </tbody>  
 </table>

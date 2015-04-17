@@ -16,7 +16,7 @@ padding-right: 0px;
         <tr><td style="width:80px;text-align:right;">客户：</td>
             <td><input name="Supplier" type="text" id="txtcustomer" style="width:200px;" /></td>
             <td style="text-align:right;">状态：</td>
-            <td><select id="Status" name="Status"><option value="">全部</option><option value="0">无退单</option><option value="1">有退单</option></select></td> 
+            <td><select id="Status" name="Status"><option value="">全部</option><option value="0">未审核</option><option value="1">已审核</option><option value="2">已结</option></select></td> 
          
             <td style="text-align:right;">结算单号：</td>
             <td><input name="QueryNo" type="text" id="txtpo" /></td>
@@ -25,7 +25,7 @@ padding-right: 0px;
                 至：<input name="DateEnd" type="text" id="to" /></td></tr>
         <tr>            
         <td colspan="8" style="text-align:center;">
-            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询</a>
             <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
             </td></tr>
     </table>
@@ -92,10 +92,10 @@ padding-right: 0px;
         var start = $("#from").val();
         var end = $("#to").val();
         var ddlr = $("#ddlr").val();
-        para = "";
+        para = " and  settleType=0";
         if (sup != '') para += " and  suppliername like '%" + sup + "%'";
         if (po != '') para += " and settleNo like '%" + po + "%'";
-        if (si != '') para += " and Status=%" + si + "%";
+        if (si != '') para += " and status=" + si;
         if (start != '') para += " and settleStart>='" + start + "'";
         if (end != '') para += " and settleEnd<'" + end + "'";
         return para;
@@ -132,4 +132,51 @@ padding-right: 0px;
         $("#detai_div_" + detailindex).css("display", "block");
     }
 
+    function capital(no, type) {
+        $.post('../cost/capitallist', { settleno: no, type: type }, function (data) {
+            if (data.length > 0) {
+                var html = "";
+                //html += +'<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">'
+                html += ' <thead>'
+                        + '  <tr>'
+                        + '    <th nowrap="nowrap">序号</th>'
+                        + '    <th>' + (type == 0 ? '客户' : '供应商') + '</th>'
+                        + '    <th nowrap="nowrap">创建人员</th>'
+                        + '    <th nowrap="nowrap">结算单号</th>'
+                        + '    <th nowrap="nowrap">金额</th>'
+                        + '    <th nowrap="nowrap">' + (type == 0 ? '收款' : '付款') + '日期</th>'
+                        + '    <th nowrap="nowrap">创建时间</th>'
+                        + '    <th>备注</th>'
+                        + '  </tr>'
+                        + '  </thead>'
+                        + ' <tbody>';
+
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    html += '<tr>'
+                            +'    <td nowrap="nowrap">'+(i+1)+'</td>'
+                            +'    <td>'+item.supplierName+'</td>'
+                            +'    <td nowrap="nowrap">'+item.createStaff+'</td>'
+                            +'    <td nowrap="nowrap">'+item.settleNo+'</td>'
+                            +'    <td nowrap="nowrap">'+item.tradeCost+'</td>'
+                            +'    <td nowrap="nowrap">'+item.tradeDate+'</td>'
+                            +'    <td nowrap="nowrap">'+item.createDate+'</td>'
+                            +'    <td>'+item.remark+'</td>'
+                            +'</tr>';
+                }
+                html += ' </tbody>';
+                $.dialog({
+                    width: 800,
+                    height: 500, content: '<table width="700px" border="0" cellspacing="0" cellpadding="0" class="table_common">' + html + '</table>'
+                });
+            } else {
+                $.dialog.tips("不存在收款明细");
+            }
+
+        });
+    }
+
+    function exportelx(no, type) {
+        window.location.href = '../cost/settleelx?settleno=' + no + '&type=' + type;
+    }
 </script>

@@ -56,3 +56,4 @@ D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.Manage\bin\D
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.Manage\bin\Debug\Enterprise.Invoicing.ViewModel.pdb
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.Manage\obj\Debug\Enterprise.Invoicing.Repositories.Manage.dll
 D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.Manage\obj\Debug\Enterprise.Invoicing.Repositories.Manage.pdb
+D:\软件开发\git\erpcode\dlerp\Enterprise.Invoicing.Repositories.Manage\obj\Debug\Enterprise.Invoicing.Repositories.Manage.csprojResolveAssemblyReference.cache

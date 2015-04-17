@@ -69,7 +69,7 @@
     </td>
     <td width="19%">@(item.supplierName+ item.remark)</td>
     <td width="15%">  
-        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockin_check"))
+        @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("stockin_check") && item.isover==0)
             {    
        <a href="javascript:void(0);" onclick="changestatus('stockin','@item.stockInNo',@item.status,'../stockin/inlist?page=@page')">@Html.Raw(@Enterprise.Invoicing.Common.Utils.GetBtnStr(item.status))</a>
         }

@@ -1,0 +1,75 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.SettlementCapital>;
+    var settleno = Model.settleno; int type = Model.type;
+    var pi = 1; var dpi = 1;
+    ViewBag.Title = settleno+(type == 0 ? "应收" : "应付") + "款明细";
+     }
+
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：费用管理 > @(settleno+(type == 0 ? "应收" : "应付") + "款明细") </div>
+<div class="data_content">
+<!--查询-->
+@*<div class="layout_report">
+    <table>
+        <tr><td style="width:80px;text-align:right;">客户：</td>
+            <td><input name="Supplier" type="text" id="txtcustomer" style="width:200px;" /></td>
+            <td style="text-align:right;">状态：</td>
+            <td><select id="Status" name="Status"><option value="">全部</option><option value="0">无退单</option><option value="1">有退单</option></select></td> 
+         
+            <td style="text-align:right;">结算单号：</td>
+            <td><input name="QueryNo" type="text" id="txtpo" /></td>
+            <td style="text-align:right;">销售日期：</td>
+            <td colspan="2"><input name="DateStart" type="text" id="from" />
+                至：<input name="DateEnd" type="text" id="to" /></td></tr>
+        <tr>            
+        <td colspan="8" style="text-align:center;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+            <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
+            </td></tr>
+    </table>
+</div>*@
+
+<!--表格内容-->
+    <div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>@(settleno+(type == 0 ? "应收" : "应付") + "款明细")</h2>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+       <th nowrap="nowrap">序号</th>
+    <th>@(type == 0 ? "客户" : "供应商")</th>
+    <th nowrap="nowrap">创建人员</th>
+    <th nowrap="nowrap">结算单号</th>
+    <th nowrap="nowrap">金额</th>
+    <th nowrap="nowrap">@(type == 0 ? "收款" : "付款")日期</th>
+    <th nowrap="nowrap">创建时间</th>
+    <th>备注</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td nowrap="nowrap">@pi</td>   
+    <td>@item.supplierName</td>
+    <td nowrap="nowrap">@item.createStaff</td>
+    <td nowrap="nowrap">@item.settleNo</td>
+    <td nowrap="nowrap">@item.tradeCost.ToString("n")</td>
+    <td nowrap="nowrap">@item.tradeDate.ToString("yyyy-MM-dd")</td>
+    <td nowrap="nowrap">@item.createDate.ToString("yyyy-MM-dd")</td>
+    <td>@item.remark</td>
+</tr>
+     pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="9">无@(type == 0 ? "收款" : "付款")明细</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    </div>

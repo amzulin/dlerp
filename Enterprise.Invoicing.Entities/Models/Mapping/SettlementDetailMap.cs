@@ -69,6 +69,7 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.tradeAmount).HasColumnName("tradeAmount");
             this.Property(t => t.returnAmount).HasColumnName("returnAmount");
             this.Property(t => t.tradePrice).HasColumnName("tradePrice");
+            this.Property(t => t.realCost).HasColumnName("realCost");
             this.Property(t => t.depotId).HasColumnName("depotId");
             this.Property(t => t.depotName).HasColumnName("depotName");
             this.Property(t => t.stockdetailRemark).HasColumnName("stockdetailRemark");

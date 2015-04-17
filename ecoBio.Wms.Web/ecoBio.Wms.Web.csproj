@@ -1963,6 +1963,8 @@
     <Content Include="Views\bom\bommaterial.cshtml" />
     <Content Include="Views\manage\materialprice.cshtml" />
     <Content Include="Views\stockout\returnred.cshtml" />
+    <Content Include="Views\cost\settledetail.cshtml" />
+    <Content Include="Views\cost\settlecapital.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

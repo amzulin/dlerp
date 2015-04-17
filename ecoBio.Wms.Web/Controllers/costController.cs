@@ -27,22 +27,6 @@ namespace Enterprise.Invoicing.Web.Controllers
         public ActionResult paylist(int? page, int? pagesize, DateTime? start, DateTime? end, string supplier)
         {
             dynamic data = new System.Dynamic.ExpandoObject();
-            //var s = start.HasValue ? start.Value.ToString("yyyy-MM-dd") : DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd");
-            //var e = end.HasValue ? end.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
-            //supplier = supplier == null ? "" : supplier;
-
-            //var list = ServiceDB.Instance.QueryModelList<NeedPayModel>(" exec usp_query_needpay 1,'" + supplier + "','" + s + "','" + e + "' ");
-
-            //int _page = page.HasValue ? page.Value : 1;
-            //int _pagesize = pagesize.HasValue ? pagesize.Value : 17;
-            //data.list = list;
-            //data.pageSize = _pagesize;
-            //data.pageIndex = _page;
-            //data.totalCount = list.Count;
-            //data.start = s;
-            //data.end = e;
-            //data.supplier = supplier;
-            //data.otherParam = "&supplier=" + supplier + "&start=" + s + "&end=" + e;
             return View(data);
         }
         [AjaxAction(ForAction = "paylist", ForController = "cost")]
@@ -50,38 +34,12 @@ namespace Enterprise.Invoicing.Web.Controllers
         {
             dynamic data = new System.Dynamic.ExpandoObject();
             if (where == null) where = "";
-            if (orderby == null || orderby == "") orderby = " order by supplierName asc ";
+            if (orderby == null || orderby == "") orderby = " order by settleNo desc ";
             else orderby = " order by " + orderby;
-            var list = ServiceDB.Instance.QueryModelList<Enterprise.Invoicing.Entities.Models.V_StockInPurchase>(" select * from V_StockInPurchase where supplierId>0 " + where + orderby).ToList();
-
-            List<NeedPayModel> pays = new List<NeedPayModel>();
-            List<int> had = new List<int>();
-            foreach (var item in list)
-            {
-                if (had.Contains(item.supplierId.Value)) continue;
-                had.Add(item.supplierId.Value);
-                #region 每个客户
-                NeedPayModel pay = new NeedPayModel();
-                var ones = list.Where(p => p.supplierId == item.supplierId);
-                pay.supplierId = item.supplierId.Value;
-                pay.supplierName = item.supplierName;
-                pay.dateStart = DateTime.Now.AddYears(1);
-                pay.dateEnd = DateTime.Now.AddYears(-1);
-                pay.amount = 0;
-                pay.cost = 0;
-                foreach (var o in ones)
-                {
-                    if (o.createDate < pay.dateStart) pay.dateStart = o.createDate;
-                    if (o.createDate > pay.dateEnd) pay.dateEnd = o.createDate;
-                    pay.amount += o.inAmount;
-                    pay.cost += o.inCost;
-                }
-                pays.Add(pay);
-                #endregion
-            }
+            var list = ServiceDB.Instance.QueryModelList<Settlement>(" select * from Settlement  where settleType=1 " + where + orderby).ToList();
             int _page = page.HasValue ? page.Value : 1;
             int _pagesize = pagesize.HasValue ? pagesize.Value : 17;
-            var vs = pays.ToPagedList(_page, _pagesize);
+            var vs = list.ToPagedList(_page, _pagesize);
             data.list = vs;
             data.pageSize = _pagesize;
             data.pageIndex = _page;
@@ -155,32 +113,7 @@ namespace Enterprise.Invoicing.Web.Controllers
             if (where == null) where = "";
             if (orderby == null || orderby == "") orderby = " order by settleNo desc ";
             else orderby = " order by " + orderby;
-
-            #region 条件
-            //if (!string.IsNullOrEmpty(model.Supplier))
-            //{
-            //    where += " and supplierName like '%"+model.Supplier+"%'";
-            //}
-            //if (!string.IsNullOrEmpty(model.QueryNo))
-            //{
-            //    where += " and settleNo like '%" + model.QueryNo + "%'";
-            //}
-            //if (model.Status.HasValue)
-            //{
-            //    where += " and status=" + model.Status.Value;
-            //}
-            //if (model.DateStart.HasValue)
-            //{
-            //    where += " and settleStart>='" + model.DateStart.Value.ToString() + "'";
-            //}
-            //if (model.DateEnd.HasValue)
-            //{
-            //    where += " and settleEnd<'" + model.DateEnd.Value.ToString() + "'";
-            //}
-            #endregion
-            var list = ServiceDB.Instance.QueryModelList<Settlement>(" select * from Settlement  where settleNo is not null " + where + orderby).ToList();
-
-
+            var list = ServiceDB.Instance.QueryModelList<Settlement>(" select * from Settlement  where settleType=0 " + where + orderby).ToList();
             int _page = page.HasValue ? page.Value : 1;
             int _pagesize = pagesize.HasValue ? pagesize.Value : 17;
             var vs = list.ToPagedList(_page, _pagesize);
@@ -252,9 +185,9 @@ namespace Enterprise.Invoicing.Web.Controllers
             if (where == null) where = "";
             if (orderby == null || orderby == "") orderby = " order by createDate desc ";
             else orderby = " order by " + orderby;
-            var list = ServiceDB.Instance.QueryModelList<V_BillCost>(" select "+
+            var list = ServiceDB.Instance.QueryModelList<V_BillCost>(" select " +
             "billNo,title,staffMake,depId ,staffCheck,checkDate,staffCfo,cfoDate,staffBoss,bossDate,status,valid,isover,billType,remark,createDate,checkRes,cfoRes,bossRes,makeName,checkName,cfoName,bossName,depName,checkMsg,cfoMsg,bossMsg"
-                +" from V_BillCostDetail  where billType=0 "
+                + " from V_BillCostDetail  where billType=0 "
                 + where + " group by "
                 + " billNo,title,staffMake,depId ,staffCheck,checkDate,staffCfo,cfoDate,staffBoss,bossDate,status,valid,isover,billType,remark,createDate,checkRes,cfoRes,bossRes,makeName,checkName,cfoName,bossName,depName,checkMsg,cfoMsg,bossMsg "
                 + orderby).ToList();
@@ -300,7 +233,7 @@ namespace Enterprise.Invoicing.Web.Controllers
             {
                 #region 创建申请单
                 type = "add";
-                no = manageService.GetBillNo();  
+                no = manageService.GetBillNo();
                 #endregion
             }
             else if (type == "edit")
@@ -431,7 +364,7 @@ namespace Enterprise.Invoicing.Web.Controllers
 
         }
         #endregion
-        
+
         #region 普通采购
 
         public ActionResult purchaselist()
@@ -445,9 +378,9 @@ namespace Enterprise.Invoicing.Web.Controllers
             if (where == null) where = "";
             if (orderby == null || orderby == "") orderby = " order by createDate desc ";
             else orderby = " order by " + orderby;
-            var list = ServiceDB.Instance.QueryModelList<V_BillCost>(" select "+
+            var list = ServiceDB.Instance.QueryModelList<V_BillCost>(" select " +
             "billNo,title,staffMake,depId ,staffCheck,checkDate,staffCfo,cfoDate,staffBoss,bossDate,status,valid,isover,billType,remark,createDate,checkRes,cfoRes,bossRes,makeName,checkName,cfoName,bossName,depName,checkMsg,cfoMsg,bossMsg"
-                +" from V_BillCostDetail  where billType=1 "
+                + " from V_BillCostDetail  where billType=1 "
                 + where + " group by "
                 + " billNo,title,staffMake,depId ,staffCheck,checkDate,staffCfo,cfoDate,staffBoss,bossDate,status,valid,isover,billType,remark,createDate,checkRes,cfoRes,bossRes,makeName,checkName,cfoName,bossName,depName,checkMsg,cfoMsg,bossMsg "
                 + orderby).ToList();
@@ -493,7 +426,7 @@ namespace Enterprise.Invoicing.Web.Controllers
             {
                 #region 创建申请单
                 type = "add";
-                no = manageService.GetTCNo();  
+                no = manageService.GetTCNo();
                 #endregion
             }
             else if (type == "edit")
@@ -626,7 +559,7 @@ namespace Enterprise.Invoicing.Web.Controllers
         #endregion
 
         #region 成本
-        
+
         public ActionResult bomcost(int? page)
         {
             return View();
@@ -654,10 +587,10 @@ namespace Enterprise.Invoicing.Web.Controllers
         public ActionResult excelbomcost(int id)
         {
             List<V_BomCostModel> list = new List<V_BomCostModel>();
-            var child = ServiceDB.Instance.QueryModelList<V_BomCostModel>(" select * from V_BomMaterialView  where parent_Id=" +id).ToList();
-         
-           // var list = bomService.GetProductBomCostModel(child,Convert.ToDouble(1));
-            string[] head = new string[10] { "序号", "类别", "物料编码", "物料名称", "物料规格",  "单位", "数量","单价","金额","备注" };
+            var child = ServiceDB.Instance.QueryModelList<V_BomCostModel>(" select * from V_BomMaterialView  where parent_Id=" + id).ToList();
+
+            // var list = bomService.GetProductBomCostModel(child,Convert.ToDouble(1));
+            string[] head = new string[10] { "序号", "类别", "物料编码", "物料名称", "物料规格", "单位", "数量", "单价", "金额", "备注" };
             List<string> data = new List<string>();
             for (int i = 0; i < list.Count; i++)
             {
@@ -670,7 +603,7 @@ namespace Enterprise.Invoicing.Web.Controllers
                 row += p.unit + "|";
                 row += p.amount + "|";
                 row += p.rootCost + "|";
-                row += (p.rootCost*p.amount).ToString()  + "|";
+                row += (p.rootCost * p.amount).ToString() + "|";
                 row += p.bomremark;
                 data.Add(row);
             }
@@ -701,7 +634,7 @@ namespace Enterprise.Invoicing.Web.Controllers
             //    {
             //        var nvi = new { km = 1, id = 0, sn = item.virtualId, no = "其他科目", name = item.virtualName, model = "", amount = item.vAmount, price = item.vPrice.ToString("N"), cost = (item.vPrice * item.vAmount).ToString("N"), unit = "", unit2 = "", amount2 = "", remark = item.remark, index = 0 };
             //        list.Add(nvi);
-                    
+
 
             //    }
             //    //var nv = new { km = 0, id = 0, sn = 0, no = "其他科目", name = "", model = "", amount = "", price = "", cost = "", unit = "", unit2 = "", amount2 = "", remark = "", index = 0, children = nvs };
@@ -789,7 +722,7 @@ namespace Enterprise.Invoicing.Web.Controllers
             int id = WebRequest.GetInt("id", 0);
             int mybomid = WebRequest.GetInt("mybom", 0);
             int forbom = WebRequest.GetInt("forbom", 0);
-         
+
             var type = WebRequest.GetString("type", true);
             var name = WebRequest.GetString("name", true);
             var remark = WebRequest.GetString("remark", true);
@@ -797,7 +730,7 @@ namespace Enterprise.Invoicing.Web.Controllers
             var price = WebRequest.GetFloat("price", 0f);
             var bom = ServiceDB.Instance.QueryOneModel<BomMain>("select * from BomMain where bomid=" + forbom);
             var row = 0; double newcost = 0f;
-            ReturnValue r = new ReturnValue { status=false};
+            ReturnValue r = new ReturnValue { status = false };
             #region 更新
             if (type == "addk")
             {
@@ -883,16 +816,166 @@ namespace Enterprise.Invoicing.Web.Controllers
             foreach (string item in ids)
             {
                 if (item == "") continue;
-                System.Data.SqlClient.SqlParameter[] param =new System.Data.SqlClient.SqlParameter[1];
+                System.Data.SqlClient.SqlParameter[] param = new System.Data.SqlClient.SqlParameter[1];
                 System.Data.SqlClient.SqlParameter sp = new System.Data.SqlClient.SqlParameter("@bomid", item);
                 param[0] = sp;// new System.Data.SqlClient.SqlParameter { Direction = System.Data.ParameterDirection.Input, Value = item, };
                 var bom = ServiceDB.Instance.ExecuteSqlCommand("exec usp_update_bomcost @bomid ", param);
-                    count++;
+                count++;
             }
             ReturnValue r = new ReturnValue();
             r.status = count > 0;
             r.message = r.status ? "" : "BOM成本更新失败";
             return Json(r, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region  应收应付明细
+        [AjaxAction(ForAction = "receivable,paylist", ForController = "cost")]
+        public ActionResult settledetail(string settleno, int type)
+        {
+            dynamic data = new System.Dynamic.ExpandoObject();
+            var one = ServiceDB.Instance.QueryOneModel<Settlement>(" select * from Settlement  where settleNo='" + settleno + "' and settleType=" + type);
+            var list = ServiceDB.Instance.QueryModelList<SettlementDetail>(" select * from SettlementDetail  where settleNo='" + settleno + "'  order by tradeDate desc").ToList();
+            data.list = list;
+            data.settleno = settleno;
+            data.one = one;
+            data.type = type;
+            return View(data);
+        }
+        [AjaxAction(ForAction = "receivable,paylist", ForController = "cost")]
+        public ActionResult settlecapital(string settleno, int type)
+        {
+            dynamic data = new System.Dynamic.ExpandoObject();
+            var list = ServiceDB.Instance.QueryModelList<SettlementCapital>(" select * from SettlementCapital  where settleNo='" + settleno + "'  order by tradeDate desc").ToList();
+            data.list = list;
+            data.settleno = settleno;
+            data.type = type;
+            return View(data);
+        }
+        [AjaxAction(ForAction = "receivable,paylist", ForController = "cost")]
+        public ActionResult capitallist(string settleno, int type)
+        {
+            var list = ServiceDB.Instance.QueryModelList<SettlementCapital>(" select * from SettlementCapital  where settleNo='" + settleno + "'  order by tradeDate desc").ToList();
+            var r = list.Select(x => new { badCost = x.badCost.ToString("f2"), createDate = x.createDate.ToString("yyyy-MM-dd"), createStaff = x.createStaff, otherCost = x.otherCost.ToString("f2"), remark = x.remark, settleNo = x.settleNo, supplierName = x.supplierName, tradeCost = x.tradeCost.ToString("f2"), tradeDate = x.tradeDate.ToString("yyyy-MM-dd") }).ToList();
+            return Json(r, JsonRequestBehavior.AllowGet);
+        }
+        [AjaxAction(ForAction = "receivable,paylist", ForController = "cost")]
+        public ActionResult gosettle()
+        {
+            ReturnValue back = new ReturnValue { status = false };
+            string no = WebRequest.GetString("no", true);
+            string forids = WebRequest.GetString("forids", true);
+            string costs = WebRequest.GetString("costs", true);
+            string date = WebRequest.GetString("date", true);
+            string remark = WebRequest.GetString("remark", true);
+            float cost = WebRequest.GetFloat("cost", 0);
+            var one = ServiceDB.Instance.QueryOneModel<Settlement>(" select * from Settlement  where settleNo='" + no + "'");
+            if (one == null)
+            {
+                back.message = "不存在结算单";
+                return Json(back, JsonRequestBehavior.AllowGet);
+            }
+            string[] snlist = forids.Split(',');
+            string[] costlist = costs.Split(',');
+            if (snlist.Length != costlist.Length || snlist.Length < 1)
+            {
+                back.message = "传入参数数组有误";
+                return Json(back, JsonRequestBehavior.AllowGet);
+            }
+            string sql = "";
+            #region sql集合
+            sql += "insert into SettlementCapital values('" + one.settleNo + "'," + one.supplierId + ",'" + one.supplierName + "','" + date + "','" + Masterpage.CurrUser.name + "'," + cost + ",0,0,getdate(),'" + remark + "');";
+
+            sql += "update Settlement set realCost+=" + cost + " where settleNo='" + no + "';";
+            for (int i = 0; i < snlist.Length; i++)
+            {
+                sql += "update SettlementDetail set isSettle=1,realCost=" + costlist[i] + " where detailSn=" + snlist[i] + ";";
+            }
+            #endregion
+            try
+            {
+                var insert3 = ServiceDB.Instance.ExecuteSqlCommand(sql);
+                if (insert3 > 0)
+                {
+                    var list = ServiceDB.Instance.QueryModelList<SettlementDetail>(" select * from SettlementDetail  where settleNo='" + no + "' and isSettle=0").ToList();
+                    if (list == null || list.Count < 1)
+                    {
+                        ServiceDB.Instance.ExecuteSqlCommand("update Settlement set isover=1, status=2  where settleNo='" + no + "';");
+                    }
+                }
+                back.status = true;
+                return Json(back, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                back.status = false;
+                back.value = ex.Message;
+                return Json(back, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [AjaxAction(ForAction = "receivable,paylist", ForController = "cost")]
+        public ActionResult settleelx(string settleno, int type)
+        {
+            //var list = ServiceDB.Instance.QueryModelList<SettlementCapital>(" select * from SettlementCapital  where settleNo='" + settleno + "'  order by tradeDate desc").ToList();
+            //var r = list.Select(x => new { badCost = x.badCost.ToString("f2"), createDate = x.createDate.ToString("yyyy-MM-dd"), createStaff = x.createStaff, otherCost = x.otherCost.ToString("f2"), remark = x.remark, settleNo = x.settleNo, supplierName = x.supplierName, tradeCost = x.tradeCost.ToString("f2"), tradeDate = x.tradeDate.ToString("yyyy-MM-dd") }).ToList();
+            var one = ServiceDB.Instance.QueryOneModel<Settlement>(" select * from Settlement  where settleNo='" + settleno + "'");
+            List<string> data = new List<string>();
+            string msg = "";
+            #region 导出
+            if (type == 0)
+            {
+                #region 导出明细
+                #region 导出收款
+                var list = ServiceDB.Instance.QueryModelList<SettlementDetail>(" select * from SettlementDetail  where settleNo='" + settleno + "'  order by tradeDate desc").ToList();
+                string[] head = new string[12] { "序号", "编码", "物料名称", "物料规格", "出库单号", "交易时间", "销售金额", "退单金额", "单价", "应收金额", "实收金额", "状态" };
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var p = list[i];
+                    var row = (i + 1).ToString() + "|";
+                    row += p.materialNo + "|";
+                    row += p.materialName + "|";
+                    row += p.materialModel + "|";
+                    row += p.stockNo + "|";
+                    row += p.tradeDate.ToString("yyyy-MM-dd") + "|";
+                    row += p.tradeAmount.ToString("n") + "|";
+                    row += p.returnAmount.ToString("n") + "|";
+                    row += p.tradePrice.ToString("n") + "|";
+                    row += ((p.tradeAmount - p.returnAmount) * p.tradePrice).ToString("n") + "|";
+                    row += p.realCost.ToString("n") + "|";
+                    row += p.isSettle == 0 ? "未结" : "已结";
+                    data.Add(row);
+                }
+                #endregion
+                msg = FileHelper.ExportEasy(head, data);
+
+                #endregion
+            }
+            else if (type == 1)
+            {
+                #region 导出收款
+                var list = ServiceDB.Instance.QueryModelList<SettlementCapital>(" select * from SettlementCapital  where settleNo='" + settleno + "'  order by tradeDate desc").ToList();
+                string[] head = new string[8] { "序号", (one.settleType == 0 ? "客户" : "供应商"), "创建人员", "结算单号", "金额", (one.settleType == 0 ? "收款" : "付款") + "日期", "创建时间", "备注" };
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var p = list[i];
+                    var row = (i + 1).ToString() + "|";
+                    row += p.supplierName + "|";
+                    row += p.createStaff + "|";
+                    row += p.settleNo + "|";
+                    row += p.tradeCost + "|";
+                    row += p.tradeDate.ToString("yyyy-MM-dd") + "|";
+                    row += p.createDate.ToString("yyyy-MM-dd") + "|";
+                    row += p.remark;
+                    data.Add(row);
+                }
+                #endregion
+                msg = FileHelper.ExportEasy(head, data);
+
+            }
+            else msg = "类型错误";
+            return Content(msg);
+            #endregion
         }
         #endregion
     }

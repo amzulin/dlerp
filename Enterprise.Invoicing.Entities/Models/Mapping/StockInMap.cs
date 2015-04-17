@@ -42,6 +42,7 @@ namespace Enterprise.Invoicing.Entities.Models.Mapping
             this.Property(t => t.checkStaff).HasColumnName("checkStaff");
             this.Property(t => t.remark).HasColumnName("remark");
             this.Property(t => t.deportStaff).HasColumnName("deportStaff");
+            this.Property(t => t.isSettle).HasColumnName("isSettle");
 
             // Relationships
             this.HasRequired(t => t.Department)

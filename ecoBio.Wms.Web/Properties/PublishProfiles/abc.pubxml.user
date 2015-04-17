@@ -449,7 +449,7 @@
       <publishTime>10/17/2013 12:15:38</publishTime>
     </File>
     <File Include="bin/ecoBio.Wms.Common.dll">
-      <publishTime>04/06/2015 21:08:43</publishTime>
+      <publishTime>04/17/2015 20:43:08</publishTime>
     </File>
     <File Include="bin/ecoBio.Wms.Data.dll">
       <publishTime>10/17/2013 17:36:31</publishTime>
@@ -539,40 +539,40 @@
       <publishTime>10/17/2013 18:11:28</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Entities.dll">
-      <publishTime>04/11/2015 08:24:49</publishTime>
+      <publishTime>04/17/2015 21:59:40</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Repositories.Account.dll">
-      <publishTime>04/11/2015 08:24:49</publishTime>
+      <publishTime>04/17/2015 21:59:41</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Repositories.Bom.dll">
-      <publishTime>04/11/2015 08:24:52</publishTime>
+      <publishTime>04/17/2015 21:59:44</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Repositories.dll">
-      <publishTime>04/11/2015 08:24:49</publishTime>
+      <publishTime>04/17/2015 21:59:40</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Repositories.Manage.dll">
-      <publishTime>04/11/2015 08:24:52</publishTime>
+      <publishTime>04/17/2015 21:59:43</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Repositories.Purchase.dll">
-      <publishTime>04/11/2015 08:24:51</publishTime>
+      <publishTime>04/17/2015 21:59:42</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Repositories.StockIn.dll">
-      <publishTime>04/11/2015 08:24:51</publishTime>
+      <publishTime>04/17/2015 21:59:42</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Repositories.StockOut.dll">
-      <publishTime>04/11/2015 08:24:51</publishTime>
+      <publishTime>04/17/2015 21:59:43</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Repositories.System.dll">
-      <publishTime>04/11/2015 08:24:52</publishTime>
+      <publishTime>04/17/2015 21:59:43</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Service.dll">
-      <publishTime>04/11/2015 08:24:51</publishTime>
+      <publishTime>04/17/2015 21:59:41</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.ViewModel.dll">
       <publishTime>04/11/2015 08:24:46</publishTime>
     </File>
     <File Include="bin/Enterprise.Invoicing.Web.dll">
-      <publishTime>04/11/2015 08:24:55</publishTime>
+      <publishTime>04/17/2015 21:59:46</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>07/25/2014 19:48:54</publishTime>
@@ -10286,10 +10286,10 @@
       <publishTime>04/05/2015 21:25:44</publishTime>
     </File>
     <File Include="Views/cost/paylist.cshtml">
-      <publishTime>04/05/2015 21:25:44</publishTime>
+      <publishTime>04/17/2015 21:57:49</publishTime>
     </File>
     <File Include="Views/cost/paylistpart.cshtml">
-      <publishTime>04/05/2015 21:25:44</publishTime>
+      <publishTime>04/17/2015 21:44:18</publishTime>
     </File>
     <File Include="Views/cost/purchasedetailview.cshtml">
       <publishTime>04/05/2015 21:25:44</publishTime>
@@ -10304,13 +10304,19 @@
       <publishTime>04/05/2015 21:25:44</publishTime>
     </File>
     <File Include="Views/cost/receivable.cshtml">
-      <publishTime>04/09/2015 22:05:15</publishTime>
+      <publishTime>04/17/2015 21:58:35</publishTime>
     </File>
     <File Include="Views/cost/receivablepart.cshtml">
-      <publishTime>04/09/2015 22:16:39</publishTime>
+      <publishTime>04/17/2015 21:37:26</publishTime>
     </File>
     <File Include="Views/cost/receivableview.cshtml">
       <publishTime>04/05/2015 21:25:44</publishTime>
+    </File>
+    <File Include="Views/cost/settlecapital.cshtml">
+      <publishTime>04/14/2015 22:57:12</publishTime>
+    </File>
+    <File Include="Views/cost/settledetail.cshtml">
+      <publishTime>04/17/2015 21:46:46</publishTime>
     </File>
     <File Include="Views/costanalysis/biogas.cshtml">
       <publishTime>10/12/2013 17:09:52</publishTime>
@@ -11195,7 +11201,7 @@
       <publishTime>04/05/2015 21:25:44</publishTime>
     </File>
     <File Include="Views/stockin/inlistpart.cshtml">
-      <publishTime>04/05/2015 21:25:44</publishTime>
+      <publishTime>04/17/2015 21:54:37</publishTime>
     </File>
     <File Include="Views/stockin/inlistview.cshtml">
       <publishTime>04/05/2015 21:25:44</publishTime>
@@ -11288,7 +11294,7 @@
       <publishTime>04/05/2015 21:25:45</publishTime>
     </File>
     <File Include="Views/stockout/outlistpart.cshtml">
-      <publishTime>04/07/2015 22:11:03</publishTime>
+      <publishTime>04/17/2015 21:55:13</publishTime>
     </File>
     <File Include="Views/stockout/outlistview.cshtml">
       <publishTime>04/05/2015 21:25:45</publishTime>
@@ -11510,7 +11516,7 @@
       <publishTime>07/10/2013 09:10:00</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/07/2015 00:32:59</publishTime>
+      <publishTime>04/17/2015 21:59:50</publishTime>
     </File>
     <File Include="WebServices/FlexServices.svc">
       <publishTime>07/10/2013 09:09:39</publishTime>

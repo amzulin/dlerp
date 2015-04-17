@@ -1,0 +1,200 @@
+﻿@{
+    var list = Model.list as List<Enterprise.Invoicing.Entities.Models.SettlementDetail>;
+    var settleno = Model.settleno; int type = Model.type; var one = Model.one as Enterprise.Invoicing.Entities.Models.Settlement;
+    var pi = 1; var dpi = 1;
+    ViewBag.Title = settleno+(type == 0 ? "应收" : "应付") + "结算明细";
+     }
+
+<style>
+    .table_common tbody td {
+padding-right: 0px;
+
+}
+</style>
+<div class="layout_guild"><i></i>您当前的位置：费用管理 > <a href="../cost/@(type==0?"receivable":"paylist")"> 结算单列表</a> > @(settleno+(type == 0 ? "应收" : "应付") + "结算明细") </div>
+<div class="data_content">
+<!--查询-->
+<div class="layout_report">
+    <table>@if (Enterprise.Invoicing.Web.Masterpage.CheckRight("settle_get") && one.status == 1 && one.isover == 0)
+                 { 
+        <tr>    <td style="width:50px;"></td>        
+        
+             
+            <td>收款日期</td><td><input name="" type="text" id="from" value="@DateTime.Now.ToString("yyyy-MM-dd")" /></td>
+            <td>备注</td><td><input name="" style="width:200px;" type="text" id="txtremark" /></td>
+            <td style="text-align:center;"> <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="settleall();">批量结算</a>
+                
+            </td>
+        </tr>}
+    </table>
+</div>
+
+<!--表格内容-->
+    <div class="detail_unfold" style="margin-left:10px;margin-right:10px;margin-top:10px; min-height:500px;*+height:100%; border:1px solid #cbdce7; border-top-left-radius:4px;border-top-right-radius:4px;">
+<h2>@(settleno+(type == 0 ? "应收" : "应付") + "结算明细")</h2>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">
+ <thead>
+  <tr>
+      <th><input type="checkbox" id="chball" onclick="selectall()" style="width:20px;" /></th>
+       <th nowrap="nowrap">序号</th>
+    <th nowrap="nowrap">编码</th>
+    <th>物料名称</th>
+    <th>物料规格</th>
+    <th nowrap="nowrap">出库单号</th>
+    <th nowrap="nowrap">交易时间</th>
+    <th nowrap="nowrap">销售</th>
+    <th nowrap="nowrap">退单</th>
+    <th nowrap="nowrap">单价</th>
+    <th nowrap="nowrap">应收</th>
+    <th nowrap="nowrap">实收</th>
+    <th nowrap="nowrap">状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+ <tbody>
+     @foreach (var item in list)
+     {  
+         <tr>
+      <td>
+          @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("settle_get") && one.status == 1 && one.isover == 0&&item.isSettle==0)
+          {
+              <input type="checkbox" id="chb_@item.detailSn" onclick="chbone(@item.detailSn)" forid="@item.detailSn" mytype="person"  style="width:20px;" />
+          }
+          </td> 
+      <td nowrap="nowrap">@pi</td>   
+    <td nowrap="nowrap">@item.materialNo</td> 
+    <td>@item.materialName</td>
+    <td>@item.materialModel</td>
+    <td nowrap="nowrap">@item.stockNo</td>
+    <td nowrap="nowrap">@item.tradeDate.ToString("yyyy-MM-dd")</td>
+    <td nowrap="nowrap">@item.tradeAmount.ToString("n")</td>
+    <td nowrap="nowrap">@item.returnAmount.ToString("n")</td>
+    <td nowrap="nowrap">@item.tradePrice.ToString("n")</td>
+    <td nowrap="nowrap">@(((item.tradeAmount-item.returnAmount)*item.tradePrice).ToString("n"))</td>
+    <td>
+         @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("settle_get") && one.status == 1 && one.isover == 0&&item.isSettle==0)
+          {
+              <input type="text" id="txt_@item.detailSn" forid="@item.detailSn" mytype="money"  style="width:50px;" mv="@(Math.Round((item.tradeAmount-item.returnAmount)*item.tradePrice,2))" value="@(Math.Round((item.tradeAmount-item.returnAmount)*item.tradePrice,2).ToString())" />
+          }
+        else{
+         <span>@item.realCost.ToString("n")</span>
+         }
+    </td>
+    <td>@(item.isSettle==0?"未结":"已结")</td>
+             <td>
+
+                 @if (Enterprise.Invoicing.Web.Masterpage.CheckRight("settle_get") && one.status == 1 && one.isover == 0 && item.isSettle == 0)
+                 {  
+        <a href="javascript:void(0);" onclick="gosettle('@item.detailSn')">结算</a>
+                 }
+             </td>
+</tr>
+     pi++;
+     }
+     @if (list.Count < 1)
+     {
+         <tr><td colspan="14">无结算单明细</td></tr> 
+     }
+  </tbody>  
+</table>
+        </div>
+    </div>
+
+<script>
+    var t = '@type';
+    var no = '@settleno';
+    $(function(){
+        $("#from").datepicker({
+            dateFormat: "yy-mm-dd",
+            showOn: "button",
+            buttonImageOnly: true,
+            buttonImage: '../images/front/public/calendar.gif',
+            changeMonth: true,
+            numberOfMonths: 1,maxDate:'@DateTime.Now.ToString("yyyy-MM-dd")'
+        });
+    });
+    function selectall() {
+        var chb = $("#chball").attr("checked");
+        var list = $("input[mytype='person']");
+        $.each(list, function (i, m) {
+            if (chb=="checked")   $(m).attr("checked", "checked");
+            else $(m).removeAttr("checked")
+        });
+    }
+    function chbone(id) {
+        var chbme = $("#chb_"+id).attr("checked");
+        if (chbme!="checked") $("#chball").removeAttr("checked")
+    }
+    var totalcost=0;
+    var costs=[];
+    function settleall(){
+        var forids=[];
+        var msg="";
+        totalcost=0;
+        costs=[];
+        var list = $("input[mytype='person']");
+        for (var i = 0; i < list.length; i++) {
+            var m=$(list[i]);
+            //}
+            //$.each(list, function (i, m) { 
+            var chb=m.attr("checked");
+            if (chb=="checked") {
+                var fid=m.attr("forid");
+                var txtc=$("#txt_"+fid).val();
+                if (isNaN(txtc)||parseFloat(txtc)<0||parseFloat(txtc)>parseFloat($("#txt_"+fid).attr("mv"))) {
+                    msg+="已选择的第"+(i+1)+"行实收金额有误 ";
+                }
+                else
+                {
+                    totalcost+=parseFloat(txtc);
+                    costs.push(parseFloat(txtc));
+                }
+                forids.push(fid);
+            }
+            //});
+        }
+        if (forids.length<1) {
+            $.dialog.alert("请选择要结算的明细！");
+            return false;
+        }
+        else if (msg!="") {
+            $.dialog.alert(msg);
+            return false;
+        }
+        else
+        {
+            gosettle(forids.toString());
+        }
+    }
+    function gosettle(sn) {
+        var cost=0;
+        if (sn.indexOf(',')>0) {
+            cost=totalcost;        }
+        else{
+            costs=[];
+            var txtc=$("#txt_"+sn).val();
+            if (isNaN(txtc)||parseFloat(txtc)<0||parseFloat(txtc)>parseFloat($("#txt_"+sn).attr("mv"))) {
+                $.dialog.alert("实收金额填写有误！");
+                return false;
+            }
+            cost=parseFloat(txtc);
+            costs.push(parseFloat(txtc))
+        }
+        if($("#from").val()=='') {
+            $("#from").focus();
+            $.dialog.alert("请填写收款日期！");
+            return false;
+        }
+        if (confirm("确定要结算吗？")) {
+            $.post('../cost/gosettle', { no: no, forids: sn,cost:cost ,costs:costs.toString(),date:$("#from").val(),remark:$("#txtremark").val() }, function (data) {
+                if (data.status == true) {
+                    window.location.href = "../cost/settledetail?settleno="+no+"&type="+t;
+                }
+                else {
+                    $.dialog.alert("结算失败！");
+                    return false;
+                }
+            });
+        }
+    }
+</script>

@@ -27,6 +27,7 @@ namespace Enterprise.Invoicing.Entities.Models
         public string checkStaff { get; set; }
         public string remark { get; set; }
         public string deportStaff { get; set; }
+        public int isSettle { get; set; }
         public virtual Department Department { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual ICollection<PurchaseReturnDetail> PurchaseReturnDetails { get; set; }

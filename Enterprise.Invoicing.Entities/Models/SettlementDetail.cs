@@ -21,6 +21,7 @@ namespace Enterprise.Invoicing.Entities.Models
         public decimal tradeAmount { get; set; }
         public decimal returnAmount { get; set; }
         public decimal tradePrice { get; set; }
+        public decimal realCost { get; set; }
         public int depotId { get; set; }
         public string depotName { get; set; }
         public string stockdetailRemark { get; set; }

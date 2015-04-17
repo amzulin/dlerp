@@ -1,25 +1,5 @@
 ﻿@{
     ViewBag.Title = "应付款列表";
-    //var list = Model.list as List<Enterprise.Invoicing.ViewModel.NeedPayModel>;
-    //var start = Model.start;
-    //var end = Model.end;
-    //var supplier = Model.supplier;
-    //int count = 0;
-    //var first = "";
-    //if (list != null && list.Count > 0)
-    //{
-    //    first = list[0].supplierId.ToString();
-    //    count = list.Count;
-    //}
-    //var page = Model.pageIndex;
-    //var pi = 1;
-    //var dpi = 1;
-    //var pageindex = Model.pageIndex;
-    //var pagesize = Model.pageSize;
-    //if (pageindex > 1)
-    //{
-    //    pi = (pageindex - 1) * pagesize + 1;
-    //}
      }
 
 <style>
@@ -33,19 +13,19 @@ padding-right: 0px;
 <!--查询-->
 <div class="layout_report">
     <table>
-        <tr><td style="width:80px;text-align:right;">供应商：</td><td><input name="" type="text" id="txtsupplier" style="width:200px;" /></td>
-            <td style="width:80px;text-align:right;">物料：</td><td><input name="" type="text" id="txtm" /></td>
-            <td style="width:80px;text-align:right;">规格：</td><td><input name="" type="text" id="txtg" /></td>
-            <td style="text-align:right;">是否退单：</td><td><select id="ddlr"><option value="-1">全部</option><option value="0">无退单</option><option value="1">有退单</option></select></td> 
-         </tr>
+        <tr><td style="width:80px;text-align:right;">客户：</td>
+            <td><input name="Supplier" type="text" id="txtcustomer" style="width:200px;" /></td>
+            <td style="text-align:right;">状态：</td>
+            <td><select id="Status" name="Status"><option value="">全部</option><option value="0">未审核</option><option value="1">已审核</option><option value="2">已结</option></select></td> 
+         
+            <td style="text-align:right;">结算单号：</td>
+            <td><input name="QueryNo" type="text" id="txtpo" /></td>
+            <td style="text-align:right;">入库日期：</td>
+            <td colspan="2"><input name="DateStart" type="text" id="from" />
+                至：<input name="DateEnd" type="text" id="to" /></td></tr>
         <tr>            
-            <td style="text-align:right;">入库日期：</td><td><input name="" type="text" id="from" /></td>
-            <td style="text-align:right;">至：</td><td><input name="" type="text" id="to" /></td>
-            <td style="text-align:right;">采购单号：</td><td><input name="" type="text" id="txtpo" /></td>
-            <td style="text-align:right;">入库单号：</td><td><input name="" type="text" id="txtin" /></td>
-        </tr>
-        <tr><td colspan="10" style="text-align:center;">
-            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询报表</a>
+        <td colspan="8" style="text-align:center;">
+            <a class="btn_refer2" href="javascript:void(0);" id="btn" onclick="pageload(1);">查询</a>
             <a class="btn_refer2" href="javascript:void(0);" onclick="excel()">导出excel</a>
             </td></tr>
     </table>
@@ -91,7 +71,8 @@ padding-right: 0px;
     function excel() {
         para = "";
         geturl();
-        window.location.href = "../cost/excelpaylist?where=" + para + "&orderby=" + orderby;
+        var url = "../cost/excelreceivable?where=" + para + "&orderby=" + orderby;
+        window.location.href = encodeURI(url);// "../cost/excelreceivable?where=" + para + "&orderby=" + orderby;
     }
     function pageload(p) {
         page = p;
@@ -105,30 +86,24 @@ padding-right: 0px;
         pageload(page);
     }
     function geturl() {
-        var sup = $("#txtsupplier").val();
-        var m = $("#txtm").val();
-        var g = $("#txtg").val();
+        var sup = $("#txtcustomer").val();
         var po = $("#txtpo").val();
-        var si = $("#txtin").val();
+        var si = $("#Status").val();
         var start = $("#from").val();
         var end = $("#to").val();
         var ddlr = $("#ddlr").val();
-        para = "";
-        if (ddlr == '0') para += ' and returnAmount=0 ';
-        if (ddlr == '1') para += ' and returnAmount>0 ';
-        if (m != '') para += " and (materialName like '%" + m + "%' or materialNo like '%" + m + "%' or tunumber like '%" + m + "%'  )";
-        if (g != '') para += " and  materialModel like '%" + g + "%'";
+        para = " and  settleType=1";
         if (sup != '') para += " and  suppliername like '%" + sup + "%'";
-        if (po != '') para += " and purchaseNo like '%" + po + "%'";
-        if (si != '') para += " and stockInNo like '%" + si + "%'";
-        if (start != '') para += " and createdate>='" + start + "'";
-        if (end != '') para += " and createdate<'" + end + "'";
+        if (po != '') para += " and settleNo like '%" + po + "%'";
+        if (si != '') para += " and status=" + si;
+        if (start != '') para += " and settleStart>='" + start + "'";
+        if (end != '') para += " and settleEnd<'" + end + "'";
         return para;
     }
 
 
     //展开明细
-    function loaddetailp(i,id) {
+    function loaddetailp(i, id) {
         if (i == detailindex) {
             var s = $("#detai_div_" + detailindex).css("display");
             if (s == "none") {
@@ -139,7 +114,7 @@ padding-right: 0px;
                 $("#detai_div_" + detailindex).css("display", "none");
                 $("#tr_" + detailindex).removeClass("active"); return false;
             }
-         //   return false;
+            //     
         }
 
         $("#detai_div_" + detailindex).css("display", "none");
@@ -148,13 +123,60 @@ padding-right: 0px;
 
         para = "";
         geturl();
-       // if (detail[i - 1] == 0) {//第一次加载数据
-            var uid = new Date();
-            $("#detai_div_" + i).load("../cost/paydetailview?uid=" + uid.getTime(),{supplier:id,where:para}, function (data) { });
-         //   detail[i - 1] = 1;
-      //  }
+        // if (detail[i - 1] == 0) {//第一次加载数据
+        var uid = new Date();
+        $("#detai_div_" + i).load("../cost/receivableview?uid=" + uid.getTime(), { supplier: id, where: para }, function (data) { });
+        //   detail[i - 1] = 1;
+        //  }
         $("#tr_" + detailindex).addClass("active");
         $("#detai_div_" + detailindex).css("display", "block");
     }
 
+    function capital(no, type) {
+        $.post('../cost/capitallist', { settleno: no, type: type }, function (data) {
+            if (data.length > 0) {
+                var html = "";
+                //html += +'<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_common">'
+                html += ' <thead>'
+                        + '  <tr>'
+                        + '    <th nowrap="nowrap">序号</th>'
+                        + '    <th>供应商</th>'
+                        + '    <th nowrap="nowrap">创建人员</th>'
+                        + '    <th nowrap="nowrap">结算单号</th>'
+                        + '    <th nowrap="nowrap">金额</th>'
+                        + '    <th nowrap="nowrap">付款日期</th>'
+                        + '    <th nowrap="nowrap">创建时间</th>'
+                        + '    <th>备注</th>'
+                        + '  </tr>'
+                        + '  </thead>'
+                        + ' <tbody>';
+
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    html += '<tr>'
+                            + '    <td nowrap="nowrap">' + (i + 1) + '</td>'
+                            + '    <td>' + item.supplierName + '</td>'
+                            + '    <td nowrap="nowrap">' + item.createStaff + '</td>'
+                            + '    <td nowrap="nowrap">' + item.settleNo + '</td>'
+                            + '    <td nowrap="nowrap">' + item.tradeCost + '</td>'
+                            + '    <td nowrap="nowrap">' + item.tradeDate + '</td>'
+                            + '    <td nowrap="nowrap">' + item.createDate + '</td>'
+                            + '    <td>' + item.remark + '</td>'
+                            + '</tr>';
+                }
+                html += ' </tbody>';
+                $.dialog({
+                    width: 800,
+                    height: 500, content: '<table width="700px" border="0" cellspacing="0" cellpadding="0" class="table_common">' + html + '</table>'
+                });
+            } else {
+                $.dialog.tips("不存在付款明细");
+            }
+
+        });
+    }
+
+    function exportelx(no, type) {
+        window.location.href = '../cost/settleelx?settleno=' + no + '&type=' + type;
+    }
 </script>
